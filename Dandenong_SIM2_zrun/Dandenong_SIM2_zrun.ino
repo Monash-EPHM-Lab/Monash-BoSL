@@ -45,7 +45,7 @@ int vinReduce = 780; //calibration factor between battery voltage and vin voltag
 int rdLow = lowVolt - vinReduce;
 int rdHigh = highVolt - vinReduce;
 //decoment the formula once the values for RGI and RIV are known.
-float divRatio = 2;//(RGI+RIV)/RGI;
+float divRatio = (RGI+RIV)/RGI;
 float pinValCal = float(5000)/float(1023); //1023 and 5030 are pin value and voltage at maximum
 
 // Begin class with selected address
@@ -75,7 +75,7 @@ void setup() {
   pinMode(MOS_G, OUTPUT);
   digitalWrite(MOS_G,LOW);
 
-  Serial.begin(9600);
+  Serial.begin(19200);
 }
 
 
@@ -94,7 +94,7 @@ void loop() {
   Serial.println("%");
   //Serial.print("Flow Rate: ");
   //Serial.println(methsn.flowSample());
-  delay(1000);
+  delay(5000);
   batLev();
   Serial.println("pin_6: LOW");
   Serial.print("Battery Level: ");
@@ -104,7 +104,7 @@ void loop() {
   Serial.print("Remain Percentage: ");
   Serial.print(volt_per);
   Serial.println("%");
-  delay(1000);
+  delay(5000);
 }
 
 void batLev() {
