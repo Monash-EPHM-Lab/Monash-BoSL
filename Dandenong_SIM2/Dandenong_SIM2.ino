@@ -21,17 +21,32 @@ float EC, EC_Var, lastEC, Pressure, lastPressure, EC_sum, Pressure_sum;
 float ECDiff, TempDiff, PressureDiff, FasterA;
 short Counter, DailyCounter;
 float Temp, lastTemp, Temp_sum, fasterA, ForceLog;
+long batTimer, batInterval;
+int Bat_Level;
 int a, ScanInterval, MinLogInterval, MaxLogInterval, Writer;
 String AAA, BBB;
 unsigned long previous;
 uint8_t x, answer;
 char response[100];
 
+//basic setup parameters battery level
+int RGI = 1000; //voltage devider, resistance between ground and input pin
+int RIV = 1000; //voltage devider, resistance between input pin and vin
+int BatPin = A3; //input pin
+int lowVolt = 7200; //battery cutoff voltage
+int highVolt = 8400; //battery full charge voltage
+int vinReduce = 780; //calibration factor between battery voltage and vin voltage --no need to adjust
+//end basic setup parametes
+int rdLow = lowVolt - vinReduce;
+int rdHigh = highVolt - vinReduce;
+//decoment the formula once the values for RGI and RIV are known.
+float divRatio = 2;//(RGI+RIV)/RGI;
+float volt_Var, volt, volt_per;
 // Begin class with selected address
 // available addresses (selected by jumper on board) 
 // default is ADDRESS_HIGH
-//  ADDRESS_HIGH = 0x76
-//  ADDRESS_LOW  = 0x77
+// ADDRESS_HIGH = 0x76
+// ADDRESS_LOW  = 0x77
 MS5803 depth_sensor(ADDRESS_HIGH);
 
 //Sensor pints
@@ -41,6 +56,7 @@ int ECPower = 7;
 void setup() {
   // put your setup code here, to run once:
   ScanInterval = 10; //set the approximate seconds between each scan
+  batInterval = 3600; //seconds between battey logging
   MinLogInterval = 60; //seconds
   MaxLogInterval = 3600; //seconds
 
@@ -101,14 +117,15 @@ void loop() {
   //Get sensor data
   GetSensorData();
   //add these values to the averagers
-  EC_sum = EC_sum + EC;
-  Temp_sum = Temp_sum + Temp;
-  Pressure_sum = Pressure_sum + Pressure;
+  EC_sum += EC;
+  Temp_sum += Temp;
+  Pressure_sum += Pressure;
 
   //increment counters
-  Counter = Counter + ScanInterval;
-  DailyCounter = DailyCounter + ScanInterval;
-
+  Counter += ScanInterval;
+  DailyCounter += ScanInterval;
+  batTimer += ScanInterval;
+  
   //if we have gone for 60 seconds, record the data.
   if(Counter >= MinLogInterval || FasterA>900) {
     EC_sum = EC_sum / (Counter/ScanInterval);
@@ -188,7 +205,15 @@ void loop() {
       lastEC = EC_sum;
       lastTemp = Temp_sum;
       lastPressure = Pressure_sum;
+      //also sends battery data if time has been long enough
+      if (batTimer >= batInterval){
+      batLev();
+      SendToWeb222(2);
+      batTimer = 0;
+      }else{
       SendToWeb222(0);
+      }
+      
       Serial.print(F("Sent to web. "));
       //turn off the TX and RX pins so the RX and TX pins of the SIM go low - saves power!
       digitalWrite(3,LOW);
@@ -197,18 +222,21 @@ void loop() {
       Serial.print(F("Skipped. "));
       //DailyCounter = 0;
     }
-    //resent counters
+    //reset counters
     Counter = 0;
     EC_sum = 0;
     Temp_sum = 0;
     Pressure_sum = 0;
-  }
+   }
   Serial.println(", delaying.");
   Sleepy::loseSomeTime(1000 * ScanInterval);
   //delay(1000 * ScanInterval);  
 }
 
 void SendToWeb222(int abc) {
+    // abc = 0 is for normal send
+    // abc = 1 initialises
+    // abc = 2 sends battery data aswell
   a = 0;
 
   //first check to see if the modem is still on - if it is, turn it off
@@ -248,6 +276,9 @@ void SendToWeb222(int abc) {
   
   do{a++;}while (sendATcommand(F("AT+CHTTPSOPSE=\"www.cartridgerefills.com.au\",80,1"), "OK",10000) == 0 && a<5);
 //you may need to move the /EoDC/ to the below line bewfore the "WriteMe.php... so it looks like "EoDC/WriteMe.php.... but try the way i have it first
+  
+  //normal send data
+  if(abc == 0){
   AAA = "GET /";
   AAA += "EoDC/databases/WriteMe.php?SiteName=BI6384.csv&T=";
   AAA += Temp_sum;
@@ -255,10 +286,29 @@ void SendToWeb222(int abc) {
   AAA += EC_sum;
   AAA += "&D=";
   AAA += Pressure_sum;
+  /*//maybe needs
+  AAA += "&BL=nul"
+  */
   AAA += " HTTP/1.1\r\nHost: www.cartridgerefills.com.au:80\r\n\r\n";
   BBB = "AT+CHTTPSSEND=";
   BBB +=AAA.length();
-
+  }
+  //battery send data
+  if(abc == 2){
+  AAA = "GET /";
+  AAA += "EoDC/databases/WriteMe.php?SiteName=BI6384.csv&T=";
+  AAA += Temp_sum;
+  AAA += "&EC=";
+  AAA += EC_sum;
+  AAA += "&D=";
+  AAA += Pressure_sum;
+  //these next 2 lines may need changing, not tested.
+  AAA += "&BL=";
+  AAA += volt_per;
+  AAA += " HTTP/1.1\r\nHost: www.cartridgerefills.com.au:80\r\n\r\n";
+  BBB = "AT+CHTTPSSEND=";
+  BBB +=AAA.length();    
+  }
   a=0;
   do{a++;}while (sendATcommand(BBB, ">",10000) == 0 && a<5);
 
@@ -361,4 +411,14 @@ void GetSensorData() {
   Serial.print(EC);
   Serial.print(F(", Recorded Pressure = "));
   Serial.print(Pressure);
+}
+
+void batLev() {
+  volt_Var = analogRead(BatPin);
+  volt = map(volt_Var, 0, 1023, 0, 5000);
+  volt = (volt * divRatio + vinReduce);
+  volt_per = (100*(float)(volt - lowVolt)/(highVolt - lowVolt));
+  if (volt_per < 0){
+     volt_per = 0;
+  }
 }

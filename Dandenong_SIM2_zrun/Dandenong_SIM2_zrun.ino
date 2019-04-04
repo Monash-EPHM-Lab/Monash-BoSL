@@ -34,7 +34,7 @@ char response[100];
 //Battery level reader
 //Variables
 float volt_Var, volt, volt_per;
-//basic setup parameters
+//basic setup parameters battery level
 int RGI = 1000; //voltage devider, resistance between ground and input pin
 int RIV = 1000; //voltage devider, resistance between input pin and vin
 int BatPin = A3; //input pin
