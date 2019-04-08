@@ -5,7 +5,7 @@ BatLevel::BatLevel(void):
     //basic setup parameters
     RGI(10),// = 10; //voltage devider, resistance between ground and input pin
     RIV(10),// =  660; //voltage devider, resistance between input pin and vin
-    BatPin(A0),// = A2; //input pin
+    BatPin(A2),// = A2; //input pin
     lowVolt(7200), //= 7200; //battery cutoff voltage
     highVolt(8400),// = 8400; //battery full charge voltage
     vinReduce(780),// = 780; //calibration factor between battery voltage and vin voltage --no need to adjust

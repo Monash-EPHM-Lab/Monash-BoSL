@@ -10,6 +10,7 @@
 #include <Wire.h>
 #include <SparkFun_MS5803_I2C.h>
 #include <SoftwareSerial.h>
+#include <BatLevel.h>
 #include <JeeLib.h> // Low power functions library
 ISR(WDT_vect) { Sleepy::watchdogEvent(); } // Setup the watchdog
 #include <avr/wdt.h>
@@ -17,10 +18,11 @@ ISR(WDT_vect) { Sleepy::watchdogEvent(); } // Setup the watchdog
 SoftwareSerial Sim900(2,3);
 
 //Declaring variables to store results
-float EC, Pressure, Pressure_sum, Temp, Temp_sum, FasterA;
+float EC, Pressure, Pressure_sum, Temp, Temp_sum, FasterA, batLev;
 short Counter;
 int a, ScanInterval, LogInterval, Writer;
 String AAA, BBB;
+String SiteID = "developement";
 unsigned long previous;
 uint8_t x, answer;
 char response[100];
@@ -31,6 +33,9 @@ char response[100];
 //  ADDRESS_HIGH = 0x76
 //  ADDRESS_LOW  = 0x77
 MS5803 depth_sensor(ADDRESS_HIGH);
+
+//create battery object:
+BatLevel batlv;
 
 void setup() {
   // put your setup code here, to run once:
@@ -168,12 +173,14 @@ void SendToWeb222(int abc) {
   do{a++;}while (sendATcommand(F("AT+CHTTPSOPSE=\"www.cartridgerefills.com.au\",80,1"), "OK",10000) == 0 && a<5);
 //you may need to move the /EoDC/ to the below line bewfore the "WriteMe.php... so it looks like "EoDC/WriteMe.php.... but try the way i have it first
   AAA = "GET /";
-  AAA += "EoDC/databases/WriteMe.php?SiteName=OJ6201.csv&T=";
+  AAA += "EoDC/databases/WriteMe.php?SiteName="+SiteID+".csv&T=";
   AAA += Temp_sum;
   AAA += "&EC=";
   AAA += EC;
   AAA += "&D=";
   AAA += Pressure_sum;
+  AAA += "&B=";
+  AAA += batLev;
   AAA += " HTTP/1.1\r\nHost: www.cartridgerefills.com.au:80\r\n\r\n";
   BBB = "AT+CHTTPSSEND=";
   BBB +=AAA.length();
@@ -252,6 +259,7 @@ void TurnOnOffSim() {
 void GetSensorData() {
   //EC, Temp & Pressure
   //EC_Var = 0.0;
+  batLev = batlv.readLev();
   Temp = depth_sensor.getTemperature(CELSIUS, ADC_512);
   Pressure = depth_sensor.getPressure(ADC_4096)/10;
   //Depth = (100*(Pressure - Pressure_base))/(997*9.8)*1000;
