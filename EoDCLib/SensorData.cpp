@@ -4,7 +4,6 @@
 SensorData::SensorData(const uint8_t rows, const uint8_t cols):
      dataHistoryNum(rows);
      dataChannelNum(cols);
-
     {
     dataArray = new float [dataChannelNum][dataHistoryNum];
     memset(dataArray, 0, sizeof(dataArray))
@@ -30,7 +29,7 @@ void SensorData::shift(){
     transmitArray[entry] = transmitArray[entry+1];
    
     }
-    
+    /*
 float SensorData::getVal(void) {
     return dataArray[0][0];
-}
+} */

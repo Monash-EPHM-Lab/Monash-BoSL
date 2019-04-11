@@ -21,7 +21,7 @@
      public:
         SensorData(const uint8_t rows, const uint8_t cols);
         void shift(void);
-        float getVal(void);
+ //       float getVal(void);
         
      private:
         const uint8_t dataHistoryNum;

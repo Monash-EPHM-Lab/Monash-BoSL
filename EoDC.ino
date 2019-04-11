@@ -5,10 +5,11 @@
 
 
 void setup(){
-  
+    const uint8_t x = 3;
+    const uint8_t y = 5;
     Serial.begin(9600);
-    data = SensorData(3,5);
+    SensorData data = SensorData(x,y);
     
-    Serial.println(data.getVal());
+  //  Serial.println(data.getVal());
 }
 void loop(){}
