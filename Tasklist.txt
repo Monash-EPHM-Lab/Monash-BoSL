@@ -3,4 +3,4 @@ Power Testing
 
 Design Standalone board to repace arduino
 
-Cleanup Code 
+Cleanup Code -Notes arduino optimises code at compile time so it is better to have the in air version of the code as a compile option rather than a seperate file.  
