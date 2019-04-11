@@ -1,0 +1,6 @@
+Power Testing
+-Test boards in 3 modes, original, fully optimised, and with usb to serial wire enable mod.
+
+Design Standalone board to repace arduino
+
+Cleanup Code 
