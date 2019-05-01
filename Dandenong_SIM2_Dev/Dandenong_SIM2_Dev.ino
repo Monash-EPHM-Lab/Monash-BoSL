@@ -24,6 +24,9 @@ String AAA, BBB;
 unsigned long previous;
 uint8_t x, answer;
 char response[100];
+bool polarityEC;
+
+
 
 // Begin class with selected address
 // available addresses (selected by jumper on board) 
@@ -49,6 +52,7 @@ void setup() {
   pinMode(A3,OUTPUT);//EC Power is A3
   pinMode(A1,OUTPUT);//EC Ground is A1
   digitalWrite(A1,LOW);//EC Ground is set to low 
+  digitalWrite(A3,LOW);
 
   Serial.begin(19200);
   Sim900.begin(19200);
@@ -57,6 +61,7 @@ void setup() {
   temp = 0.0;
   EC = 0.0;
   Depth = 0.0;
+  polarityEC = 0;
   
   //go and get temperature and EC a couple of times to initiate things!
   GetTempANDEC();
@@ -389,6 +394,7 @@ void TurnOnOffSim() {
 }
 
 void GetTempANDEC(){
+  
   //Temperature and Depth
   TempVar = depth_sensor.getTemperature(CELSIUS, ADC_512);
   DepthVar = depth_sensor.getPressure(ADC_4096)/10;
@@ -399,13 +405,28 @@ void GetTempANDEC(){
   
   //EC
   ECVar = 0.0;
+  if (polarityEC == true){ //need to do computation with ec var cause its no longer symetric 
+  digitalWrite(A1,LOW);
   digitalWrite(A3,HIGH);
-  ECVar= analogRead(A0);
-  ECVar= analogRead(A0);// This is not a mistake, First reading will be low beause if charged a capacitor
+  delay(100);
+  ECVar = analogRead(A0);
+  digitalWrite(A1,LOW);
   digitalWrite(A3,LOW);
+  
+  polarityEC = false;
+  }else{
+  digitalWrite(A1,HIGH);
+  digitalWrite(A3,LOW);
+  delay(100);
+  ECVar = analogRead(A0);
+  digitalWrite(A1,LOW);
+  digitalWrite(A3,LOW);
+  
+  polarityEC = true; 
+  }
   Serial.print(F(", Recorded EC = "));
   Serial.print(ECVar);
   Serial.print(F(", A5 reading = "));
   Serial.print(FasterA);
-
+  
 }
