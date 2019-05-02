@@ -64,9 +64,9 @@ void setup() {
   polarityEC = true;
   
   //go and get temperature and EC a couple of times to initiate things!
-  GetTempANDEC();
-  delay(1000);
-  GetTempANDEC();
+//  GetTempANDEC();
+//  delay(1000);
+//  GetTempANDEC();
 
   //set placeholdernumbers
   lastECwritten = ECVar;
@@ -77,7 +77,7 @@ void setup() {
   Depth = DepthVar;
   
   //set Ec and temp
-  SendToWeb222(1);
+  //SendToWeb222(1);
 
   EC = 0.0;
   temp = 0.0;
