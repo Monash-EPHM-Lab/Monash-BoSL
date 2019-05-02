@@ -61,7 +61,7 @@ void setup() {
   temp = 0.0;
   EC = 0.0;
   Depth = 0.0;
-  polarityEC = 0;
+  polarityEC = true;
   
   //go and get temperature and EC a couple of times to initiate things!
   GetTempANDEC();
@@ -75,7 +75,7 @@ void setup() {
   EC = ECVar;
   temp = TempVar;
   Depth = DepthVar;
-
+  
   //set Ec and temp
   SendToWeb222(1);
 
@@ -405,10 +405,11 @@ void GetTempANDEC(){
   
   //EC
   ECVar = 0.0;
+  uint16_t readMax = 1023;
   if (polarityEC == true){ //need to do computation with ec var cause its no longer symetric 
   digitalWrite(A1,LOW);
   digitalWrite(A3,HIGH);
-  delay(100);
+  delay(100);//this value may need to be adjusted
   ECVar = analogRead(A0);
   digitalWrite(A1,LOW);
   digitalWrite(A3,LOW);
@@ -417,8 +418,9 @@ void GetTempANDEC(){
   }else{
   digitalWrite(A1,HIGH);
   digitalWrite(A3,LOW);
-  delay(100);
+  delay(100);//this value may need to be adjusted
   ECVar = analogRead(A0);
+  ECVar = readMax - ECVar;
   digitalWrite(A1,LOW);
   digitalWrite(A3,LOW);
   
