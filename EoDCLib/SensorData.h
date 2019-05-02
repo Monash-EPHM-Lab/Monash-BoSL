@@ -21,14 +21,15 @@
      public:
         SensorData(const uint8_t rows, const uint8_t cols);
         void shift(void);
+        float **dataArr;
+
  //       float getVal(void);
         
      private:
-        const uint8_t dataHistoryNum;
-        const uint8_t dataChannelNum;
+        const uint8_t historyNum;
+        const uint8_t channelNum;
      
-        float *dataArray;
-        bool *transmitArray;
+        bool *transmitArr;
 };
  
  #endif
