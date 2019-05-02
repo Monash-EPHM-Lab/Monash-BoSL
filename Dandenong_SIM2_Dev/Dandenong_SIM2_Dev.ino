@@ -405,7 +405,7 @@ void GetTempANDEC(){
   
   //EC
   ECVar = 0.0;
-  uint16_t readMax = 1023;
+  uint16_t readMax = 1012;
   if (polarityEC == true){ //need to do computation with ec var cause its no longer symetric 
   digitalWrite(A1,LOW);
   digitalWrite(A3,HIGH);
