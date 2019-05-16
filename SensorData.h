@@ -21,7 +21,7 @@
      public:
         SensorData(const uint8_t rows, const uint8_t cols);
         void shift(void);
-        char dumpArray(void);
+        void print(void);
         float **dataArr;
 
  //       float getVal(void);
