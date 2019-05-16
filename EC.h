@@ -6,7 +6,8 @@
  class EC
  {
      public:
-        EC(bool, uint8_t, uint8_t, uint8_t);
+        EC(uint8_t pinR, uint8_t pinA, uint8_t pinB, bool doSwitching = true);
+        //arguments: read pin, voltage pin A, voltage pin B, do polarity switching.
         uint16_t measure(void);
         void pinSwitch(void);
         

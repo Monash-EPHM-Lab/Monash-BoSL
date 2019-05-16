@@ -1,6 +1,6 @@
 #include <EC.h>
 
-EC::EC(bool doSwitching, uint8_t pinR, uint8_t pinA, uint8_t pinB) : 
+EC::EC(uint8_t pinR, uint8_t pinA, uint8_t pinB, bool doSwitching) : 
     doSwitch(doSwitching),
     pinRead(pinR),
     pinVA(pinA),
@@ -14,19 +14,23 @@ EC::EC(bool doSwitching, uint8_t pinR, uint8_t pinA, uint8_t pinB) :
 
     pinVAswitch = pinVA;
     pinVBswitch = pinVB;
+    
 }
 
  
 uint16_t EC::measure(){ // make sure shift works properly
   uint16_t ECVar = 0;
   
-  digitalWrite(pinVBswitch,LOW);
-  digitalWrite(pinVAswitch,HIGH);
-  delay(100);//this value may need to be adjusted
-  ECVar = ECread();
-  digitalWrite(pinVBswitch,LOW);
-  digitalWrite(pinVAswitch,LOW);
-  pinSwitch();
+  for (uint8_t i = 0; i<2; i++){
+      digitalWrite(pinVBswitch,LOW);
+      digitalWrite(pinVAswitch,HIGH);
+      delay(100);//this value may need to be adjusted
+      ECVar += ECread();
+      digitalWrite(pinVBswitch,LOW);
+      digitalWrite(pinVAswitch,LOW);
+      pinSwitch();
+  }
+  ECVar = ECVar/2;
   return(ECVar);
 }
 
@@ -40,10 +44,12 @@ void EC::pinSwitch(){
 }
 
 uint16_t EC::ECread(){
-   uint16_t readMax = 1012;
+   uint16_t readMax = 1023;
    uint16_t ECVal = analogRead(pinRead);
    if (polarity == true){
        ECVal = readMax - ECVal;
    }
+   Serial.print("ECEC ");
+   Serial.println(ECVal);
    return ECVal;
 }
