@@ -1,6 +1,3 @@
-Power Testing
--Test boards in 3 modes, original, fully optimised, and with usb to serial wire enable mod.
-
-Design Standalone board to repace arduino
+Branch Specific Tasklist
 
 Cleanup Code -Notes arduino optimises code at compile time so it is better to have the in air version of the code as a compile option rather than a seperate file.  
