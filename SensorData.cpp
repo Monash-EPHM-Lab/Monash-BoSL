@@ -26,8 +26,8 @@ void SensorData::shift(){ // make sure shift works properly
     //shift data array
     for(uint8_t channel = 0; channel < channelNum; channel++){
         for(uint8_t entry = 0; entry < historyNum-1; entry++){
-            int replace = historyNum - entry;
-            dataArr[channel][replace - 1] = dataArr[channel][replace];
+            int replace = (historyNum-1) - entry;
+            dataArr[channel][replace] = dataArr[channel][replace - 1];
         }
         dataArr[channel][0] = 0.0;
     }
