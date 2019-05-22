@@ -4,11 +4,11 @@
 #include <Arduino.h>
 
 /*index:
-0 = Time        seconds since last transmit
-1 = Pressure    in pascal 
-2 = Temp        in Celcius
-3 = EC          in something
-4 = Battery     in percent                      */
+0 = Time        
+1 = Pressure     
+2 = Temp        
+3 = EC          
+4 = Battery                          */
 #define Time 0
 #define Pressue 1
 #define Temp 2
