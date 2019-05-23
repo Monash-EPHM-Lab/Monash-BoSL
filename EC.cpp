@@ -1,48 +1,48 @@
 #include <EC.h>
 
-EC::EC(uint8_t pinR, uint8_t pinA, uint8_t pinB, bool doSwitching = false) : 
+EC::EC(uint8_t pinR, uint8_t pinA, uint8_t pinB = -1, bool doSwitching = false) : 
     doSwitch(doSwitching),
     pinRead(pinR),
     pinVA(pinA),
     pinVB(pinB)
     {
     pinMode(pinRead,INPUT); //EC PIN is pinRead
+
     pinMode(pinVA,OUTPUT);//EC Power is pinVA
-    pinMode(pinVB,OUTPUT);//EC Ground is pinVB
-    digitalWrite(pinVB,LOW);//EC Ground is set to low 
     digitalWrite(pinVA,LOW);
+
+    if (doSwitching) { // -1 is default value for unspecfied pinB. must specify for switching.
+      pinMode(pinVB,OUTPUT);//EC Ground is pinVB
+      digitalWrite(pinVB,LOW);//EC Ground is set to low       
+    }
     storeLen = 0;
+    ECSum = 0;
 }
 
  
 void EC::measure(){ 
   uint16_t ECVar = 0;
-  
-  for (uint8_t i = 0; i<2; i++){
-      digitalWrite(pinVB,LOW);
-      digitalWrite(pinVA,HIGH);
-      delay(100);//this value may need to be adjusted
+  uint8_t reps = 2;
+
+  for (uint8_t i = 0; i<reps; i++){
       ECVar += ECread();
-      digitalWrite(pinVB,LOW);
-      digitalWrite(pinVA,LOW);
       pinSwitch();
   }
-  ECVar = ECVar/2;
 
-  ECVals[storeLen] = reading;
-  storeLen++;
+  ECSum += ECVar; // add measurement to total sum
+  storeLen += reps;  // add reps for number of measurements taken
 }
 
-float getEC(clearVals = true) {
-  uint16_t ECSum = 0;
-  for (int i = 0; i<storeLen; i++) {
-    ECSum += ECVals[i];
-  }
 
+float getEC() {
   float ECAverage = (float)ECSum / (float)storeLen;
 
-  return ECAverage
+  storeLen = 0;
+  ECSum = 0;
+
+  return ECAverage;
 }
+
 
 void EC::pinSwitch(){
   if (doSwitch) {
@@ -53,15 +53,30 @@ void EC::pinSwitch(){
   }
 }
 
+
 uint16_t EC::ECread(){
-   uint16_t readMax = 1023;
-   uint16_t ECVal = analogRead(pinRead);
-   if (polarity) {
-       ECVal = readMax - ECVal;
-   }
-   Serial.print("ECEC ");
-   Serial.println(ECVal);
-   return ECVal;
+  digitalWrite(pinVA,HIGH);
+  if (doSwitching) {
+    digitalWrite(pinVB,LOW);
+  }
+
+  delay(100);//this value may need to be adjusted
+
+  uint16_t readMax = 1023;
+  uint16_t ECVal = analogRead(pinRead);
+  if (polarity) {
+    ECVal = readMax - ECVal;
+  }
+
+  Serial.print("EC = ");
+  Serial.println(ECVal);
+
+  if (doSwitching){
+    digitalWrite(pinVB,LOW);    
+  }
+  digitalWrite(pinVA,LOW);
+  
+  return ECVal;
 }
 
 

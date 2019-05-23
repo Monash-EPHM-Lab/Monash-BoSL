@@ -13,10 +13,10 @@
      private:
         void pinSwitch(void);
         uint16_t ECread(void);
-        float getEC(clearVals = true;);
+        float getEC();
 
-        uint16_t ECVals[10];  // array to store multiple EC measuremts, averaged on getValue call (each minute)
-        uint8_t storeLen;
+        uint16_t ECSum;  // sum of EC measuremts, averaged on getValue call (each minute)
+        uint8_t storeLen;  // number of EC values which have been measured and summed
 
         uint8_t pinVA; 
         uint8_t pinVB;
