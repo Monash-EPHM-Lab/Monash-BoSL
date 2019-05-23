@@ -1,3 +1,11 @@
 Branch Specific Tasklist
 
 Cleanup Code -Notes arduino optimises code at compile time so it is better to have the in air version of the code as a compile option rather than a seperate file.  
+
+Test EC class and ensure gives accurate readings in real life.
+
+Implement Temp and other sensor classes.
+
+Change SensorData interface to work by passing in measurements as arguments, rather than using indices. Pass pointers of Sensor classes to sensorData, no need for main file overhead.
+
+Get SIM7000 workings

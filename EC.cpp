@@ -11,10 +11,11 @@ EC::EC(uint8_t pinR, uint8_t pinA, uint8_t pinB = -1, bool doSwitching = false) 
     pinMode(pinVA,OUTPUT);//EC Power is pinVA
     digitalWrite(pinVA,LOW);
 
-    if (doSwitching) { // -1 is default value for unspecfied pinB. must specify for switching.
+    if (doSwitch) { // -1 is default value for unspecfied pinB. must specify for switching.
       pinMode(pinVB,OUTPUT);//EC Ground is pinVB
       digitalWrite(pinVB,LOW);//EC Ground is set to low       
     }
+
     storeLen = 0;
     ECSum = 0;
 }
@@ -34,13 +35,20 @@ void EC::measure(){
 }
 
 
-float getEC() {
+float getEC(bool clear = true) {
   float ECAverage = (float)ECSum / (float)storeLen;
 
-  storeLen = 0;
-  ECSum = 0;
+  if (clear) {
+    clearEC();
+  }
 
   return ECAverage;
+}
+
+
+void clearEC() {
+  ECSum = 0;
+  storeLen = 0;
 }
 
 
@@ -56,7 +64,7 @@ void EC::pinSwitch(){
 
 uint16_t EC::ECread(){
   digitalWrite(pinVA,HIGH);
-  if (doSwitching) {
+  if (doSwitch) {
     digitalWrite(pinVB,LOW);
   }
 
@@ -71,7 +79,7 @@ uint16_t EC::ECread(){
   Serial.print("EC = ");
   Serial.println(ECVal);
 
-  if (doSwitching){
+  if (doSwitch){
     digitalWrite(pinVB,LOW);    
   }
   digitalWrite(pinVA,LOW);
