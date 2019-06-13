@@ -6,6 +6,8 @@ Test EC class and ensure gives accurate readings in real life.
 
 Implement Temp and other sensor classes.
 
-Change SensorData interface to work by passing in measurements as arguments, rather than using indices. Pass pointers of Sensor classes to sensorData, no need for main file overhead.
+Change SensorData interface to work by passing in measurements as arguments, rather than using indices. 
+- Appraoch strategy: Write logData to be a template function and take in any sensor value variable type (int/float/string). Use snprintf to safely store value in dataArray with correct format. Second argument is index for row index, should be defined in main (#define EC 0, ...).
+main file will call sensor.getReadings and then pass into dataArray class, more readable and maintainable.
 
-Get SIM7000 workings
+Test SIM7000 with modified botletics code and stable/ battery power supply.
