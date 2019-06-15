@@ -21,7 +21,7 @@ EC::EC(uint8_t pinR, uint8_t pinA, uint8_t pinB = -1, bool doSwitching = false) 
 }
 
  
-void EC::measure(){ 
+void EC::measure(void){ 
   uint16_t ECVar = 0;
   uint8_t reps = 2;
 
@@ -35,7 +35,7 @@ void EC::measure(){
 }
 
 
-float getEC(bool clear = true) {
+float EC::getEC(bool clear = true) {
   float ECAverage = (float)ECSum / (float)storeLen;
 
   if (clear) {
@@ -46,7 +46,7 @@ float getEC(bool clear = true) {
 }
 
 
-void clearEC() {
+void EC::clearEC(void) {
   ECSum = 0;
   storeLen = 0;
 }
@@ -86,6 +86,3 @@ uint16_t EC::ECread(){
   
   return ECVal;
 }
-
-
-
