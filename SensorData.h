@@ -26,12 +26,21 @@ Define these indecies in main script. More explicit		*/
         void shift(void);  // method to shift array to right, removing oldest logged data making space for new data.
         void print(void); // dump (print) entire array to serial port.
 
-        void save(float data, const int sensor); // save new data into array. sensor ID index for index at which to store data.
-        void save(int data, const int sensor); //overloaded definition for different sensor data types.
-        void save(char data, const int sensor); //char, int, float should cover main types.
+        void save(float data, int sensor); // save new data into array. sensor ID index for index at which to store data.
+        void save(int data, int sensor); //overloaded definition for different sensor data types.
+        void save(char data, int sensor); //char, int, float should cover main types.
 
         char ***dataArr;  //make private. First axis (index) is for column or one timestamp reading. 
         //Second axis (index) is for rows or sensor value.
+
+        float getFloat(int sensor, int index);  // get stored sensor value at given index
+        float getLastFloat(int sensor); // get most recent float value stored of given sensor
+        float get2ndLastFloat(int sensor); //2nd most recent
+
+        char getValue(int sensor, int index);  //return char value at given index. 0 is most recent
+        char getLastValue(int sensor);  //return char value of most recent value
+        char get2ndLastValue(int sensor); //2nd most recent
+
 
  //       float getVal(void);
         
