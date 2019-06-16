@@ -4,7 +4,7 @@
 SensorData::SensorData(const uint8_t rows, const uint8_t cols) : 
     channelNum(rows),
     historyNum(cols),
-    MAX_DATA_SIZE(6) // specify this value as max size of stored readings
+    MAX_DATA_SIZE(6) // specify this value as max size of stored readings. 6bytes
     {
 
     dataArr = new char**[historyNum];

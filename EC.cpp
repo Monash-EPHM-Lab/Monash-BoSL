@@ -1,23 +1,22 @@
 #include <EC.h>
 
 EC::EC(uint8_t pinR, uint8_t pinA, uint8_t pinB = -1, bool doSwitching = false) : 
-    doSwitch(doSwitching),
-    pinRead(pinR),
-    pinVA(pinA),
-    pinVB(pinB)
-    {
-    pinMode(pinRead,INPUT); //EC PIN is pinRead
+  doSwitch(doSwitching),
+  pinRead(pinR),
+  pinVA(pinA),
+  pinVB(pinB)
+  {
+  pinMode(pinRead,INPUT); //EC PIN is pinRead
+  pinMode(pinVA,OUTPUT);//EC Power is pinVA
+  digitalWrite(pinVA,LOW);
 
-    pinMode(pinVA,OUTPUT);//EC Power is pinVA
-    digitalWrite(pinVA,LOW);
+  if (doSwitch) { // -1 is default value for unspecfied pinB. must specify for switching.
+    pinMode(pinVB,OUTPUT);//EC Ground is pinVB
+    digitalWrite(pinVB,LOW);//EC Ground is set to low       
+  }
 
-    if (doSwitch) { // -1 is default value for unspecfied pinB. must specify for switching.
-      pinMode(pinVB,OUTPUT);//EC Ground is pinVB
-      digitalWrite(pinVB,LOW);//EC Ground is set to low       
-    }
-
-    storeLen = 0;
-    ECSum = 0;
+  storeLen = 0;
+  ECSum = 0;
 }
 
  
@@ -35,7 +34,7 @@ void EC::measure(void){
 }
 
 
-float EC::getEC(bool clear = true) {
+float EC::getAverage(bool clear = true) {
   float ECAverage = (float)ECSum / (float)storeLen;
 
   if (clear) {
@@ -46,7 +45,7 @@ float EC::getEC(bool clear = true) {
 }
 
 
-void EC::clearEC(void) {
+void EC::clear(void) {
   ECSum = 0;
   storeLen = 0;
 }
@@ -62,7 +61,7 @@ void EC::pinSwitch(){
 }
 
 
-uint16_t EC::ECread(){
+uint16_t EC::read(){
   digitalWrite(pinVA,HIGH);
   if (doSwitch) {
     digitalWrite(pinVB,LOW);
