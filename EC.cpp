@@ -25,7 +25,7 @@ void EC::measure(void){
   uint8_t reps = 2;
 
   for (uint8_t i = 0; i<reps; i++){
-      ECVar += ECread();
+      ECVar += read();
       pinSwitch();
   }
 
@@ -38,14 +38,14 @@ float EC::getAverage(bool clear = true) {
   float ECAverage = (float)ECSum / (float)storeLen;
 
   if (clear) {
-    clearEC();
+    clearSum();
   }
 
   return ECAverage;
 }
 
 
-void EC::clear(void) {
+void EC::clearSum(void) {
   ECSum = 0;
   storeLen = 0;
 }

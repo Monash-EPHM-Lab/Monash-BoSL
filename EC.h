@@ -10,7 +10,7 @@
         //arguments: read pin, voltage pin A, voltage pin B, do polarity switching.
         void measure(void);
         float getAverage(bool clear = true); // clear the EC averages by default
-        void clear(void);
+        void clearSum(void);
           
      private:
         void pinSwitch(void);

@@ -16,6 +16,10 @@
 #define Bat 4 		
 Define these indecies in main script. More explicit		*/
 
+#define MAX_DATA_SIZE 7 // max number of bytes per data point
+#define FLOAT_DECIMALS 3 // max number of decimals to save float
+#define FLOAT_WIDTH 5  // minimum float width
+
 
  class SensorData
  {
@@ -26,12 +30,15 @@ Define these indecies in main script. More explicit		*/
         void shift(void);  // method to shift array to right, removing oldest logged data making space for new data.
         void print(void); // dump (print) entire array to serial port.
 
-        void save(float data, int sensor); // save new data into array. sensor ID index for index at which to store data.
-        void save(int data, int sensor); //overloaded definition for different sensor data types.
-        void save(char data, int sensor); //char, int, float should cover main types.
+    //    void saveNew(float data, int sensor); // save new data into array. sensor ID index for index at which to store data.
+    //    void saveNew(int data, int sensor); //overloaded definition for different sensor data types.
+    //    void saveNew(char data, int sensor); //char, int, float should cover main types.
+        template <typename T>
+        void saveNew(T data, int sensor); //char, int, float should cover main types.
 
-        char ***dataArr;  //make private. First axis (index) is for column or one timestamp reading. 
-        //Second axis (index) is for rows or sensor value.
+        void saveAt(float data, int sensor, int historyPos);
+        void saveAt(int data, int sensor, int historyPos);
+        void saveAt(char data, int sensor, int historyPos);
 
         float getFloat(int sensor, int index);  // get stored sensor value at given index
         float getLastFloat(int sensor); // get most recent float value stored of given sensor
@@ -41,14 +48,16 @@ Define these indecies in main script. More explicit		*/
         char getLastValue(int sensor);  //return char value of most recent value
         char get2ndLastValue(int sensor); //2nd most recent
 
+        char ***dataArr;  //make private. First axis (index) is for column or one timestamp reading. 
+        //Second axis (index) is for rows or sensor value.
+
 
  //       float getVal(void);
         
      private:
+        char test[6];
         const uint8_t historyNum;
         const uint8_t channelNum;
-
-        const uint8_t MAX_DATA_SIZE;
      
         bool *transmitArr;
 
