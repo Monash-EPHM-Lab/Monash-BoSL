@@ -1,4 +1,5 @@
 #include <SensorData.h>
+#include <EC.h>
 
 
 /////////////////////////////
@@ -11,7 +12,9 @@
 /////////////////////////////
 
 #define sensorNum 5    // number of sensors/rows to be in data array
-#define logHistory 30  // number of readings/columns to be kept in data array
+#define logHistory 10  // number of readings/columns to be kept in data array
+
+#define BAUDRATE 9600
 
 const int ECPinR = 10;
 const int ECPinA = 11;
@@ -22,27 +25,32 @@ const int diffThreshold = 0.1;  //10% change in consecutive readings before tran
 uint16_t counter = 0;
 
 
+EC sensorEC = EC(ECPinR, ECPinA, ECPinB, true);  //three pins and switching is true.
+
+
 void setup() {
-  SensorData data = SensorData(sensorNum, logHistory); //initialise data array.
 
-  EC EC = EC(ECPinR, ECPinA, ECPinB, true);  //three pins and switching is true.
 
-  Serial.begin(9600);
+  Serial.begin(BAUDRATE);
+
+  SensorData data = SensorData(sensorNum, logHistory); //initialise data array
+  data.print();
 }
 
 // the loop function runs over and over again forever
 void loop() {
-	delay(10000);
+	delay(1000000);
+	//delay(10000);
 	counter++;
-	EC.measure();
+	sensorEC.measure();
 
 	if (counter % 6 == 0) {
-		logData();
-		transmitCheck();
+		//logData();
+		//transmitCheck();
 	}
 }
 
-
+/*
 float getDiff(int sensor) {
 	float newReading = data.getLastFloat(sensor);
 	float oldReading = data.get2ndLastFloat(sensor); //can change to not be most recent reading.
@@ -53,15 +61,16 @@ float getDiff(int sensor) {
 }
 
 void logData(){
-	float ECVal = EC.getAverage(true); //clear the EC sensor value to start a new average.
-	data.save(ECVal, _EC);
+	float ECVal = sensorEC.getAverage(true); //clear the EC sensor value to start a new average.
+	data.saveNew(ECVal, _EC);
 }
 
 void transmitCheck() {
 	float ECDiff = getDiff(_EC);
 
 	if (ECDiff >= diffThreshold) {
-		transmit() //make this do something....
+		//transmit(); //make this do something....
 	}
 
-}
+} */
+
