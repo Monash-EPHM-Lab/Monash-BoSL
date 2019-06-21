@@ -5,6 +5,7 @@ SensorData::SensorData(const uint8_t rows, const uint8_t cols) :
     channelNum(rows),
     historyNum(cols)
     {
+        
     dataArr = new char**[channelNum];
     for (uint8_t i = 0; i < channelNum; i++) {
         dataArr[i] = new char*[historyNum];
