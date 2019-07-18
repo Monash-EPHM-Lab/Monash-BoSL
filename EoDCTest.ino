@@ -16,9 +16,9 @@
 
 #define BAUDRATE 9600
 
-const int ECPinR = 10;
-const int ECPinA = 11;
-const int ECPinB = 12;
+const int ECPinR = A0;
+const int ECPinA = A1;
+const int ECPinB = A3;
 
 const int diffThreshold = 0.1;  //10% change in consecutive readings before transmitting
 
@@ -39,10 +39,11 @@ void setup() {
 
 // the loop function runs over and over again forever
 void loop() {
-	delay(1000000);
+	delay(1000);
 	//delay(10000);
 	counter++;
 	sensorEC.measure();
+  Serial.println(sensorEC.getAverage());
 
 	if (counter % 6 == 0) {
 		//logData();
@@ -73,4 +74,3 @@ void transmitCheck() {
 	}
 
 } */
-
