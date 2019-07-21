@@ -1,9 +1,9 @@
 Branch Specific Tasklist
 
-Cleanup Code -Notes arduino optimises code at compile time so it is better to have the in air version of the code as a compile option rather than a seperate file.  
-
-Test EC class and ensure gives accurate readings in real life.
+Test EC class and ensure settling time and pin/cable resistance is well understood on reading effects.
 
 Implement Temp and other sensor classes.
 
-modify data class to write /read to SD card.
+Test SIM7000 code and run test to see if it can log readings on cartridgerefills.com
+
+measure power consumption on everything.
