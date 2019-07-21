@@ -2,6 +2,9 @@
 #define SensorData_h
 
 #include <Arduino.h>
+#include <SensorData.h>
+#include <SPI.h>
+#include <SdFat.h>
 
 /*index:
 0 = Time        
@@ -16,52 +19,54 @@
 #define Bat 4 		
 Define these indecies in main script. More explicit		*/
 
-#define MAX_DATA_SIZE 7 // max number of bytes per data point
-#define FLOAT_DECIMALS 3 // max number of decimals to save float
-#define FLOAT_WIDTH 5  // minimum float width
+#define MAX_DATA_SIZE 20 // max number of bytes per data point or tag
+#define MAX_LINE_SIZE 100 // max number of bytes per line
+
+#define DELIMITER   44 // ASCII code for , (comma) character used to seperate values in files
+#define LF          10  // linefeed or newline character. ASCII code for \n
+
+/* pins defined for SPI atmega328p 
+MOSI is pin 11 
+MISO is pin 12 
+SCK is pin 13  */
+#define chipSelect 8 //chip select pin is #8
 
 
+//class for data structure handling sensor data
  class SensorData
  {
      public:
-        SensorData(const uint8_t rows, const uint8_t cols);  //class for data structure handling sensor data
-        // in shape of a table. Each column is one timestamp of sensor readings, EC, Temp, Bat...
-        // Rows represent different reading sets
-        void shift(void);  // method to shift array to right, removing oldest logged data making space for new data.
-        void print(void); // dump (print) entire array to serial port.
+        SensorData(char* file, int logHistory);
+        // manages SD card reading/writing 
 
-    //    void saveNew(float data, int sensor); // save new data into array. sensor ID index for index at which to store data.
-    //    void saveNew(int data, int sensor); //overloaded definition for different sensor data types.
-    //    void saveNew(char data, int sensor); //char, int, float should cover main types.
-        template <typename T>
-        void saveNew(T data, int sensor); //char, int, float should cover main types.
+        void newFile(char* name);
 
-        void saveAt(float data, int sensor, int historyPos);
-        void saveAt(int data, int sensor, int historyPos);
-        void saveAt(char data, int sensor, int historyPos);
+        //overloaded methods for acccepting different types of data to be stored
+        // tag is phrase which preceeds data, e.g EC=
+        void composeLine(char* data, char* tag, char* del = DELIMITER);
+        void composeLine(float data, char* tag, char* del = DELIMITER);
+        void composeLine(int data, char* tag, char* del = DELIMITER);
 
-        float getFloat(int sensor, int index);  // get stored sensor value at given index
-        float getLastFloat(int sensor); // get most recent float value stored of given sensor
-        float get2ndLastFloat(int sensor); //2nd most recent
+        void writeLine(void); //write the composed dataLine to SD card memory 
 
-        char getValue(int sensor, int index);  //return char value at given index. 0 is most recent
-        char getLastValue(int sensor);  //return char value of most recent value
-        char get2ndLastValue(int sensor); //2nd most recent
+        void readLast(char* tag = ""); //read the last line at given tag in the file
+        void readLine(uint8_t lineNum, char* tag = ""); //read the tag in the given line from the bottom 
 
-        char ***dataArr;  //make private. First axis (index) is for column or one timestamp reading. 
-        //Second axis (index) is for rows or sensor value.
+      //  char getValue(int sensor, int index);  //return char value at given index. 0 is most recent
+      //  char getLastValue(int sensor);  //return char value of most recent value
 
+        void dump(void); // dump entire file to serial port.
 
- //       float getVal(void);
         
      private:
-        char test[6];
-        const uint8_t historyNum;
-        const uint8_t channelNum;
+        int historyNum;  // max number of datapoints per transmission
      
         bool *transmitArr;
 
-        void commitMemory(char data, const int sensor);
+        char dataLine[MAX_LINE_SIZE];  //line to be saved in SD card
+        char filename[MAX_DATA_SIZE];  //filename max 20 characters
+
+        byte keep_SPCR; // SPCR register var
 };
  
  #endif

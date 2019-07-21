@@ -1,142 +1,204 @@
 #include <SensorData.h>
 
+//class for managing sensor data to be stored and accessed on SD card
 
-SensorData::SensorData(const uint8_t rows, const uint8_t cols) : 
-    channelNum(rows),
-    historyNum(cols)
-    {
-        
-    dataArr = new char**[channelNum];
-    for (uint8_t i = 0; i < channelNum; i++) {
-        dataArr[i] = new char*[historyNum];
-        for (uint8_t j = 0; j < historyNum; j++) {
-            dataArr[i][j] = new char[MAX_DATA_SIZE];
-            float val = i*channelNum + j*3.142; //for testing
-            saveAt(val, i, j);
-        }
-    }
+SensorData::SensorData(char* file, int logHistory) : historyNum(logHistory)
+    {  
+    memset(dataLine, 0, MAX_LINE_SIZE); //initialise dataline as empty with 0
 
-  //  memset(dataArray, 0, sizeof(dataArray));
     transmitArr = new bool [historyNum];
-    for (uint8_t j = 0; j<historyNum; j++) {  
-        transmitArr[j] = 0; //for testing
+    memset(transmitArr, 1, historyNum);  // initialise every element as transmitted.
+
+    newFile(file); //initial filename
+}
+
+
+/////////////////////////////////////////////////////////////////
+// do not pass in arguments greater than MAX_DATA_SIZE (20 characters)
+// make sure total line is not longer than MAX_LINE_SIZE (100 characters)
+void SensorData::composeLine(char* data, char* tag, char* del = DELIMITER) {
+    size_t lnLen = strlen(dataLine);
+    if (lnLen + strlen(tag) + strlen(data) + 5 < MAX_LINE_SIZE) {  
+        strcat(dataLine, tag); //add tag to the existing data line
+        strcat(dataLine, data); //add data 
+        strcat(dataLine, del); //add delimiter
+    } //check that new line will not be too large.
+}
+
+void SensorData::composeLine(int data, char* tag, char* del = DELIMITER) {
+    char data_str[MAX_DATA_SIZE];
+    snprintf(data_str, MAX_DATA_SIZE, "%d", data);  //convert int to char array
+
+    composeLine(data_str, tag, del); //call 
+}
+
+void SensorData::composeLine(float data, char* tag, char* del = DELIMITER) {
+    char data_str[MAX_DATA_SIZE];  
+    dtostrf(data, 4, 2, data_str);  //convert float to char array
+
+    composeLine(data_str, tag, del);
+}
+
+
+/////////////////////////////////////////////////////////////////
+// write the composed line to SD card and then clear line
+void SensorData::writeLine(void) {
+    size_t lnLen = strlen(dataLine);
+    dataLine[lnLen-1] = 0; // remove last delimiter
+
+    ////////////////// begin SD card
+    SdFat sd;
+    SdFile file;
+
+    if (!sd.begin(chipSelect, SD_SCK_MHZ(8))) {
+        sd.initErrorHalt();
+    }  // initialise sd card
+
+
+    file.open(filename, O_WRONLY | O_CREAT | O_AT_END);
+
+    file.println(dataLine);
+
+    file.close();
+
+
+    memset(dataLine, 0, MAX_LINE_SIZE);  //clear dataLine for new line.
+}
+
+
+/////////////////////////////////////////////////////////////////
+// transmit contents of old file before creating new file.
+void SensorData::newFile(char* name) {
+    strcpy(filename, name);
+
+  //  File newF = SD.open(filename, FILE_WRITE);
+  //  newF.close();
+}
+
+/////////////////////////////////////////////////////////////////
+void SensorData::readLine(uint8_t lineNum, char* tag = "") {
+    Serial.print("---LINE: ");
+    Serial.println(lineNum);
+
+    SdFat sd;
+    SdFile file;
+
+    if (!sd.begin(chipSelect, SD_SCK_MHZ(8))) {
+        sd.initErrorHalt();
+    }  // initialise sd card
+
+    file.open(filename, O_RDONLY);
+
+    int32_t offset = (MAX_LINE_SIZE * (lineNum + 1) + 3); //characters to go back for last line
+
+    if (offset > file.fileSize()) {
+        offset = file.fileSize();
     }
-}
 
-/////////////////////////////////////////////////////////////////
-//saves in the most recent (first column) for given sensor index
-//use saveAt() to save at any position
-// shift should be called before save otherwise last save will be overwritten
-// template to accept any data type. 
-//should imply datatype in all cases and not require <> specification.
-template <typename T>
-void SensorData::saveNew(T data, int sensor) { 
-    saveAt(data, sensor, 0);
-}
+    file.seekEnd(-offset);  
+    //go back to the position in the file where lines will concretely be. search buffer. 
 
-/////////////////////////////////////////////////////////////////
-// save at a specific position
-//saveAt overload methods for different sensor data types
-void SensorData::saveAt(float data, int sensor, int historyPos) { 
-    char str_temp[MAX_DATA_SIZE];
-    dtostrf(data, 4, 2, str_temp);
-    snprintf(dataArr[sensor][historyPos], MAX_DATA_SIZE, "%s", str_temp);
-}
+    char c;
+    uint16_t totalLines = 0; //total lines in search buffer
 
-void SensorData::saveAt(int data, int sensor, int historyPos) { 
-    snprintf(dataArr[sensor][historyPos], MAX_DATA_SIZE, "%d", data);
-}
-
-void SensorData::saveAt(char data, int sensor, int historyPos) { 
-    snprintf(dataArr[sensor][historyPos], MAX_DATA_SIZE, "%s", data);
-  //  snprintf(dataArr[sensor][historyPos], MAX_DATA_SIZE, "%s", data);
-}
-
-/////////////////////////////////////////////////////////////////
-void SensorData::shift() { // make sure shift works properly
-    //shift data array, removing oldest entry and filling new column with zeros
-    for(uint8_t channel = 0; channel < channelNum; channel++){
-        for(uint8_t entry = 0; entry < historyNum-1; entry++){
-            uint8_t replace = (historyNum-1) - entry;
-            dataArr[channel][replace] = dataArr[channel][replace - 1];
+    while (file.available()) {
+        c = file.read();
+        if (c == '\n') {
+            totalLines++;
         }
     }
 
-    //initalise first column with zeros
-    for(uint8_t channel = 0; channel < channelNum; channel++) {  
-        dataArr[channel][0] = "0.0";  
-    }
+    uint32_t n=0; // number of lines read
+    uint32_t i=0; // number of chars read. 
+    int32_t start = 0; // start char pos of the desired line relative to search buffer
 
-    //shift trasmit array
-    for(uint8_t entry = 0; entry < historyNum-1; entry++){
-        uint8_t replace = (historyNum-1) - entry;
-        transmitArr[replace] = transmitArr[replace - 1];
-    }
-    transmitArr[0] = false; // initialise as untransmitted
-}
+    file.seekEnd(-offset);  //go back to start of search buffer
 
-
-/////////////////////////////////////////////////////////////////
-float SensorData::getFloat(int sensor, int index) {
-    float value = atof(dataArr[sensor][index]);
-    return value;
-}
-
-float SensorData::getLastFloat(int sensor) {
-    float value = getFloat(sensor, 0);  //most recent stored value
-    return value;
-}
-
-float SensorData::get2ndLastFloat(int sensor) {
-    float value = getFloat(sensor, 1); //second most recent stored value
-    return value;
-}
-
-/////////////////////////////////////////////////////////////////
-char SensorData::getValue(int sensor, int index) {  //returns char instead of float
-    char value = dataArr[sensor][index];
-    return value;
-}
-
-char SensorData::getLastValue(int sensor) {
-    char value = getValue(sensor, 0);  //most recent stored value
-    return value;
-}
-
-char SensorData::get2ndLastValue(int sensor) {
-    char value = getValue(sensor, 1); //second most recent stored value, hence 1
-    return value;
-}
-
-
-/////////////////////////////////////////////////////////////////
-void SensorData::print() {  //dump array
-  //return char array with \n every historyNum positions
-    Serial.println("----SENSOR DATA----");
-    for (uint8_t j = 0; j<channelNum; j++){
-        for (uint8_t i = 0; i<historyNum; i++){
-            for (uint8_t c = 0; c<MAX_DATA_SIZE; c++) {
-                int A = (int) dataArr[j][i][c];
-                Serial.print(A);
-                Serial.print(' ');
+    while (file.available()) {
+        c = file.read();
+        i++;
+        if (c == '\n') {
+            n++; //increase number of lines read count
+            if (n == (totalLines - lineNum - 1)) {
+                start = i;
             }
-            Serial.print('\n');
-            Serial.println(dataArr[j][i]);
-            //Serial.print(dataArr[j][i]);
-            //Serial.print(" ");
         }
-        Serial.println("");
     }
-    Serial.println("-------------------");
-    for (uint8_t i = 0; i<historyNum; i++) {
-            Serial.print(transmitArr[i]);
-            Serial.print(" ");
+
+    file.seekEnd(start - offset);  //seek negative offset pos', then go forwards start pos'
+
+    if (tag[0] == 0) { // empty tag so return whole line
+        while (file.available()) {
+            c = file.read(); 
+            Serial.print(c); 
+            if (c == '\n') {
+                break;
+            }
         }
-        Serial.println(" ");
-    Serial.println("-------------------");
+    } else { //search for tag
+        bool match = true;  //if tag matches character phrase in line
+        bool searching = true; //if we are still searching for tag
+
+        while (file.available() && searching) {
+             //check if the next len(tag) chars in line match the tag
+            for (int i = 0; i < strlen(tag) && match; i++) {
+                c = file.read();
+
+                if (c != tag[i]) {  // no match, so exit loop
+                    match = false;
+                } if (c == '\n') { //reached end of line without match so exit search
+                    searching = false;
+                    match = false;
+                }
+            }
+
+            if (match) { // if it was a match stop searching
+                searching = false;
+            } else { //else keep searching for a new match
+                match = true;
+            }
+        }
+
+        if (match) { //we found tag, so return data until DELIMITER or \n 
+            while (file.available()) {
+                c = file.read();
+                if (c == DELIMITER || c == "\n") {
+                    break;
+                }
+                Serial.print(c);
+            }
+        }  
+    }
+
+    file.close(); // do not corrupt file
+}
+
+////////////////////////////////////////////////////////////////
+void SensorData::readLast(char* tag = "") {
+    readLine(0, tag);
+}
 
 
-    Serial.print("test: ");
-    Serial.println(test);
-    Serial.println((char*) test); //try this but in example test was type uint8_t
+/////////////////////////////////////////////////////////////////
+void SensorData::dump(void) {  //dump array
+    Serial.print("----SENSOR DATA---- Reading file: ");
+    Serial.println(filename);
+
+    SdFat sd;
+    SdFile file;
+
+    if (!sd.begin(chipSelect, SD_SCK_MHZ(8))) {
+        sd.initErrorHalt();
+    }  // initialise sd card
+
+    file.open(filename, O_RDONLY);
+
+    char c;
+    while (file.available()) {
+        c = file.read();
+        Serial.print(c);
+    }
+
+    file.close();
+
 }

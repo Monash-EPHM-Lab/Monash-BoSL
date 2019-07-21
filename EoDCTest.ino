@@ -3,16 +3,15 @@
 
 
 /////////////////////////////
-// Sensor indexes for data array
-#define _Time 0
-#define _Pressue 1
-#define _Temp 2
-#define _EC 3
-#define _Bat 4 
+// tags for storing and retreiving data in CSV file on SD card
+#define TIME_TAG "t="
+#define DEPTH_TAG "depth="
+#define TEMP_TAG "temp="
+#define EC_TAG "EC="
+#define BAT_TAG "bat="
 /////////////////////////////
 
-#define sensorNum 5    // number of sensors/rows to be in data array
-#define logHistory 10  // number of readings/columns to be kept in data array
+#define logHistory 60  // max number of readings/columns to be transmitted
 
 #define BAUDRATE 9600
 
@@ -25,52 +24,67 @@ const int diffThreshold = 0.1;  //10% change in consecutive readings before tran
 uint16_t counter = 0;
 
 
-EC sensorEC = EC(ECPinR, ECPinA, ECPinB, true);  //three pins and switching is true.
+SensorEC EC = SensorEC(ECPinR, ECPinA, ECPinB, true);  //three pins and switching is true.
+
+SensorData data = SensorData("startfile.txt", logHistory); //initialise data array
 
 
+///////////////////////////////////////////////////////////////
 void setup() {
-
-
-  Serial.begin(BAUDRATE);
-
-  SensorData data = SensorData(sensorNum, logHistory); //initialise data array
-  data.print();
+	Serial.begin(BAUDRATE);
+	data.dump();
 }
 
-// the loop function runs over and over again forever
+
+///////////////////////////////////////////////////////////////
 void loop() {
 	delay(1000);
 	//delay(10000);
 	counter++;
-	sensorEC.measure();
-  Serial.println(sensorEC.getAverage());
 
-	if (counter % 6 == 0) {
-		//logData();
+	EC.measure(); //take measurement every 10sec
+/*	temp.measure();
+	depth.measure();	*/
+
+	if (counter % 6 == 0) { //one minute has passed
+		logData();
 		//transmitCheck();
 	}
 }
 
-/*
-float getDiff(int sensor) {
-	float newReading = data.getLastFloat(sensor);
-	float oldReading = data.get2ndLastFloat(sensor); //can change to not be most recent reading.
 
-	float diff = (oldReading - newReading) / oldReading;  
+///////////////////////////////////////////////////////////////
+void logData() { // save all data from each sensor
 
-	return diff;
+	float ECVal = EC.getAverage(); 
+	data.composeLine(ECVal, EC_TAG);
+	EC.clearSum();   //clear the EC sensor value to start a new average.
+
+/*	float tempVal = temp.getAverage(); 
+	data.composeLine(tempVal, TEMP_TAG);
+	temp.clearSum();   
+
+	float depthVal = depth.getAverage(); 
+	data.composeLine(depthVal, DEPTH_TAG);
+	depth.clearSum();    */
+
+	data.writeLine(); //write the composed line to SD card
 }
 
-void logData(){
-	float ECVal = sensorEC.getAverage(true); //clear the EC sensor value to start a new average.
-	data.saveNew(ECVal, _EC);
-}
 
+///////////////////////////////////////////////////////////////
 void transmitCheck() {
-	float ECDiff = getDiff(_EC);
 
-	if (ECDiff >= diffThreshold) {
-		//transmit(); //make this do something....
+	float ECdiff = (EC.getLast() - EC.getAverage()) / EC.getLast(); 
+	// EC percentage change: (old - new) / old
+
+
+/*	float tempDiff = (temp.getLast() - temp.getAverage()) / temp.getLast(); 
+
+	float depthDiff = (depth.getLast() - depth.getAverage()) / depth.getLast(); */
+
+//	if (ECdiff >= diffThreshold || tempDiff >= diffThreshold || depthDiff >= diffThreshold) {
+	if (ECdiff >= diffThreshold) {
+		transmit(); //make this do something....
 	}
-
-} */
+} 

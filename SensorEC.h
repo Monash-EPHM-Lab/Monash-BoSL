@@ -8,6 +8,7 @@ class SensorEC
     public:
         SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0, const uint16_t Rdivider = 1225, const uint16_t Rcable = 250);
         //arguments: read pin, voltage pin A, voltage pin B, resistance divider, cable resistance.
+
         void measure(void);
         float getAverage(bool clear = false); // get the average EC value over the measurement interval
         void clearSum(void);  // clear and save the EC sum to last, beginning a new measurement 
@@ -29,7 +30,7 @@ class SensorEC
         const uint8_t pinRead;
 
         bool polarity = false;
-        
+
         float lastEC;  //last EC value measured 
 };
 
