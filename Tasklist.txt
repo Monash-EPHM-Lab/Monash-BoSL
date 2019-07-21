@@ -6,4 +6,6 @@ Implement Temp and other sensor classes.
 
 Test SIM7000 code and run test to see if it can log readings on cartridgerefills.com
 
-measure power consumption on everything.
+measure power consumption on everything and create file for it in documentation.
+
+write code documentation
