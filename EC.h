@@ -1,21 +1,23 @@
-#ifndef EC_h
-#define EC_h
+#ifndef SensorEC_h
+#define SensorEC_h
 
 #include <Arduino.h>
 
- class EC
- {
-     public:
-        EC(uint8_t pinR, uint8_t pinA, uint8_t pinB, bool doSwitching = false, const uint16_t Rdevider = 1225, const uint16_t Rcable = 250);
-        //arguments: read pin, voltage pin A, voltage pin B, do polarity switching.
+class SensorEC
+{
+    public:
+        SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0, const uint16_t Rdivider = 1225, const uint16_t Rcable = 250);
+        //arguments: read pin, voltage pin A, voltage pin B, resistance divider, cable resistance.
         void measure(void);
-        float getAverage(bool clear = true); // clear the EC averages by default
-        void clearSum(void);
-          
-     private:
+        float getAverage(bool clear = false); // get the average EC value over the measurement interval
+        void clearSum(void);  // clear and save the EC sum to last, beginning a new measurement 
+
+        float getLast(void); //get the last EC value
+
+    private:
         void pinSwitch(void);
         uint16_t read(void);
-        float ECCal(float);
+        float calEC(float ECAv);
 
         uint16_t ECSum;  // sum of EC measuremts, averaged on getEC call (each minute)
         uint8_t storeLen;  // number of EC values which have been measured and summed
@@ -26,8 +28,9 @@
         const uint16_t Rc;
         const uint8_t pinRead;
 
-        bool doSwitch;
         bool polarity = false;
+        
+        float lastEC;  //last EC value measured 
 };
- 
- #endif
+
+#endif
