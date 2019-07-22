@@ -1,4 +1,4 @@
-#include <EC.h>
+#include <SensorEC.h>
 
 /*
 Application notes:
@@ -35,6 +35,15 @@ Typical values:
 Rd = 1225
 Rc = 250
 */
+
+//500ms delay values
+//#define CAL_M -0.0724 
+//#define CAL_C 70.9  
+
+#define EC_DELAY 100 //in ms
+#define CAL_M -0.0568 //calibration gradient for 0.1-15 ms/cm range. CALIBRATED IN LAB 22/07/19
+#define CAL_C 54.0    // calibration constant. CALIBRATED IN LAB 22/07/19
+// calibrated for 100ms delay
 
 
 SensorEC::SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0, const uint16_t Rdivider = 1225, const uint16_t Rcable = 250): 
@@ -83,7 +92,7 @@ float SensorEC::getAverage(bool clear = false) {
 		clearSum();
 	}
 
-  	float ECAverageCal = calEC(ECAverage); 
+  	float ECAverageCal = calEC(ECAverage);  
 
   	return ECAverageCal;
 }
@@ -94,7 +103,7 @@ void SensorEC::clearSum(void) {
     lastEC = getAverage();  //save the average to last EC before clearing
 
 	ECSum = 0;
-  	storeLen = 0;
+    storeLen = 0;
 }
 
 
@@ -123,10 +132,14 @@ uint16_t SensorEC::read(){
         digitalWrite(pinVB,LOW);
     }
 
-	delay(100); //this value may need to be adjusted
+	delay(EC_DELAY); //this value may need to be adjusted
+    // the delay time is very important. increasing delay to 500ms can increase analog readings
+    // by 8% in the exact some circumstances.
 
 	uint16_t readMax = 1023;
-	uint16_t ECVal = analogRead(pinRead);
+    uint16_t ECVal = analogRead(pinRead);
+    ECVal = analogRead(pinRead);
+
   	if (polarity) {
     	ECVal = readMax - ECVal;
  	}
@@ -146,7 +159,10 @@ uint16_t SensorEC::read(){
 
 ///////////////////////////////////////////////////////////////
 float SensorEC::calEC(float ECAv) {  // calibrate the raw analog reading to a resistance
-    float divmath = (float)ECAv / ((float)(1024-ECAv));
 
-    return ((((Rd)*divmath) - (Rc))/10); 
+// THESE VALUES ARE BASED ON LAB CALIBRATION CURVE
+
+    return CAL_M * ECAv + CAL_C;
 }
+
+
