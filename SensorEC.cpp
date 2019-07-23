@@ -40,7 +40,7 @@ Rc = 250
 //#define CAL_M -0.0724 
 //#define CAL_C 70.9  
 
-#define EC_DELAY 100 //in ms
+#define EC_DELAY 1 //in ms
 #define CAL_M -0.0568 //calibration gradient for 0.1-15 ms/cm range. CALIBRATED IN LAB 22/07/19
 #define CAL_C 54.0    // calibration constant. CALIBRATED IN LAB 22/07/19
 // calibrated for 100ms delay
@@ -92,9 +92,10 @@ float SensorEC::getAverage(bool clear = false) {
 		clearSum();
 	}
 
-  	float ECAverageCal = calEC(ECAverage);  
+  	//ECAverage = calEC(ECAverage);  
+    // do not calibrate at the moment. return raw ADC values
 
-  	return ECAverageCal;
+  	return ECAverage;
 }
 
 

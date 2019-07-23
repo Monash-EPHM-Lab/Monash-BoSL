@@ -9,3 +9,14 @@ Test SIM7000 code and run test to see if it can log readings on cartridgerefills
 measure power consumption on everything and create file for it in documentation.
 
 write code documentation
+
+
+Flip C5 180 degrees
+Change to SMD parts
+Disconnect joined pads for SIM7000 mount
+Remove unused holes
+fix pinout on voltage regulator
+Add sim7000 pin 1 (pwrkey) pin header
+Add alternate names on pin headers (eg: SDA/A5)
+
+
