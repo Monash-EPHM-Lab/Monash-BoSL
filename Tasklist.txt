@@ -18,5 +18,10 @@ Remove unused holes
 fix pinout on voltage regulator
 Add sim7000 pin 1 (pwrkey) pin header
 Add alternate names on pin headers (eg: SDA/A5)
-
-
+Swap for lower frequency crystals (8Mhz)
+Label schematics and board better
+Correct schematic to PCB board (pin 2/3 go to R/TX instead of 10/11)
+Move C5 cap so its not infant of ATMEGA328 (makes prying out chip easier)
+Add a USB port for uploading. 
+Have a debug switch/ jumper to turn on LED's / USB port (UART to Serial converter)
+Have dedicated plug for sensors (ethernet port)
