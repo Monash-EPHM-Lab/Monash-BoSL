@@ -14,17 +14,17 @@
   Written by Limor Fried/Ladyada for Adafruit Industries.
   BSD license, all text above must be included in any redistribution
  ****************************************************/
-    // next line per http://postwarrior.com/arduino-ethershield-error-prog_char-does-not-name-a-type/
+
+// Library modified for SIM7000 by Botletics: https://github.com/botletics
+// Further modified by Boris Deletic - Monash University Civil Engineering
 
 #include "SIM7000.h"
 
 
 
 
-SIM7000::SIM7000(int8_t rst)
+SIM7000::SIM7000(void) : _type(SIM7000A)
 {
-  _rstpin = rst;
-
   // apn = F("FONAnet");
   apn = F("");
   apnusername = 0;
@@ -41,16 +41,6 @@ uint8_t SIM7000::type(void) {
 
 boolean SIM7000::begin(Stream &port) {
   mySerial = &port;
-
-  if (_rstpin != 99) { // Pulse the reset pin only if it's not an LTE module
-  	DEBUG_PRINTLN(F("Resetting the module..."));
-    pinMode(_rstpin, OUTPUT);
-    digitalWrite(_rstpin, HIGH);
-    delay(10);
-    digitalWrite(_rstpin, LOW);
-    delay(100);
-    digitalWrite(_rstpin, HIGH);
-  }
 
   DEBUG_PRINTLN(F("Attempting to open comm with ATs"));
   // give 7 seconds to reboot
@@ -88,7 +78,6 @@ boolean SIM7000::begin(Stream &port) {
   }
 
   // turn on hangupitude
-  if (_rstpin != 99) sendCheckReply(F("AT+CVHU=0"), ok_reply);
 
   delay(100);
   flushInput();
@@ -123,11 +112,9 @@ boolean SIM7000::begin(Stream &port) {
 
 
 /********* Serial port ********************************************/
-boolean SIM7000::setBaudrate(uint16_t baud) {
-  return sendCheckReply(F("AT+IPREX="), baud, ok_reply);
-}
 
-boolean SIM7000_LTE::setBaudrate(uint16_t baud) {
+
+boolean SIM7000::setBaudrate(uint16_t baud) {
   return sendCheckReply(F("AT+IPR="), baud, ok_reply);
 }
 
@@ -176,14 +163,14 @@ boolean SIM7000::setFunctionality(uint8_t option) {
 // 13 - GSM only
 // 38 - LTE only
 // 51 - GSM and LTE only
-boolean SIM7000_LTE::setPreferredMode(uint8_t mode) {
+boolean SIM7000::setPreferredMode(uint8_t mode) {
   return sendCheckReply(F("AT+CNMP="), mode, ok_reply);
 }
 
 // 1 - CAT-M
 // 2 - NB-IoT
 // 3 - CAT-M and NB-IoT
-boolean SIM7000_LTE::setPreferredLTEMode(uint8_t mode) {
+boolean SIM7000::setPreferredLTEMode(uint8_t mode) {
   return sendCheckReply(F("AT+CMNB="), mode, ok_reply);
 }
 
@@ -192,7 +179,7 @@ boolean SIM7000_LTE::setPreferredLTEMode(uint8_t mode) {
 // whereas Verizon uses band 13
 // Mode: "CAT-M" or "NB-IOT"
 // Band: The cellular EUTRAN band number
-boolean SIM7000_LTE::setOperatingBand(const char * mode, uint8_t band) {
+boolean SIM7000::setOperatingBand(const char * mode, uint8_t band) {
   char cmdBuff[24];
 
   sprintf(cmdBuff, "AT+CBANDCFG=\"%s\",%i", mode, band);

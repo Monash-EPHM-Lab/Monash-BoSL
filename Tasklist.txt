@@ -25,3 +25,5 @@ Move C5 cap so its not infant of ATMEGA328 (makes prying out chip easier)
 Add a USB port for uploading. 
 Have a debug switch/ jumper to turn on LED's / USB port (UART to Serial converter)
 Have dedicated plug for sensors (ethernet port)
+Lots of extra headers for certain pins (3.3v / gnd/ A4/5)
+Add transistor switch for 3.3v output for EC sensor & check ADC consistency relative to VCC.

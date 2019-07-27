@@ -29,7 +29,6 @@
 
 
 #define FONA_DEFAULT_TIMEOUT_MS 500
-#define FONA_NO_RST_PIN 99
 
 #define FONA_HTTP_GET   0
 #define FONA_HTTP_POST  1
@@ -38,7 +37,8 @@
 
 class SIM7000 : public FONAStreamType {
  public:
-  SIM7000(int8_t);
+  SIM7000(void);
+
   boolean begin(FONAStreamType &port);
   uint8_t type();
 
@@ -48,9 +48,6 @@ class SIM7000 : public FONAStreamType {
   int read(void);
   int peek(void);
   void flush();
-
-  // FONA 3G requirements
-  boolean setBaudrate(uint16_t baud);
 
   // Power, battery, and ADC
   boolean powerDown(void);
@@ -130,9 +127,16 @@ class SIM7000 : public FONAStreamType {
   boolean sendCheckReply(FONAFlashStringPtr send, FONAFlashStringPtr reply, uint16_t timeout = FONA_DEFAULT_TIMEOUT_MS);
   boolean sendCheckReply(const char* send, FONAFlashStringPtr reply, uint16_t timeout = FONA_DEFAULT_TIMEOUT_MS);
 
+//////////////////////
+//LTE METHODS - SIM7000
+  boolean setPreferredMode(uint8_t mode);
+  boolean setPreferredLTEMode(uint8_t mode);
+  boolean setOperatingBand(const char * mode, uint8_t band);
+  boolean setBaudrate(uint16_t baud);
+  boolean hangUp(void);
+
 
  protected:
-  int8_t _rstpin;
   uint8_t _type;
 
   char replybuffer[255];
@@ -191,16 +195,5 @@ class SIM7000 : public FONAStreamType {
   FONAStreamType *mySerial;
 };
 
-class SIM7000_LTE : public SIM7000 {
-
- public:
-  SIM7000_LTE () : SIM7000(FONA_NO_RST_PIN) { _type = SIM7000A;}
-
-  boolean setPreferredMode(uint8_t mode);
-  boolean setPreferredLTEMode(uint8_t mode);
-  boolean setOperatingBand(const char * mode, uint8_t band);
-  boolean setBaudrate(uint16_t baud);
-  boolean hangUp(void);
-};
 
 #endif
