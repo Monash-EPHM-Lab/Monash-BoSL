@@ -1,13 +1,14 @@
-#include <SensorData.h>
+#include "SensorData.h"
+
 
 //class for managing sensor data to be stored and accessed on SD card
 
-SensorData::SensorData(char* file, int logHistory) : historyNum(logHistory)
+SensorData::SensorData(char* file)
     {  
     memset(dataLine, 0, MAX_LINE_SIZE); //initialise dataline as empty with 0
 
-    transmitArr = new bool [historyNum];
-    memset(transmitArr, 1, historyNum);  // initialise every element as transmitted.
+    transmitArr = new bool [logHistory];
+    memset(transmitArr, 1, logHistory);  // initialise every element as transmitted.
 
     newFile(file); //initial filename
 }

@@ -83,11 +83,8 @@ class SIM7000 : public FONAStreamType {
   // GPRS handling
   boolean enableGPRS(boolean onoff);
   int8_t GPRSstate(void);
-  boolean getGSMLoc(uint16_t *replycode, char *buff, uint16_t maxlen);
-  boolean getGSMLoc(float *lat, float *lon);
   void setNetworkSettings(FONAFlashStringPtr apn, FONAFlashStringPtr username=0, FONAFlashStringPtr password=0);
   boolean postData(const char *request_type, const char *URL, const char *body = "", const char *token = "", uint32_t bodylen = 0);
-  boolean postData(const char *server, uint16_t port, const char *connType, const char *URL, const char *body = "");
   void getNetworkInfo(void);
 
   // TCP raw connections
@@ -97,26 +94,6 @@ class SIM7000 : public FONAStreamType {
   boolean TCPsend(char *packet, uint8_t len);
   uint16_t TCPavailable(void);
   uint16_t TCPread(uint8_t *buff, uint8_t len);
-
-  // HTTP low level interface (maps directly to SIM800 commands).
-  boolean HTTP_init();
-  boolean HTTP_term();
-  void HTTP_para_start(FONAFlashStringPtr parameter, boolean quoted = true);
-  boolean HTTP_para_end(boolean quoted = true);
-  boolean HTTP_para(FONAFlashStringPtr parameter, const char *value);
-  boolean HTTP_para(FONAFlashStringPtr parameter, FONAFlashStringPtr value);
-  boolean HTTP_para(FONAFlashStringPtr parameter, int32_t value);
-  boolean HTTP_data(uint32_t size, uint32_t maxTime=10000);
-  boolean HTTP_action(uint8_t method, uint16_t *status, uint16_t *datalen, int32_t timeout = 10000);
-  boolean HTTP_readall(uint16_t *datalen);
-  boolean HTTP_ssl(boolean onoff);
-
-  // HTTP high level interface (easier to use, less flexible).
-  boolean HTTP_GET_start(char *url, uint16_t *status, uint16_t *datalen);
-  void HTTP_GET_end(void);
-  boolean HTTP_POST_start(char *url, FONAFlashStringPtr contenttype, const uint8_t *postdata, uint16_t postdatalen,  uint16_t *status, uint16_t *datalen);
-  void HTTP_POST_end(void);
-  void setUserAgent(FONAFlashStringPtr useragent);
 
   // HTTPS
   void setHTTPSRedirect(boolean onoff);
@@ -147,8 +124,6 @@ class SIM7000 : public FONAStreamType {
   FONAFlashStringPtr useragent;
   FONAFlashStringPtr ok_reply;
 
-  // HTTP helpers
-  boolean HTTP_setup(char *url);
 
   void flushInput();
   uint16_t readRaw(uint16_t b);

@@ -2,23 +2,21 @@
 #define SensorData_h
 
 #include <Arduino.h>
-#include <SensorData.h>
 #include <SPI.h>
 #include <SdFat.h>
 
-/*index:
-0 = Time        
-1 = Pressure     
-2 = Temp        
-3 = EC          
-4 = Battery                          
-#define Time 0
-#define Pressue 1
-#define Temp 2
-#define EC 3
-#define Bat 4 		
-Define these indecies in main script. More explicit		*/
 
+// tags for storing and retreiving data in CSV file on SD card
+#define TIME_TAG "t="
+#define DEPTH_TAG "depth="
+#define TEMP_TAG "temp="
+#define EC_TAG "EC="
+#define BAT_TAG "bat="
+/////////////////////////////
+
+
+
+#define logHistory 60  // max number of readings/columns to be transmitted
 #define MAX_DATA_SIZE 20 // max number of bytes per data point or tag
 #define MAX_LINE_SIZE 100 // max number of bytes per line
 
@@ -36,7 +34,7 @@ SCK is pin 13  */
  class SensorData
  {
      public:
-        SensorData(char* file, int logHistory);
+        SensorData(char* file);
         // manages SD card reading/writing 
 
         void newFile(char* name);
@@ -58,9 +56,7 @@ SCK is pin 13  */
         void dump(void); // dump entire file to serial port.
 
         
-     private:
-        int historyNum;  // max number of datapoints per transmission
-     
+     private:     
         bool *transmitArr;
 
         char dataLine[MAX_LINE_SIZE];  //line to be saved in SD card

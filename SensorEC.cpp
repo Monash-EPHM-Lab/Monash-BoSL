@@ -1,4 +1,4 @@
-#include <SensorEC.h>
+#include "SensorEC.h"
 
 /*
 Application notes:
@@ -69,21 +69,6 @@ SensorEC::SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0, const uint16_t 
 
 
 ///////////////////////////////////////////////////////////////
-void SensorEC::measure(void){ 
-	uint16_t ECVar = 0;
-	uint8_t reps = 2;
-
-	for (uint8_t i = 0; i<reps; i++) {
-		ECVar += read();
-		pinSwitch();
-	}
-
-	ECSum += ECVar; // add measurement to total sum
-	storeLen += reps;  // add reps for number of measurements taken
-}
-
-
-///////////////////////////////////////////////////////////////
 float SensorEC::getAverage(bool clear = false) {
 	float ECAverage = (float)ECSum / (float)storeLen;
   
@@ -100,10 +85,10 @@ float SensorEC::getAverage(bool clear = false) {
 
 
 ///////////////////////////////////////////////////////////////
-void SensorEC::clearSum(void) {
+void SensorEC::clearAndSave(void) {
     lastEC = getAverage();  //save the average to last EC before clearing
 
-	ECSum = 0;
+	  ECSum = 0;
     storeLen = 0;
 }
 
@@ -126,37 +111,44 @@ void SensorEC::pinSwitch(){
 
 
 ///////////////////////////////////////////////////////////////
-uint16_t SensorEC::read(){
-  	digitalWrite(pinVA,HIGH);
+int16_t SensorEC::read(){
+  uint8_t reps = 2;
+  int16_t ECVal;
+  
+  for (uint8_t i = 0; i<reps; i++) {
+    digitalWrite(pinVA,HIGH);
 
     if (pinVB) {
         digitalWrite(pinVB,LOW);
     }
 
-	delay(EC_DELAY); //this value may need to be adjusted
+  delay(EC_DELAY); //this value may need to be adjusted
     // the delay time is very important. increasing delay to 500ms can increase analog readings
     // by 8% in the exact some circumstances.
 
-	uint16_t readMax = 1023;
-    uint16_t ECVal = analogRead(pinRead);
-    ECVal = analogRead(pinRead);
+  uint16_t readMax = 1023;
+  analogRead(pinRead);  //once to settle sensor
+  ECVal += analogRead(pinRead);
 
-  	if (polarity) {
-    	ECVal = readMax - ECVal;
- 	}
+    if (polarity) {
+      ECVal = readMax - ECVal;
+  }
 
-  	if (pinVB){
-    	digitalWrite(pinVB,LOW);    
-  	}
+    if (pinVB){
+      digitalWrite(pinVB,LOW);    
+    }
 
-  	digitalWrite(pinVA,LOW);
+    digitalWrite(pinVA,LOW);
   
-  	Serial.print("EC = ");
-  	Serial.println(ECVal);
+    Serial.print("EC = ");
+    Serial.println(ECVal);
+
+
+    pinSwitch();  // switch pins before reading again
+  }
   
-  	return ECVal;
+  return ECVal / reps;
 }
-
 
 ///////////////////////////////////////////////////////////////
 float SensorEC::calEC(float ECAv) {  // calibrate the raw analog reading to a resistance
@@ -165,5 +157,3 @@ float SensorEC::calEC(float ECAv) {  // calibrate the raw analog reading to a re
 
     return CAL_M * ECAv + CAL_C;
 }
-
-

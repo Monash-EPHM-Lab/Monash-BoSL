@@ -406,29 +406,13 @@ boolean SIM7000::enableRTC(uint8_t i) {
 
 boolean SIM7000::enableGPRS(boolean onoff) {
   if (onoff) {
-    /*
-    // if (_type < SIM7000A) { // UNCOMMENT FOR LTE ONLY!
-      // disconnect all sockets
-      sendCheckReply(F("AT+CIPSHUT"), F("SHUT OK"), 20000);
-
-      if (! sendCheckReply(F("AT+CGATT=1"), ok_reply, 10000))
-        return false;
-
-    // set bearer profile! connection type GPRS
-    if (! sendCheckReply(F("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\""), ok_reply, 10000))
-      return false;
-    // } // UNCOMMENT FOR LTE ONLY! */
-
     delay(200); // This seems to help the next line run the first time
-    
     // set bearer profile access point name
     if (apn) {
       // Send command AT+SAPBR=3,1,"APN","<apn value>" where <apn value> is the configured APN value.
       if (! sendCheckReplyQuoted(F("AT+SAPBR=3,1,\"APN\","), apn, ok_reply, 10000))
         return false;
 
-      // if (_type < SIM7000A) { // UNCOMMENT FOR LTE ONLY!
-        // send AT+CSTT,"apn","user","pass"
         flushInput();
 
         mySerial->print(F("AT+CSTT=\""));
@@ -457,7 +441,6 @@ boolean SIM7000::enableGPRS(boolean onoff) {
         DEBUG_PRINTLN("\"");
         
         if (! expectReply(ok_reply)) return false;
-      // } // UNCOMMENT FOR LTE ONLY!
     
       // set username/password
       if (apnusername) {
@@ -476,11 +459,9 @@ boolean SIM7000::enableGPRS(boolean onoff) {
     if (! sendCheckReply(F("AT+SAPBR=1,1"), ok_reply, 30000))
       return false;
 
-    // if (_type < SIM7000A) { // UNCOMMENT FOR LTE ONLY!
       // bring up wireless connection
       if (! sendCheckReply(F("AT+CIICR"), ok_reply, 10000))
         return false;
-    // } // UNCOMMENT FOR LTE ONLY!
   } else {
     // disconnect all sockets
     if (! sendCheckReply(F("AT+CIPSHUT"), F("SHUT OK"), 20000))
@@ -490,10 +471,8 @@ boolean SIM7000::enableGPRS(boolean onoff) {
     if (! sendCheckReply(F("AT+SAPBR=0,1"), ok_reply, 10000))
       return false;
 
-    // if (_type < SIM7000A) { // UNCOMMENT FOR LTE ONLY!
-      if (! sendCheckReply(F("AT+CGATT=0"), ok_reply, 10000))
-        return false;
-  // } // UNCOMMENT FOR LTE ONLY!
+    if (! sendCheckReply(F("AT+CGATT=0"), ok_reply, 10000))
+      return false;
 
   }
   return true;
@@ -522,48 +501,6 @@ void SIM7000::setNetworkSettings(FONAFlashStringPtr apn,
   if (_type >= SIM7000A) sendCheckReplyQuoted(F("AT+CGDCONT=1,\"IP\","), apn, ok_reply, 10000);
 }
 
-boolean SIM7000::getGSMLoc(uint16_t *errorcode, char *buff, uint16_t maxlen) {
-
-  getReply(F("AT+CIPGSMLOC=1,1"), (uint16_t)10000);
-
-  if (! parseReply(F("+CIPGSMLOC: "), errorcode))
-    return false;
-
-  char *p = replybuffer+14;
-  uint16_t lentocopy = min(maxlen-1, (int)strlen(p));
-  strncpy(buff, p, lentocopy+1);
-
-  readline(); // eat OK
-
-  return true;
-}
-
-boolean SIM7000::getGSMLoc(float *lat, float *lon) {
-
-  uint16_t returncode;
-  char gpsbuffer[120];
-
-  // make sure we could get a response
-  if (! getGSMLoc(&returncode, gpsbuffer, 120))
-    return false;
-
-  // make sure we have a valid return code
-  if (returncode != 0)
-    return false;
-
-  // +CIPGSMLOC: 0,-74.007729,40.730160,2015/10/15,19:24:55
-  // tokenize the gps buffer to locate the lat & long
-  char *longp = strtok(gpsbuffer, ",");
-  if (! longp) return false;
-
-  char *latp = strtok(NULL, ",");
-  if (! latp) return false;
-
-  *lat = atof(latp);
-  *lon = atof(longp);
-
-  return true;
-}
 
 boolean SIM7000::postData(const char *request_type, const char *URL, const char *body, const char *token, uint32_t bodylen) {
   // NOTE: Need to open socket/enable GPRS before using this function
@@ -650,93 +587,6 @@ boolean SIM7000::postData(const char *request_type, const char *URL, const char 
   sendCheckReply(F("AT+HTTPTERM"), ok_reply, 10000);
 
   return true;
-}
-
-/********************************* HTTPS FUNCTION *********************************/
-// boolean SIM7000_3G::postData3G(const char *server, uint16_t port, const char *connType, char *URL) {
-boolean SIM7000::postData(const char *server, uint16_t port, const char *connType, const char *URL, const char *body) {
-  // Sample request URL: "GET /dweet/for/{deviceID}?temp={temp}&batt={batt} HTTP/1.1\r\nHost: dweet.io\r\n\r\n"
-
-  // Start HTTPS stack
-	if (! sendCheckReply(F("AT+CHTTPSSTART"), ok_reply, 10000))
-  	return false;
-
-	DEBUG_PRINTLN(F("Waiting 1s to ensure connection..."));
-  delay(1000);
-  
-  // Construct the AT command based on function parameters
-  // char auxStr[strlen(URL)+strlen(server)+7];
-  char auxStr[200];
-  uint8_t connTypeNum = 1;
-  
-  if (strcmp(connType, "HTTP") == 0) {
-  	connTypeNum = 1;
-  }
-  if (strcmp(connType, "HTTPS") == 0) {
-  	connTypeNum = 2;
-  }
-
-  sprintf(auxStr, "AT+CHTTPSOPSE=\"%s\",%d,%d", server, port, connTypeNum);
-
-  // Connect to HTTPS server
-  // if (! sendCheckReply(F("AT+CHTTPSOPSE=\"www.dweet.io\",443,2"), ok_reply, 10000)) // Use port 443 and HTTPS
-  //   return false;
-  // if (! sendCheckReply(auxStr, ok_reply, 10000))
-  //   return false;
-
-
-  if (! sendCheckReply(auxStr, ok_reply, 10000))
-    return false;
-  
-  // readline(10000);
-
-  // if (strstr(replybuffer, "+HTTPSOPSE: 0") == 0) {
-  //   return false;
-  // }
-
-  DEBUG_PRINTLN(F("Waiting 1s to make sure it works..."));
-  delay(1000);
-
-  // Send data to server
-  sprintf(auxStr, "AT+CHTTPSSEND=%i", strlen(URL) + strlen(body)); // URL and body must include \r\n as needed
-
-  if (! sendCheckReply(auxStr, ">", 10000))
-    return false;
-
-  if (! sendCheckReply(URL, ok_reply, 10000))
-    return false;
-  
-  delay(1000);
-
-  // Check server response length
-  uint16_t replyLen;
-  sendParseReply(F("AT+CHTTPSRECV?"), F("+CHTTPSRECV: LEN,"), &replyLen);
-
-  // Get server response content
-  sprintf(auxStr, "AT+CHTTPSRECV=%i", replyLen);
-  getReply(auxStr, 2000);
-
-  if (replyLen > 0) {
-    readRaw(replyLen);
-    flushInput();
-    DEBUG_PRINT("\t<--- "); DEBUG_PRINTLN(replybuffer);
-  }
-  
-  // Close HTTP/HTTPS session
-  if (! sendCheckReply(F("AT+CHTTPSCLSE"), ok_reply, 10000))
-    return false;
-
-  readline(10000);
-  DEBUG_PRINT("\t<--- "); DEBUG_PRINTLN(replybuffer);
-
-  // Stop HTTP/HTTPS stack
-  if (! sendCheckReply(F("AT+CHTTPSSTOP"), F("+CHTTPSSTOP: 0"), 10000))
-    return false;
-
-  readline(); // Eat OK
-  DEBUG_PRINT("\t<--- "); DEBUG_PRINTLN(replybuffer);
-
-  return (replyLen > 0);
 }
 
 /********* TCP FUNCTIONS  ************************************/
@@ -852,212 +702,6 @@ uint16_t SIM7000::TCPread(uint8_t *buff, uint8_t len) {
   memcpy(buff, replybuffer, avail);
 
   return avail;
-}
-
-
-
-/********* HTTP LOW LEVEL FUNCTIONS  ************************************/
-
-boolean SIM7000::HTTP_init() {
-  return sendCheckReply(F("AT+HTTPINIT"), ok_reply);
-}
-
-boolean SIM7000::HTTP_term() {
-  return sendCheckReply(F("AT+HTTPTERM"), ok_reply);
-}
-
-void SIM7000::HTTP_para_start(FONAFlashStringPtr parameter,
-                                    boolean quoted) {
-  flushInput();
-
-
-  DEBUG_PRINT(F("\t---> "));
-  DEBUG_PRINT(F("AT+HTTPPARA=\""));
-  DEBUG_PRINT(parameter);
-  DEBUG_PRINTLN('"');
-
-
-  mySerial->print(F("AT+HTTPPARA=\""));
-  mySerial->print(parameter);
-  if (quoted)
-    mySerial->print(F("\",\""));
-  else
-    mySerial->print(F("\","));
-}
-
-boolean SIM7000::HTTP_para_end(boolean quoted) {
-  if (quoted)
-    mySerial->println('"');
-  else
-    mySerial->println();
-
-  return expectReply(ok_reply);
-}
-
-boolean SIM7000::HTTP_para(FONAFlashStringPtr parameter,
-                                 const char *value) {
-  HTTP_para_start(parameter, true);
-  mySerial->print(value);
-  return HTTP_para_end(true);
-}
-
-boolean SIM7000::HTTP_para(FONAFlashStringPtr parameter,
-                                 FONAFlashStringPtr value) {
-  HTTP_para_start(parameter, true);
-  mySerial->print(value);
-  return HTTP_para_end(true);
-}
-
-boolean SIM7000::HTTP_para(FONAFlashStringPtr parameter,
-                                 int32_t value) {
-  HTTP_para_start(parameter, false);
-  mySerial->print(value);
-  return HTTP_para_end(false);
-}
-
-boolean SIM7000::HTTP_data(uint32_t size, uint32_t maxTime) {
-  flushInput();
-
-
-  DEBUG_PRINT(F("\t---> "));
-  DEBUG_PRINT(F("AT+HTTPDATA="));
-  DEBUG_PRINT(size);
-  DEBUG_PRINT(',');
-  DEBUG_PRINTLN(maxTime);
-
-
-  mySerial->print(F("AT+HTTPDATA="));
-  mySerial->print(size);
-  mySerial->print(",");
-  mySerial->println(maxTime);
-
-  return expectReply(F("DOWNLOAD"));
-}
-
-boolean SIM7000::HTTP_action(uint8_t method, uint16_t *status,
-                                   uint16_t *datalen, int32_t timeout) {
-  // Send request.
-  if (! sendCheckReply(F("AT+HTTPACTION="), method, ok_reply))
-    return false;
-
-  // Parse response status and size.
-  readline(timeout);
-  if (! parseReply(F("+HTTPACTION:"), status, ',', 1))
-    return false;
-  if (! parseReply(F("+HTTPACTION:"), datalen, ',', 2))
-    return false;
-
-  return true;
-}
-
-boolean SIM7000::HTTP_readall(uint16_t *datalen) {
-  getReply(F("AT+HTTPREAD"));
-  if (! parseReply(F("+HTTPREAD:"), datalen, ',', 0))
-    return false;
-
-  return true;
-}
-
-boolean SIM7000::HTTP_ssl(boolean onoff) {
-  return sendCheckReply(F("AT+HTTPSSL="), onoff ? 1 : 0, ok_reply);
-}
-
-/********* HTTP HIGH LEVEL FUNCTIONS ***************************/
-
-boolean SIM7000::HTTP_GET_start(char *url,
-              uint16_t *status, uint16_t *datalen){
-  if (! HTTP_setup(url))
-    return false;
-
-  // HTTP GET
-  if (! HTTP_action(FONA_HTTP_GET, status, datalen, 30000))
-    return false;
-
-  DEBUG_PRINT(F("Status: ")); DEBUG_PRINTLN(*status);
-  DEBUG_PRINT(F("Len: ")); DEBUG_PRINTLN(*datalen);
-
-  // HTTP response data
-  if (! HTTP_readall(datalen))
-    return false;
-
-  return true;
-}
-
-
-void SIM7000::HTTP_GET_end(void) {
-  HTTP_term();
-}
-
-boolean SIM7000::HTTP_POST_start(char *url,
-              FONAFlashStringPtr contenttype,
-              const uint8_t *postdata, uint16_t postdatalen,
-              uint16_t *status, uint16_t *datalen){
-  if (! HTTP_setup(url))
-    return false;
-
-  if (! HTTP_para(F("CONTENT"), contenttype)) {
-    return false;
-  }
-
-  // HTTP POST data
-  if (! HTTP_data(postdatalen, 10000))
-    return false;
-  mySerial->write(postdata, postdatalen);
-  if (! expectReply(ok_reply))
-    return false;
-
-  // HTTP POST
-  if (! HTTP_action(FONA_HTTP_POST, status, datalen))
-    return false;
-
-  DEBUG_PRINT(F("Status: ")); DEBUG_PRINTLN(*status);
-  DEBUG_PRINT(F("Len: ")); DEBUG_PRINTLN(*datalen);
-
-  // HTTP response data
-  if (! HTTP_readall(datalen))
-    return false;
-
-  return true;
-}
-
-void SIM7000::HTTP_POST_end(void) {
-  HTTP_term();
-}
-
-void SIM7000::setUserAgent(FONAFlashStringPtr useragent) {
-  this->useragent = useragent;
-}
-
-void SIM7000::setHTTPSRedirect(boolean onoff) {
-  httpsredirect = onoff;
-}
-
-/********* HTTP HELPERS ****************************************/
-
-boolean SIM7000::HTTP_setup(char *url) {
-  // Handle any pending
-  HTTP_term();
-
-  // Initialize and set parameters
-  if (! HTTP_init())
-    return false;
-  if (! HTTP_para(F("CID"), 1))
-    return false;
-  if (! HTTP_para(F("UA"), useragent))
-    return false;
-  if (! HTTP_para(F("URL"), url))
-    return false;
-
-  // HTTPS redirect
-  if (httpsredirect) {
-    if (! HTTP_para(F("REDIR"), 1))
-      return false;
-
-    if (! HTTP_ssl(true))
-      return false;
-  }
-
-  return true;
 }
 
 /********* HELPERS *********************************************/
