@@ -1,4 +1,6 @@
 #include <SoftwareSerial.h>
+#include <Wire.h>
+#include <SparkFun_MS5803_I2C.h> // Click here to get the library
 #include "SensorData.h"
 #include "SensorEC.h"
 #include "SIM7000.h"
@@ -6,6 +8,7 @@
 
 
 #define SIMCOM_7000 // SIM7000A/C/E/G
+#define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 // For SIM7000 BoSL board
 #define PWRKEY 6
@@ -14,31 +17,47 @@
 #define BOSL_RX 2 // Microcontroller TX
 
 
-#define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
-
 SoftwareSerial boslSS = SoftwareSerial(BOSL_TX, BOSL_RX);
 
-SIM7000 bosl = SIM7000();
+SIM7000 bosl = SIM7000(); 
 
-
-uint8_t type;
+//  ADDRESS_HIGH = 0x76 // ADDRESS_LOW  = 0x77
+MS5803 boardSensor(ADDRESS_LOW);
+MS5803 cableSensor(ADDRESS_HIGH);
 
 const int ECPinR = A0;
 const int ECPinA = A1;
 const int ECPinB = A3;
 
-const int diffThreshold = 0.1;  //10% change in consecutive readings before transmitting
+const char* sitename = "development.csv";
 
 uint16_t counter = 0;
 
+uint8_t reps = 0;
+float lastTemp, lastEC;
+double lastPressure;  // last true pressure reading. sensor pressure - air pressure
+float tempSum = 0, ECSum = 0;
+double sensorPressureSum = 0, airPressureSum = 0;
 
-SensorEC EC = SensorEC(ECPinR, ECPinA, ECPinB, true);  //three pins and switching is true.
+
+SensorEC EC = SensorEC(ECPinR, ECPinA, ECPinB);  //three pins therefore switching is true.
 
 //SensorData data = SensorData("startfile.txt"); //initialise data array on SD card
 
 
 ///////////////////////////////////////////////////////////////
 void setup() {
+	Wire.begin();
+
+  	Serial.begin(BAUDRATE);
+  	Serial.println(F("BoSL Initialising"));
+
+  	// initialise both sensors
+	cableSensor.reset();
+	boardSensor.reset();
+  	cableSensor.begin();
+  	boardSensor.begin();
+
 	pinMode(PWRKEY, OUTPUT);
   	pinMode(DTR, OUTPUT);
 
@@ -46,10 +65,7 @@ void setup() {
   	// This amount of time depends on the specific module that's used
   	powerOn(); // See function definition at the very end of the sketch
 
-  	Serial.begin(BAUDRATE);
-  	Serial.println(F("BoSL Initialising"));
-
-  	// ensure that board is set to 9600 baudrate from 115200 default. 
+ 	// ensure that board is set to 9600 baudrate from 115200 default. 
   	boslSS.begin(115200); // Default SIM7000 shield baud rate
  	Serial.println(F("Configuring to 9600 baud"));
   	boslSS.println("AT+IPR=9600"); // Set baud rate. Manually change to BAUDRATE if modifying
@@ -61,16 +77,8 @@ void setup() {
     	while (1); // Don't proceed if it couldn't find the device
   	}
 
-
-  	type = bosl.type();
   	Serial.println(F("BoSL is OK"));
   	Serial.print(F("Found "));
-  	switch (type) {
-    	case SIM7000G:
-      		Serial.println(F("SIM7000G (Default BoSL)")); break;
-    	default:
-      		Serial.println(F("???")); break;
-    }
 
   	// Set modem to full functionality
   	bosl.setFunctionality(1); // AT+CFUN=1
@@ -88,120 +96,122 @@ void setup() {
   	bosl.setPreferredLTEMode(1); // Use LTE CAT-M only, not NB-IoT
   	bosl.setOperatingBand("CAT-M", 28); // Telstra uses band 28
 
-
-
+	if (!bosl.enableGPRS(true)) {
+		Serial.println(F("Failed to turn on"));
+	}
   //	data.dump(); // dump SD card file
 }
 
 
 ///////////////////////////////////////////////////////////////
 void loop() {
-	delay(1000);
 	Serial.print("count: ");
 	Serial.println(counter);
-	//delay(10000);
-	counter++;
+	delay(10000);
+	counter++;  // increment these in loop only
+	reps++; //this must come before logData();
 
-	EC.measure(); //take measurement every 10sec
-/*	temp.measure();
-	depth.measure();	*/
+	ECSum += EC.measure(); //take measurement every 10sec
+	tempSum += cableSensor.getTemperature(CELSIUS, ADC_512);
+	sensorPressureSum += cableSensor.getPressure(ADC_4096);	
+	airPressureSum += boardSensor.getPressure(ADC_4096);	
+// TODO: bat level
 
-	if (counter % 6 == 5) { //one minute has passed
-		logData();
-		//transmitCheck();
+	if (reps == 6) { //one minute has passed
+		logAndTransmitCheck();
 	}
 }
 
 
 ///////////////////////////////////////////////////////////////
-void logData() { // save all data to last variable and prepare for new data
-
-	float ECVal = EC.getAverage(); 
+void logAndTransmitCheck() {  // log data and check if transmission is required
+	float ECVal = (float) ECSum / (float) reps; 
 	//data.composeLine(ECVal, EC_TAG); //for SD card
-	EC.clearSum();   //clear the EC sensor value to start a new average.
 
-/*	float tempVal = temp.getAverage(); 
-	data.composeLine(tempVal, TEMP_TAG);
-	temp.clearSum();   
+	float tempVal = (float) tempSum / (float) reps; 
+	//data.composeLine(tempVal, TEMP_TAG);
 
-	float depthVal = depth.getAverage(); 
-	data.composeLine(depthVal, DEPTH_TAG);
-	depth.clearSum();    */
+	double sensorPressure = (double) sensorPressureSum / (double) reps;
+	//data.composeLine(sensorPressure, DEPTH_TAG);
+
+	double airPressure = (double) airPressureSum / (double) reps;  //air pressure on the board
+	//data.composeLine(airPressure, DEPTH_TAG);
+
+	double pressure = sensorPressure - airPressure;  // true pressure in water
+	// cable pressure - air pressure
 
 	//data.writeLine(); //write the composed line to SD card
+
+
+	/// TRANSMIT CHECK ///
+	// diff = (old - new) / old
+	float ECdiff = (lastEC - ECVal) / lastEC;
+	float tempDiff = (lastTemp - tempVal) / lastTemp;
+	float pressureDiff = (lastPressure - pressure) / lastPressure;
+
+	if (ECdiff >= 0.1 | tempDiff >= 0.1 | pressureDiff >= 0.1) {
+		transmit(ECVal, tempVal, pressure);
+	}
+
+	/// CLEAR SUMS FOR NEW MEASUREMENTS ///
+	lastEC = ECVal;
+	lastTemp = tempVal;
+	lastPressure = pressure;
+
+	ECSum = tempSum = airPressureSum = sensorPressureSum = 0; // clear all sums
+	reps = 0;
 }
 
 
 ///////////////////////////////////////////////////////////////
-void transmitCheck() {
+void transmit(float ECVal, float tempVal, double pressure) {
+	/// turn on SIM7000 ///
+	simOn();
+  	bosl.begin(boslSS);
 
-	float ECdiff = (EC.getLast() - EC.getAverage()) / EC.getLast(); 
-	// EC percentage change: (old - new) / old
+  	bosl.enableGPRS(true);
 
-
-/*	float tempDiff = (temp.getLast() - temp.getAverage()) / temp.getLast(); 
-
-	float depthDiff = (depth.getLast() - depth.getAverage()) / depth.getLast(); */
-
-//	if (ECdiff >= diffThreshold || tempDiff >= diffThreshold || depthDiff >= diffThreshold) {
-	if (ECdiff >= diffThreshold) {
-//		transmit(); //make this do something....
-	}
-} 
-
-
-void transmit() {
 	char URL[150];
 
-	sprintf(URL, "www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=development.csv&T=SIM7000&EC=TEST"); // No need to specify http:// or https://
+	sprintf(URL, "www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=%s&T=%f&EC=%f&D=%f", sitename, ECVal, tempVal, pressure); 
 
 	if (!bosl.postData("GET", URL)) {
     	Serial.println(F("Failed to complete HTTP GET to EoDC database..."));
 	}
-        
+
+	/// Power OFF ///
+	simOff();
 }
 
 
-void openNetwork() {
-	// test all network functions on SIM
-	const char CFUN[] = "AT+CFUN?";
-	const char OK[] = "";
-	bosl.sendCheckReply(CFUN, OK, 30000);
-	delay(100);
-
-	const char CREG[] = "AT+CREG?";
-	bosl.sendCheckReply(CREG, OK, 30000);
-	delay(100);
-
-	const char CGREG[] = "AT+CGREG?";
-	bosl.sendCheckReply(CGREG, OK, 30000);
-	delay(100);
-
-	const char C4[] = "AT+CPSI?";
-	bosl.sendCheckReply(C4, OK, 30000);
-	delay(100);
-
-	const char C5[] = "AT+CGDCONT?";
-	bosl.sendCheckReply(C5, OK, 30000);
-	delay(100);
-
-	const char C6[] = "AT+COPS?";
-	bosl.sendCheckReply(C6, OK, 60000);
-	delay(100);
-	// turn GPRS on
-	if (!bosl.enableGPRS(true)) {
-		Serial.println(F("Failed to turn on"));
-	}
-} 
+///////////////////////////////////////////////////////////////
+void simOn() {
+	pinMode(FONA_PWRKEY, OUTPUT);
+	pinMode(FONA_TX, OUTPUT);
+	digitalWrite(FONA_TX, HIGH);
+	pinMode(FONA_RX, INPUT_PULLUP);
 
 
+	digitalWrite(FONA_PWRKEY, LOW);
+	// See spec sheets for your particular module
+	delay(100); // For SIM7000
 
-
-void powerOn() {
-  digitalWrite(PWRKEY, LOW);
-
-  delay(100); // For SIM7000
-  
-  digitalWrite(PWRKEY, HIGH);
+	digitalWrite(FONA_PWRKEY, HIGH);
 }
+
+
+///////////////////////////////////////////////////////////////
+void simOff() {
+	//  TX / RX pins off to save power
+	pinMode(FONA_TX, INPUT);
+	pinMode(FONA_RX, INPUT);
+
+	digitalWrite(FONA_PWRKEY, LOW);
+	// See spec sheets for your particular module
+	delay(3000); // For SIM7000
+	digitalWrite(FONA_PWRKEY, HIGH);
+}
+
+
+
 

@@ -21,8 +21,6 @@
 #include "SIM7000.h"
 
 
-
-
 SIM7000::SIM7000(void) : _type(SIM7000A)
 {
   // apn = F("FONAnet");
@@ -35,81 +33,59 @@ SIM7000::SIM7000(void) : _type(SIM7000A)
   ok_reply = F("OK");
 }
 
-uint8_t SIM7000::type(void) {
-  return _type;
-}
 
-boolean SIM7000::begin(Stream &port) {
-  mySerial = &port;
+/// POST DATA ///
+boolean SIM7000::postData(const char *request_type, const char *URL, const char *body, const char *token, uint32_t bodylen) {
+  // NOTE: Need to open socket/enable GPRS before using this function
+  // char auxStr[64];
 
-  DEBUG_PRINTLN(F("Attempting to open comm with ATs"));
-  // give 7 seconds to reboot
-  int16_t timeout = 7000;
+  // Make sure HTTP service is terminated so initialization will run
+  sendCheckReply(F("AT+HTTPTERM"), ok_reply, 10000);
 
-  while (timeout > 0) {
-    while (mySerial->available()) mySerial->read();
-    if (sendCheckReply(F("AT"), ok_reply))
-      break;
-    while (mySerial->available()) mySerial->read();
-    if (sendCheckReply(F("AT"), F("AT"))) 
-      break;
-    delay(500);
-    timeout-=500;
-  }
-
-  if (timeout <= 0) {
-#ifdef ADAFRUIT_FONA_DEBUG
-    DEBUG_PRINTLN(F("Timeout: No response to AT... last ditch attempt."));
-#endif
-    sendCheckReply(F("AT"), ok_reply);
-    delay(100);
-    sendCheckReply(F("AT"), ok_reply);
-    delay(100);
-    sendCheckReply(F("AT"), ok_reply);
-    delay(100);
-  }
-
-  // turn off Echo!
-  sendCheckReply(F("ATE0"), ok_reply);
-  delay(100);
-
-  if (! sendCheckReply(F("ATE0"), ok_reply)) {
+  // Initialize HTTP service
+  if (! sendCheckReply(F("AT+HTTPINIT"), ok_reply, 10000))
     return false;
+
+  // Set HTTP parameters
+  if (! sendCheckReply(F("AT+HTTPPARA=\"CID\",1"), ok_reply, 10000))
+    return false;
+
+  // Specify URL
+  char urlBuff[strlen(URL) + 22];
+
+  sprintf(urlBuff, "AT+HTTPPARA=\"URL\",\"%s\"", URL);
+
+  if (! sendCheckReply(urlBuff, ok_reply, 10000))
+    return false;
+
+  // Perform request based on specified request Type
+  if (strlen(body) > 0) bodylen = strlen(body);
+
+  if (request_type == "GET") {
+    if (! sendCheckReply(F("AT+HTTPACTION=0"), ok_reply, 10000))
+      return false;
   }
 
-  // turn on hangupitude
+  // Parse response status and size
+  uint16_t status, datalen;
+  readline(10000);
+  if (! parseReply(F("+HTTPACTION:"), &status, ',', 1))
+    return false;
+  if (! parseReply(F("+HTTPACTION:"), &datalen, ',', 2))
+    return false;
 
-  delay(100);
-  flushInput();
+  DEBUG_PRINT("HTTP status: "); DEBUG_PRINTLN(status);
+  DEBUG_PRINT("Data length: "); DEBUG_PRINTLN(datalen);
 
+  if (status != 200) return false;
 
-  DEBUG_PRINT(F("\t---> ")); DEBUG_PRINTLN("ATI");
+ // getReply(F("AT+HTTPREAD"));
 
-  mySerial->println("ATI");
-  readline(500, true);
-
-  DEBUG_PRINT (F("\t<--- ")); DEBUG_PRINTLN(replybuffer);
-
-
-
-
-  if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000A")) != 0) {
-    _type = SIM7000A;
-  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000C")) != 0) {
-    _type = SIM7000C;
-  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000E")) != 0) {
-    _type = SIM7000E;
-  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000G")) != 0) {
-    _type = SIM7000G;
-  } 
-
-#if defined(FONA_PREF_SMS_STORAGE)
-    sendCheckReply(F("AT+CPMS=" FONA_PREF_SMS_STORAGE "," FONA_PREF_SMS_STORAGE "," FONA_PREF_SMS_STORAGE), ok_reply);
-#endif
+  // Terminate HTTP service
+  sendCheckReply(F("AT+HTTPTERM"), ok_reply, 10000);
 
   return true;
 }
-
 
 /********* Serial port ********************************************/
 
@@ -502,92 +478,6 @@ void SIM7000::setNetworkSettings(FONAFlashStringPtr apn,
 }
 
 
-boolean SIM7000::postData(const char *request_type, const char *URL, const char *body, const char *token, uint32_t bodylen) {
-  // NOTE: Need to open socket/enable GPRS before using this function
-  // char auxStr[64];
-
-  // Make sure HTTP service is terminated so initialization will run
-  sendCheckReply(F("AT+HTTPTERM"), ok_reply, 10000);
-
-  // Initialize HTTP service
-  if (! sendCheckReply(F("AT+HTTPINIT"), ok_reply, 10000))
-    return false;
-
-  // Set HTTP parameters
-  if (! sendCheckReply(F("AT+HTTPPARA=\"CID\",1"), ok_reply, 10000))
-    return false;
-
-  // Specify URL
-  char urlBuff[strlen(URL) + 22];
-
-  sprintf(urlBuff, "AT+HTTPPARA=\"URL\",\"%s\"", URL);
-
-  if (! sendCheckReply(urlBuff, ok_reply, 10000))
-    return false;
-
-  // Perform request based on specified request Type
-  if (strlen(body) > 0) bodylen = strlen(body);
-
-  if (request_type == "GET") {
-  	if (! sendCheckReply(F("AT+HTTPACTION=0"), ok_reply, 10000))
-    	return false;
-  }
-  else if (request_type == "POST" && bodylen > 0 ) { // POST with content body
-  	if (! sendCheckReply(F("AT+HTTPPARA=\"CONTENT\",\"application/json\""), ok_reply, 10000))
-    	return false;
-
-    if (strlen(token) > 0) {
-      char tokenStr[strlen(token) + 55];
-
-	  	sprintf(tokenStr, "AT+HTTPPARA=\"USERDATA\",\"Authorization: Bearer %s\"", token);
-
-	  	if (! sendCheckReply(tokenStr, ok_reply, 10000))
-	  		return false;
-	  }
-
-    char dataBuff[sizeof(bodylen) + 20];
-
-		sprintf(dataBuff, "AT+HTTPDATA=%d,10000", bodylen);
-		if (! sendCheckReply(dataBuff, "DOWNLOAD", 10000))
-	    return false;
-
-    delay(100); // Needed for fast baud rates (ex: 115200 baud with SAMD21 hardware serial)
-
-		if (! sendCheckReply(body, ok_reply, 10000))
-	    return false;
-
-  	if (! sendCheckReply(F("AT+HTTPACTION=1"), ok_reply, 10000))
-    	return false;
-  }
-  else if (request_type == "POST" && bodylen == 0) { // POST with query parameters
-  	if (! sendCheckReply(F("AT+HTTPACTION=1"), ok_reply, 10000))
-    	return false;
-  }
-  else if (request_type == "HEAD") {
-  	if (! sendCheckReply(F("AT+HTTPACTION=2"), ok_reply, 10000))
-    	return false;
-  }
-
-  // Parse response status and size
-  uint16_t status, datalen;
-  readline(10000);
-  if (! parseReply(F("+HTTPACTION:"), &status, ',', 1))
-    return false;
-  if (! parseReply(F("+HTTPACTION:"), &datalen, ',', 2))
-    return false;
-
-  DEBUG_PRINT("HTTP status: "); DEBUG_PRINTLN(status);
-  DEBUG_PRINT("Data length: "); DEBUG_PRINTLN(datalen);
-
-  if (status != 200) return false;
-
-  getReply(F("AT+HTTPREAD"));
-
-  // Terminate HTTP service
-  sendCheckReply(F("AT+HTTPTERM"), ok_reply, 10000);
-
-  return true;
-}
 
 /********* TCP FUNCTIONS  ************************************/
 
@@ -716,6 +606,81 @@ boolean SIM7000::expectReply(FONAFlashStringPtr reply,
 }
 
 /********* LOW LEVEL *******************************************/
+
+uint8_t SIM7000::type(void) {
+  return _type;
+}
+
+boolean SIM7000::begin(Stream &port) {
+  mySerial = &port;
+
+  DEBUG_PRINTLN(F("Attempting to open comm with ATs"));
+  // give 7 seconds to reboot
+  int16_t timeout = 7000;
+
+  while (timeout > 0) {
+    while (mySerial->available()) mySerial->read();
+    if (sendCheckReply(F("AT"), ok_reply))
+      break;
+    while (mySerial->available()) mySerial->read();
+    if (sendCheckReply(F("AT"), F("AT"))) 
+      break;
+    delay(500);
+    timeout-=500;
+  }
+
+  if (timeout <= 0) {
+#ifdef ADAFRUIT_FONA_DEBUG
+    DEBUG_PRINTLN(F("Timeout: No response to AT... last ditch attempt."));
+#endif
+    sendCheckReply(F("AT"), ok_reply);
+    delay(100);
+    sendCheckReply(F("AT"), ok_reply);
+    delay(100);
+    sendCheckReply(F("AT"), ok_reply);
+    delay(100);
+  }
+
+  // turn off Echo!
+  sendCheckReply(F("ATE0"), ok_reply);
+  delay(100);
+
+  if (! sendCheckReply(F("ATE0"), ok_reply)) {
+    return false;
+  }
+
+  // turn on hangupitude
+
+  delay(100);
+  flushInput();
+
+
+  DEBUG_PRINT(F("\t---> ")); DEBUG_PRINTLN("ATI");
+
+  mySerial->println("ATI");
+  readline(500, true);
+
+  DEBUG_PRINT (F("\t<--- ")); DEBUG_PRINTLN(replybuffer);
+
+
+
+
+  if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000A")) != 0) {
+    _type = SIM7000A;
+  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000C")) != 0) {
+    _type = SIM7000C;
+  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000E")) != 0) {
+    _type = SIM7000E;
+  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000G")) != 0) {
+    _type = SIM7000G;
+  } 
+
+#if defined(FONA_PREF_SMS_STORAGE)
+    sendCheckReply(F("AT+CPMS=" FONA_PREF_SMS_STORAGE "," FONA_PREF_SMS_STORAGE "," FONA_PREF_SMS_STORAGE), ok_reply);
+#endif
+
+  return true;
+}
 
 inline int SIM7000::available(void) {
   return mySerial->available();

@@ -46,108 +46,77 @@ Rc = 250
 // calibrated for 100ms delay
 
 
-SensorEC::SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0, const uint16_t Rdivider = 1225, const uint16_t Rcable = 250): 
+SensorEC::SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0): 
 	pinRead(pinR),
 	pinVA(pinA),
 	pinVB(pinB),
-	Rc(Rcable),
-	Rd(Rdivider),
-	lastEC(0)
 	{
 	pinMode(pinRead,INPUT); //EC PIN is pinRead
 	pinMode(pinVA,OUTPUT);//EC Power is pinVA
 	digitalWrite(pinVA,LOW);
 
-    if (pinVB) { // if pinB is not 0 (anything else) then activate switching mode
-		pinMode(pinVB,OUTPUT);//EC Ground is pinVB
-		digitalWrite(pinVB,LOW);//EC Ground is set to low       
-  	}
-
-  	storeLen = 0;
-  	ECSum = 0;
-}
-
-
-///////////////////////////////////////////////////////////////
-float SensorEC::getAverage(bool clear = false) {
-	float ECAverage = (float)ECSum / (float)storeLen;
-  
-
-	if (clear) {
-		clearSum();
+  if (pinVB) { // if pinB is not 0 (anything else) then activate switching mode
+  	pinMode(pinVB,OUTPUT);//EC Ground is pinVB
+  	digitalWrite(pinVB,LOW);//EC Ground is set to low       
 	}
-
-  	//ECAverage = calEC(ECAverage);  
-    // do not calibrate at the moment. return raw ADC values
-
-  	return ECAverage;
 }
 
 
 ///////////////////////////////////////////////////////////////
-void SensorEC::clearAndSave(void) {
-    lastEC = getAverage();  //save the average to last EC before clearing
+uint16_t SensorEC::measure(void){ 
+  uint16_t ECVar = 0;
+  uint8_t reps = 2;
 
-	  ECSum = 0;
-    storeLen = 0;
-}
+  for (uint8_t i = 0; i<reps; i++) {
+    ECVar += read();
+    pinSwitch();
+  }
 
-
-///////////////////////////////////////////////////////////////
-float SensorEC::getLast() {
-    return lastEC;
+  return ECVar / reps;
 }
 
 
 ///////////////////////////////////////////////////////////////
 void SensorEC::pinSwitch(){
-    if (pinVB) { //if pinVB is defined (not 0) then switch
-        uint8_t temp = pinVA;
-        pinVA = pinVB;
-        pinVB = temp;
-        polarity = !polarity;
-    }
+  if (pinVB) { //if pinVB is defined (not 0) then switch
+    uint8_t temp = pinVA;
+    pinVA = pinVB;
+    pinVB = temp;
+    polarity = !polarity;
+  }
 }
 
 
 ///////////////////////////////////////////////////////////////
-int16_t SensorEC::read(){
-  uint8_t reps = 2;
-  int16_t ECVal;
-  
-  for (uint8_t i = 0; i<reps; i++) {
-    digitalWrite(pinVA,HIGH);
+uint16_t SensorEC::read(){
+  digitalWrite(pinVA,HIGH);
 
-    if (pinVB) {
-        digitalWrite(pinVB,LOW);
-    }
+  if (pinVB) {
+      digitalWrite(pinVB,LOW);
+  }
 
   delay(EC_DELAY); //this value may need to be adjusted
     // the delay time is very important. increasing delay to 500ms can increase analog readings
-    // by 8% in the exact some circumstances.
+    // by 8% in some circumstances.
 
   uint16_t readMax = 1023;
-  analogRead(pinRead);  //once to settle sensor
-  ECVal += analogRead(pinRead);
+  uint16_t ECVal = analogRead(pinRead);
+  ECVal = analogRead(pinRead);
 
-    if (polarity) {
-      ECVal = readMax - ECVal;
+  if (polarity) {
+    ECVal = readMax - ECVal;
   }
 
-    if (pinVB){
-      digitalWrite(pinVB,LOW);    
-    }
-
-    digitalWrite(pinVA,LOW);
-  
-    Serial.print("EC = ");
-    Serial.println(ECVal);
-
-
-    pinSwitch();  // switch pins before reading again
+  if (pinVB){
+    digitalWrite(pinVB,LOW);    
   }
-  
-  return ECVal / reps;
+
+  digitalWrite(pinVA,LOW);
+
+  Serial.print("EC = ");
+  Serial.println(ECVal);
+
+  return ECVal;
 }
 
 ///////////////////////////////////////////////////////////////
