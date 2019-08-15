@@ -113,9 +113,6 @@ uint16_t SensorEC::read(){
 
   digitalWrite(pinVA,LOW);
 
-  Serial.print("EC = ");
-  Serial.println(ECVal);
-
   return ECVal;
 }
 
