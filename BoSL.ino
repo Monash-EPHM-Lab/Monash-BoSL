@@ -1,7 +1,8 @@
 #include <SoftwareSerial.h>
 #include <Wire.h>
 #include <SparkFun_MS5803_I2C.h> // Click here to get the library
-#include "SensorData.h"
+#include <LowPower.h> // Click here to get the library
+//#include "SensorData.h"
 #include "SensorEC.h"
 #include "SIM7000.h"
 
@@ -13,11 +14,11 @@
 // For SIM7000 BoSL board
 #define PWRKEY 6
 #define DTR 8 // Connect with solder jumper
-#define BOSL_TX 3 // Microcontroller RX
-#define BOSL_RX 2 // Microcontroller TX
+#define BOSL_RX 3 // Microcontroller RX
+#define BOSL_TX 2 // Microcontroller TX
 
 
-SoftwareSerial boslSS = SoftwareSerial(BOSL_TX, BOSL_RX);
+SoftwareSerial boslSS = SoftwareSerial(BOSL_RX, BOSL_TX);
 
 SIM7000 bosl = SIM7000(); 
 
@@ -63,13 +64,13 @@ void setup() {
 
   	// Turn on the module by pulsing PWRKEY low for a little bit
   	// This amount of time depends on the specific module that's used
-  	powerOn(); // See function definition at the very end of the sketch
+  	simOn(); // See function definition at the very end of the sketch
 
  	// ensure that board is set to 9600 baudrate from 115200 default. 
-  	boslSS.begin(115200); // Default SIM7000 shield baud rate
- 	Serial.println(F("Configuring to 9600 baud"));
-  	boslSS.println("AT+IPR=9600"); // Set baud rate. Manually change to BAUDRATE if modifying
-  	delay(100); // Short pause to let the command run
+  	//boslSS.begin(115200); // Default SIM7000 shield baud rate
+ 	//Serial.println(F("Configuring to 9600 baud"));
+  	//boslSS.println("AT+IPR=9600"); // Set baud rate. Manually change to BAUDRATE if modifying
+  	//delay(100); // Short pause to let the command run
 
   	boslSS.begin(BAUDRATE);
   	if (! bosl.begin(boslSS)) {
@@ -99,6 +100,8 @@ void setup() {
 	if (!bosl.enableGPRS(true)) {
 		Serial.println(F("Failed to turn on"));
 	}
+
+
   //	data.dump(); // dump SD card file
 }
 
@@ -107,13 +110,21 @@ void setup() {
 void loop() {
 	Serial.print("count: ");
 	Serial.println(counter);
-	delay(10000);
+
+	boslSS.flush(); // must run before going to sleep
+	Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
+
+	LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);  
+	LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);  
+
+
 	counter++;  // increment these in loop only
 	reps++; //this must come before logData();
 
 	ECSum += EC.measure(); //take measurement every 10sec
 	tempSum += cableSensor.getTemperature(CELSIUS, ADC_512);
 	sensorPressureSum += cableSensor.getPressure(ADC_4096);	
+
 	airPressureSum += boardSensor.getPressure(ADC_4096);	
 // TODO: bat level
 
@@ -142,6 +153,13 @@ void logAndTransmitCheck() {  // log data and check if transmission is required
 
 	//data.writeLine(); //write the composed line to SD card
 
+	Serial.print("EC = ");
+	Serial.print(ECVal);
+	Serial.print(", temp = ");
+	Serial.print(tempVal);
+	Serial.print(", pressure = ");
+	Serial.println(pressure);
+
 
 	/// TRANSMIT CHECK ///
 	// diff = (old - new) / old
@@ -149,7 +167,7 @@ void logAndTransmitCheck() {  // log data and check if transmission is required
 	float tempDiff = (lastTemp - tempVal) / lastTemp;
 	float pressureDiff = (lastPressure - pressure) / lastPressure;
 
-	if (ECdiff >= 0.1 | tempDiff >= 0.1 | pressureDiff >= 0.1) {
+	if (ECdiff >= 0.1 || tempDiff >= 0.1 || pressureDiff >= 0.1 || counter % 60 == 0) {
 		transmit(ECVal, tempVal, pressure);
 	}
 
@@ -173,7 +191,14 @@ void transmit(float ECVal, float tempVal, double pressure) {
 
 	char URL[150];
 
-	sprintf(URL, "www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=%s&T=%f&EC=%f&D=%f", sitename, ECVal, tempVal, pressure); 
+	char str_EC[8]; //convert floats to strings
+	char str_temp[8];
+	char str_pressure[8];
+	dtostrf(ECVal, 4, 2, str_EC);
+	dtostrf(tempVal, 4, 2, str_temp);
+	dtostrf(pressure, 4, 2, str_pressure);
+
+	sprintf(URL, "www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=%s&T=%s&EC=%s&D=%s", sitename, str_temp, str_EC, str_pressure); 
 
 	if (!bosl.postData("GET", URL)) {
     	Serial.println(F("Failed to complete HTTP GET to EoDC database..."));
@@ -186,32 +211,28 @@ void transmit(float ECVal, float tempVal, double pressure) {
 
 ///////////////////////////////////////////////////////////////
 void simOn() {
-	pinMode(FONA_PWRKEY, OUTPUT);
-	pinMode(FONA_TX, OUTPUT);
-	digitalWrite(FONA_TX, HIGH);
-	pinMode(FONA_RX, INPUT_PULLUP);
+	pinMode(PWRKEY, OUTPUT);
+	pinMode(BOSL_TX, OUTPUT);
+	digitalWrite(BOSL_TX, HIGH);
+	pinMode(BOSL_RX, INPUT_PULLUP);
 
 
-	digitalWrite(FONA_PWRKEY, LOW);
+	digitalWrite(PWRKEY, LOW);
 	// See spec sheets for your particular module
 	delay(100); // For SIM7000
 
-	digitalWrite(FONA_PWRKEY, HIGH);
+	digitalWrite(PWRKEY, HIGH);
 }
 
 
 ///////////////////////////////////////////////////////////////
 void simOff() {
 	//  TX / RX pins off to save power
-	pinMode(FONA_TX, INPUT);
-	pinMode(FONA_RX, INPUT);
+	pinMode(BOSL_TX, INPUT);
+	pinMode(BOSL_RX, INPUT);
 
-	digitalWrite(FONA_PWRKEY, LOW);
+	digitalWrite(PWRKEY, LOW);
 	// See spec sheets for your particular module
 	delay(3000); // For SIM7000
-	digitalWrite(FONA_PWRKEY, HIGH);
+	digitalWrite(PWRKEY, HIGH);
 }
-
-
-
-

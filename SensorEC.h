@@ -12,7 +12,7 @@ class SensorEC
         uint16_t measure(void);  // return measured ADC value
         
     private:
-        int16_t read(void);
+        uint16_t read(void);
         void pinSwitch(void);
         float calEC(float ECAv);
 

@@ -20,8 +20,8 @@
 #define MAX_DATA_SIZE 20 // max number of bytes per data point or tag
 #define MAX_LINE_SIZE 100 // max number of bytes per line
 
-#define DELIMITER   44 // ASCII code for , (comma) character used to seperate values in files
-#define LF          10  // linefeed or newline character. ASCII code for \n
+#define DELIMITER   ',' // character used to seperate values in files
+#define LF          '\n'  // linefeed or newline character. ASCII code for \n
 
 /* pins defined for SPI atmega328p 
 MOSI is pin 11 

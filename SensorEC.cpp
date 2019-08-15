@@ -46,10 +46,10 @@ Rc = 250
 // calibrated for 100ms delay
 
 
-SensorEC::SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB = 0): 
+SensorEC::SensorEC(uint8_t pinR, uint8_t pinA, uint8_t pinB) : 
 	pinRead(pinR),
 	pinVA(pinA),
-	pinVB(pinB),
+	pinVB(pinB)
 	{
 	pinMode(pinRead,INPUT); //EC PIN is pinRead
 	pinMode(pinVA,OUTPUT);//EC Power is pinVA
