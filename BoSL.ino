@@ -38,6 +38,7 @@ float lastTemp, lastEC;
 double lastPressure;  // last true pressure reading. sensor pressure - air pressure
 float tempSum = 0, ECSum = 0;
 double sensorPressureSum = 0, airPressureSum = 0;
+uint16_t batLevel = 4200; //mV
 
 
 SensorEC EC = SensorEC(ECPinR, ECPinA, ECPinB);  //three pins therefore switching is true.
@@ -55,8 +56,8 @@ void setup() {
   	// initialise both sensors
 	cableSensor.reset();
 	boardSensor.reset();
-  	cableSensor.begin();
-  	boardSensor.begin();
+  cableSensor.begin();
+  boardSensor.begin();
 
 	pinMode(PWRKEY, OUTPUT);
   	pinMode(DTR, OUTPUT);
@@ -96,9 +97,12 @@ void setup() {
   	bosl.setPreferredLTEMode(1); // Use LTE CAT-M only, not NB-IoT
   	bosl.setOperatingBand("CAT-M", 28); // Telstra uses band 28
 
-	if (!bosl.enableGPRS(true)) {
-		Serial.println(F("Failed to turn on"));
-	}
+  	simOff();
+
+
+//	if (!bosl.enableGPRS(true)) {
+//		Serial.println(F("Failed to turn on"));
+//	}
 
 
   //	data.dump(); // dump SD card file
@@ -116,14 +120,12 @@ void loop() {
 	LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF);  
 	LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);  
 
-
 	counter++;  // increment these in loop only
 	reps++; //this must come before logData();
 
 	ECSum += EC.measure(); //take measurement every 10sec
 	tempSum += cableSensor.getTemperature(CELSIUS, ADC_512);
 	sensorPressureSum += cableSensor.getPressure(ADC_4096);	
-
 	airPressureSum += boardSensor.getPressure(ADC_4096);	
 // TODO: bat level
 
@@ -157,7 +159,7 @@ void logAndTransmitCheck() {  // log data and check if transmission is required
 	Serial.print(", temp = ");
 	Serial.print(tempVal);
 	Serial.print(", pressure = ");
-	Serial.println(pressure);
+	Serial.println(sensorPressure);
 
 
 	/// TRANSMIT CHECK ///
@@ -166,7 +168,7 @@ void logAndTransmitCheck() {  // log data and check if transmission is required
 	float tempDiff = (lastTemp - tempVal) / lastTemp;
 	float pressureDiff = (lastPressure - pressure) / lastPressure;
 
-	if (ECdiff >= 0.1 || tempDiff >= 0.1 || pressureDiff >= 0.1 || counter % 60 == 0) {
+	if (ECdiff >= 0.1 || tempDiff >= 0.1 || pressureDiff >= 0.1 || counter % 360 == 0) {
 		transmit(ECVal, tempVal, pressure);
 	}
 
@@ -190,12 +192,12 @@ void transmit(float ECVal, float tempVal, double pressure) {
 
 	char URL[150];
 
-	char str_EC[8]; //convert floats to strings
-	char str_temp[8];
-	char str_pressure[8];
-	dtostrf(ECVal, 4, 2, str_EC);
-	dtostrf(tempVal, 4, 2, str_temp);
-	dtostrf(pressure, 4, 2, str_pressure);
+	char str_EC[10]; //convert floats to strings
+	char str_temp[10];
+	char str_pressure[10];
+	dtostrf(ECVal, 2, 2, str_EC);
+	dtostrf(tempVal, 2, 2, str_temp);
+	dtostrf(pressure, 2, 2, str_pressure);
 
 	sprintf(URL, "www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=%s&T=%s&EC=%s&D=%s", sitename, str_temp, str_EC, str_pressure); 
 
@@ -227,8 +229,9 @@ void simOn() {
 ///////////////////////////////////////////////////////////////
 void simOff() {
 	//  TX / RX pins off to save power
-	pinMode(BOSL_TX, INPUT);
-	pinMode(BOSL_RX, INPUT);
+
+	digitalWrite(BOSL_TX, LOW);
+	digitalWrite(BOSL_RX, LOW);
 
 	digitalWrite(PWRKEY, LOW);
 	// See spec sheets for your particular module
