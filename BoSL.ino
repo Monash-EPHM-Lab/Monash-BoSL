@@ -11,8 +11,8 @@
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 // For SIM7000 BoSL board
-#define PWRKEY 6
-#define DTR 8 // Connect with solder jumper
+#define PWRKEY 4
+#define DTR 5 // Connect with solder jumper
 #define BOSL_RX 3 // Microcontroller RX
 #define BOSL_TX 2 // Microcontroller TX
 
@@ -127,6 +127,7 @@ void loop() {
 	tempSum += cableSensor.getTemperature(CELSIUS, ADC_512);
 	sensorPressureSum += cableSensor.getPressure(ADC_4096);	
 	airPressureSum += boardSensor.getPressure(ADC_4096);	
+  Serial.println(airPressureSum);
 // TODO: bat level
 
 	if (reps == 6) { //one minute has passed
