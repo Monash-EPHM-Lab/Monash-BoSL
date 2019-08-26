@@ -29,7 +29,7 @@ const int ECPinR = A0;
 const int ECPinA = A1;
 const int ECPinB = A3;
 
-const char* sitename = "development.csv";
+const char sitename[] = "BoSLv02_longTest.csv";
 
 uint16_t counter = 0;
 
@@ -41,8 +41,6 @@ double sensorPressureSum = 0, airPressureSum = 0;
 
 
 SensorEC EC = SensorEC(ECPinR, ECPinA, ECPinB);  //three pins therefore switching is true.
-
-//SensorData data = SensorData("startfile.txt"); //initialise data array on SD card
 
 
 ///////////////////////////////////////////////////////////////
