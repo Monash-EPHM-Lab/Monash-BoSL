@@ -22,12 +22,6 @@
 #include "includes/platform/FONAPlatform.h"
 
 
-#define SIM7000A 7
-#define SIM7000C 8
-#define SIM7000E 9
-#define SIM7000G 10
-
-
 #define FONA_DEFAULT_TIMEOUT_MS 500
 
 #define FONA_HTTP_GET   0
@@ -40,7 +34,6 @@ class SIM7000 : public FONAStreamType {
   SIM7000(void);
 
   boolean begin(FONAStreamType &port);
-  uint8_t type();
 
   // Stream
   int available(void);
@@ -78,14 +71,13 @@ class SIM7000 : public FONAStreamType {
   
   // RTC
   boolean enableRTC(uint8_t i);
-  boolean readRTC(uint8_t *year, uint8_t *month, uint8_t *date, uint8_t *hr, uint8_t *min, uint8_t *sec);
 
   // GPRS handling
   boolean enableGPRS(boolean onoff);
-  int8_t GPRSstate(void);
   void setNetworkSettings(FONAFlashStringPtr apn, FONAFlashStringPtr username=0, FONAFlashStringPtr password=0);
-  boolean postData(const char *request_type, const char *URL, const char *body = "", const char *token = "", uint32_t bodylen = 0);
   void getNetworkInfo(void);
+
+  boolean postData(const char *request_type, const char *URL, const char *body = "", const char *token = "", uint32_t bodylen = 0);
 
   // TCP raw connections
   boolean TCPconnect(char *server, uint16_t port);
@@ -94,9 +86,6 @@ class SIM7000 : public FONAStreamType {
   boolean TCPsend(char *packet, uint8_t len);
   uint16_t TCPavailable(void);
   uint16_t TCPread(uint8_t *buff, uint8_t len);
-
-  // HTTPS
-  void setHTTPSRedirect(boolean onoff);
 
   // Helper functions to verify responses.
   boolean expectReply(FONAFlashStringPtr reply, uint16_t timeout = 10000);
@@ -110,20 +99,13 @@ class SIM7000 : public FONAStreamType {
   boolean setPreferredLTEMode(uint8_t mode);
   boolean setOperatingBand(const char * mode, uint8_t band);
   boolean setBaudrate(uint16_t baud);
-  boolean hangUp(void);
 
 
  protected:
-  uint8_t _type;
-
-  char replybuffer[255];
+  char replybuffer[200];
   FONAFlashStringPtr apn;
-  FONAFlashStringPtr apnusername;
-  FONAFlashStringPtr apnpassword;
-  boolean httpsredirect;
   FONAFlashStringPtr useragent;
   FONAFlashStringPtr ok_reply;
-
 
   void flushInput();
   uint16_t readRaw(uint16_t b);
@@ -140,32 +122,13 @@ class SIM7000 : public FONAStreamType {
   boolean sendCheckReply(FONAFlashStringPtr prefix, int32_t suffix, int32_t suffix2, FONAFlashStringPtr reply, uint16_t timeout = FONA_DEFAULT_TIMEOUT_MS);
   boolean sendCheckReplyQuoted(FONAFlashStringPtr prefix, FONAFlashStringPtr suffix, FONAFlashStringPtr reply, uint16_t timeout = FONA_DEFAULT_TIMEOUT_MS);
 
-  void mqtt_connect_message(const char *protocol, byte *mqtt_message, const char *client_id, const char *username, const char *password);
-  void mqtt_publish_message(byte *mqtt_message, const char *topic, const char *message);
-  void mqtt_subscribe_message(byte *mqtt_message, const char *topic, byte QoS);
-  void mqtt_disconnect_message(byte *mqtt_message);
-  boolean mqtt_sendPacket(byte *packet, byte len);
+  boolean parseReply(FONAFlashStringPtr toreply, uint16_t *v, char divider  = ',', uint8_t index=0);
+  boolean parseReplyFloat(FONAFlashStringPtr toreply, float *f, char divider, uint8_t index);
+  boolean parseReply(FONAFlashStringPtr toreply, char *v, char divider  = ',', uint8_t index=0);
+  boolean parseReplyQuoted(FONAFlashStringPtr toreply, char *v, int maxlen, char divider, uint8_t index);
 
-
-  boolean parseReply(FONAFlashStringPtr toreply,
-          uint16_t *v, char divider  = ',', uint8_t index=0);
-  boolean parseReplyFloat(FONAFlashStringPtr toreply,
-           float *f, char divider, uint8_t index);
-  boolean parseReply(FONAFlashStringPtr toreply,
-          char *v, char divider  = ',', uint8_t index=0);
-  boolean parseReplyQuoted(FONAFlashStringPtr toreply,
-          char *v, int maxlen, char divider, uint8_t index);
-
-  boolean sendParseReply(FONAFlashStringPtr tosend,
-       FONAFlashStringPtr toreply,
-       uint16_t *v, char divider = ',', uint8_t index=0);
-
-  boolean sendParseReplyFloat(FONAFlashStringPtr tosend,
-         FONAFlashStringPtr toreply,
-         float *f, char divider = ',', uint8_t index=0);
-
-  static boolean _incomingCall;
-  static void onIncomingCall();
+  boolean sendParseReply(FONAFlashStringPtr tosend, FONAFlashStringPtr toreply, uint16_t *v, char divider = ',', uint8_t index=0);
+  boolean sendParseReplyFloat(FONAFlashStringPtr tosend, FONAFlashStringPtr toreply, float *f, char divider = ',', uint8_t index=0);
 
   FONAStreamType *mySerial;
 };

@@ -21,14 +21,11 @@
 #include "SIM7000.h"
 
 
-SIM7000::SIM7000(void) : _type(SIM7000A)
+SIM7000::SIM7000(void)
 {
   // apn = F("FONAnet");
   apn = F("");
-  apnusername = 0;
-  apnpassword = 0;
   mySerial = 0;
-  httpsredirect = false;
   useragent = F("FONA");
   ok_reply = F("OK");
 }
@@ -272,14 +269,7 @@ uint8_t SIM7000::getIMEI(char *imei) {
 
 uint8_t SIM7000::getNetworkStatus(void) {
   uint16_t status;
-
-  if (_type >= SIM7000A) {
-    if (! sendParseReply(F("AT+CGREG?"), F("+CGREG: "), &status, ',', 1)) return 0;
-  }
-  else {
-    if (! sendParseReply(F("AT+CREG?"), F("+CREG: "), &status, ',', 1)) return 0;
-  }
-
+  if (! sendParseReply(F("AT+CGREG?"), F("+CGREG: "), &status, ',', 1)) return 0;
   return status;
 }
 
@@ -296,22 +286,6 @@ uint8_t SIM7000::getRSSI(void) {
 
 
 /********* TIME **********************************************************/
-
-/*
-boolean SIM7000::enableNetworkTimeSync(boolean onoff) {
-  if (onoff) {
-    if (! sendCheckReply(F("AT+CLTS=1"), ok_reply))
-      return false;
-  } else {
-    if (! sendCheckReply(F("AT+CLTS=0"), ok_reply))
-      return false;
-  }
-
-  flushInput(); // eat any 'Unsolicted Result Code'
-
-  return true;
-}
-*/
 
 boolean SIM7000::enableNTPTimeSync(boolean onoff, FONAFlashStringPtr ntpserver) {
   if (onoff) {
@@ -340,9 +314,9 @@ boolean SIM7000::enableNTPTimeSync(boolean onoff, FONAFlashStringPtr ntpserver) 
     if (! sendCheckReply(F("AT+CNTPCID=0"), ok_reply))
       return false;
   }
-
   return true;
 }
+
 
 boolean SIM7000::getTime(char *buff, uint16_t maxlen) {
   getReply(F("AT+CCLK?"), (uint16_t) 10000);
@@ -359,17 +333,6 @@ boolean SIM7000::getTime(char *buff, uint16_t maxlen) {
   return true;
 }
 
-/********* Real Time Clock ********************************************/
-
-boolean SIM7000::readRTC(uint8_t *year, uint8_t *month, uint8_t *date, uint8_t *hr, uint8_t *min, uint8_t *sec) {
-  uint16_t v;
-  if (! sendParseReply(F("AT+CCLK?"), F("+CCLK: "), &v, '/', 0) ) return false;
-  *year = v;
-
-  DEBUG_PRINTLN(*year);
-
-  return true;
-}
 
 boolean SIM7000::enableRTC(uint8_t i) {
   if (! sendCheckReply(F("AT+CLTS="), i, ok_reply))
@@ -393,42 +356,13 @@ boolean SIM7000::enableGPRS(boolean onoff) {
 
         mySerial->print(F("AT+CSTT=\""));
         mySerial->print(apn);
-        if (apnusername) {
-          mySerial->print("\",\"");
-          mySerial->print(apnusername);
-        }
-        if (apnpassword) {
-          mySerial->print("\",\"");
-          mySerial->print(apnpassword);
-        }
         mySerial->println("\"");
 
         DEBUG_PRINT(F("\t---> ")); DEBUG_PRINT(F("AT+CSTT=\""));
         DEBUG_PRINT(apn);
-        
-        if (apnusername) {
-          DEBUG_PRINT("\",\"");
-          DEBUG_PRINT(apnusername); 
-        }
-        if (apnpassword) {
-          DEBUG_PRINT("\",\"");
-          DEBUG_PRINT(apnpassword); 
-        }
         DEBUG_PRINTLN("\"");
         
         if (! expectReply(ok_reply)) return false;
-    
-      // set username/password
-      if (apnusername) {
-        // Send command AT+SAPBR=3,1,"USER","<user>" where <user> is the configured APN username.
-        if (! sendCheckReplyQuoted(F("AT+SAPBR=3,1,\"USER\","), apnusername, ok_reply, 10000))
-          return false;
-      }
-      if (apnpassword) {
-        // Send command AT+SAPBR=3,1,"PWD","<password>" where <password> is the configured APN password.
-        if (! sendCheckReplyQuoted(F("AT+SAPBR=3,1,\"PWD\","), apnpassword, ok_reply, 10000))
-          return false;
-      }
     }
 
     // open bearer
@@ -459,22 +393,10 @@ void SIM7000::getNetworkInfo(void) {
 	getReply(F("AT+COPS?"));
 }
 
-int8_t SIM7000::GPRSstate(void) {
-  uint16_t state;
-
-  if (! sendParseReply(F("AT+CGATT?"), F("+CGATT: "), &state) )
-    return -1;
-
-  return state;
-}
-
-void SIM7000::setNetworkSettings(FONAFlashStringPtr apn,
-              FONAFlashStringPtr username, FONAFlashStringPtr password) {
+void SIM7000::setNetworkSettings(FONAFlashStringPtr apn, FONAFlashStringPtr username, FONAFlashStringPtr password) {
   this->apn = apn;
-  this->apnusername = username;
-  this->apnpassword = password;
 
-  if (_type >= SIM7000A) sendCheckReplyQuoted(F("AT+CGDCONT=1,\"IP\","), apn, ok_reply, 10000);
+  sendCheckReplyQuoted(F("AT+CGDCONT=1,\"IP\","), apn, ok_reply, 10000);
 }
 
 
@@ -607,10 +529,6 @@ boolean SIM7000::expectReply(FONAFlashStringPtr reply,
 
 /********* LOW LEVEL *******************************************/
 
-uint8_t SIM7000::type(void) {
-  return _type;
-}
-
 boolean SIM7000::begin(Stream &port) {
   mySerial = &port;
 
@@ -661,24 +579,6 @@ boolean SIM7000::begin(Stream &port) {
   readline(500, true);
 
   DEBUG_PRINT (F("\t<--- ")); DEBUG_PRINTLN(replybuffer);
-
-
-
-
-  if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000A")) != 0) {
-    _type = SIM7000A;
-  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000C")) != 0) {
-    _type = SIM7000C;
-  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000E")) != 0) {
-    _type = SIM7000E;
-  } else if (prog_char_strstr(replybuffer, (prog_char *)F("SIM7000G")) != 0) {
-    _type = SIM7000G;
-  } 
-
-#if defined(FONA_PREF_SMS_STORAGE)
-    sendCheckReply(F("AT+CPMS=" FONA_PREF_SMS_STORAGE "," FONA_PREF_SMS_STORAGE "," FONA_PREF_SMS_STORAGE), ok_reply);
-#endif
-
   return true;
 }
 
