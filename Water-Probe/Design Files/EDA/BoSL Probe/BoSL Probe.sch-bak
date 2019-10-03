@@ -220,7 +220,7 @@ U 1 1 5D55F20D
 P 2950 4900
 F 0 "C1" H 3065 4945 50  0000 L CNN
 F 1 "100nF" H 3065 4856 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603_HandSoldering" H 2988 4750 50  0001 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2988 4750 50  0001 C CNN
 F 3 "~" H 2950 4900 50  0001 C CNN
 	1    2950 4900
 	1    0    0    -1  
@@ -231,7 +231,7 @@ U 1 1 5D55F5AF
 P 4700 4700
 F 0 "R1" H 4550 4750 50  0000 L CNN
 F 1 "10 kΩ" H 4400 4650 50  0000 L CNN
-F 2 "Resistors_SMD:R_0603_HandSoldering" V 4630 4700 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 4630 4700 50  0001 C CNN
 F 3 "~" H 4700 4700 50  0001 C CNN
 	1    4700 4700
 	1    0    0    -1  
@@ -245,7 +245,7 @@ U 1 1 5D55FE88
 P 4700 5100
 F 0 "R2" H 4550 5150 50  0000 L CNN
 F 1 "10 kΩ" H 4400 5050 50  0000 L CNN
-F 2 "Resistors_SMD:R_0603_HandSoldering" V 4630 5100 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 4630 5100 50  0001 C CNN
 F 3 "~" H 4700 5100 50  0001 C CNN
 	1    4700 5100
 	1    0    0    -1  
@@ -281,7 +281,7 @@ U 1 1 5D568B46
 P 5550 3300
 F 0 "U2" H 5320 3345 50  0000 R CNN
 F 1 "DS18B20" H 5320 3256 50  0000 R CNN
-F 2 "TO_SOT_Packages_THT:TO-92_Inline_Narrow_Oval" H 4550 3050 50  0001 C CNN
+F 2 "TO_SOT_Packages_THT:TO-92_Horizontal2_Inline_Narrow_Oval" H 4550 3050 50  0001 C CNN
 F 3 "http://datasheets.maximintegrated.com/en/ds/DS18B20.pdf" H 5400 3550 50  0001 C CNN
 	1    5550 3300
 	1    0    0    -1  
@@ -316,7 +316,7 @@ U 1 1 5D56B6B6
 P 6000 3150
 F 0 "R3" H 6070 3195 50  0000 L CNN
 F 1 "4.7 kΩ" H 6070 3106 50  0000 L CNN
-F 2 "Resistors_SMD:R_0603_HandSoldering" V 5930 3150 50  0001 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 5930 3150 50  0001 C CNN
 F 3 "~" H 6000 3150 50  0001 C CNN
 	1    6000 3150
 	1    0    0    -1  
@@ -335,28 +335,6 @@ F 1 "+3.3V" H 6015 3171 50  0000 C CNN
 F 2 "" H 6000 3000 50  0001 C CNN
 F 3 "" H 6000 3000 50  0001 C CNN
 	1    6000 3000
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H1
-U 1 1 5D56FABA
-P 7500 3450
-F 0 "H1" H 7450 3750 50  0000 L CNN
-F 1 "MountingHole_Pad" H 6900 3650 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_3.2mm_M3" H 7500 3450 50  0001 C CNN
-F 3 "~" H 7500 3450 50  0001 C CNN
-	1    7500 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H2
-U 1 1 5D57003C
-P 8050 3450
-F 0 "H2" H 8000 3750 50  0000 L CNN
-F 1 "MountingHole_Pad" H 8000 3650 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_3.2mm_M3" H 8050 3450 50  0001 C CNN
-F 3 "~" H 8050 3450 50  0001 C CNN
-	1    8050 3450
 	1    0    0    -1  
 $EndComp
 Text GLabel 7500 3550 3    50   Input ~ 0
@@ -399,5 +377,27 @@ F 2 "Project:MS5803" H 5450 4850 50  0001 C CNN
 F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+SheetMS5803-01BAB3pdfEnglishENG_DS_MS5803-01BA_B3.pdfCAT-BLPS0038" H 5450 4850 50  0001 C CNN
 	1    5450 4850
 	1    0    0    -1  
+$EndComp
+$Comp
+L Project:KeyStone_Screw J?
+U 1 1 5D953E64
+P 8050 3100
+F 0 "J?" V 8238 3187 50  0000 L CNN
+F 1 "KeyStone_Screw" V 8327 3187 50  0000 L CNN
+F 2 "Project:KeyStone_Screw" H 8050 3100 50  0001 C CNN
+F 3 "https://docs-apac.rs-online.com/webdocs/13ec/0900766b813ecaa4.pdf" H 8050 3100 50  0001 C CNN
+	1    8050 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L Project:KeyStone_Screw J?
+U 1 1 5D9540DF
+P 7500 3100
+F 0 "J?" V 7688 3187 50  0000 L CNN
+F 1 "KeyStone_Screw" V 7777 3187 50  0000 L CNN
+F 2 "Project:KeyStone_Screw" H 7500 3100 50  0001 C CNN
+F 3 "https://docs-apac.rs-online.com/webdocs/13ec/0900766b813ecaa4.pdf" H 7500 3100 50  0001 C CNN
+	1    7500 3100
+	0    1    1    0   
 $EndComp
 $EndSCHEMATC

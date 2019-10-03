@@ -337,28 +337,6 @@ F 3 "" H 6000 3000 50  0001 C CNN
 	1    6000 3000
 	1    0    0    -1  
 $EndComp
-$Comp
-L Mechanical:MountingHole_Pad H1
-U 1 1 5D56FABA
-P 7500 3450
-F 0 "H1" H 7450 3750 50  0000 L CNN
-F 1 "MountingHole_Pad" H 6900 3650 50  0000 L CNN
-F 2 "Measurement_Points:Measurement_Point_Round-TH_Big" H 7500 3450 50  0001 C CNN
-F 3 "~" H 7500 3450 50  0001 C CNN
-	1    7500 3450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Mechanical:MountingHole_Pad H2
-U 1 1 5D57003C
-P 8050 3450
-F 0 "H2" H 8000 3750 50  0000 L CNN
-F 1 "MountingHole_Pad" H 8000 3650 50  0000 L CNN
-F 2 "Measurement_Points:Measurement_Point_Round-TH_Big" H 8050 3450 50  0001 C CNN
-F 3 "~" H 8050 3450 50  0001 C CNN
-	1    8050 3450
-	1    0    0    -1  
-$EndComp
 Text GLabel 7500 3550 3    50   Input ~ 0
 A0
 Text GLabel 8050 3550 3    50   Input ~ 0
@@ -399,5 +377,27 @@ F 2 "Project:MS5803" H 5450 4850 50  0001 C CNN
 F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&DocId=Data+SheetMS5803-01BAB3pdfEnglishENG_DS_MS5803-01BA_B3.pdfCAT-BLPS0038" H 5450 4850 50  0001 C CNN
 	1    5450 4850
 	1    0    0    -1  
+$EndComp
+$Comp
+L Project:KeyStone_Screw_Small J?
+U 1 1 5D955396
+P 8050 3100
+F 0 "J?" V 8238 3187 50  0000 L CNN
+F 1 "KeyStone_Screw_Small" V 8327 3187 50  0000 L CNN
+F 2 "Project:KeyStone_Screw" H 8050 3100 50  0001 C CNN
+F 3 "https://www.digikey.com.au/product-detail/en/keystone-electronics/7774/36-7774-ND/2745944" H 8050 3100 50  0001 C CNN
+	1    8050 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L Project:KeyStone_Screw_Small J?
+U 1 1 5D955623
+P 7500 3100
+F 0 "J?" V 7688 3187 50  0000 L CNN
+F 1 "KeyStone_Screw_Small" V 7777 3187 50  0000 L CNN
+F 2 "Project:KeyStone_Screw" H 7500 3100 50  0001 C CNN
+F 3 "https://www.digikey.com.au/product-detail/en/keystone-electronics/7774/36-7774-ND/2745944" H 7500 3100 50  0001 C CNN
+	1    7500 3100
+	0    1    1    0   
 $EndComp
 $EndSCHEMATC
