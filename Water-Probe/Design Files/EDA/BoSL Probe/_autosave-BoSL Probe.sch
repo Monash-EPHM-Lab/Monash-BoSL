@@ -379,10 +379,10 @@ F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&D
 	1    0    0    -1  
 $EndComp
 $Comp
-L Project:KeyStone_Screw J?
+L Project:KeyStone_Screw J3
 U 1 1 5D953E64
 P 8050 3100
-F 0 "J?" V 8238 3187 50  0000 L CNN
+F 0 "J3" V 8238 3187 50  0000 L CNN
 F 1 "KeyStone_Screw" V 8327 3187 50  0000 L CNN
 F 2 "Project:KeyStone_Screw" H 8050 3100 50  0001 C CNN
 F 3 "https://docs-apac.rs-online.com/webdocs/13ec/0900766b813ecaa4.pdf" H 8050 3100 50  0001 C CNN
@@ -390,10 +390,10 @@ F 3 "https://docs-apac.rs-online.com/webdocs/13ec/0900766b813ecaa4.pdf" H 8050 3
 	0    1    1    0   
 $EndComp
 $Comp
-L Project:KeyStone_Screw J?
+L Project:KeyStone_Screw J2
 U 1 1 5D9540DF
 P 7500 3100
-F 0 "J?" V 7688 3187 50  0000 L CNN
+F 0 "J2" V 7688 3187 50  0000 L CNN
 F 1 "KeyStone_Screw" V 7777 3187 50  0000 L CNN
 F 2 "Project:KeyStone_Screw" H 7500 3100 50  0001 C CNN
 F 3 "https://docs-apac.rs-online.com/webdocs/13ec/0900766b813ecaa4.pdf" H 7500 3100 50  0001 C CNN
