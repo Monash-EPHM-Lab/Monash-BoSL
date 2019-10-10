@@ -5,8 +5,6 @@
 #include "SensorEC.h"
 #include "SIM7000.h"
 
-
-
 #define SIMCOM_7000 // SIM7000A/C/E/G
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 

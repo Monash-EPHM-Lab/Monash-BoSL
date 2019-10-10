@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 5)
+    (drawings 10)
     (tracks 71)
     (zones 0)
     (modules 9)
@@ -34,7 +34,7 @@
   )
 
   (setup
-    (last_trace_width 0.4)
+    (last_trace_width 0.25)
     (user_trace_width 0.4)
     (user_trace_width 0.6)
     (trace_clearance 0.2)
@@ -87,9 +87,9 @@
       (subtractmaskfromsilk false)
       (outputformat 1)
       (mirror false)
-      (drillshape 1)
+      (drillshape 0)
       (scaleselection 1)
-      (outputdirectory ""))
+      (outputdirectory "../../Production Files/Gerber/"))
   )
 
   (net 0 "")
@@ -427,11 +427,18 @@
     )
   )
 
-  (gr_line (start 129 91) (end 129 109) (layer Edge.Cuts) (width 0.05) (tstamp 5D955396))
-  (gr_line (start 100 109) (end 129 109) (layer Edge.Cuts) (width 0.05))
-  (gr_line (start 100 100) (end 100 109) (layer Edge.Cuts) (width 0.05))
-  (gr_line (start 100 91) (end 129 91) (layer Edge.Cuts) (width 0.05))
-  (gr_line (start 100 100) (end 100 91) (layer Edge.Cuts) (width 0.05))
+  (gr_text "BoSL-Probe\nrev 0.1" (at 114 107) (layer B.SilkS)
+    (effects (font (size 1 1) (thickness 0.15)) (justify mirror))
+  )
+  (gr_arc (start 128 92) (end 129 92) (angle -90) (layer Edge.Cuts) (width 0.05))
+  (gr_arc (start 128 108) (end 128 109) (angle -90) (layer Edge.Cuts) (width 0.05))
+  (gr_arc (start 101 108) (end 100 108) (angle -90) (layer Edge.Cuts) (width 0.05))
+  (gr_arc (start 101 92) (end 101 91) (angle -90) (layer Edge.Cuts) (width 0.05))
+  (gr_line (start 129 92) (end 129 108) (layer Edge.Cuts) (width 0.05) (tstamp 5D955396))
+  (gr_line (start 101 109) (end 128 109) (layer Edge.Cuts) (width 0.05))
+  (gr_line (start 100 100) (end 100 108) (layer Edge.Cuts) (width 0.05))
+  (gr_line (start 101 91) (end 128 91) (layer Edge.Cuts) (width 0.05))
+  (gr_line (start 100 100) (end 100 92) (layer Edge.Cuts) (width 0.05))
 
   (segment (start 115.7 95.725) (end 115.7 97.25) (width 0.4) (layer B.Cu) (net 1) (status 20))
   (segment (start 114.995 95.02) (end 115.7 95.725) (width 0.4) (layer B.Cu) (net 1))
