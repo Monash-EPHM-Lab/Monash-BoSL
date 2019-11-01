@@ -1,0 +1,1537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>D:\data\My Documents\Monash\EoDC_Hardware\SIM\Board\SIM7000.sch</source>
+    <date>2019/8/4   21:45:45</date>
+    <tool>Eeschema (5.1.2)-2</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Lobstar Board</title>
+        <company/>
+        <rev>0.2</rev>
+        <date>2019-08-04</date>
+        <source>SIM7000.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="D1">
+      <value>1N4148</value>
+      <footprint>Diodes_SMD:D_SOD-323_HandSoldering</footprint>
+      <libsource lib="Device" part="D" description="Diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE4F567</tstamp>
+    </comp>
+    <comp ref="IC1">
+      <value>ATMEGA328-P</value>
+      <footprint>Housings_DIP:DIP-28_W7.62mm_Socket_LongPads</footprint>
+      <libsource lib="SIM7000-rescue" part="ATMEGA328-P-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE615FC</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>10 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE61DD3</tstamp>
+    </comp>
+    <comp ref="Y1">
+      <value>8 MHz</value>
+      <footprint>Crystals:Crystal_HC49-U_Vertical</footprint>
+      <libsource lib="Device" part="Crystal" description="Two pin crystal"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE649D0</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>22 pF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE64EC9</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>22 pF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE65174</tstamp>
+    </comp>
+    <comp ref="I1">
+      <value>SIM</value>
+      <footprint>SIMFootprints:SIMNano</footprint>
+      <libsource lib="SIM7000-rescue" part="SIM-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE6604C</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>220 pF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE66F55</tstamp>
+    </comp>
+    <comp ref="CON2">
+      <value>BARREL_JACK</value>
+      <footprint>Connectors:BARREL_JACK</footprint>
+      <libsource lib="SIM7000-rescue" part="BARREL_JACK-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE71D3E</tstamp>
+    </comp>
+    <comp ref="TP2">
+      <value>TEST</value>
+      <footprint>Measurement_Points:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="SIM7000-rescue" part="TEST-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEFA75C</tstamp>
+    </comp>
+    <comp ref="P7">
+      <value>CONN_01X04</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X04-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CEFBED0</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>1 μF</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF043FB</tstamp>
+    </comp>
+    <comp ref="IC2">
+      <value>SIM7000</value>
+      <footprint>SIMFootprints:SIM7000</footprint>
+      <libsource lib="SIM7000-rescue" part="SIM7000-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CE4EC39</tstamp>
+    </comp>
+    <comp ref="TP3">
+      <value>TEST</value>
+      <footprint>Measurement_Points:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="SIM7000-rescue" part="TEST-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF09F46</tstamp>
+    </comp>
+    <comp ref="P3">
+      <value>CONN_01X04</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X04-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5CF14CF2</tstamp>
+    </comp>
+    <comp ref="SW1">
+      <value>SPST</value>
+      <footprint>Buttons_Switches_SMD:SW_SPST_B3S-1000</footprint>
+      <libsource lib="SIM7000-rescue" part="SPST-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0B2067</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>0.1 μF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0B92D2</tstamp>
+    </comp>
+    <comp ref="AT1">
+      <value>AT</value>
+      <footprint>Connectors:SMA_THT_Jack_Straight</footprint>
+      <libsource lib="SIM7000-rescue" part="AT-ant" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0C5883</tstamp>
+    </comp>
+    <comp ref="CON1">
+      <value>Micro_SD_Card</value>
+      <footprint>SIMFootprints:microSD_Connector</footprint>
+      <libsource lib="SIM7000-rescue" part="Micro_SD_Card-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D143564</tstamp>
+    </comp>
+    <comp ref="P4">
+      <value>CONN_01X04</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X04-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D397555</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>MSQA6V1W5T2G</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-353_SC-70-5_Handsoldering</footprint>
+      <libsource lib="SIM7000-rescue" part="MSQA6V1W5T2G-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D39A194</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>Screw_Terminal_1x06</value>
+      <footprint>SIMFootprints:Screw_Terminals_1x6</footprint>
+      <libsource lib="SIM7000-rescue" part="Screw_Terminal_1x06-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3A70FC</tstamp>
+    </comp>
+    <comp ref="J2">
+      <value>Screw_Terminal_1x04</value>
+      <footprint>SIMFootprints:Screw_Terminals_1x4</footprint>
+      <libsource lib="SIM7000-rescue" part="Screw_Terminal_1x04-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3AF380</tstamp>
+    </comp>
+    <comp ref="P6">
+      <value>CONN_01X09</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x09_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X09-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3B7691</tstamp>
+    </comp>
+    <comp ref="TP1">
+      <value>TEST</value>
+      <footprint>Measurement_Points:Measurement_Point_Round-SMD-Pad_Small</footprint>
+      <libsource lib="SIM7000-rescue" part="TEST-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3BD257</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>1 μF</value>
+      <footprint>Capacitors_SMD:C_1206_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D0B9208</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>330 μF</value>
+      <footprint>Capacitors_SMD:CP_Elec_8x10</footprint>
+      <libsource lib="Device" part="CP" description="Polarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3BFC85</tstamp>
+    </comp>
+    <comp ref="U5">
+      <value>FT232RL</value>
+      <footprint>Housings_SSOP:SSOP-28_5.3x10.2mm_Pitch0.65mm</footprint>
+      <libsource lib="SIM7000-rescue" part="FT232RL-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3C8FC0</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>100 nF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3CBD17</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>100 nF</value>
+      <footprint>Capacitors_SMD:C_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3CDF21</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LED</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3D04A9</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>3.3 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3D0757</tstamp>
+    </comp>
+    <comp ref="P8">
+      <value>USB_A</value>
+      <footprint>Connectors:USB_Micro-B</footprint>
+      <libsource lib="SIM7000-rescue" part="USB_A-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D3D7545</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>LED</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D430CC2</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>3.3 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D430D8C</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>LED</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D4315A4</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>3.3 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D4315AA</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>LED</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D432F55</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>3.3 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D432F5B</tstamp>
+    </comp>
+    <comp ref="D6">
+      <value>LED</value>
+      <footprint>LEDs:LED_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="LED" description="Light emitting diode"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D4364BC</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>3.3 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D4364C2</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>MCP1700T-3302E/TT</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-89-3_Handsoldering</footprint>
+      <libsource lib="SIM7000-rescue" part="MCP1700T-3302E_TT-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D43E63A</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>MS5803</value>
+      <footprint>SIMFootprints:MS5803</footprint>
+      <libsource lib="SIM7000-rescue" part="MS5803-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D44396C</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>10 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D446624</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10 kΩ</value>
+      <footprint>Resistors_SMD:R_0805_HandSoldering</footprint>
+      <libsource lib="Device" part="R" description="Resistor"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D448DD0</tstamp>
+    </comp>
+    <comp ref="J4">
+      <value>Screw_Terminal_1x08</value>
+      <footprint>SIMFootprints:Screw_Terminals_1x8</footprint>
+      <libsource lib="SIM7000-rescue" part="Screw_Terminal_1x08-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D432391</tstamp>
+    </comp>
+    <comp ref="J6">
+      <value>RJ45</value>
+      <footprint>SIMFootprints:RJ_45</footprint>
+      <libsource lib="SIM7000-rescue" part="RJ45-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D433563</tstamp>
+    </comp>
+    <comp ref="J3">
+      <value>Screw_Terminal_1x02</value>
+      <footprint>SIMFootprints:Screw_Terminals_1x2</footprint>
+      <libsource lib="SIM7000-rescue" part="Screw_Terminal_1x02-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D43FC6D</tstamp>
+    </comp>
+    <comp ref="P2">
+      <value>CONN_01X04</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X04-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D44098B</tstamp>
+    </comp>
+    <comp ref="J5">
+      <value>Screw_Terminal_1x04</value>
+      <footprint>SIMFootprints:Screw_Terminals_1x4</footprint>
+      <libsource lib="SIM7000-rescue" part="Screw_Terminal_1x04-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D456DDA</tstamp>
+    </comp>
+    <comp ref="P9">
+      <value>CONN_01X12</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x12_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X12-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D458C3A</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>CONN_01X16</value>
+      <footprint>Pin_Headers:Pin_Header_Straight_1x16_Pitch2.54mm</footprint>
+      <libsource lib="SIM7000-rescue" part="CONN_01X16-SIM7000-rescue" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D45AC74</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>MC74HC08A</value>
+      <footprint>Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm</footprint>
+      <libsource lib="SIM7000-rescue" part="MC74HC08A-simcom" description=""/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5D454F67</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="CP">
+      <description>Polarized capacitor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>CP_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">CP</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Crystal">
+      <description>Two pin crystal</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>Crystal*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">Y</field>
+        <field name="Value">Crystal</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="D">
+      <description>Diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>TO-???*</fp>
+        <fp>*_Diode_*</fp>
+        <fp>*SingleDiode*</fp>
+        <fp>D_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">D</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="LED">
+      <description>Light emitting diode</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>LED*</fp>
+        <fp>LED_SMD:*</fp>
+        <fp>LED_THT:*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED</field>
+      </fields>
+      <pins>
+        <pin num="1" name="K" type="passive"/>
+        <pin num="2" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R">
+      <description>Resistor</description>
+      <docs>~</docs>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="AT-ant">
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">AT</field>
+        <field name="Value">AT-ant</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="BiDi"/>
+        <pin num="2" name="~" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="ATMEGA328-P-SIM7000-rescue">
+      <footprints>
+        <fp>28DIP-ELL600</fp>
+        <fp>28dip600</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">ATMEGA328-P-SIM7000-rescue</field>
+        <field name="Footprint">DIL28</field>
+      </fields>
+      <pins>
+        <pin num="1" name="(PCINT14/~RESET~)PC6" type="BiDi"/>
+        <pin num="2" name="(PCINT16/RXD)PD0" type="BiDi"/>
+        <pin num="3" name="(PCINT17/TXD)PD1" type="BiDi"/>
+        <pin num="4" name="(PCINT18/INT0)PD2" type="BiDi"/>
+        <pin num="5" name="(PCINT19/OC2B/INT1)PD3" type="BiDi"/>
+        <pin num="6" name="(PCINT20/XCK/T0)PD4" type="BiDi"/>
+        <pin num="7" name="VCC" type="power_in"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="(PCINT6/XTAL1/TOSC1)PB6" type="BiDi"/>
+        <pin num="10" name="(PCINT7/XTAL2/TOSC2)PB7" type="BiDi"/>
+        <pin num="11" name="(PCINT21/OC0B/T1)PD5" type="BiDi"/>
+        <pin num="12" name="(PCINT22/OC0A/AIN0)PD6" type="BiDi"/>
+        <pin num="13" name="(PCINT23/AIN1)PD7" type="BiDi"/>
+        <pin num="14" name="(PCINT0/CLKO/ICP1)PB0" type="BiDi"/>
+        <pin num="15" name="(PCINT1/OC1A)PB1" type="BiDi"/>
+        <pin num="16" name="(PCINT2/OC1B/~SS~)PB2" type="BiDi"/>
+        <pin num="17" name="(PCINT3/OC2A/MOSI)PB3" type="BiDi"/>
+        <pin num="18" name="(PCINT4/MISO)PB4" type="BiDi"/>
+        <pin num="19" name="(PCINT5/SCK)PB5" type="BiDi"/>
+        <pin num="20" name="AVCC" type="power_in"/>
+        <pin num="21" name="AREF" type="BiDi"/>
+        <pin num="22" name="GND" type="power_in"/>
+        <pin num="23" name="(PCINT8/ADC0)PC0" type="BiDi"/>
+        <pin num="24" name="(PCINT9/ADC1)PC1" type="BiDi"/>
+        <pin num="25" name="(PCINT10/ADC2)PC2" type="BiDi"/>
+        <pin num="26" name="(PCINT11/ADC3)PC3" type="BiDi"/>
+        <pin num="27" name="(PCINT12/SDA/ADC4)PC4" type="BiDi"/>
+        <pin num="28" name="(PCINT13/SCL/ADC5)PC5" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="BARREL_JACK-SIM7000-rescue">
+      <fields>
+        <field name="Reference">CON</field>
+        <field name="Value">BARREL_JACK-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="CONN_01X04-SIM7000-rescue">
+      <footprints>
+        <fp>Pin_Header_Straight_1X04</fp>
+        <fp>Pin_Header_Angled_1X04</fp>
+        <fp>Socket_Strip_Straight_1X04</fp>
+        <fp>Socket_Strip_Angled_1X04</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X04-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="CONN_01X09-SIM7000-rescue">
+      <footprints>
+        <fp>Pin_Header_Straight_1X09</fp>
+        <fp>Pin_Header_Angled_1X09</fp>
+        <fp>Socket_Strip_Straight_1X09</fp>
+        <fp>Socket_Strip_Angled_1X09</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X09-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+        <pin num="9" name="P9" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="CONN_01X12-SIM7000-rescue">
+      <footprints>
+        <fp>Pin_Header_Straight_1X12</fp>
+        <fp>Pin_Header_Angled_1X12</fp>
+        <fp>Socket_Strip_Straight_1X12</fp>
+        <fp>Socket_Strip_Angled_1X12</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X12-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+        <pin num="9" name="P9" type="passive"/>
+        <pin num="10" name="P10" type="passive"/>
+        <pin num="11" name="P11" type="passive"/>
+        <pin num="12" name="P12" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="CONN_01X16-SIM7000-rescue">
+      <footprints>
+        <fp>Pin_Header_Straight_1X16</fp>
+        <fp>Pin_Header_Angled_1X16</fp>
+        <fp>Socket_Strip_Straight_1X16</fp>
+        <fp>Socket_Strip_Angled_1X16</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_01X16-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P2" type="passive"/>
+        <pin num="3" name="P3" type="passive"/>
+        <pin num="4" name="P4" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+        <pin num="6" name="P6" type="passive"/>
+        <pin num="7" name="P7" type="passive"/>
+        <pin num="8" name="P8" type="passive"/>
+        <pin num="9" name="P9" type="passive"/>
+        <pin num="10" name="P10" type="passive"/>
+        <pin num="11" name="P11" type="passive"/>
+        <pin num="12" name="P12" type="passive"/>
+        <pin num="13" name="P13" type="passive"/>
+        <pin num="14" name="P14" type="passive"/>
+        <pin num="15" name="P15" type="passive"/>
+        <pin num="16" name="P16" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="FT232RL-simcom">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">FT232RL-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="TXD" type="power_in"/>
+        <pin num="2" name="DTR#" type="power_in"/>
+        <pin num="3" name="RTS#" type="power_in"/>
+        <pin num="4" name="VCCIO" type="power_in"/>
+        <pin num="5" name="RXD" type="power_in"/>
+        <pin num="6" name="RI#" type="power_in"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="NC" type="power_in"/>
+        <pin num="9" name="DSR#" type="power_in"/>
+        <pin num="10" name="DCD#" type="power_in"/>
+        <pin num="11" name="CTS#" type="power_in"/>
+        <pin num="12" name="CBUS4" type="power_in"/>
+        <pin num="13" name="CBUS2" type="power_in"/>
+        <pin num="14" name="CBUS3" type="power_in"/>
+        <pin num="15" name="USBDP" type="power_in"/>
+        <pin num="16" name="USBDM" type="power_in"/>
+        <pin num="17" name="3V3OUT" type="power_in"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="RESET#" type="power_in"/>
+        <pin num="20" name="VCC" type="power_in"/>
+        <pin num="21" name="GND" type="power_in"/>
+        <pin num="22" name="CBUS1" type="power_in"/>
+        <pin num="23" name="CBUS0" type="power_in"/>
+        <pin num="24" name="NC" type="power_in"/>
+        <pin num="25" name="AGND" type="power_in"/>
+        <pin num="26" name="TEST" type="power_in"/>
+        <pin num="27" name="OSCI" type="power_in"/>
+        <pin num="28" name="OSCO" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="MC74HC08A-simcom">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MC74HC08A-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A1" type="input"/>
+        <pin num="2" name="B1" type="input"/>
+        <pin num="3" name="Y1" type="input"/>
+        <pin num="4" name="A2" type="input"/>
+        <pin num="5" name="B2" type="input"/>
+        <pin num="6" name="Y2" type="input"/>
+        <pin num="7" name="GND" type="input"/>
+        <pin num="8" name="Y3" type="input"/>
+        <pin num="9" name="A3" type="input"/>
+        <pin num="10" name="B3" type="input"/>
+        <pin num="11" name="Y4" type="input"/>
+        <pin num="12" name="A4" type="input"/>
+        <pin num="13" name="B4" type="input"/>
+        <pin num="14" name="VCC" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="MCP1700T-3302E_TT-SIM7000-rescue">
+      <footprints>
+        <fp>SOT-89*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MCP1700T-3302E_TT-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="VI" type="power_in"/>
+        <pin num="3" name="VO" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="MS5803-simcom">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MS5803-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCLK" type="input"/>
+        <pin num="2" name="GND" type="input"/>
+        <pin num="3" name="CSB" type="input"/>
+        <pin num="4" name="NC" type="input"/>
+        <pin num="5" name="VDD" type="input"/>
+        <pin num="6" name="PS" type="input"/>
+        <pin num="7" name="SDA" type="input"/>
+        <pin num="8" name="SDO" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="MSQA6V1W5T2G-simcom">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">MSQA6V1W5T2G-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="input"/>
+        <pin num="2" name="~" type="input"/>
+        <pin num="3" name="~" type="input"/>
+        <pin num="4" name="~" type="input"/>
+        <pin num="5" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="Micro_SD_Card-SIM7000-rescue">
+      <fields>
+        <field name="Reference">CON</field>
+        <field name="Value">Micro_SD_Card-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="DAT2" type="BiDi"/>
+        <pin num="2" name="DAT3/CD" type="BiDi"/>
+        <pin num="3" name="CMD" type="input"/>
+        <pin num="4" name="VDD" type="power_in"/>
+        <pin num="5" name="CLK" type="input"/>
+        <pin num="6" name="VSS" type="power_in"/>
+        <pin num="7" name="DAT0" type="input"/>
+        <pin num="8" name="DAT1" type="input"/>
+        <pin num="9" name="SHIELD" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="RJ45-SIM7000-rescue">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">RJ45-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+        <pin num="5" name="~" type="passive"/>
+        <pin num="6" name="~" type="passive"/>
+        <pin num="7" name="~" type="passive"/>
+        <pin num="8" name="~" type="passive"/>
+        <pin num="9" name="SHIELD" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="SIM-simcom">
+      <fields>
+        <field name="Reference">I</field>
+        <field name="Value">SIM-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="input"/>
+        <pin num="2" name="RST" type="input"/>
+        <pin num="3" name="CLK" type="input"/>
+        <pin num="4" name="GND" type="input"/>
+        <pin num="5" name="VPP" type="input"/>
+        <pin num="6" name="DATA" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="SIM7000-simcom">
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">IC</field>
+        <field name="Value">SIM7000-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="PWRKEY" type="input"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="DTR" type="input"/>
+        <pin num="4" name="RI" type="output"/>
+        <pin num="5" name="DCD" type="output"/>
+        <pin num="6" name="BOOT_CFG" type="input"/>
+        <pin num="7" name="CTS" type="output"/>
+        <pin num="8" name="RTS" type="input"/>
+        <pin num="9" name="TXD" type="output"/>
+        <pin num="10" name="RXD" type="input"/>
+        <pin num="11" name="PCM_CLK" type="output"/>
+        <pin num="12" name="PCM_SYNC" type="output"/>
+        <pin num="13" name="PCM_DIN" type="input"/>
+        <pin num="14" name="PCM_DOUT" type="output"/>
+        <pin num="15" name="VDD_EXT" type="power_out"/>
+        <pin num="16" name="NRESET" type="input"/>
+        <pin num="17" name="GND" type="passive"/>
+        <pin num="18" name="GND" type="passive"/>
+        <pin num="19" name="NC" type="NotConnected"/>
+        <pin num="20" name="NC" type="NotConnected"/>
+        <pin num="21" name="NC" type="NotConnected"/>
+        <pin num="22" name="NC" type="NotConnected"/>
+        <pin num="23" name="MDM_LOG_TX" type="output"/>
+        <pin num="24" name="USB_VBUS" type="input"/>
+        <pin num="25" name="ADC" type="input"/>
+        <pin num="26" name="NC" type="NotConnected"/>
+        <pin num="27" name="USB_DP" type="BiDi"/>
+        <pin num="28" name="USB_DM" type="BiDi"/>
+        <pin num="29" name="GND" type="passive"/>
+        <pin num="30" name="SIM_VDD" type="power_out"/>
+        <pin num="31" name="SIM_DATA" type="BiDi"/>
+        <pin num="32" name="SIM_CLK" type="output"/>
+        <pin num="33" name="SIM_RST" type="output"/>
+        <pin num="34" name="SIM_DET" type="input"/>
+        <pin num="35" name="NC" type="input"/>
+        <pin num="36" name="NC" type="input"/>
+        <pin num="37" name="I2C_SDA" type="BiDi"/>
+        <pin num="38" name="I2C_SCL" type="output"/>
+        <pin num="39" name="GND" type="passive"/>
+        <pin num="40" name="NC" type="NotConnected"/>
+        <pin num="41" name="NC" type="NotConnected"/>
+        <pin num="42" name="NC" type="NotConnected"/>
+        <pin num="43" name="NC" type="NotConnected"/>
+        <pin num="44" name="NC" type="NotConnected"/>
+        <pin num="45" name="GND" type="passive"/>
+        <pin num="46" name="GND" type="passive"/>
+        <pin num="47" name="NC" type="NotConnected"/>
+        <pin num="48" name="GPIO4" type="BiDi"/>
+        <pin num="49" name="GPIO1_UART3_RXD" type="BiDi"/>
+        <pin num="50" name="GPIO0/UART3_TXD" type="BiDi"/>
+        <pin num="51" name="NC" type="NotConnected"/>
+        <pin num="52" name="NETLIGHT" type="output"/>
+        <pin num="53" name="GNSS_ANT" type="input"/>
+        <pin num="54" name="GND" type="passive"/>
+        <pin num="55" name="VBAT" type="power_in"/>
+        <pin num="56" name="VBAT" type="power_in"/>
+        <pin num="57" name="VBAT" type="power_in"/>
+        <pin num="58" name="GND" type="passive"/>
+        <pin num="59" name="GND" type="passive"/>
+        <pin num="60" name="RF_ANT" type="BiDi"/>
+        <pin num="61" name="GND" type="passive"/>
+        <pin num="62" name="GND" type="passive"/>
+        <pin num="63" name="GND" type="passive"/>
+        <pin num="64" name="GND" type="passive"/>
+        <pin num="65" name="GND" type="passive"/>
+        <pin num="66" name="STATUS" type="output"/>
+        <pin num="67" name="GPIO2" type="BiDi"/>
+        <pin num="68" name="GPIO3" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="SPST-simcom">
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SPST-simcom</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="input"/>
+        <pin num="2" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="Screw_Terminal_1x02-SIM7000-rescue">
+      <footprints>
+        <fp>bornier2</fp>
+        <fp>TerminalBlock*2pol</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Screw_Terminal_1x02-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="Screw_Terminal_1x04-SIM7000-rescue">
+      <footprints>
+        <fp>bornier4</fp>
+        <fp>TerminalBlock*4pol</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Screw_Terminal_1x04-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="Screw_Terminal_1x06-SIM7000-rescue">
+      <footprints>
+        <fp>bornier6</fp>
+        <fp>TerminalBlock*6pol</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Screw_Terminal_1x06-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+        <pin num="5" name="~" type="passive"/>
+        <pin num="6" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="Screw_Terminal_1x08-SIM7000-rescue">
+      <footprints>
+        <fp>TerminalBlock*8pol</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Screw_Terminal_1x08-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+        <pin num="3" name="~" type="passive"/>
+        <pin num="4" name="~" type="passive"/>
+        <pin num="5" name="~" type="passive"/>
+        <pin num="6" name="~" type="passive"/>
+        <pin num="7" name="~" type="passive"/>
+        <pin num="8" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="TEST-SIM7000-rescue">
+      <fields>
+        <field name="Reference">TP</field>
+        <field name="Value">TEST-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="SIM7000-rescue" part="USB_A-SIM7000-rescue">
+      <footprints>
+        <fp>USB*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">USB_A-SIM7000-rescue</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VBUS" type="power_in"/>
+        <pin num="2" name="D-" type="passive"/>
+        <pin num="3" name="D+" type="passive"/>
+        <pin num="4" name="GND" type="power_in"/>
+        <pin num="5" name="shield" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Device">
+      <uri>C:\Program Files\KiCad\share\kicad\library/Device.lib</uri>
+    </library>
+    <library logical="SIM7000-rescue">
+      <uri>D:\data\My Documents\Monash\EoDC_Hardware\SIM\Board/SIM7000-rescue.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="Net-(AT1-Pad1)">
+      <node ref="AT1" pin="1"/>
+      <node ref="IC2" pin="60"/>
+    </net>
+    <net code="2" name="Net-(D1-Pad2)">
+      <node ref="IC2" pin="1"/>
+      <node ref="TP1" pin="1"/>
+      <node ref="D1" pin="2"/>
+    </net>
+    <net code="3" name="Net-(C2-Pad2)">
+      <node ref="IC1" pin="9"/>
+      <node ref="C2" pin="2"/>
+      <node ref="Y1" pin="2"/>
+    </net>
+    <net code="4" name="Net-(C3-Pad2)">
+      <node ref="Y1" pin="1"/>
+      <node ref="IC1" pin="10"/>
+      <node ref="C3" pin="2"/>
+    </net>
+    <net code="5" name="Net-(I1-Pad3)">
+      <node ref="I1" pin="3"/>
+      <node ref="U3" pin="3"/>
+      <node ref="IC2" pin="32"/>
+    </net>
+    <net code="6" name="Net-(I1-Pad6)">
+      <node ref="I1" pin="6"/>
+      <node ref="U3" pin="4"/>
+      <node ref="IC2" pin="31"/>
+    </net>
+    <net code="7" name="V_3.3">
+      <node ref="P6" pin="4"/>
+      <node ref="U2" pin="5"/>
+      <node ref="U2" pin="6"/>
+      <node ref="R3" pin="1"/>
+      <node ref="J2" pin="1"/>
+      <node ref="P6" pin="5"/>
+      <node ref="U1" pin="3"/>
+      <node ref="J6" pin="2"/>
+      <node ref="P3" pin="4"/>
+      <node ref="IC1" pin="7"/>
+      <node ref="C1" pin="1"/>
+      <node ref="IC1" pin="20"/>
+      <node ref="P2" pin="4"/>
+      <node ref="J5" pin="3"/>
+      <node ref="R2" pin="1"/>
+      <node ref="CON1" pin="4"/>
+    </net>
+    <net code="8" name="Net-(I1-Pad2)">
+      <node ref="I1" pin="2"/>
+      <node ref="U3" pin="1"/>
+      <node ref="IC2" pin="33"/>
+    </net>
+    <net code="9" name="/USB_VBUS">
+      <node ref="P7" pin="4"/>
+      <node ref="IC2" pin="24"/>
+    </net>
+    <net code="10" name="/DM">
+      <node ref="IC2" pin="28"/>
+      <node ref="P7" pin="3"/>
+    </net>
+    <net code="11" name="/DP">
+      <node ref="IC2" pin="27"/>
+      <node ref="P7" pin="2"/>
+    </net>
+    <net code="12" name="VPP">
+      <node ref="R1" pin="1"/>
+      <node ref="C6" pin="1"/>
+      <node ref="C5" pin="1"/>
+      <node ref="U1" pin="2"/>
+      <node ref="P6" pin="2"/>
+      <node ref="IC2" pin="55"/>
+      <node ref="IC2" pin="56"/>
+      <node ref="P6" pin="3"/>
+      <node ref="IC2" pin="57"/>
+      <node ref="J5" pin="4"/>
+      <node ref="IC2" pin="25"/>
+      <node ref="C7" pin="1"/>
+      <node ref="CON2" pin="1"/>
+    </net>
+    <net code="13" name="Net-(C4-Pad2)">
+      <node ref="C4" pin="2"/>
+      <node ref="IC2" pin="30"/>
+      <node ref="I1" pin="1"/>
+      <node ref="U3" pin="5"/>
+    </net>
+    <net code="14" name="USB_DM">
+      <node ref="P8" pin="2"/>
+      <node ref="U5" pin="16"/>
+    </net>
+    <net code="15" name="Net-(U5-Pad3)">
+      <node ref="U5" pin="3"/>
+    </net>
+    <net code="16" name="Net-(U5-Pad11)">
+      <node ref="U5" pin="11"/>
+    </net>
+    <net code="17" name="Net-(U5-Pad9)">
+      <node ref="U5" pin="9"/>
+    </net>
+    <net code="18" name="Net-(U5-Pad10)">
+      <node ref="U5" pin="10"/>
+    </net>
+    <net code="19" name="Net-(U5-Pad6)">
+      <node ref="U5" pin="6"/>
+    </net>
+    <net code="20" name="Net-(U5-Pad13)">
+      <node ref="U5" pin="13"/>
+    </net>
+    <net code="21" name="Net-(U5-Pad14)">
+      <node ref="U5" pin="14"/>
+    </net>
+    <net code="22" name="Net-(U5-Pad12)">
+      <node ref="U5" pin="12"/>
+    </net>
+    <net code="23" name="USB_V">
+      <node ref="P8" pin="1"/>
+      <node ref="U4" pin="1"/>
+      <node ref="U4" pin="10"/>
+      <node ref="U4" pin="13"/>
+      <node ref="U4" pin="14"/>
+      <node ref="U4" pin="4"/>
+      <node ref="U5" pin="20"/>
+      <node ref="D4" pin="2"/>
+    </net>
+    <net code="24" name="USB_DP">
+      <node ref="U5" pin="15"/>
+      <node ref="P8" pin="3"/>
+    </net>
+    <net code="25" name="Net-(P8-Pad5)">
+      <node ref="P8" pin="5"/>
+    </net>
+    <net code="26" name="Net-(U5-Pad19)">
+      <node ref="U5" pin="19"/>
+    </net>
+    <net code="27" name="Net-(U5-Pad8)">
+      <node ref="U5" pin="8"/>
+    </net>
+    <net code="28" name="Net-(U5-Pad24)">
+      <node ref="U5" pin="24"/>
+    </net>
+    <net code="29" name="Net-(U5-Pad27)">
+      <node ref="U5" pin="27"/>
+    </net>
+    <net code="30" name="Net-(U5-Pad28)">
+      <node ref="U5" pin="28"/>
+    </net>
+    <net code="31" name="TLL_RST">
+      <node ref="SW1" pin="2"/>
+      <node ref="IC1" pin="1"/>
+      <node ref="C9" pin="1"/>
+      <node ref="P4" pin="2"/>
+      <node ref="R1" pin="2"/>
+    </net>
+    <net code="32" name="Net-(C9-Pad2)">
+      <node ref="U5" pin="2"/>
+      <node ref="C9" pin="2"/>
+    </net>
+    <net code="33" name="Net-(D5-Pad2)">
+      <node ref="U5" pin="23"/>
+      <node ref="D5" pin="2"/>
+    </net>
+    <net code="34" name="GND">
+      <node ref="IC2" pin="39"/>
+      <node ref="IC2" pin="29"/>
+      <node ref="CON2" pin="3"/>
+      <node ref="CON2" pin="2"/>
+      <node ref="IC2" pin="54"/>
+      <node ref="CON1" pin="9"/>
+      <node ref="CON1" pin="6"/>
+      <node ref="IC2" pin="64"/>
+      <node ref="J2" pin="2"/>
+      <node ref="U5" pin="7"/>
+      <node ref="J6" pin="6"/>
+      <node ref="U5" pin="21"/>
+      <node ref="IC2" pin="45"/>
+      <node ref="P7" pin="1"/>
+      <node ref="U5" pin="25"/>
+      <node ref="AT1" pin="2"/>
+      <node ref="C4" pin="1"/>
+      <node ref="U5" pin="18"/>
+      <node ref="U5" pin="26"/>
+      <node ref="P3" pin="3"/>
+      <node ref="P4" pin="1"/>
+      <node ref="C2" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="IC2" pin="63"/>
+      <node ref="C6" pin="2"/>
+      <node ref="IC2" pin="46"/>
+      <node ref="IC2" pin="62"/>
+      <node ref="I1" pin="4"/>
+      <node ref="IC2" pin="61"/>
+      <node ref="IC1" pin="22"/>
+      <node ref="IC2" pin="59"/>
+      <node ref="IC1" pin="8"/>
+      <node ref="C7" pin="2"/>
+      <node ref="U3" pin="2"/>
+      <node ref="IC2" pin="2"/>
+      <node ref="IC2" pin="18"/>
+      <node ref="IC2" pin="17"/>
+      <node ref="C5" pin="2"/>
+      <node ref="P6" pin="9"/>
+      <node ref="IC2" pin="65"/>
+      <node ref="C1" pin="2"/>
+      <node ref="P6" pin="6"/>
+      <node ref="IC2" pin="58"/>
+      <node ref="SW1" pin="1"/>
+      <node ref="P6" pin="7"/>
+      <node ref="P6" pin="8"/>
+      <node ref="P8" pin="4"/>
+      <node ref="R5" pin="2"/>
+      <node ref="U4" pin="7"/>
+      <node ref="U1" pin="1"/>
+      <node ref="R4" pin="2"/>
+      <node ref="R8" pin="1"/>
+      <node ref="U2" pin="3"/>
+      <node ref="R7" pin="1"/>
+      <node ref="C8" pin="2"/>
+      <node ref="R6" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="P2" pin="3"/>
+      <node ref="J5" pin="1"/>
+      <node ref="J5" pin="2"/>
+    </net>
+    <net code="35" name="Net-(D5-Pad1)">
+      <node ref="D5" pin="1"/>
+      <node ref="R7" pin="2"/>
+    </net>
+    <net code="36" name="SCL">
+      <node ref="IC1" pin="28"/>
+      <node ref="R2" pin="2"/>
+      <node ref="P9" pin="2"/>
+      <node ref="J1" pin="6"/>
+      <node ref="J6" pin="4"/>
+      <node ref="J2" pin="4"/>
+      <node ref="U2" pin="1"/>
+      <node ref="P2" pin="1"/>
+      <node ref="P3" pin="1"/>
+      <node ref="P9" pin="1"/>
+    </net>
+    <net code="37" name="Net-(D6-Pad2)">
+      <node ref="U5" pin="22"/>
+      <node ref="D6" pin="2"/>
+    </net>
+    <net code="38" name="Net-(U2-Pad4)">
+      <node ref="U2" pin="4"/>
+    </net>
+    <net code="39" name="Net-(U2-Pad8)">
+      <node ref="U2" pin="8"/>
+    </net>
+    <net code="40" name="SDA">
+      <node ref="R3" pin="2"/>
+      <node ref="J2" pin="3"/>
+      <node ref="J1" pin="5"/>
+      <node ref="IC1" pin="27"/>
+      <node ref="J6" pin="8"/>
+      <node ref="P2" pin="2"/>
+      <node ref="P3" pin="2"/>
+      <node ref="P9" pin="4"/>
+      <node ref="P9" pin="3"/>
+      <node ref="U2" pin="7"/>
+    </net>
+    <net code="41" name="Net-(D4-Pad1)">
+      <node ref="R6" pin="1"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="42" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1"/>
+      <node ref="R5" pin="1"/>
+    </net>
+    <net code="43" name="Net-(C8-Pad1)">
+      <node ref="U5" pin="4"/>
+      <node ref="C8" pin="1"/>
+      <node ref="U5" pin="17"/>
+    </net>
+    <net code="44" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="45" name="Net-(D6-Pad1)">
+      <node ref="R8" pin="2"/>
+      <node ref="D6" pin="1"/>
+    </net>
+    <net code="46" name="D8">
+      <node ref="P1" pin="6"/>
+      <node ref="P1" pin="5"/>
+      <node ref="J4" pin="6"/>
+      <node ref="IC1" pin="14"/>
+    </net>
+    <net code="47" name="D9">
+      <node ref="P1" pin="7"/>
+      <node ref="P1" pin="8"/>
+      <node ref="J4" pin="5"/>
+      <node ref="IC1" pin="15"/>
+    </net>
+    <net code="48" name="SD_CS">
+      <node ref="IC1" pin="16"/>
+      <node ref="CON1" pin="2"/>
+      <node ref="P1" pin="9"/>
+      <node ref="J4" pin="4"/>
+      <node ref="P1" pin="10"/>
+    </net>
+    <net code="49" name="D7">
+      <node ref="J4" pin="7"/>
+      <node ref="IC1" pin="13"/>
+      <node ref="P1" pin="3"/>
+      <node ref="P1" pin="4"/>
+    </net>
+    <net code="50" name="A1">
+      <node ref="J1" pin="2"/>
+      <node ref="P9" pin="10"/>
+      <node ref="J6" pin="3"/>
+      <node ref="IC1" pin="24"/>
+      <node ref="P9" pin="9"/>
+    </net>
+    <net code="51" name="D6">
+      <node ref="P1" pin="2"/>
+      <node ref="J4" pin="8"/>
+      <node ref="P1" pin="1"/>
+      <node ref="IC1" pin="12"/>
+    </net>
+    <net code="52" name="SD_MOSI">
+      <node ref="IC1" pin="17"/>
+      <node ref="CON1" pin="3"/>
+      <node ref="J4" pin="3"/>
+      <node ref="P1" pin="11"/>
+      <node ref="P1" pin="12"/>
+    </net>
+    <net code="53" name="SD_MISO">
+      <node ref="J4" pin="2"/>
+      <node ref="P1" pin="13"/>
+      <node ref="IC1" pin="18"/>
+      <node ref="P1" pin="14"/>
+      <node ref="CON1" pin="7"/>
+    </net>
+    <net code="54" name="SD_SCLK">
+      <node ref="P1" pin="15"/>
+      <node ref="P1" pin="16"/>
+      <node ref="CON1" pin="5"/>
+      <node ref="J4" pin="1"/>
+      <node ref="IC1" pin="19"/>
+    </net>
+    <net code="55" name="AND_TX">
+      <node ref="U4" pin="11"/>
+      <node ref="U5" pin="5"/>
+    </net>
+    <net code="56" name="ONOFF_PIN">
+      <node ref="IC1" pin="6"/>
+      <node ref="D1" pin="1"/>
+    </net>
+    <net code="57" name="TLL_TX">
+      <node ref="J3" pin="1"/>
+      <node ref="U4" pin="12"/>
+      <node ref="P4" pin="4"/>
+      <node ref="IC1" pin="3"/>
+    </net>
+    <net code="58" name="Net-(D2-Pad2)">
+      <node ref="U4" pin="3"/>
+      <node ref="D2" pin="2"/>
+    </net>
+    <net code="59" name="Net-(D3-Pad2)">
+      <node ref="D3" pin="2"/>
+      <node ref="U4" pin="6"/>
+    </net>
+    <net code="60" name="TLL_RX">
+      <node ref="P4" pin="3"/>
+      <node ref="IC1" pin="2"/>
+      <node ref="J3" pin="2"/>
+      <node ref="U4" pin="8"/>
+    </net>
+    <net code="61" name="AND_RX">
+      <node ref="U5" pin="1"/>
+      <node ref="U4" pin="9"/>
+    </net>
+    <net code="62" name="Net-(IC2-Pad16)">
+      <node ref="IC2" pin="16"/>
+    </net>
+    <net code="63" name="Net-(CON1-Pad1)">
+      <node ref="CON1" pin="1"/>
+    </net>
+    <net code="64" name="Net-(CON1-Pad8)">
+      <node ref="CON1" pin="8"/>
+    </net>
+    <net code="65" name="A0">
+      <node ref="J1" pin="1"/>
+      <node ref="J6" pin="1"/>
+      <node ref="P9" pin="11"/>
+      <node ref="IC1" pin="23"/>
+      <node ref="P9" pin="12"/>
+    </net>
+    <net code="66" name="A3">
+      <node ref="J6" pin="7"/>
+      <node ref="P9" pin="6"/>
+      <node ref="P9" pin="5"/>
+      <node ref="IC1" pin="26"/>
+      <node ref="J1" pin="4"/>
+    </net>
+    <net code="67" name="A2">
+      <node ref="P9" pin="8"/>
+      <node ref="IC1" pin="25"/>
+      <node ref="P9" pin="7"/>
+      <node ref="J6" pin="5"/>
+      <node ref="J1" pin="3"/>
+    </net>
+    <net code="68" name="Net-(J6-Pad9)">
+      <node ref="J6" pin="9"/>
+    </net>
+    <net code="69" name="Net-(IC2-Pad6)">
+      <node ref="IC2" pin="6"/>
+      <node ref="TP2" pin="1"/>
+    </net>
+    <net code="71" name="Net-(IC2-Pad34)">
+      <node ref="IC2" pin="34"/>
+    </net>
+    <net code="72" name="Net-(IC2-Pad4)">
+      <node ref="IC2" pin="4"/>
+    </net>
+    <net code="73" name="Net-(IC2-Pad22)">
+      <node ref="IC2" pin="22"/>
+    </net>
+    <net code="74" name="Net-(IC2-Pad23)">
+      <node ref="IC2" pin="23"/>
+      <node ref="TP3" pin="1"/>
+    </net>
+    <net code="75" name="Net-(IC2-Pad26)">
+      <node ref="IC2" pin="26"/>
+    </net>
+    <net code="76" name="Net-(IC2-Pad21)">
+      <node ref="IC2" pin="21"/>
+    </net>
+    <net code="77" name="Net-(IC2-Pad35)">
+      <node ref="IC2" pin="35"/>
+    </net>
+    <net code="78" name="Net-(IC2-Pad36)">
+      <node ref="IC2" pin="36"/>
+    </net>
+    <net code="79" name="Net-(IC2-Pad37)">
+      <node ref="IC2" pin="37"/>
+    </net>
+    <net code="80" name="Net-(IC2-Pad38)">
+      <node ref="IC2" pin="38"/>
+    </net>
+    <net code="81" name="Net-(IC2-Pad40)">
+      <node ref="IC2" pin="40"/>
+    </net>
+    <net code="82" name="Net-(IC2-Pad41)">
+      <node ref="IC2" pin="41"/>
+    </net>
+    <net code="83" name="Net-(IC2-Pad42)">
+      <node ref="IC2" pin="42"/>
+    </net>
+    <net code="84" name="Net-(IC2-Pad11)">
+      <node ref="IC2" pin="11"/>
+    </net>
+    <net code="85" name="RX">
+      <node ref="IC1" pin="4"/>
+      <node ref="IC2" pin="10"/>
+    </net>
+    <net code="86" name="Net-(IC2-Pad12)">
+      <node ref="IC2" pin="12"/>
+    </net>
+    <net code="87" name="Net-(IC2-Pad13)">
+      <node ref="IC2" pin="13"/>
+    </net>
+    <net code="88" name="Net-(IC2-Pad14)">
+      <node ref="IC2" pin="14"/>
+    </net>
+    <net code="89" name="Net-(IC2-Pad15)">
+      <node ref="IC2" pin="15"/>
+    </net>
+    <net code="90" name="Net-(IC2-Pad19)">
+      <node ref="IC2" pin="19"/>
+    </net>
+    <net code="91" name="Net-(IC2-Pad20)">
+      <node ref="IC2" pin="20"/>
+    </net>
+    <net code="92" name="Net-(IC2-Pad7)">
+      <node ref="IC2" pin="7"/>
+    </net>
+    <net code="93" name="Net-(IC2-Pad8)">
+      <node ref="IC2" pin="8"/>
+    </net>
+    <net code="94" name="Net-(IC2-Pad5)">
+      <node ref="IC2" pin="5"/>
+    </net>
+    <net code="95" name="Net-(IC2-Pad53)">
+      <node ref="IC2" pin="53"/>
+    </net>
+    <net code="96" name="Net-(IC2-Pad50)">
+      <node ref="IC2" pin="50"/>
+    </net>
+    <net code="97" name="Net-(IC2-Pad49)">
+      <node ref="IC2" pin="49"/>
+    </net>
+    <net code="98" name="Net-(IC2-Pad48)">
+      <node ref="IC2" pin="48"/>
+    </net>
+    <net code="99" name="Net-(IC2-Pad67)">
+      <node ref="IC2" pin="67"/>
+    </net>
+    <net code="100" name="Net-(IC2-Pad68)">
+      <node ref="IC2" pin="68"/>
+    </net>
+    <net code="101" name="DTR">
+      <node ref="IC1" pin="11"/>
+      <node ref="IC2" pin="3"/>
+    </net>
+    <net code="103" name="Net-(I1-Pad5)">
+      <node ref="I1" pin="5"/>
+    </net>
+    <net code="104" name="Net-(IC2-Pad43)">
+      <node ref="IC2" pin="43"/>
+    </net>
+    <net code="105" name="AREF">
+      <node ref="IC1" pin="21"/>
+      <node ref="P6" pin="1"/>
+    </net>
+    <net code="106" name="PWR_STAT">
+      <node ref="IC2" pin="66"/>
+      <node ref="U4" pin="5"/>
+    </net>
+    <net code="107" name="TX">
+      <node ref="IC1" pin="5"/>
+      <node ref="IC2" pin="9"/>
+    </net>
+    <net code="110" name="Net-(IC2-Pad44)">
+      <node ref="IC2" pin="44"/>
+    </net>
+    <net code="111" name="Net-(IC2-Pad47)">
+      <node ref="IC2" pin="47"/>
+    </net>
+    <net code="112" name="Net-(IC2-Pad51)">
+      <node ref="IC2" pin="51"/>
+    </net>
+    <net code="113" name="NETLIGHT">
+      <node ref="U4" pin="2"/>
+      <node ref="IC2" pin="52"/>
+    </net>
+  </nets>
+</export>
