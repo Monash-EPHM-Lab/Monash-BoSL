@@ -337,9 +337,9 @@ F 3 "" H 6000 3000 50  0001 C CNN
 	1    6000 3000
 	1    0    0    -1  
 $EndComp
-Text GLabel 7500 3550 3    50   Input ~ 0
+Text GLabel 7650 3200 3    50   Input ~ 0
 A0
-Text GLabel 8050 3550 3    50   Input ~ 0
+Text GLabel 7850 3200 3    50   Input ~ 0
 A3
 Wire Notes Line
 	6750 2700 6750 4000
@@ -379,25 +379,14 @@ F 3 "https://www.te.com/commerce/DocumentDelivery/DDEController?Action=showdoc&D
 	1    0    0    -1  
 $EndComp
 $Comp
-L Project:KeyStone_Screw_Small J?
-U 1 1 5D955396
-P 8050 3100
-F 0 "J?" V 8238 3187 50  0000 L CNN
-F 1 "KeyStone_Screw_Small" V 8327 3187 50  0000 L CNN
-F 2 "Project:KeyStone_Screw" H 8050 3100 50  0001 C CNN
-F 3 "https://www.digikey.com.au/product-detail/en/keystone-electronics/7774/36-7774-ND/2745944" H 8050 3100 50  0001 C CNN
-	1    8050 3100
-	0    1    1    0   
-$EndComp
-$Comp
-L Project:KeyStone_Screw_Small J?
-U 1 1 5D955623
-P 7500 3100
-F 0 "J?" V 7688 3187 50  0000 L CNN
-F 1 "KeyStone_Screw_Small" V 7777 3187 50  0000 L CNN
-F 2 "Project:KeyStone_Screw" H 7500 3100 50  0001 C CNN
-F 3 "https://www.digikey.com.au/product-detail/en/keystone-electronics/7774/36-7774-ND/2745944" H 7500 3100 50  0001 C CNN
-	1    7500 3100
-	0    1    1    0   
+L Connector:Screw_Terminal_01x03 J?
+U 1 1 5DCE746A
+P 7750 3000
+F 0 "J?" V 7714 2813 50  0000 R CNN
+F 1 "Screw_Terminal_01x03" V 7625 2813 50  0000 R CNN
+F 2 "Project:Screw_Terminals_1x3" H 7750 3000 50  0001 C CNN
+F 3 "~" H 7750 3000 50  0001 C CNN
+	1    7750 3000
+	0    -1   -1   0   
 $EndComp
 $EndSCHEMATC
