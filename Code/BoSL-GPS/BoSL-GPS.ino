@@ -6,7 +6,7 @@
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 #define CHARBUFF 196 //SIM7000 serial response buffer //longer than 255 will cause issues
-#define MAXTRASMITINTERVAL 120000//milli seconds
+#define MAXTRASMITINTERVAL 86400000//120000//milli seconds
 
 // For SIM7000 BoSL board
 #define PWRKEY 4
@@ -65,10 +65,7 @@ void setup() {
     
     
 void loop() {
-    
-
-    
-    
+        
  simOn();
  
   if(GNSSgetFix(300000)){
@@ -86,27 +83,26 @@ void loop() {
   
     Serial.println("Sleep");
 
-    simCom.flush(); // must run before going to sleep
- 	Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
-  
-
-    simOff();
-    
-    delay(10000);
-
-    // delay(200);
-	// LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
-    // delay(20);
-    // LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
-    // delay(20);
-    // LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
-    // delay(20);
-    // LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
-    // delay(20);
-    // LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+    Sleepy(900);
   
 }
 
+////SLEEPS FOR SET TIME////
+void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
+    
+    simCom.flush(); // must run before going to sleep
+ 	Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
+    simOff();
+
+    LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+    delay(20);
+    
+    while(tsleep >= 16){
+        LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+        delay(20);
+        tsleep -= 8;
+    }
+}
 
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
 void Transmit(){
@@ -189,7 +185,7 @@ bool shouldTrasmit(){
     }
     
     //latitude is char array so this checks to see if most significant digits are the same 
-    for(i=0; i<7; i++){
+    for(i=0; i<8; i++){
         if (lat[i] != Lstlat[i]){
             return 1;
         }
@@ -360,8 +356,7 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
     memset(response, '\0', CHARBUFF);    // Initialize the string
 
     // this loop waits for the answer
-    Serial.println("before");
-    Serial.println(response);
+
     do{
         if(simCom.available() != 0){    
             response[i] = simCom.read();
@@ -382,8 +377,6 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
     if (expctAns == "0"){
                 answer = 1;
             }
-            
-    Serial.println("after");
     Serial.println(response);
     
     }while(answer == 0 && a < 5);
@@ -449,6 +442,7 @@ void simInit(){
 
 ////powers on SIM7000////
 void simOn() {
+    //do check for if sim is on
 	pinMode(PWRKEY, OUTPUT);
 	pinMode(BOSL_TX, OUTPUT);
 	digitalWrite(BOSL_TX, HIGH);
