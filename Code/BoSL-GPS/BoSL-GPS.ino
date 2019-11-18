@@ -5,8 +5,8 @@
 #define SIMCOM_7000 // SIM7000A/C/E/G
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
-#define CHARBUFF 196 //SIM7000 serial responce buffer //longer than 255 will cause issues
-#define MAXTRASMITINTERVAL 86400000//milli seconds
+#define CHARBUFF 196 //SIM7000 serial response buffer //longer than 255 will cause issues
+#define MAXTRASMITINTERVAL 120000//milli seconds
 
 // For SIM7000 BoSL board
 #define PWRKEY 4
@@ -15,12 +15,13 @@
 #define BOSL_TX 2 // Microcontroller TX
 
 //Site specific config
-#define SiteID = "GPS"
-#define APN = "telstra.internet"
+#define SITEID "GPS"
+#define APN "telstra.internet"
 
 //gobal variables 
-char response[CHARBUFF]; //sim7000 serial responce buffer
+char response[CHARBUFF]; //sim7000 serial response buffer
 uint32_t lstTransmit; //timestamp of last tramit (milli seconds)
+String dataStr; //Transmit URL
 
 //GPS reponse stings
 char UTC[19];
@@ -40,6 +41,7 @@ SoftwareSerial simCom = SoftwareSerial(BOSL_RX, BOSL_TX);
  
 
 void setup() {
+        
   //clear buffers
   charBuffclr();
   LstcharBuffclr();
@@ -54,47 +56,122 @@ void setup() {
   Serial.println("initialising sim");
   //initialise sim (on arduino startup only)
   simInit();
-
     
- // netReg();
- // netUnreg();
+  netReg();
+  netUnreg();
 
-  //GNSSgetFix(100);
-  
- // GNSSread();
-  
-  //Transmit();
 }
 
     
     
 void loop() {
     
-  simOn();
-  GNSSgetFix(300000);
+
+    
+    
+ simOn();
+ 
+  if(GNSSgetFix(300000)){
   
   //read latest GPS coordinates
   GNSSread();
   
+
   //check if transmit is nesseary
   if(shouldTrasmit()){
     Transmit();  
   }
   
-  simOff();
-  //SLEEP CODE HERE
+  }
+  
+    Serial.println("Sleep");
+
+    simCom.flush(); // must run before going to sleep
+ 	Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
+  
+
+    simOff();
+    
+    delay(10000);
+
+    // delay(200);
+	// LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+    // delay(20);
+    // LowPower.powerDown(SLEEP_2S, ADC_OFF, BOD_OFF);
+    // delay(20);
+    // LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+    // delay(20);
+    // LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF);
+    // delay(20);
+    // LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
+  
 }
+
 
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
 void Transmit(){
     
     
+    dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
+    
+   
+    dataStr += SITEID;
+    dataStr += ".csv&Z=";
+    dataStr += UTC;
+    dataStr += "&Y=";
+    dataStr += lat;
+    dataStr += "&X=";
+    dataStr += lng;
+    dataStr += "&T=";
+    dataStr += CN0;
+    dataStr += "&V=";
+    dataStr += Nview;
+    
+    dataStr += "\"";
+    
     simOn();
     
-   // sendATcmd(F("AT+CGDCONT=1,\"IP\",APN"), "OK",1000))
+    netReg();
     
-    //sendATcmd(F("AT+CGDAPN"), "OK",1000);
-    //sendATcmd(F("AT+CNACT=1,\"ctnb\""), "OK",1000);
+    
+    ///***check logic
+   //set CSTT - if it is already set, then no need to do again...
+        sendATcmd(F("AT+CSTT?"), "OK",1000);   
+        if (strstr(response, "telstra.internet") != NULL){
+            //this means the cstt has been set, so no need to set again!
+            Serial.println("CSTT already set to APN ...no need to set again");
+       } else {
+            sendATcmd(F("AT+CSTT=\"telstra.internet\""), "OK",1000);
+        }
+    
+    
+    //close open bearer
+    sendATcmd(F("AT+SAPBR=2,1"), "OK",1000);
+    if (strstr(response, "1,1") == NULL){
+        if (strstr(response, "1,3") == NULL){
+        sendATcmd(F("AT+SAPBR=0,1"), "OK",1000);
+        }
+        sendATcmd(F("AT+SAPBR=1,1"), "OK",1000);
+    }
+    
+  
+  
+   // sendATcmd(F("AT+HTTPTERM"), "OK",10000); *ERROR
+    
+    sendATcmd(F("AT+HTTPINIT"), "OK",10000);
+    sendATcmd(F("AT+HTTPPARA=\"CID\",1"), "OK",10000);
+    
+    //sendATcmd(F("AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=" + SITEID + ".csv&Z=" + UTC + "&Y=" + lat + "&X=" + lng + "&W=" + CN0 + "&V=" + Nview + "\""), "OK",1000);
+    sendATcmd(dataStr, "OK",1000);
+   
+   sendATcmd(F("AT+HTTPACTION=0"), "200",20000);
+    sendATcmd(F("AT+HTTPTERM"), "OK",10000);
+  //close the bearer connection
+    sendATcmd(F("AT+SAPBR=0,1"), "OK",10000);
+    
+    netUnreg();
+    
+    
     
     
     //record transmision details 
@@ -106,15 +183,20 @@ void Transmit(){
 bool shouldTrasmit(){
     uint8_t i;
     
+    //if buffer is empty don't transmit
+    if(UTC[0] == '\0') {
+        return 0;
+    }
+    
     //latitude is char array so this checks to see if most significant digits are the same 
     for(i=0; i<7; i++){
-        if (Lstlat[i] != Lstlat[i]){
+        if (lat[i] != Lstlat[i]){
             return 1;
         }
     }
     //longitude is char array so this checks to see if most significant digits are the same 
     for(i=0; i<8; i++){
-        if (Lstlng[i] != Lstlng[i]){
+        if (lng[i] != Lstlng[i]){
             return 1;
         }
     }
@@ -159,14 +241,14 @@ void GNSSread(){
                 break;
             }
             
-            //do nothing if responce does not have fix
-            if ((x == 2) && ((response[i+1] != '1')&&((response[i] != '1')))){
-                end = 1;
-            }
-            //if fix then clear the char arrays to write new data
-            if ((x == 2) && (response[i] == '1')){
-                charBuffclr();
-            }
+           //do nothing if response does not have fix
+           if ((x == 2) && ((response[i+1] != '1')&&((response[i] != '1')))){
+               end = 1;
+           }
+           //if fix then clear the char arrays to write new data
+           if ((x == 2) && (response[i] == '1')){
+               charBuffclr();
+           }
 
             //write to char arrays
             if (response[i] != ','){
@@ -201,7 +283,7 @@ void GNSSread(){
 
 
 ////Activates GNSS and waits time in argument for coordiante fix////
-void GNSSgetFix(uint32_t maxTFF){
+bool GNSSgetFix(uint32_t maxTFF){
     
     bool answer;
     uint32_t timeStart;
@@ -219,11 +301,11 @@ void GNSSgetFix(uint32_t maxTFF){
     answer = sendATcmd(F("AT+CGNSINF"), "+CGNSINF: 1,1",1000);
     
     if(answer){
-        break;
+        return 1;
     }
     
     }
-    
+    return 0;
 }
 
 ////powers down GNSS functionality////
@@ -263,7 +345,6 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
     
     timeStart = 0;
 
-    memset(response, '\0', CHARBUFF);    // Initialize the string
 
     delay(100);
 
@@ -276,8 +357,11 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
 
     uint8_t i = 0;
     timeStart = millis();
+    memset(response, '\0', CHARBUFF);    // Initialize the string
 
     // this loop waits for the answer
+    Serial.println("before");
+    Serial.println(response);
     do{
         if(simCom.available() != 0){    
             response[i] = simCom.read();
@@ -299,8 +383,8 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
                 answer = 1;
             }
             
+    Serial.println("after");
     Serial.println(response);
-    
     
     }while(answer == 0 && a < 5);
     
@@ -329,6 +413,7 @@ void LstcharBuffclr(){
 ////stores coordinate data as previous and clears current arrays////
 void charBuffAdvance(){
     uint8_t i;
+    
     for(i = 0; i < 19; i++){
         LstUTC[i] = UTC[i];
     }
@@ -375,6 +460,7 @@ void simOn() {
 	delay(100); // For SIM7000
 
 	digitalWrite(PWRKEY, HIGH);
+    delay(5000);
 }
 
 ////powers off SIM7000////
@@ -385,9 +471,12 @@ void simOff() {
 	digitalWrite(BOSL_RX, LOW);
 
 	digitalWrite(PWRKEY, LOW);
+
 	// See spec sheets for your particular module
 	delay(3000); // For SIM7000
+
 	digitalWrite(PWRKEY, HIGH);
+    delay(10);
 }
 
 

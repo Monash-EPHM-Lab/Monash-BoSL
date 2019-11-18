@@ -233,6 +233,6 @@ void simOff() {
 
 	digitalWrite(PWRKEY, LOW);
 	// See spec sheets for your particular module
-	delay(3000); // For SIM7000
+	delay(4000); // For SIM7000
 	digitalWrite(PWRKEY, HIGH);
 }

@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source "D:\\data\\My Documents\\Monash\\Monash-BoSL\\Water-Probe\\Design Files\\EDA\\BoSL Probe\\BoSL Probe.sch")
-    (date "2019/11/15   20:16:30")
+    (date "2019/11/18   12:08:46")
     (tool "Eeschema (5.1.2)-2")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -66,7 +66,7 @@
       (tstamp 5D58BA7C))
     (comp (ref J2)
       (value Screw_Terminal_01x03)
-      (footprint Project:Screw_Terminals_1x3)
+      (footprint Project:Screw_Terminals_1x3_3.5mm)
       (datasheet ~)
       (libsource (lib Connector) (part Screw_Terminal_01x03) (description "Generic screw terminal, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"))
       (sheetpath (names /) (tstamps /))

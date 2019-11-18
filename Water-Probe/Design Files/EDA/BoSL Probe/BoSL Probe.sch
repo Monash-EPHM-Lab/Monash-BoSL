@@ -384,7 +384,7 @@ U 1 1 5DCE746A
 P 7750 3000
 F 0 "J2" V 7714 2813 50  0000 R CNN
 F 1 "Screw_Terminal_01x03" V 7625 2813 50  0000 R CNN
-F 2 "Project:Screw_Terminals_1x3" H 7750 3000 50  0001 C CNN
+F 2 "Project:Screw_Terminals_1x3_3.5mm" H 7750 3000 50  0001 C CNN
 F 3 "~" H 7750 3000 50  0001 C CNN
 	1    7750 3000
 	0    -1   -1   0   
