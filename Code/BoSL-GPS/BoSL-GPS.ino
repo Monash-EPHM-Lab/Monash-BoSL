@@ -55,10 +55,10 @@ void setup() {
 
   Serial.println("initialising sim");
   //initialise sim (on arduino startup only)
-  simInit();
-    
-  netReg();
-  netUnreg();
+     simInit();
+        
+     netReg();
+     netUnreg();
 
 }
 
@@ -66,40 +66,42 @@ void setup() {
     
 void loop() {
         
- simOn();
- 
-  if(GNSSgetFix(300000)){
-  
-  //read latest GPS coordinates
-  GNSSread();
-  
+     simOn();
+     netUnreg();
+     
+      if(GNSSgetFix(300000)){
+      
+      //read latest GPS coordinates
+      GNSSread();
+      
 
-  //check if transmit is nesseary
-  if(shouldTrasmit()){
-    Transmit();  
-  }
-  
-  }
+      //check if transmit is nesseary
+      if(shouldTrasmit()){
+        Transmit();  
+      }
+      
+     }
   
     Serial.println("Sleep");
 
     Sleepy(900);
-  
+ 
 }
 
 ////SLEEPS FOR SET TIME////
 void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
     
     simCom.flush(); // must run before going to sleep
- 	Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
+ 	
+    Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
     simOff();
 
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
-    delay(20);
+    delay(50);
     
     while(tsleep >= 16){
         LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
-        delay(20);
+        delay(50);
         tsleep -= 8;
     }
 }
@@ -154,16 +156,16 @@ void Transmit(){
   
    // sendATcmd(F("AT+HTTPTERM"), "OK",10000); *ERROR
     
-    sendATcmd(F("AT+HTTPINIT"), "OK",10000);
-    sendATcmd(F("AT+HTTPPARA=\"CID\",1"), "OK",10000);
+    sendATcmd(F("AT+HTTPINIT"), "OK",1000);
+    sendATcmd(F("AT+HTTPPARA=\"CID\",1"), "OK",1000);
     
     //sendATcmd(F("AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=" + SITEID + ".csv&Z=" + UTC + "&Y=" + lat + "&X=" + lng + "&W=" + CN0 + "&V=" + Nview + "\""), "OK",1000);
     sendATcmd(dataStr, "OK",1000);
    
-   sendATcmd(F("AT+HTTPACTION=0"), "200",20000);
-    sendATcmd(F("AT+HTTPTERM"), "OK",10000);
+   sendATcmd(F("AT+HTTPACTION=0"), "200",2000);
+    sendATcmd(F("AT+HTTPTERM"), "OK",1000);
   //close the bearer connection
-    sendATcmd(F("AT+SAPBR=0,1"), "OK",10000);
+    sendATcmd(F("AT+SAPBR=0,1"), "OK",1000);
     
     netUnreg();
     
