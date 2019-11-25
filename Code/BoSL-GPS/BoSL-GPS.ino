@@ -6,7 +6,7 @@
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 #define CHARBUFF 196 //SIM7000 serial response buffer //longer than 255 will cause issues
-#define MAXTRASMITINTERVAL 86400000//120000//milli seconds
+#define MAXTRASMITINTERVAL 900000//milli seconds
 
 // For SIM7000 BoSL board
 #define PWRKEY 4
@@ -16,11 +16,16 @@
 
 //Site specific config
 #define SITEID "GPS"
+#define SITEPINGID "GPSPING"
 #define APN "telstra.internet"
+
+//millis timer variable 
+extern volatile unsigned long timer0_millis;
 
 //gobal variables 
 char response[CHARBUFF]; //sim7000 serial response buffer
-uint32_t lstTransmit; //timestamp of last tramit (milli seconds)
+uint32_t lstTransmit; //timestamp of last transmit (milli seconds)
+uint32_t lstPing; //timestamp of last ping (milli seconds)
 String dataStr; //Transmit URL
 
 //GPS reponse stings
@@ -69,24 +74,100 @@ void loop() {
      simOn();
      netUnreg();
      
-      if(GNSSgetFix(300000)){
+      if(GNSSgetFix(120000)){
       
-      //read latest GPS coordinates
-      GNSSread();
-      
+          Serial.println("nofix");
+          //read latest GPS coordinates
+          GNSSread();
+          
 
-      //check if transmit is nesseary
-      if(shouldTrasmit()){
-        Transmit();  
-      }
+          //check if transmit is nesseary
+          if(shouldTrasmit()){
+            Transmit();  
+          }
       
-     }
+      }else{
+          
+          if(shouldPing()){
+              Ping();
+          }
+      }
   
     Serial.println("Sleep");
 
-    Sleepy(900);
+    Sleepy(300);
  
 }
+
+////PINGS SERVER TO SHOW IF STILL ALIVE////
+void Ping(){
+        
+    dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
+    
+   
+    dataStr += SITEPINGID;
+    dataStr += ".csv&D=";
+    dataStr += "PING\"";
+    
+    simOn();
+    
+    netReg();
+    
+    
+    ///***check logic
+   //set CSTT - if it is already set, then no need to do again...
+        sendATcmd(F("AT+CSTT?"), "OK",1000);   
+        if (strstr(response, "telstra.internet") != NULL){
+            //this means the cstt has been set, so no need to set again!
+            Serial.println("CSTT already set to APN ...no need to set again");
+       } else {
+            sendATcmd(F("AT+CSTT=\"telstra.internet\""), "OK",1000);
+        }
+    
+    
+    //close open bearer
+    sendATcmd(F("AT+SAPBR=2,1"), "OK",1000);
+    if (strstr(response, "1,1") == NULL){
+        if (strstr(response, "1,3") == NULL){
+        sendATcmd(F("AT+SAPBR=0,1"), "OK",1000);
+        }
+        sendATcmd(F("AT+SAPBR=1,1"), "OK",1000);
+    }
+    
+  
+  
+   // sendATcmd(F("AT+HTTPTERM"), "OK",10000); *ERROR
+    
+    sendATcmd(F("AT+HTTPINIT"), "OK",1000);
+    sendATcmd(F("AT+HTTPPARA=\"CID\",1"), "OK",1000);
+    
+    //sendATcmd(F("AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=" + SITEID + ".csv&Z=" + UTC + "&Y=" + lat + "&X=" + lng + "&W=" + CN0 + "&V=" + Nview + "\""), "OK",1000);
+    sendATcmd(dataStr, "OK",1000);
+   
+   sendATcmd(F("AT+HTTPACTION=0"), "200",2000);
+    sendATcmd(F("AT+HTTPTERM"), "OK",1000);
+  //close the bearer connection
+    sendATcmd(F("AT+SAPBR=0,1"), "OK",1000);
+    
+    netUnreg();
+ 
+    //record transmision details 
+    lstPing = millis();
+}
+
+////RETURNS TRUE IF SIM7000 SHOULD PING SERVER////
+bool shouldPing(){
+    
+    
+    //checks to see if it has been longer than max transmit interval
+    if ((MAXTRASMITINTERVAL < millis() - lstTransmit) && (MAXTRASMITINTERVAL < millis() - lstPing)){
+        return 1;
+    }
+    
+    //if all checks for transmit are not nessesary, return false
+    return 0;
+}
+
 
 ////SLEEPS FOR SET TIME////
 void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
@@ -98,10 +179,20 @@ void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
 
     LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
     delay(50);
+    //advance millis timer as it is paused in sleep
+    noInterrupts();
+    timer0_millis += 8000;
+    interrupts(); 
+    
     
     while(tsleep >= 16){
         LowPower.powerDown(SLEEP_8S, ADC_OFF, BOD_OFF); 
         delay(50);
+        //advance millis timer as it is paused in sleep
+        noInterrupts();
+        timer0_millis += 8000;
+        interrupts();
+        
         tsleep -= 8;
     }
 }
