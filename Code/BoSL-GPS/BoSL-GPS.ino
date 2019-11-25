@@ -278,13 +278,13 @@ bool shouldTrasmit(){
     }
     
     //latitude is char array so this checks to see if most significant digits are the same 
-    for(i=0; i<8; i++){
+    for(i=0; i<7; i++){
         if (lat[i] != Lstlat[i]){
             return 1;
         }
     }
     //longitude is char array so this checks to see if most significant digits are the same 
-    for(i=0; i<8; i++){
+    for(i=0; i<7; i++){
         if (lng[i] != Lstlng[i]){
             return 1;
         }
