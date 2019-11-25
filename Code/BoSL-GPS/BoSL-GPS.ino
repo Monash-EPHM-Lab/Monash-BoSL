@@ -76,7 +76,7 @@ void loop() {
      
       if(GNSSgetFix(120000)){
       
-          Serial.println("nofix");
+          
           //read latest GPS coordinates
           GNSSread();
           
