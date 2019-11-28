@@ -7,6 +7,9 @@
 //FFT sample buffers
 double read[128];
 double imag[128];
+
+double max;
+int    indx;
     
 //Define FFT object
 arduinoFFT FFT = arduinoFFT(); 
@@ -32,6 +35,9 @@ void setup(){
 
 void loop(){
     
+    max = 0;
+    indx = 0; 
+    
    //sample 128 times at 100 Hz
    for(int i = 0; i < 128; i++){
        read[i] = analogRead(A1);
@@ -48,26 +54,44 @@ void loop(){
    FFT.Compute(read, imag, 128, FFT_FORWARD);
    FFT.ComplexToMagnitude(read, imag, 128);
    
-   //Plot FFT
-   for(int i=2; i<(128/2); i++)
-    {
-        Serial.println(read[i], 1);   
-    }
-
-    for(int i=0; i<(436); i++)
-   {
-        Serial.println(0);   
-   }
    
-   //delay for convenience
-    delay(3000);
+    for(int i=2; i<(128/2); i++)
+    {
+        if (max < read[i]){
+            max = read[i];
+            indx = i;
+        }
+        
+    }
+    
+    //converts frequency to cm/s (for head to head)
+    // devide by two for reflected
+    max = 34*(indx*0.78)/40;
+    
+    //prints speed
+    Serial.println(max);
+      
+   
+   // //Plot FFT
+   // for(int i=2; i<(128/2); i++)
+    // {
+        // Serial.println(read[i], 1);   
+    // }
+
+    // for(int i=0; i<(436); i++)
+   // {
+        // Serial.println(0);   
+   // }
+   
+   // //delay for convenience
+    // delay(3000);
 
 
-   //clear screen
-      for(int i=0; i<(512); i++)
-   {
-        Serial.println(0);   
-   }
+   // //clear screen
+      // for(int i=0; i<(512); i++)
+   // {
+        // Serial.println(0);   
+   // }
     
 }
 
