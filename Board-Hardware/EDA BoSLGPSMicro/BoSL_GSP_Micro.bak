@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:BoSL_GSP-cache
 EELAYER 29 0
 EELAYER END
 $Descr A3 16535 11693
@@ -310,16 +309,10 @@ Text GLabel 1750 7050 0    60   Input ~ 0
 TLL_RST
 Text GLabel 3400 4800 2    60   Input ~ 0
 A0
-Text GLabel 1700 8800 0    60   Input ~ 0
-V_3.3
 Text GLabel 3400 5200 2    60   Input ~ 0
 SDA
 Text GLabel 3400 5300 2    60   Input ~ 0
 SCL
-Text GLabel 1700 8500 0    60   Input ~ 0
-SCL
-Text GLabel 1700 8600 0    60   Input ~ 0
-SDA
 Text GLabel 3400 4900 2    60   Input ~ 0
 A1
 Text GLabel 3400 5000 2    60   Input ~ 0
@@ -495,28 +488,6 @@ F 3 "" H 7550 4200 50  0000 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L power:GND #PWR06
-U 1 1 5CF10EF3
-P 1700 8700
-F 0 "#PWR06" H 1700 8450 50  0001 C CNN
-F 1 "GND" H 1700 8550 50  0000 C CNN
-F 2 "" H 1700 8700 50  0000 C CNN
-F 3 "" H 1700 8700 50  0000 C CNN
-	1    1700 8700
-	0    1    1    0   
-$EndComp
-$Comp
-L SIM7000-rescue:CONN_01X04-SIM7000-rescue P3
-U 1 1 5CF14CF2
-P 1900 8650
-F 0 "P3" H 1900 8900 50  0000 C CNN
-F 1 "CONN_01X04" V 2000 8650 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 1900 8650 50  0001 C CNN
-F 3 "" H 1900 8650 50  0000 C CNN
-	1    1900 8650
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR02
 U 1 1 5CF1A29C
 P 900 5000
@@ -651,191 +622,6 @@ Text GLabel 3400 3950 2    60   Input ~ 0
 D8
 Text GLabel 1500 4550 0    60   Input ~ 0
 AREF
-$Comp
-L SIM7000-rescue:Screw_Terminal_1x06-SIM7000-rescue J1
-U 1 1 5D3A70FC
-P 1100 9800
-F 0 "J1" H 1100 10450 50  0000 C TNN
-F 1 "Screw_Terminal_1x06" V 950 9800 50  0000 C TNN
-F 2 "SIMFootprints:Screw_Terminals_1x6" H 1100 9175 50  0001 C CNN
-F 3 "" H 1075 10200 50  0001 C CNN
-	1    1100 9800
-	-1   0    0    1   
-$EndComp
-Text GLabel 900  9300 0    60   Input ~ 0
-SCL
-Text GLabel 900  9500 0    60   Input ~ 0
-SDA
-Text GLabel 900  9700 0    60   Input ~ 0
-A3
-Text GLabel 900  9900 0    60   Input ~ 0
-A2
-Text GLabel 900  10100 0    60   Input ~ 0
-A1
-Text GLabel 900  10300 0    60   Input ~ 0
-A0
-Text GLabel 1750 7450 0    60   Input ~ 0
-TLL_TX
-Text GLabel 1750 7650 0    60   Input ~ 0
-TLL_RX
-$Comp
-L SIM7000-rescue:Screw_Terminal_1x04-SIM7000-rescue J2
-U 1 1 5D3AF380
-P 1900 9300
-F 0 "J2" H 1900 9750 50  0000 C TNN
-F 1 "Screw_Terminal_1x04" V 1750 9300 50  0000 C TNN
-F 2 "SIMFootprints:Screw_Terminals_1x4" H 1900 8875 50  0001 C CNN
-F 3 "" H 1875 9500 50  0001 C CNN
-	1    1900 9300
-	-1   0    0    1   
-$EndComp
-Text GLabel 1700 9600 0    60   Input ~ 0
-V_3.3
-$Comp
-L power:GND #PWR07
-U 1 1 5D3AF4EA
-P 1700 9400
-F 0 "#PWR07" H 1700 9150 50  0001 C CNN
-F 1 "GND" H 1700 9250 50  0000 C CNN
-F 2 "" H 1700 9400 50  0000 C CNN
-F 3 "" H 1700 9400 50  0000 C CNN
-	1    1700 9400
-	0    1    1    0   
-$EndComp
-Text GLabel 1700 9200 0    60   Input ~ 0
-SDA
-Text GLabel 1700 9000 0    60   Input ~ 0
-SCL
-Text GLabel 2800 8800 0    60   Input ~ 0
-SD_SCLK
-Text GLabel 2800 9000 0    60   Input ~ 0
-SD_MISO
-Text GLabel 2800 9200 0    60   Input ~ 0
-SD_MOSI
-Text GLabel 2800 9400 0    60   Input ~ 0
-SD_CS
-Text GLabel 2800 9600 0    60   Input ~ 0
-D9
-Text GLabel 2800 9800 0    60   Input ~ 0
-D8
-Text GLabel 2800 10000 0    60   Input ~ 0
-D7
-$Comp
-L power:VPP #PWR012
-U 1 1 5D3B4E69
-P 3500 7000
-F 0 "#PWR012" H 3500 6850 50  0001 C CNN
-F 1 "VPP" H 3500 7150 50  0000 C CNN
-F 2 "" H 3500 7000 50  0000 C CNN
-F 3 "" H 3500 7000 50  0000 C CNN
-	1    3500 7000
-	0    -1   -1   0   
-$EndComp
-Text GLabel 3500 6900 0    60   Input ~ 0
-AREF
-Text GLabel 3500 7200 0    60   Input ~ 0
-V_3.3
-$Comp
-L power:GND #PWR016
-U 1 1 5D3B6D83
-P 3500 7600
-F 0 "#PWR016" H 3500 7350 50  0001 C CNN
-F 1 "GND" H 3500 7450 50  0000 C CNN
-F 2 "" H 3500 7600 50  0000 C CNN
-F 3 "" H 3500 7600 50  0000 C CNN
-	1    3500 7600
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR015
-U 1 1 5D3B7090
-P 3500 7500
-F 0 "#PWR015" H 3500 7250 50  0001 C CNN
-F 1 "GND" H 3500 7350 50  0000 C CNN
-F 2 "" H 3500 7500 50  0000 C CNN
-F 3 "" H 3500 7500 50  0000 C CNN
-	1    3500 7500
-	0    1    1    0   
-$EndComp
-$Comp
-L power:VPP #PWR013
-U 1 1 5D3B7127
-P 3500 7100
-F 0 "#PWR013" H 3500 6950 50  0001 C CNN
-F 1 "VPP" H 3500 7250 50  0000 C CNN
-F 2 "" H 3500 7100 50  0000 C CNN
-F 3 "" H 3500 7100 50  0000 C CNN
-	1    3500 7100
-	0    -1   -1   0   
-$EndComp
-Text GLabel 3500 7300 0    60   Input ~ 0
-V_3.3
-$Comp
-L power:GND #PWR014
-U 1 1 5D3B712E
-P 3500 7400
-F 0 "#PWR014" H 3500 7150 50  0001 C CNN
-F 1 "GND" H 3500 7250 50  0000 C CNN
-F 2 "" H 3500 7400 50  0000 C CNN
-F 3 "" H 3500 7400 50  0000 C CNN
-	1    3500 7400
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR017
-U 1 1 5D3B7134
-P 3500 7700
-F 0 "#PWR017" H 3500 7450 50  0001 C CNN
-F 1 "GND" H 3500 7550 50  0000 C CNN
-F 2 "" H 3500 7700 50  0000 C CNN
-F 3 "" H 3500 7700 50  0000 C CNN
-	1    3500 7700
-	0    1    1    0   
-$EndComp
-$Comp
-L SIM7000-rescue:CONN_01X09-SIM7000-rescue P6
-U 1 1 5D3B7691
-P 3700 7300
-F 0 "P6" H 3700 7800 50  0000 C CNN
-F 1 "CONN_01X09" V 3800 7300 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x09_Pitch2.54mm" H 3700 7300 50  0001 C CNN
-F 3 "" H 3700 7300 50  0000 C CNN
-	1    3700 7300
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:VPP #PWR018
-U 1 1 5D3B78CA
-P 3650 8500
-F 0 "#PWR018" H 3650 8350 50  0001 C CNN
-F 1 "VPP" H 3650 8650 50  0000 C CNN
-F 2 "" H 3650 8500 50  0000 C CNN
-F 3 "" H 3650 8500 50  0000 C CNN
-	1    3650 8500
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:GND #PWR019
-U 1 1 5D3B78D2
-P 3650 7900
-F 0 "#PWR019" H 3650 7650 50  0001 C CNN
-F 1 "GND" H 3650 7750 50  0000 C CNN
-F 2 "" H 3650 7900 50  0000 C CNN
-F 3 "" H 3650 7900 50  0000 C CNN
-	1    3650 7900
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR020
-U 1 1 5D3B78E5
-P 3650 8100
-F 0 "#PWR020" H 3650 7850 50  0001 C CNN
-F 1 "GND" H 3650 7950 50  0000 C CNN
-F 2 "" H 3650 8100 50  0000 C CNN
-F 3 "" H 3650 8100 50  0000 C CNN
-	1    3650 8100
-	0    1    1    0   
-$EndComp
 $Comp
 L SIM7000-rescue:TEST-SIM7000-rescue TP1
 U 1 1 5D3BD257
@@ -1128,60 +914,6 @@ F 3 "" H 2600 2300 50  0000 C CNN
 	1    2600 2300
 	0    -1   -1   0   
 $EndComp
-$Comp
-L SIM7000-rescue:MS5803-simcom U2
-U 1 1 5D44396C
-P 11200 3050
-F 0 "U2" H 11200 2800 60  0000 C CNN
-F 1 "MS5803" V 11200 3100 60  0000 C CNN
-F 2 "SIMFootprints:MS5803" H 11200 3050 60  0001 C CNN
-F 3 "" H 11200 3050 60  0001 C CNN
-	1    11200 3050
-	1    0    0    -1  
-$EndComp
-Text GLabel 11850 3250 2    60   Input ~ 0
-V_3.3
-$Comp
-L power:GND #PWR027
-U 1 1 5D445199
-P 10700 2950
-F 0 "#PWR027" H 10700 2700 50  0001 C CNN
-F 1 "GND" H 10700 2800 50  0000 C CNN
-F 2 "" H 10700 2950 50  0000 C CNN
-F 3 "" H 10700 2950 50  0000 C CNN
-	1    10700 2950
-	0    1    1    0   
-$EndComp
-$Comp
-L Device:R R3
-U 1 1 5D446624
-P 12150 2800
-F 0 "R3" V 12230 2800 50  0000 C CNN
-F 1 "10 kΩ" V 12050 2800 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 12080 2800 50  0001 C CNN
-F 3 "" H 12150 2800 50  0000 C CNN
-	1    12150 2800
-	1    0    0    -1  
-$EndComp
-Text GLabel 12150 2650 1    60   Input ~ 0
-V_3.3
-Text GLabel 12300 2950 2    60   Input ~ 0
-SDA
-$Comp
-L Device:R R2
-U 1 1 5D448DD0
-P 10500 2650
-F 0 "R2" V 10580 2650 50  0000 C CNN
-F 1 "10 kΩ" V 10400 2650 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 10430 2650 50  0001 C CNN
-F 3 "" H 10500 2650 50  0000 C CNN
-	1    10500 2650
-	1    0    0    -1  
-$EndComp
-Text GLabel 10500 2500 1    60   Input ~ 0
-V_3.3
-Text GLabel 10350 2800 0    60   Input ~ 0
-SCL
 Wire Wire Line
 	7450 1350 7450 1500
 Wire Wire Line
@@ -1393,23 +1125,6 @@ Wire Wire Line
 	10400 1200 10250 1200
 Wire Wire Line
 	11150 1200 11550 1200
-Connection ~ 12150 2950
-Connection ~ 10500 2800
-Wire Wire Line
-	10350 2800 10500 2800
-Wire Wire Line
-	11700 2950 12150 2950
-Wire Wire Line
-	11700 3100 11800 3100
-Wire Wire Line
-	11800 3100 11800 3250
-Wire Wire Line
-	11700 3250 11800 3250
-Connection ~ 11800 3250
-Wire Wire Line
-	10700 3100 10700 2950
-NoConn ~ 11700 2800
-NoConn ~ 10700 3250
 $Comp
 L power:GND #PWR046
 U 1 1 5D45B014
@@ -1426,66 +1141,6 @@ V_3.3
 NoConn ~ 6550 3550
 Text GLabel 3400 6150 2    60   Input ~ 0
 D6
-$Comp
-L SIM7000-rescue:Screw_Terminal_1x08-SIM7000-rescue J4
-U 1 1 5D432391
-P 3000 9500
-F 0 "J4" H 3000 10350 50  0000 C TNN
-F 1 "Screw_Terminal_1x08" V 2850 9500 50  0000 C TNN
-F 2 "SIMFootprints:Screw_Terminals_1x8" H 3000 8675 50  0001 C CNN
-F 3 "" H 2975 10100 50  0001 C CNN
-	1    3000 9500
-	-1   0    0    1   
-$EndComp
-Text GLabel 2800 10200 0    60   Input ~ 0
-D6
-$Comp
-L SIM7000-rescue:RJ45-SIM7000-rescue J6
-U 1 1 5D433563
-P 13750 3300
-F 0 "J6" H 13950 3800 50  0000 C CNN
-F 1 "RJ45" H 13600 3800 50  0000 C CNN
-F 2 "SIMFootprints:RJ_45" H 13750 3300 50  0001 C CNN
-F 3 "" H 13750 3300 50  0000 C CNN
-	1    13750 3300
-	1    0    0    -1  
-$EndComp
-Text GLabel 13400 3750 3    60   Input ~ 0
-A0
-Text GLabel 13600 3750 3    60   Input ~ 0
-A1
-Text GLabel 13500 3750 3    60   Input ~ 0
-V_3.3
-Text GLabel 13800 3750 3    60   Input ~ 0
-A2
-Text GLabel 14000 3750 3    60   Input ~ 0
-A3
-$Comp
-L power:GND #PWR049
-U 1 1 5D43B9DB
-P 13900 3750
-F 0 "#PWR049" H 13900 3500 50  0001 C CNN
-F 1 "GND" H 13900 3600 50  0000 C CNN
-F 2 "" H 13900 3750 50  0000 C CNN
-F 3 "" H 13900 3750 50  0000 C CNN
-	1    13900 3750
-	1    0    0    -1  
-$EndComp
-Text GLabel 13700 3750 3    60   Input ~ 0
-SCL
-Text GLabel 14100 3750 3    60   Input ~ 0
-SDA
-$Comp
-L SIM7000-rescue:Screw_Terminal_1x02-SIM7000-rescue J3
-U 1 1 5D43FC6D
-P 1950 7550
-F 0 "J3" H 1950 7800 50  0000 C TNN
-F 1 "Screw_Terminal_1x02" V 1800 7550 50  0000 C TNN
-F 2 "SIMFootprints:Screw_Terminals_1x2" H 1950 7325 50  0001 C CNN
-F 3 "" H 1925 7550 50  0001 C CNN
-	1    1950 7550
-	-1   0    0    1   
-$EndComp
 Text GLabel 1700 8300 0    60   Input ~ 0
 V_3.3
 Text GLabel 1700 8000 0    60   Input ~ 0
@@ -1516,19 +1171,6 @@ F 3 "" H 1900 8150 50  0000 C CNN
 $EndComp
 NoConn ~ 2600 2800
 NoConn ~ 2600 2100
-Text GLabel 3650 8300 0    60   Input ~ 0
-V_3.3
-$Comp
-L SIM7000-rescue:Screw_Terminal_1x04-SIM7000-rescue J5
-U 1 1 5D456DDA
-P 3850 8200
-F 0 "J5" H 3850 8650 50  0000 C TNN
-F 1 "Screw_Terminal_1x04" V 3700 8200 50  0000 C TNN
-F 2 "SIMFootprints:Screw_Terminals_1x4" H 3850 7775 50  0001 C CNN
-F 3 "" H 3825 8400 50  0001 C CNN
-	1    3850 8200
-	-1   0    0    1   
-$EndComp
 $Comp
 L SIM7000-rescue:CONN_01X12-SIM7000-rescue P9
 U 1 1 5D458C3A
@@ -1652,12 +1294,6 @@ Wire Wire Line
 Wire Wire Line
 	14350 2400 14450 2400
 Wire Wire Line
-	12150 2950 12300 2950
-Wire Wire Line
-	10500 2800 10700 2800
-Wire Wire Line
-	11800 3250 11850 3250
-Wire Wire Line
 	3400 5400 3750 5400
 Wire Wire Line
 	8550 5000 9050 5000
@@ -1704,22 +1340,9 @@ Wire Notes Line
 Text Notes 13050 700  0    60   ~ 0
 USB-TTL Converter\n
 Wire Notes Line
-	14500 2650 14500 4300
-Wire Notes Line
 	16000 600  16000 4300
 Text Notes 14550 2750 0    60   ~ 0
 Serial USB Conn
-Wire Notes Line
-	12800 4300 16000 4300
-Text Notes 12850 2750 0    60   ~ 0
-Eithernet Sensor Port
-Connection ~ 10700 2950
-Wire Notes Line
-	12800 4300 12800 1900
-Wire Notes Line
-	9700 3650 12800 3650
-Text Notes 9750 2050 0    60   ~ 0
-MS5803 On-Board Pressure Sensor
 Wire Notes Line
 	4500 6650 4500 10500
 Wire Notes Line
@@ -1818,7 +1441,7 @@ U 1 1 5D620C83
 P 10000 3950
 F 0 "H1" H 10100 3996 50  0000 L CNN
 F 1 "MountingHole" H 10100 3905 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_2.2mm_M2" H 10000 3950 50  0001 C CNN
+F 2 "Mounting_Holes:MountingHole_3.2mm_M3" H 10000 3950 50  0001 C CNN
 F 3 "~" H 10000 3950 50  0001 C CNN
 	1    10000 3950
 	1    0    0    -1  
@@ -1829,13 +1452,11 @@ U 1 1 5D622088
 P 10700 3950
 F 0 "H2" H 10800 3996 50  0000 L CNN
 F 1 "MountingHole" H 10800 3905 50  0000 L CNN
-F 2 "Mounting_Holes:MountingHole_2.2mm_M2" H 10700 3950 50  0001 C CNN
+F 2 "Mounting_Holes:MountingHole_3.2mm_M3" H 10700 3950 50  0001 C CNN
 F 3 "~" H 10700 3950 50  0001 C CNN
 	1    10700 3950
 	1    0    0    -1  
 $EndComp
-Wire Notes Line
-	11550 4350 11550 3650
 Wire Notes Line
 	9700 4350 11550 4350
 Text Notes 9750 3800 0    60   ~ 0
@@ -1865,10 +1486,10 @@ F 3 "" H 8300 3100 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SIM7000-rescue:AT-ant AT?
+L SIM7000-rescue:AT-ant AT2
 U 1 1 5DBBFC5D
 P 8850 650
-F 0 "AT?" H 8700 550 50  0000 L CNN
+F 0 "AT2" H 8700 550 50  0000 L CNN
 F 1 "AT-GNSS" H 8500 750 50  0000 L CNN
 F 2 "Connectors_Molex:Molex_Microcoaxial_RF" H 8888 500 50  0001 C CNN
 F 3 "" H 8850 650 50  0000 C CNN
@@ -1880,10 +1501,10 @@ Wire Wire Line
 Wire Wire Line
 	8250 950  9050 950 
 $Comp
-L Device:C C?
+L Device:C C10
 U 1 1 5DBC63AD
 P 8700 1200
-F 0 "C?" V 8850 1200 50  0000 C CNN
+F 0 "C10" V 8850 1200 50  0000 C CNN
 F 1 "33 pF" V 8540 1200 50  0000 C CNN
 F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8738 1050 50  0001 C CNN
 F 3 "~" H 8700 1200 50  0001 C CNN
@@ -1895,10 +1516,10 @@ Wire Wire Line
 Wire Wire Line
 	8850 1200 8850 900 
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0101
 U 1 1 5DBD0D35
 P 8650 650
-F 0 "#PWR?" H 8650 400 50  0001 C CNN
+F 0 "#PWR0101" H 8650 400 50  0001 C CNN
 F 1 "GND" V 8655 523 50  0000 R CNN
 F 2 "" H 8650 650 50  0001 C CNN
 F 3 "" H 8650 650 50  0001 C CNN

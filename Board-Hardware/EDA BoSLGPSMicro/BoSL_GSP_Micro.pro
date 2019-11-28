@@ -1,4 +1,4 @@
-update=2019/11/1   15:32:39
+update=2019/11/29   8:35:13
 version=1
 last_client=kicad
 [cvpcb]
@@ -22,7 +22,7 @@ ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=BoSL_GSP.net
+LastNetListRead=BoSL_GSP_Micro.net
 CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
