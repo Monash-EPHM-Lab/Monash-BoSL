@@ -1,643 +1,370 @@
-1574976717451
-Mounting_Holes
-MountingHole_2.2mm_M2
+1574988031174
+Housings_QFP
+HTQFP-64-1EP_10x10mm_Pitch0.5mm_ThermalPad
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_DIN965
+Housings_QFP
+LQFP-32-1EP_5x5mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_DIN965_Pad
+Housings_QFP
+LQFP-32_5x5mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_ISO7380
+Housings_QFP
+LQFP-32_7x7mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_ISO7380_Pad
+Housings_QFP
+LQFP-36_7x7mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_ISO14580
+Housings_QFP
+LQFP-44_10x10mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_ISO14580_Pad
+Housings_QFP
+LQFP-48_7x7mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_Pad
+Housings_QFP
+LQFP-52-1EP_10x10mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.2mm_M2_Pad_Via
+Housings_QFP
+LQFP-52_10x10mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.5mm
+Housings_QFP
+LQFP-64-1EP_10x10mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.5mm_Pad
+Housings_QFP
+LQFP-64_7x7mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.5mm_Pad_Via
+Housings_QFP
+LQFP-64_10x10mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm
+Housings_QFP
+LQFP-64_14x14mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5
+Housings_QFP
+LQFP-80_10x10mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_DIN965
+Housings_QFP
+LQFP-80_12x12mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_DIN965_Pad
+Housings_QFP
+LQFP-80_14x14mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_ISO7380
+Housings_QFP
+LQFP-100_14x14mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_ISO7380_Pad
+Housings_QFP
+LQFP-128_14x14mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_ISO14580
+Housings_QFP
+LQFP-128_14x20mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_ISO14580_Pad
+Housings_QFP
+LQFP-144_20x20mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_Pad
+Housings_QFP
+LQFP-160_24x24mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_M2.5_Pad_Via
+Housings_QFP
+LQFP-176_20x20mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_Pad
+Housings_QFP
+LQFP-176_24x24mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_2.7mm_Pad_Via
+Housings_QFP
+LQFP-208_28x28mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3
+Housings_QFP
+LQFP-216_24x24mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_DIN965
+Housings_QFP
+PQFP-44_10x10mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_DIN965_Pad
+Housings_QFP
+PQFP-80_14x20mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_ISO7380
+Housings_QFP
+PQFP-100_14x20mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_ISO7380_Pad
+Housings_QFP
+PQFP-112_20x20mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_ISO14580
+Housings_QFP
+PQFP-132_24x24mm_Pitch0.635mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_ISO14580_Pad
+Housings_QFP
+PQFP-132_24x24mm_Pitch0.635mm_i386
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_Pad
+Housings_QFP
+PQFP-160_28x28mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.2mm_M3_Pad_Via
+Housings_QFP
+PQFP-208_28x28mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.5mm
+Housings_QFP
+PQFP-256_28x28mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.5mm_Pad
+Housings_QFP
+TQFP-32_7x7mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.5mm_Pad_Via
+Housings_QFP
+TQFP-44-1EP_10x10mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.7mm
+Housings_QFP
+TQFP-44_10x10mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.7mm_Pad
+Housings_QFP
+TQFP-48-1EP_7x7mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3.7mm_Pad_Via
+Housings_QFP
+TQFP-48_7x7mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3mm
+Housings_QFP
+TQFP-64-1EP_10x10mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3mm_Pad
+Housings_QFP
+TQFP-64_7x7mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_3mm_Pad_Via
+Housings_QFP
+TQFP-64_10x10mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4
+Housings_QFP
+TQFP-64_14x14mm_Pitch0.8mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_DIN965
+Housings_QFP
+TQFP-80-1EP_14x14mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_DIN965_Pad
+Housings_QFP
+TQFP-80_12x12mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_ISO7380
+Housings_QFP
+TQFP-80_14x14mm_Pitch0.65mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_ISO7380_Pad
+Housings_QFP
+TQFP-100-1EP_14x14mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_ISO14580
+Housings_QFP
+TQFP-100_12x12mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_ISO14580_Pad
+Housings_QFP
+TQFP-100_14x14mm_Pitch0.5mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_Pad
+Housings_QFP
+TQFP-120_14x14mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3mm_M4_Pad_Via
+Housings_QFP
+TQFP-128_14x14mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3x6.2mm_M4_Pad
+Housings_QFP
+TQFP-144_16x16mm_Pitch0.4mm
 
 
 0
 0
 0
-Mounting_Holes
-MountingHole_4.3x6.2mm_M4_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_4.5mm
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_4.5mm_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_4.5mm_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_4mm
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_4mm_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_4mm_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_DIN965
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_DIN965_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_ISO7380
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_ISO7380_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_ISO14580
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_ISO14580_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.3mm_M5_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.5mm
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.5mm_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5.5mm_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5mm
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5mm_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_5mm_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_DIN965
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_DIN965_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_ISO7380
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_ISO7380_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_ISO14580
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_ISO14580_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.4mm_M6_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.5mm
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.5mm_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6.5mm_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6mm
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6mm_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_6mm_Pad_Via
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_8.4mm_M8
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_8.4mm_M8_Pad
-
-
-0
-0
-0
-Mounting_Holes
-MountingHole_8.4mm_M8_Pad_Via
+Housings_QFP
+TQFP-144_20x20mm_Pitch0.5mm
 
 
 0
