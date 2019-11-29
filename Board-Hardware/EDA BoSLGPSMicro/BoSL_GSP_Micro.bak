@@ -5,9 +5,9 @@ EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
-Title "Monash BoSL G Board"
-Date "2019-11-01"
-Rev "0.3 G"
+Title "Monash BoSL GPS Micro Board"
+Date "2019-11-29"
+Rev "0.3 Gμ"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -1440,7 +1440,7 @@ U 1 1 5DE0CED2
 P 2800 5150
 F 0 "U2" H 2800 3563 50  0000 C CNN
 F 1 "ATmega328P-AU" H 2800 3474 50  0000 C CNN
-F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 2800 5150 50  0001 C CIN
+F 2 "Housings_QFP:LQFP-32_7x7mm_Pitch0.8mm" H 2800 5150 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2800 5150 50  0001 C CNN
 	1    2800 5150
 	1    0    0    -1  
