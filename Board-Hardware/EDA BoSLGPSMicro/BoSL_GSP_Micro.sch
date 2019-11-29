@@ -1,4 +1,5 @@
 EESchema Schematic File Version 4
+LIBS:BoSL_GSP_Micro-cache
 EELAYER 29 0
 EELAYER END
 $Descr A3 16535 11693
@@ -147,45 +148,34 @@ NoConn ~ 9150 2350
 NoConn ~ 7150 1500
 NoConn ~ 7050 1500
 $Comp
-L SIM7000-rescue:ATMEGA328-P-SIM7000-rescue IC1
-U 1 1 5CE615FC
-P 2400 5050
-F 0 "IC1" H 1500 4900 50  0000 L BNN
-F 1 "ATMEGA328-P" H 2800 3650 50  0000 L BNN
-F 2 "Housings_DIP:DIP-28_W7.62mm_Socket_LongPads" H 2400 5050 50  0001 C CIN
-F 3 "" H 2400 5050 50  0000 C CNN
-	1    2400 5050
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR03
 U 1 1 5CE61B33
-P 1500 6150
-F 0 "#PWR03" H 1500 5900 50  0001 C CNN
-F 1 "GND" H 1500 6000 50  0000 C CNN
-F 2 "" H 1500 6150 50  0000 C CNN
-F 3 "" H 1500 6150 50  0000 C CNN
-	1    1500 6150
-	0    1    1    0   
+P 2800 6650
+F 0 "#PWR03" H 2800 6400 50  0001 C CNN
+F 1 "GND" H 2800 6500 50  0000 C CNN
+F 2 "" H 2800 6650 50  0000 C CNN
+F 3 "" H 2800 6650 50  0000 C CNN
+	1    2800 6650
+	0    -1   -1   0   
 $EndComp
 $Comp
 L Device:R R1
 U 1 1 5CE61DD3
-P 3900 5400
-F 0 "R1" V 3980 5400 50  0000 C CNN
-F 1 "10 kΩ" V 3800 5400 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 3830 5400 50  0001 C CNN
-F 3 "" H 3900 5400 50  0000 C CNN
-	1    3900 5400
+P 3900 5450
+F 0 "R1" V 3980 5450 50  0000 C CNN
+F 1 "10 kΩ" V 3800 5450 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 3830 5450 50  0001 C CNN
+F 3 "" H 3900 5450 50  0000 C CNN
+	1    3900 5450
 	0    1    1    0   
 $EndComp
-Text GLabel 3400 5950 2    60   Input ~ 0
+Text GLabel 3400 6050 2    60   Input ~ 0
 ONOFF_PIN
-Text GLabel 3700 5400 1    60   Input ~ 0
+Text GLabel 3700 5450 1    60   Input ~ 0
 TLL_RST
-Text GLabel 3400 5550 2    60   Input ~ 0
-TLL_RX
 Text GLabel 3400 5650 2    60   Input ~ 0
+TLL_RX
+Text GLabel 3400 5750 2    60   Input ~ 0
 TLL_TX
 $Comp
 L Device:Crystal Y1
@@ -307,17 +297,17 @@ Text GLabel 1750 7150 0    60   Input ~ 0
 TLL_RX
 Text GLabel 1750 7050 0    60   Input ~ 0
 TLL_RST
-Text GLabel 3400 4800 2    60   Input ~ 0
+Text GLabel 3400 4850 2    60   Input ~ 0
 A0
-Text GLabel 3400 5200 2    60   Input ~ 0
+Text GLabel 3400 5250 2    60   Input ~ 0
 SDA
-Text GLabel 3400 5300 2    60   Input ~ 0
+Text GLabel 3400 5350 2    60   Input ~ 0
 SCL
-Text GLabel 3400 4900 2    60   Input ~ 0
+Text GLabel 3400 4950 2    60   Input ~ 0
 A1
-Text GLabel 3400 5000 2    60   Input ~ 0
+Text GLabel 3400 5050 2    60   Input ~ 0
 A2
-Text GLabel 3400 5100 2    60   Input ~ 0
+Text GLabel 3400 5150 2    60   Input ~ 0
 A3
 $Comp
 L SIM7000-rescue:BARREL_JACK-SIM7000-rescue CON2
@@ -474,7 +464,7 @@ Text Label 7750 1000 0    60   ~ 0
 50_Ω
 Text GLabel 6550 2250 0    60   Input ~ 0
 DTR
-Text GLabel 3400 6050 2    60   Input ~ 0
+Text GLabel 3400 6150 2    60   Input ~ 0
 DTR
 $Comp
 L SIM7000-rescue:TEST-SIM7000-rescue TP3
@@ -571,9 +561,9 @@ Text GLabel 3400 4150 2    60   Input ~ 0
 SD_CS
 Text GLabel 3400 4450 2    60   Input ~ 0
 SD_SCLK
-Text GLabel 3400 5750 2    60   Input ~ 0
-RX
 Text GLabel 3400 5850 2    60   Input ~ 0
+RX
+Text GLabel 3400 5950 2    60   Input ~ 0
 TX
 Text GLabel 3400 4250 2    60   Input ~ 0
 SD_MOSI
@@ -616,11 +606,11 @@ F 3 "" H 8600 5750 60  0001 C CNN
 	1    8550 5750
 	1    0    0    -1  
 $EndComp
-Text GLabel 3400 6250 2    60   Input ~ 0
+Text GLabel 3400 6350 2    60   Input ~ 0
 D7
 Text GLabel 3400 3950 2    60   Input ~ 0
 D8
-Text GLabel 1500 4550 0    60   Input ~ 0
+Text GLabel 2200 3950 0    60   Input ~ 0
 AREF
 $Comp
 L SIM7000-rescue:TEST-SIM7000-rescue TP1
@@ -969,11 +959,7 @@ Wire Wire Line
 Wire Wire Line
 	7850 900  7850 1500
 Wire Wire Line
-	1500 6150 1500 6250
-Wire Wire Line
-	1500 4250 1500 3950
-Wire Wire Line
-	4150 5400 4050 5400
+	4150 5450 4050 5450
 Wire Wire Line
 	3400 4550 4050 4550
 Connection ~ 4050 4550
@@ -1136,10 +1122,10 @@ F 3 "" H 11550 1600 50  0000 C CNN
 	1    11550 1600
 	0    1    1    0   
 $EndComp
-Text GLabel 1500 3950 0    60   Input ~ 0
+Text GLabel 2800 3550 1    60   Input ~ 0
 V_3.3
 NoConn ~ 6550 3550
-Text GLabel 3400 6150 2    60   Input ~ 0
+Text GLabel 3400 6250 2    60   Input ~ 0
 D6
 Text GLabel 2650 7250 0    60   Input ~ 0
 V_3.3
@@ -1216,7 +1202,7 @@ Wire Wire Line
 Wire Wire Line
 	14350 2400 14450 2400
 Wire Wire Line
-	3400 5400 3750 5400
+	3400 5450 3750 5450
 Wire Wire Line
 	8550 5000 9050 5000
 Wire Wire Line
@@ -1383,7 +1369,7 @@ Wire Notes Line
 	9700 4350 11550 4350
 Text Notes 9750 3800 0    60   ~ 0
 Mounting Holes\n
-Text GLabel 4150 5400 2    60   Input ~ 0
+Text GLabel 4150 5450 2    60   Input ~ 0
 V_3.3
 $Comp
 L SIM7000-rescue:74HC126 U4
@@ -1448,4 +1434,25 @@ F 3 "" H 8650 650 50  0001 C CNN
 	1    8650 650 
 	0    1    1    0   
 $EndComp
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-AU U2
+U 1 1 5DE0CED2
+P 2800 5150
+F 0 "U2" H 2800 3563 50  0000 C CNN
+F 1 "ATmega328P-AU" H 2800 3474 50  0000 C CNN
+F 2 "Housings_QFP:LQFP-32_7x7mm_Pitch0.8mm" H 2800 5150 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2800 5150 50  0001 C CNN
+	1    2800 5150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2900 3650 2900 3550
+Wire Wire Line
+	2900 3550 2800 3550
+Wire Wire Line
+	2800 3650 2800 3550
+Text GLabel 2200 4150 0    60   Input ~ 0
+A6
+Text GLabel 2200 4250 0    60   Input ~ 0
+A7
 $EndSCHEMATC
