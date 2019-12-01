@@ -1455,4 +1455,21 @@ Text GLabel 2200 4150 0    60   Input ~ 0
 A6
 Text GLabel 2200 4250 0    60   Input ~ 0
 A7
+$Comp
+L Connector_Generic:Conn_01x03 J?
+U 1 1 5DE48010
+P 1950 7700
+F 0 "J?" H 2030 7742 50  0000 L CNN
+F 1 "Conn_01x03" H 2030 7653 50  0000 L CNN
+F 2 "" H 1950 7700 50  0001 C CNN
+F 3 "~" H 1950 7700 50  0001 C CNN
+	1    1950 7700
+	1    0    0    -1  
+$EndComp
+Text GLabel 1750 7600 0    60   Input ~ 0
+SD_MOSI
+Text GLabel 1750 7700 0    60   Input ~ 0
+SD_MISO
+Text GLabel 1750 7800 0    60   Input ~ 0
+SD_SCLK
 $EndSCHEMATC
