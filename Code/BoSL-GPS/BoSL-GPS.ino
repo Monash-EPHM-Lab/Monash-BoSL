@@ -439,7 +439,7 @@ bool GNSSgetFix(uint32_t maxTFF, uint32_t maxTFS){
     //wait for signal
     while(maxTFS > millis() - timeStart){
         //check for fix
-        answer = sendATcmd(F("AT+CGNSINF"), "+CGNSINF: 1",1000);
+        answer = sendATcmd(F("AT+CGNSINF"), "OK" ,1000);
         
         if(answer){
             //update CN0     
