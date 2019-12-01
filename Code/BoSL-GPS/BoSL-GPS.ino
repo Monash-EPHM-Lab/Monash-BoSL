@@ -19,6 +19,9 @@
 #define SITEPINGID "GPSPING"
 #define APN "telstra.internet"
 
+//default variable array (complilation purposes only)
+const bool defaultVars[5] = {1,1,1,1,1};
+
 //millis timer variable 
 extern volatile unsigned long timer0_millis;
 
@@ -44,6 +47,156 @@ char LstNview[3];
 //SIM7000 serial object
 SoftwareSerial simCom = SoftwareSerial(BOSL_RX, BOSL_TX);
  
+////clears char arrays////
+void charBuffclr(bool clrVars[5] = defaultVars){
+    if(clrVars[0]){
+    memset(UTC, '\0', 19);
+    }
+    if(clrVars[1]){
+    memset(lat, '\0', 11);
+    }
+    if(clrVars[2]){
+    memset(lng, '\0', 12);
+    }
+    if(clrVars[3]){
+    memset(Nview, '\0', 3);
+    }
+    if(clrVars[4]){
+    memset(CN0, '\0', 3); 
+    }
+}
+
+////clears char arrays////
+void LstcharBuffclr(bool clrVars[5] = defaultVars){
+    if(clrVars[0]){
+    memset(LstUTC, '\0', 19);
+    }
+    if(clrVars[1]){
+    memset(Lstlat, '\0', 11);
+    }
+    if(clrVars[2]){
+    memset(Lstlng, '\0', 12);
+    }
+    if(clrVars[3]){
+    memset(LstNview, '\0', 3);
+    }
+    if(clrVars[4]){
+    memset(LstCN0, '\0', 3);
+    }
+}
+
+////stores coordinate data as previous and clears current arrays////
+void charBuffAdvance(bool advVars[5] = defaultVars){
+    uint8_t i;
+    
+    if(advVars[0]){
+        for(i = 0; i < 19; i++){
+            LstUTC[i] = UTC[i];
+        }
+    }
+    if(advVars[1]){
+        for(i = 0; i < 11; i++){
+            Lstlat[i] = lat[i];
+        }
+    }
+    if(advVars[2]){
+        for(i = 0; i < 12; i++){
+            Lstlng[i] = lng[i];
+        }
+    }
+    if(advVars[3]){
+        for(i = 0; i < 3; i++){
+            LstNview[i] = Nview[i];
+        }
+    }
+    if(advVars[4]){
+        for(i = 0; i < 3; i++){
+            LstCN0[i] = CN0[i];
+        }
+    }
+   
+    charBuffclr();
+}
+
+////reads GNSS responce and stores in responces in variables if flagged////
+void storeGNSSresponse(bool forceUpdate = 0, bool updateVars[5] = defaultVars){
+    
+    bool end = 0;
+    uint8_t x = 0;
+    uint8_t j = 0;
+    
+    //loop through reponce to extract data
+    for (uint8_t i=0; i < CHARBUFF; i++){
+
+        //string splitting cases
+        switch(response[i]){
+        case ':':
+            x++;
+            j=0;
+            i += 2;
+            break;
+
+        case ',':
+            x++;
+            j=0;
+            break;
+
+        case '\0':
+            end = 1;
+            break;
+        }
+       
+       if(!forceUpdate){
+           //do nothing if response does not have fix
+           if ((x == 2) && ((response[i+1] != '1')&&((response[i] != '1')))){
+               end = 1;
+           }
+           //if fix then clear the char arrays to write new data
+           if ((x == 2) && (response[i] == '1')){
+               charBuffclr(updateVars);
+           }
+       }
+
+        //write to char arrays
+        if (response[i] != ','){
+            switch(x){
+                case 3:
+                    if(updateVars[0]){
+                    UTC[j] = response[i];
+                    }
+                break;
+                case 4:
+                    if(updateVars[1]){
+                    lat[j] = response[i];
+                    }
+                break;
+                case 5:
+                    if(updateVars[2]){
+                    lng[j] = response[i];
+                    }
+                break;
+                case 15:
+                    if(updateVars[3]){
+                    Nview[j] = response[i];
+                    }
+                break;
+                case 19:
+                    if(updateVars[4]){
+                    CN0[j] = response[i];
+                    }
+                break;
+                
+            }
+            //increment char array counter
+            j++;
+        }
+        //break loop when end flag is high
+        if (end){
+            i = CHARBUFF; 
+        }
+    }
+    
+}
 
 void setup() {
         
@@ -66,15 +219,13 @@ void setup() {
      netUnreg();
 
 }
-
-    
     
 void loop() {
         
      simOn();
      netUnreg();
      
-      if(GNSSgetFix(120000)){
+      if(GNSSgetFix(600000,120000)){
       
           
           //read latest GPS coordinates
@@ -83,13 +234,13 @@ void loop() {
 
           //check if transmit is nesseary
           if(shouldTrasmit()){
-            Transmit();  
+            Transmit(0);  
           }
       
       }else{
           
           if(shouldPing()){
-              Ping();
+              Transmit(1);
           }
       }
   
@@ -97,62 +248,6 @@ void loop() {
 
     Sleepy(300);
  
-}
-
-////PINGS SERVER TO SHOW IF STILL ALIVE////
-void Ping(){
-        
-    dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
-    
-   
-    dataStr += SITEPINGID;
-    dataStr += ".csv&D=";
-    dataStr += "PING\"";
-    
-    simOn();
-    
-    netReg();
-    
-    
-    ///***check logic
-   //set CSTT - if it is already set, then no need to do again...
-        sendATcmd(F("AT+CSTT?"), "OK",1000);   
-        if (strstr(response, "telstra.internet") != NULL){
-            //this means the cstt has been set, so no need to set again!
-            Serial.println("CSTT already set to APN ...no need to set again");
-       } else {
-            sendATcmd(F("AT+CSTT=\"telstra.internet\""), "OK",1000);
-        }
-    
-    
-    //close open bearer
-    sendATcmd(F("AT+SAPBR=2,1"), "OK",1000);
-    if (strstr(response, "1,1") == NULL){
-        if (strstr(response, "1,3") == NULL){
-        sendATcmd(F("AT+SAPBR=0,1"), "OK",1000);
-        }
-        sendATcmd(F("AT+SAPBR=1,1"), "OK",1000);
-    }
-    
-  
-  
-   // sendATcmd(F("AT+HTTPTERM"), "OK",10000); *ERROR
-    
-    sendATcmd(F("AT+HTTPINIT"), "OK",1000);
-    sendATcmd(F("AT+HTTPPARA=\"CID\",1"), "OK",1000);
-    
-    //sendATcmd(F("AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=" + SITEID + ".csv&Z=" + UTC + "&Y=" + lat + "&X=" + lng + "&W=" + CN0 + "&V=" + Nview + "\""), "OK",1000);
-    sendATcmd(dataStr, "OK",1000);
-   
-   sendATcmd(F("AT+HTTPACTION=0"), "200",2000);
-    sendATcmd(F("AT+HTTPTERM"), "OK",1000);
-  //close the bearer connection
-    sendATcmd(F("AT+SAPBR=0,1"), "OK",1000);
-    
-    netUnreg();
- 
-    //record transmision details 
-    lstPing = millis();
 }
 
 ////RETURNS TRUE IF SIM7000 SHOULD PING SERVER////
@@ -198,12 +293,14 @@ void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
 }
 
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
-void Transmit(){
+void Transmit(int transmitType){
+    //transmitType = 0 : transmit GNSS data
+    //transmitType = 1 : PING
     
     
     dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
     
-   
+   if(transmitType == 0){
     dataStr += SITEID;
     dataStr += ".csv&Z=";
     dataStr += UTC;
@@ -215,9 +312,15 @@ void Transmit(){
     dataStr += CN0;
     dataStr += "&V=";
     dataStr += Nview;
-    
     dataStr += "\"";
-    
+   }
+   
+   if(transmitType == 1){
+    dataStr += SITEPINGID;
+    dataStr += ".csv&D=";
+    dataStr += "PING\"";  
+   }
+   
     simOn();
     
     netReg();
@@ -264,8 +367,13 @@ void Transmit(){
     
     
     //record transmision details 
-    lstTransmit = millis();
-    charBuffAdvance();
+    if(transmitType == 0){
+        lstTransmit = millis();
+        charBuffAdvance();
+    }
+    if(transmitType == 1){
+        lstPing = millis();
+    }
 }
 
 ////RETURNS TRUE IF SIM7000 SHOULD TRANSMIT////
@@ -303,79 +411,22 @@ bool shouldTrasmit(){
 void GNSSread(){
     //get GNSS data
     if (sendATcmd(F("AT+CGNSINF"), "OK",1000)){
-       
         
-        bool end = 0;
-        uint8_t x = 0;
-        uint8_t j = 0;
+        storeGNSSresponse();
         
-        //loop through reponce to extract data
-        for (uint8_t i=0; i < CHARBUFF; i++){
-
-            //string splitting cases
-            switch(response[i]){
-            case ':':
-                x++;
-                j=0;
-                i += 2;
-                break;
-   
-            case ',':
-                x++;
-                j=0;
-                break;
-   
-            case '\0':
-                end = 1;
-                break;
-            }
-            
-           //do nothing if response does not have fix
-           if ((x == 2) && ((response[i+1] != '1')&&((response[i] != '1')))){
-               end = 1;
-           }
-           //if fix then clear the char arrays to write new data
-           if ((x == 2) && (response[i] == '1')){
-               charBuffclr();
-           }
-
-            //write to char arrays
-            if (response[i] != ','){
-                switch(x){
-                    case 3:
-                    UTC[j] = response[i];
-                    break;
-                    case 4:
-                    lat[j] = response[i];
-                    break;
-                    case 5:
-                    lng[j] = response[i];
-                    break;
-                    case 15:
-                    Nview[j] = response[i];
-                    break;
-                    case 19:
-                    CN0[j] = response[i];
-                    break;
-                    
-                }
-                //increment char array counter
-                j++;
-            }
-            //break loop when end flag is high
-            if (end){
-                i = CHARBUFF; 
-            }
-        }
     }
 }
 
 
-////Activates GNSS and waits time in argument for coordiante fix////
-bool GNSSgetFix(uint32_t maxTFF){
+
+////Activates GNSS and waits for fix | maxTFF is time to wait for fix after signal | maxTFS is time to wait for signal////
+bool GNSSgetFix(uint32_t maxTFF, uint32_t maxTFS){
     
     bool answer;
+    bool waitFix;
     uint32_t timeStart;
+    
+    const bool updateVars[5] = {0,0,0,0,1};
     
     //turn on GNSS functionality//
     sendATcmd(F("AT+CGNSPWR=1"), "OK", 1000);
@@ -383,16 +434,42 @@ bool GNSSgetFix(uint32_t maxTFF){
     //timeout counter start
     timeStart = millis();
     answer = 0;
+    waitFix = 0;
     
-    
-    while(maxTFF > millis() - timeStart){
-    //check for fix
-    answer = sendATcmd(F("AT+CGNSINF"), "+CGNSINF: 1,1",1000);
-    
-    if(answer){
-        return 1;
+    //wait for signal
+    while(maxTFS > millis() - timeStart){
+        //check for fix
+        answer = sendATcmd(F("AT+CGNSINF"), "+CGNSINF: 1",1000);
+        
+        if(answer){
+            //update CN0     
+            storeGNSSresponse(1, updateVars);
+            
+            //flag that we should wait for fix
+            if (CN0[0] != '\0'){
+                waitFix = 1;
+            }
+        
+        }  
+        //end waiting for signal
+        if(waitFix == 1){
+            break;
+        }
     }
     
+    timeStart = millis();
+    answer = 0;
+    
+    if(waitFix == 1){
+        //wait for fix
+        while(maxTFF > millis() - timeStart){
+            //check for fix
+            answer = sendATcmd(F("AT+CGNSINF"), "+CGNSINF: 1,1",1000);
+            
+            if(answer){
+                return 1;
+            }  
+        }
     }
     return 0;
 }
@@ -478,46 +555,7 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
      return answer;
 }
 
-////clears char arrays////
-void charBuffclr(){
-    memset(UTC, '\0', 19);
-    memset(lat, '\0', 11);
-    memset(lng, '\0', 12);
-    memset(Nview, '\0', 3);
-    memset(CN0, '\0', 3);   
-}
 
-////clears char arrays////
-void LstcharBuffclr(){
-    memset(LstUTC, '\0', 19);
-    memset(Lstlat, '\0', 11);
-    memset(Lstlng, '\0', 12);
-    memset(LstNview, '\0', 3);
-    memset(LstCN0, '\0', 3);
-}
-
-////stores coordinate data as previous and clears current arrays////
-void charBuffAdvance(){
-    uint8_t i;
-    
-    for(i = 0; i < 19; i++){
-        LstUTC[i] = UTC[i];
-    }
-    for(i = 0; i < 11; i++){
-        Lstlat[i] = lat[i];
-    }
-    for(i = 0; i < 12; i++){
-        Lstlng[i] = lng[i];
-    }
-    for(i = 0; i < 3; i++){
-        LstNview[i] = Nview[i];
-    }
-    for(i = 0; i < 3; i++){
-        LstCN0[i] = CN0[i];
-    }
-   
-    charBuffclr();
-}
 
 ////initialises sim on arduino startup////
 void simInit(){
