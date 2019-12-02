@@ -6,7 +6,7 @@
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 #define CHARBUFF 196 //SIM7000 serial response buffer //longer than 255 will cause issues
-#define MAXTRASMITINTERVAL 900//900000//milli seconds
+#define MAXTRASMITINTERVAL 900000//milli seconds
 
 // For SIM7000 BoSL board
 #define PWRKEY 4
@@ -288,7 +288,7 @@ void loop() {
      simOn();
      netUnreg();
      
-      if(GNSSgetFix(600000,60000)){
+      if(GNSSgetFix(900000,60000)){
       
           
           //read latest GPS coordinates
