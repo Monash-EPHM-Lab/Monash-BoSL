@@ -6,7 +6,7 @@
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 #define CHARBUFF 196 //SIM7000 serial response buffer //longer than 255 will cause issues
-#define MAXTRASMITINTERVAL 900000//milli seconds
+#define MAXTRASMITINTERVAL 900//900000//milli seconds
 
 // For SIM7000 BoSL board
 #define PWRKEY 4
@@ -20,7 +20,7 @@
 #define APN "telstra.internet"
 
 //default variable array (complilation purposes only)
-const bool defaultVars[5] = {1,1,1,1,1};
+const bool defaultVars[6] = {1,1,1,1,1,1};
 
 //millis timer variable 
 extern volatile unsigned long timer0_millis;
@@ -37,6 +37,7 @@ char lat[11];
 char lng[12];
 char CN0[3];
 char Nview[3];
+char CBC[5];
 //previous GPS reponse strings
 char LstUTC[19];
 char Lstlat[11];
@@ -48,7 +49,7 @@ char LstNview[3];
 SoftwareSerial simCom = SoftwareSerial(BOSL_RX, BOSL_TX);
  
 ////clears char arrays////
-void charBuffclr(bool clrVars[5] = defaultVars){
+void charBuffclr(bool clrVars[6] = defaultVars){
     if(clrVars[0]){
     memset(UTC, '\0', 19);
     }
@@ -64,10 +65,13 @@ void charBuffclr(bool clrVars[5] = defaultVars){
     if(clrVars[4]){
     memset(CN0, '\0', 3); 
     }
+    if(clrVars[5]){
+    memset(CBC, '\0', 5); 
+    }
 }
 
 ////clears char arrays////
-void LstcharBuffclr(bool clrVars[5] = defaultVars){
+void LstcharBuffclr(bool clrVars[6] = defaultVars){
     if(clrVars[0]){
     memset(LstUTC, '\0', 19);
     }
@@ -86,7 +90,7 @@ void LstcharBuffclr(bool clrVars[5] = defaultVars){
 }
 
 ////stores coordinate data as previous and clears current arrays////
-void charBuffAdvance(bool advVars[5] = defaultVars){
+void charBuffAdvance(bool advVars[6] = defaultVars){
     uint8_t i;
     
     if(advVars[0]){
@@ -115,15 +119,74 @@ void charBuffAdvance(bool advVars[5] = defaultVars){
         }
     }
    
-    charBuffclr();
+    bool clrVars[6] = {1,1,1,1,1,0};
+    
+    charBuffclr(clrVars);
 }
 
-////reads GNSS responce and stores in responces in variables if flagged////
-void storeGNSSresponse(bool forceUpdate = 0, bool updateVars[5] = defaultVars){
+////reads battery voltage from responce char array////
+void storeCBCresponse(){
     
     bool end = 0;
     uint8_t x = 0;
     uint8_t j = 0;
+    
+    bool clrVars[6] = {0,0,0,0,0,1};
+    
+    charBuffclr(clrVars);
+    
+    //loop through reponce to extract data
+    for (uint8_t i=0; i < CHARBUFF; i++){
+
+        //string splitting cases
+        switch(response[i]){
+        case ':':
+            x++;
+            j=0;
+            i += 2;
+            break;
+
+        case ',':
+            x++;
+            j=0;
+            break;
+
+        case '\0':
+            end = 1;
+            break;
+        case '\r':
+            x++;
+            j=0;
+            break;
+        }
+
+        //write to char arrays
+        if (response[i] != ','){
+            switch(x){
+                case 4:
+                    CBC[j] = response[i];
+                break;             
+            }
+            //increment char array counter
+            j++;
+        }
+        //break loop when end flag is high
+        if (end){
+            i = CHARBUFF; 
+        }
+    }
+}
+
+////reads GNSS responce and stores in responces in variables if flagged////
+void storeGNSSresponse(bool forceUpdate = 0, bool updateVars[6] = defaultVars){
+    
+    bool end = 0;
+    uint8_t x = 0;
+    uint8_t j = 0;
+    
+    if(forceUpdate){
+           charBuffclr(updateVars);
+       }
     
     //loop through reponce to extract data
     for (uint8_t i=0; i < CHARBUFF; i++){
@@ -156,7 +219,7 @@ void storeGNSSresponse(bool forceUpdate = 0, bool updateVars[5] = defaultVars){
                charBuffclr(updateVars);
            }
        }
-
+       
         //write to char arrays
         if (response[i] != ','){
             switch(x){
@@ -181,7 +244,7 @@ void storeGNSSresponse(bool forceUpdate = 0, bool updateVars[5] = defaultVars){
                     }
                 break;
                 case 19:
-                    if(updateVars[4]){
+                    if(updateVars[4]){  
                     CN0[j] = response[i];
                     }
                 break;
@@ -225,7 +288,7 @@ void loop() {
      simOn();
      netUnreg();
      
-      if(GNSSgetFix(600000,120000)){
+      if(GNSSgetFix(600000,60000)){
       
           
           //read latest GPS coordinates
@@ -234,12 +297,14 @@ void loop() {
 
           //check if transmit is nesseary
           if(shouldTrasmit()){
+            CBCread();
             Transmit(0);  
           }
       
       }else{
           
           if(shouldPing()){
+              CBCread();
               Transmit(1);
           }
       }
@@ -312,13 +377,18 @@ void Transmit(int transmitType){
     dataStr += CN0;
     dataStr += "&V=";
     dataStr += Nview;
+    dataStr += "&B=";
+    dataStr += CBC;
     dataStr += "\"";
    }
    
    if(transmitType == 1){
     dataStr += SITEPINGID;
     dataStr += ".csv&D=";
-    dataStr += "PING\"";  
+    dataStr += "PING";
+    dataStr += "&B=";
+    dataStr += CBC;
+    dataStr += "\"";    
    }
    
     simOn();
@@ -426,7 +496,7 @@ bool GNSSgetFix(uint32_t maxTFF, uint32_t maxTFS){
     bool waitFix;
     uint32_t timeStart;
     
-    const bool updateVars[5] = {0,0,0,0,1};
+    const bool updateVars[6] = {0,0,0,0,1,0};
     
     //turn on GNSS functionality//
     sendATcmd(F("AT+CGNSPWR=1"), "OK", 1000);
@@ -445,14 +515,17 @@ bool GNSSgetFix(uint32_t maxTFF, uint32_t maxTFS){
             //update CN0     
             storeGNSSresponse(1, updateVars);
             
+            Serial.println(CN0[0]);
             //flag that we should wait for fix
             if (CN0[0] != '\0'){
+                
                 waitFix = 1;
             }
         
         }  
         //end waiting for signal
         if(waitFix == 1){
+            Serial.println("GNSS Signal");
             break;
         }
     }
@@ -603,6 +676,17 @@ void simOff() {
 	digitalWrite(PWRKEY, HIGH);
     delay(10);
 }
+
+void CBCread(){
+    //get GNSS data
+    if (sendATcmd(F("AT+CBC"), "OK",1000)){
+        
+        storeCBCresponse();
+        
+    }
+}
+
+
 
 
 
