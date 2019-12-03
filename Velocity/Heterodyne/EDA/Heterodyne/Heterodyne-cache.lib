@@ -1,0 +1,144 @@
+EESchema-LIBRARY Version 2.4
+#encoding utf-8
+#
+# Connector_Generic_Conn_01x01
+#
+DEF Connector_Generic_Conn_01x01 J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Connector_Generic_Conn_01x01" 0 -100 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*
+$ENDFPLIST
+DRAW
+S -50 5 0 -5 1 1 6 N
+S -50 50 50 -50 1 1 10 f
+X Pin_1 1 -200 0 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Connector_Generic_Conn_01x02
+#
+DEF Connector_Generic_Conn_01x02 J 0 40 Y N 1 F N
+F0 "J" 0 100 50 H V C CNN
+F1 "Connector_Generic_Conn_01x02" 0 -200 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ Connector*:*_1x??_*
+$ENDFPLIST
+DRAW
+S -50 -95 0 -105 1 1 6 N
+S -50 5 0 -5 1 1 6 N
+S -50 50 50 -150 1 1 10 f
+X Pin_1 1 -200 0 150 R 50 50 1 1 P
+X Pin_2 2 -200 -100 150 R 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_C
+#
+DEF Device_C C 0 10 N Y 1 F N
+F0 "C" 25 100 50 H V L CNN
+F1 "Device_C" 25 -100 50 H V L CNN
+F2 "" 38 -150 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ C_*
+$ENDFPLIST
+DRAW
+P 2 0 1 20 -80 -30 80 -30 N
+P 2 0 1 20 -80 30 80 30 N
+X ~ 1 0 150 110 D 50 50 1 1 P
+X ~ 2 0 -150 110 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_R
+#
+DEF Device_R R 0 0 N Y 1 F N
+F0 "R" 80 0 50 V V C CNN
+F1 "Device_R" 0 0 50 V V C CNN
+F2 "" -70 0 50 V I C CNN
+F3 "" 0 0 50 H I C CNN
+$FPLIST
+ R_*
+$ENDFPLIST
+DRAW
+S -40 -100 40 100 0 1 10 N
+X ~ 1 0 150 50 D 50 50 1 1 P
+X ~ 2 0 -150 50 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Device_Speaker_Ultrasound
+#
+DEF Device_Speaker_Ultrasound LS 0 0 Y N 1 F N
+F0 "LS" 25 225 50 H V R CNN
+F1 "Device_Speaker_Ultrasound" 25 150 50 H V R CNN
+F2 "" -35 -50 50 H I C CNN
+F3 "" -35 -50 50 H I C CNN
+ALIAS Speaker_Ultrasound
+DRAW
+S -100 50 45 -150 0 0 10 N
+S -80 -25 25 -75 0 0 10 N
+P 2 0 0 0 -65 -90 15 -90 N
+P 2 0 0 0 -65 -10 15 -10 N
+P 2 0 0 0 -25 -90 -25 -120 N
+P 2 0 0 0 -25 -10 -25 20 N
+P 4 0 0 10 45 50 145 150 145 -250 45 -150 N
+X 1 1 -200 0 100 R 50 50 1 1 I
+X 2 2 -200 -100 100 R 50 50 1 1 I
+ENDDRAW
+ENDDEF
+#
+# Project_SA612AD
+#
+DEF Project_SA612AD U 0 40 Y Y 1 F N
+F0 "U" 0 250 50 H V C CNN
+F1 "Project_SA612AD" 0 -50 50 V V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+S -350 350 350 -300 0 1 0 N
+X IN_A 1 -550 250 200 R 50 50 1 1 I
+X IN_B 2 -550 100 200 R 50 50 1 1 I
+X GND 3 -550 -50 200 R 50 50 1 1 W
+X OUT_A 4 -550 -200 200 R 50 50 1 1 O
+X OUT_B 5 550 -200 200 L 50 50 1 1 O
+X OSC_B 6 550 -50 200 L 50 50 1 1 B
+X OSC_E 7 550 100 200 L 50 50 1 1 B
+X VCC 8 550 250 200 L 50 50 1 1 W
+ENDDRAW
+ENDDEF
+#
+# power_GND
+#
+DEF power_GND #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -250 50 H I C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 6 0 1 0 0 0 0 -50 50 -50 0 -100 -50 -50 0 -50 N
+X GND 1 0 0 0 D 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+# power_VPP
+#
+DEF power_VPP #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 -150 50 H I C CNN
+F1 "power_VPP" 0 150 50 H V C CNN
+F2 "" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+DRAW
+P 2 0 1 0 -30 50 0 100 N
+P 2 0 1 0 0 0 0 100 N
+P 2 0 1 0 0 100 30 50 N
+X VPP 1 0 0 0 U 50 50 1 1 W N
+ENDDRAW
+ENDDEF
+#
+#End Library

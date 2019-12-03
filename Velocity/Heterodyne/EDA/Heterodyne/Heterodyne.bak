@@ -1,0 +1,341 @@
+EESchema Schematic File Version 4
+EELAYER 29 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Project:SA612AD U1
+U 1 1 5DE59955
+P 5250 3950
+F 0 "U1" H 5250 4461 50  0000 C CNN
+F 1 "SA612AD" H 5250 4372 50  0000 C CNN
+F 2 "Turbitidy:Voltera_DIP8" H 5250 3950 50  0001 C CNN
+F 3 "" H 5250 3950 50  0001 C CNN
+	1    5250 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:VPP #PWR0101
+U 1 1 5DE5A2B7
+P 6000 3700
+F 0 "#PWR0101" H 6000 3550 50  0001 C CNN
+F 1 "VPP" V 6015 3827 50  0000 L CNN
+F 2 "" H 6000 3700 50  0001 C CNN
+F 3 "" H 6000 3700 50  0001 C CNN
+	1    6000 3700
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5DE5A5CA
+P 4100 4000
+F 0 "#PWR0102" H 4100 3750 50  0001 C CNN
+F 1 "GND" V 4105 3873 50  0000 R CNN
+F 2 "" H 4100 4000 50  0001 C CNN
+F 3 "" H 4100 4000 50  0001 C CNN
+	1    4100 4000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6000 3700 5800 3700
+Wire Wire Line
+	4100 4000 4250 4000
+Wire Wire Line
+	4350 3850 4250 3850
+Wire Wire Line
+	4250 3850 4250 4000
+Connection ~ 4250 4000
+Wire Wire Line
+	4250 4000 4700 4000
+Wire Wire Line
+	4700 3700 4700 3500
+$Comp
+L Device:C C4
+U 1 1 5DE5CC2D
+P 6550 4150
+F 0 "C4" H 6435 4105 50  0000 R CNN
+F 1 "1 nF" H 6435 4194 50  0000 R CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 6588 4000 50  0001 C CNN
+F 3 "~" H 6550 4150 50  0001 C CNN
+	1    6550 4150
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	4650 3850 4700 3850
+$Comp
+L Device:C C2
+U 1 1 5DE5B5FE
+P 4500 3850
+F 0 "C2" V 4251 3850 50  0000 C CNN
+F 1 "100 nF" V 4340 3850 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 4538 3700 50  0001 C CNN
+F 3 "~" H 4500 3850 50  0001 C CNN
+	1    4500 3850
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:Speaker_Ultrasound LS2
+U 1 1 5DE5E303
+P 8450 3250
+F 0 "LS2" H 8416 2836 50  0000 C CNN
+F 1 "Emmiter" H 8416 2925 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 8415 3200 50  0001 C CNN
+F 3 "~" H 8415 3200 50  0001 C CNN
+	1    8450 3250
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0103
+U 1 1 5DE5E81E
+P 8000 3150
+F 0 "#PWR0103" H 8000 2900 50  0001 C CNN
+F 1 "GND" V 8005 3023 50  0000 R CNN
+F 2 "" H 8000 3150 50  0001 C CNN
+F 3 "" H 8000 3150 50  0001 C CNN
+	1    8000 3150
+	0    1    -1   0   
+$EndComp
+Wire Wire Line
+	8250 3150 8000 3150
+Wire Wire Line
+	8250 3250 8050 3250
+Wire Wire Line
+	8050 3250 8050 4000
+$Comp
+L Device:Speaker_Ultrasound LS1
+U 1 1 5DE60CCA
+P 3800 3500
+F 0 "LS1" H 3766 3086 50  0000 C CNN
+F 1 "Emmiter" H 3766 3175 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 3765 3450 50  0001 C CNN
+F 3 "~" H 3765 3450 50  0001 C CNN
+	1    3800 3500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 5DE6141E
+P 4400 3500
+F 0 "C1" V 4151 3500 50  0000 C CNN
+F 1 "100 nF" V 4240 3500 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 4438 3350 50  0001 C CNN
+F 3 "~" H 4400 3500 50  0001 C CNN
+	1    4400 3500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4700 3500 4550 3500
+Wire Wire Line
+	4250 3500 4000 3500
+$Comp
+L power:VPP #PWR0104
+U 1 1 5DE61CFD
+P 4150 3100
+F 0 "#PWR0104" H 4150 2950 50  0001 C CNN
+F 1 "VPP" H 4165 3271 50  0000 C CNN
+F 2 "" H 4150 3100 50  0001 C CNN
+F 3 "" H 4150 3100 50  0001 C CNN
+	1    4150 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 3400 4150 3400
+Wire Wire Line
+	4150 3400 4150 3100
+NoConn ~ 4700 4150
+$Comp
+L Connector_Generic:Conn_01x01 J1
+U 1 1 5DE63115
+P 5150 4650
+F 0 "J1" H 5069 4429 50  0000 C CNN
+F 1 "Doppler Out" H 5069 4518 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x01" H 5150 4650 50  0001 C CNN
+F 3 "~" H 5150 4650 50  0001 C CNN
+	1    5150 4650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5800 4150 6150 4150
+Wire Wire Line
+	6150 4150 6150 4650
+NoConn ~ 5800 3850
+$Comp
+L Connector_Generic:Conn_01x01 J2
+U 1 1 5DE5ACEB
+P 8550 4000
+F 0 "J2" H 8468 3779 50  0000 C CNN
+F 1 "V_Square" H 8468 3868 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x01" H 8550 4000 50  0001 C CNN
+F 3 "~" H 8550 4000 50  0001 C CNN
+	1    8550 4000
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	8050 4000 8350 4000
+Wire Wire Line
+	5800 4000 6550 4000
+$Comp
+L power:GND #PWR0105
+U 1 1 5DE72E84
+P 6550 4300
+F 0 "#PWR0105" H 6550 4050 50  0001 C CNN
+F 1 "GND" H 6555 4129 50  0000 C CNN
+F 2 "" H 6550 4300 50  0001 C CNN
+F 3 "" H 6550 4300 50  0001 C CNN
+	1    6550 4300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5DE73D39
+P 6000 4650
+F 0 "R1" V 5796 4650 50  0000 C CNN
+F 1 "330 Ω" V 5885 4650 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02_Space" V 5930 4650 50  0001 C CNN
+F 3 "~" H 6000 4650 50  0001 C CNN
+	1    6000 4650
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C3
+U 1 1 5DE7445A
+P 5600 4800
+F 0 "C3" H 5486 4755 50  0000 R CNN
+F 1 "33 nF" H 5486 4844 50  0000 R CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 5638 4650 50  0001 C CNN
+F 3 "~" H 5600 4800 50  0001 C CNN
+	1    5600 4800
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 5DE74913
+P 5600 4950
+F 0 "#PWR0106" H 5600 4700 50  0001 C CNN
+F 1 "GND" H 5605 4779 50  0000 C CNN
+F 2 "" H 5600 4950 50  0001 C CNN
+F 3 "" H 5600 4950 50  0001 C CNN
+	1    5600 4950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5850 4650 5600 4650
+Wire Wire Line
+	5600 4650 5350 4650
+Connection ~ 5600 4650
+$Comp
+L Device:C C5
+U 1 1 5DE77CF3
+P 6900 4000
+F 0 "C5" V 6651 4000 50  0000 C CNN
+F 1 "1 nF" V 6740 4000 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 6938 3850 50  0001 C CNN
+F 3 "~" H 6900 4000 50  0001 C CNN
+	1    6900 4000
+	0    -1   1    0   
+$EndComp
+Wire Wire Line
+	6550 4000 6750 4000
+Connection ~ 6550 4000
+$Comp
+L Device:R R2
+U 1 1 5DE786A6
+P 7300 4000
+F 0 "R2" V 7096 4000 50  0000 C CNN
+F 1 "680 Ω" V 7185 4000 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02_Space" V 7230 4000 50  0001 C CNN
+F 3 "~" H 7300 4000 50  0001 C CNN
+	1    7300 4000
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7050 4000 7150 4000
+$Comp
+L Device:R R3
+U 1 1 5DE79092
+P 7850 4000
+F 0 "R3" V 7646 4000 50  0000 C CNN
+F 1 "20 Ω" V 7735 4000 50  0000 C CNN
+F 2 "Turbitidy:Voltera_Conn_01x02_Space" V 7780 4000 50  0001 C CNN
+F 3 "~" H 7850 4000 50  0001 C CNN
+	1    7850 4000
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C6
+U 1 1 5DE79328
+P 7550 4300
+F 0 "C6" H 7436 4255 50  0000 R CNN
+F 1 "2.2 nF" H 7436 4344 50  0000 R CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 7588 4150 50  0001 C CNN
+F 3 "~" H 7550 4300 50  0001 C CNN
+	1    7550 4300
+	1    0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0107
+U 1 1 5DE797CE
+P 7550 4550
+F 0 "#PWR0107" H 7550 4300 50  0001 C CNN
+F 1 "GND" H 7555 4379 50  0000 C CNN
+F 2 "" H 7550 4550 50  0001 C CNN
+F 3 "" H 7550 4550 50  0001 C CNN
+	1    7550 4550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 4000 7550 4000
+Wire Wire Line
+	8000 4000 8050 4000
+Connection ~ 8050 4000
+Wire Wire Line
+	7550 4150 7550 4000
+Connection ~ 7550 4000
+Wire Wire Line
+	7550 4000 7700 4000
+Wire Wire Line
+	7550 4450 7550 4550
+$Comp
+L Connector_Generic:Conn_01x02 J3
+U 1 1 5DE85660
+P 6900 3100
+F 0 "J3" H 6980 3092 50  0000 L CNN
+F 1 "Conn_01x02" H 6980 3003 50  0000 L CNN
+F 2 "Turbitidy:Voltera_Conn_01x02" H 6900 3100 50  0001 C CNN
+F 3 "~" H 6900 3100 50  0001 C CNN
+	1    6900 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0108
+U 1 1 5DE85F8F
+P 6700 3100
+F 0 "#PWR0108" H 6700 2850 50  0001 C CNN
+F 1 "GND" V 6705 2973 50  0000 R CNN
+F 2 "" H 6700 3100 50  0001 C CNN
+F 3 "" H 6700 3100 50  0001 C CNN
+	1    6700 3100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VPP #PWR0109
+U 1 1 5DE8643B
+P 6700 3200
+F 0 "#PWR0109" H 6700 3050 50  0001 C CNN
+F 1 "VPP" V 6715 3326 50  0000 L CNN
+F 2 "" H 6700 3200 50  0001 C CNN
+F 3 "" H 6700 3200 50  0001 C CNN
+	1    6700 3200
+	0    -1   -1   0   
+$EndComp
+$EndSCHEMATC
