@@ -25,16 +25,25 @@ void setup(){
   pinMode(3, OUTPUT);
   pinMode(11, OUTPUT);
   TCCR2A = _BV(COM2A0) | _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
-  TCCR2B = _BV(WGM22) | _BV(CS21);
-  OCR2A = 49;
-  OCR2B = 24;
+  TCCR2B = _BV(WGM22) | _BV(CS20);
+  OCR2A = 65;
+  OCR2B = 32;
     
   
    Serial.begin(230400);
 }
 
 void loop(){
-    
+   
+   // pinMode(3, OUTPUT);
+  // pinMode(11, OUTPUT);
+  // TCCR2A = _BV(COM2A0) | _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
+  // TCCR2B = _BV(WGM22) | _BV(CS20);
+  // OCR2A = 65;
+  // OCR2B = 32;
+  // delayMicroseconds(20);
+  // pinMode(3, INPUT);
+  // delay(10);
    
     // max = 0;
     // indx = 0; 

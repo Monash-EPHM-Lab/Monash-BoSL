@@ -561,7 +561,7 @@ void netUnreg(){
 void netReg(){
     sendATcmd(F("AT+CFUN=0"), "OK", 1000);
     
-    if(sendATcmd(F("AT+CFUN=1"), "OK", 1000) == 0){
+    if(sendATcmd(F("AT+CFUN=1"), "+CPIN: READY", 1000) == 0){
         sendATcmd(F("AT+CFUN=6"), "OK", 10000);
         
         sendATcmd(F("AT+CFUN=1"), "OK", 1000);
@@ -685,7 +685,6 @@ void CBCread(){
         
     }
 }
-
 
 
 
