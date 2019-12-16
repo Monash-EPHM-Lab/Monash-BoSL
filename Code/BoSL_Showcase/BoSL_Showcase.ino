@@ -17,7 +17,7 @@
 #define BOSL_TX 2 // Microcontroller TX
 
 //Site specific config
-#define SITEID "BOSL_SHOWCASE"
+#define SITEID "PUT SITE IDENTIFIER HERE"
 #define APN "telstra.internet"
 
 //default variable array (complilation purposes only)
