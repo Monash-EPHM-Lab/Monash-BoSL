@@ -194,9 +194,9 @@ void setup() {
     pinMode(A1,OUTPUT);//EC Ground is A1
     digitalWrite(A1,LOW);//EC Ground is set to low 
         
-  // //clear buffers
-  // charBuffclr();
-  // LstcharBuffclr();
+  //clear buffers
+  charBuffclr();
+  LstcharBuffclr();
   
   //ensure sim is in the off state
   simOff();
@@ -205,13 +205,15 @@ void setup() {
   Serial.begin(BAUDRATE);
   simCom.begin(BAUDRATE);
 
-  // Serial.println("Initialising SIM 7000");
-  // //initialise sim (on arduino startup only)
-     // simInit();
+  Serial.println("Initialising SIM 7000");
+  //initialise sim (on arduino startup only)
+	 simOn();
+     simInit();
         
-     // netReg();
-     // netUnreg();
+     netReg();
+     netUnreg();
 
+	 simOff();
 }
     
 void loop() {
@@ -229,10 +231,10 @@ void loop() {
       
       if(shouldTrasmit()){
             simOn();
-            simOn();
             
             netUnreg();
             CBCread();
+			
             Transmit(); 
 
             simOff();
@@ -241,7 +243,8 @@ void loop() {
   
     Serial.println("Sleep");
 	Serial.println();
- 
+	
+	Sleepy(60);
 }
 
 void ECread(){
@@ -304,7 +307,6 @@ void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
     simCom.flush(); // must run before going to sleep
  	
     Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
-    simOff();
 
     LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF); //8 seconds dosen't work on the 8mhz
     //advance millis timer as it is paused in sleep
@@ -326,9 +328,6 @@ void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
 
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
 void Transmit(){
-    //transmitType = 0 : transmit GNSS data
-    //transmitType = 1 : PING
-    
     
     dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
     
@@ -341,15 +340,9 @@ void Transmit(){
     dataStr += air;
     dataStr += "&EC=";
     dataStr += EC;
-  //  dataStr += "&T=";
-  //  dataStr += CN0;
-  //  dataStr += "&V=";
-  //  dataStr += Nview;
     dataStr += "&B=";
     dataStr += CBC;
     dataStr += "\"";
-   
-    simOn();
     
     netReg();
     
@@ -373,10 +366,6 @@ void Transmit(){
         }
         sendATcmd(F("AT+SAPBR=1,1"), "OK",1000);
     }
-    
-  
-  
-   // sendATcmd(F("AT+HTTPTERM"), "OK",10000); *ERROR
     
     sendATcmd(F("AT+HTTPINIT"), "OK",1000);
     sendATcmd(F("AT+HTTPPARA=\"CID\",1"), "OK",1000);
@@ -417,11 +406,11 @@ void netReg(){
     
     if(sendATcmd(F("AT+CFUN=1"), "+CPIN: READY", 1000) == 0){
         sendATcmd(F("AT+CFUN=6"), "OK", 10000);
-        delay(10000);
+        xDelay(10000);
         
         sendATcmd(F("AT+CFUN=1"), "OK", 1000);
     }
-    delay(2000);
+    xDelay(2000);
     sendATcmd(F("AT+CREG?"), "+CREG: 0,1", 2000);
 }
 
@@ -487,9 +476,7 @@ bool sendATcmd(String ATcommand, char* expctAns, unsigned int timeout){
 
 ////initialises sim on arduino startup////
 void simInit(){
-    
-  simOn();
-  
+   
       sendATcmd(F("AT+IPR=9600"),"OK",1000);
       
       sendATcmd(F("ATE0"),"OK",1000);
@@ -510,10 +497,10 @@ void simOn() {
 
 	digitalWrite(PWRKEY, LOW);
 	// See spec sheets for your particular module
-	delay(100); // For SIM7000
+	xDelay(1000); // For SIM7000
 
 	digitalWrite(PWRKEY, HIGH);
-    delay(5000);
+    xDelay(4000);
 }
 
 ////powers off SIM7000////
@@ -526,10 +513,10 @@ void simOff() {
 	digitalWrite(PWRKEY, LOW);
 
 	// See spec sheets for your particular module
-	delay(3000); // For SIM7000
+	xDelay(1200); // For SIM7000
 
 	digitalWrite(PWRKEY, HIGH);
-    delay(10);
+    xDelay(2000);
 }
 
 void CBCread(){
