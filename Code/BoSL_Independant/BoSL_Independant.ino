@@ -1,8 +1,9 @@
+#include <avr/power.h>
 #include <SoftwareSerial.h>
+#include <LowPower.h>
 #include <SparkFun_MS5803_I2C.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
-#include "Sleeps.h"
 
 #define SIMCOM_7000 // SIM7000A/C/E/G
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
@@ -17,11 +18,14 @@
 #define BOSL_TX 2 // Microcontroller TX
 
 //Site specific config
-#define SITEID "Independant"
+#define SITEID "PUT SITE IDENTIFIER HERE"
 #define APN "telstra.internet"
 
 //default variable array (complilation purposes only)
 bool defaultVars[6] = {1,1,1,1,1,1};
+
+//millis timer variable 
+extern volatile unsigned long timer0_millis;
 
 //gobal variables 
 char response[CHARBUFF]; //sim7000 serial response buffer
@@ -52,7 +56,6 @@ MS5803 MyAirMS5803(ADDRESS_LOW);
 //DEFINE DS18B20//
 OneWire oneWire(A2);
 DallasTemperature MyDS18B20(&oneWire);
-
  
 ////clears char arrays////
 void charBuffclr(bool clrVars[6] = defaultVars){
@@ -191,9 +194,9 @@ void setup() {
     pinMode(A1,OUTPUT);//EC Ground is A1
     digitalWrite(A1,LOW);//EC Ground is set to low 
         
-  //clear buffers
-  charBuffclr();
-  LstcharBuffclr();
+  // //clear buffers
+  // charBuffclr();
+  // LstcharBuffclr();
   
   //ensure sim is in the off state
   simOff();
@@ -202,52 +205,42 @@ void setup() {
   Serial.begin(BAUDRATE);
   simCom.begin(BAUDRATE);
 
-  Serial.println("initialising sim");
+  // Serial.println("Initialising SIM 7000");
   // //initialise sim (on arduino startup only)
      // simInit();
         
      // netReg();
      // netUnreg();
-    // simOff();
+
 }
     
 void loop() {
-    //  Serial.println("awake");
-    //  Serial.flush();
-     // Sleeps.sleeps(16);
-      Sleeps.sleeps(8);
-      delay(3000);
-      // charBuffclr();
       
-      // Serial.println("EC");
-      // ECread();
-      // Serial.println("PRESS");
-      // pressread();
-      // Serial.println("TEMP");
-      // tempread();
-      // Serial.println("AIR");
-      // airread();
+      charBuffclr();
       
-      // if(shouldTrasmit()){
-            // simOn();
+      Serial.println("EC");
+      ECread();
+      Serial.println("PRESS");
+      pressread();
+      Serial.println("TEMP");
+      tempread();
+      Serial.println("AIR");
+      airread();
+      
+      if(shouldTrasmit()){
+            simOn();
+            simOn();
             
-            // netUnreg();
-     
-            // CBCread();
-            
-            // Transmit(); 
+            netUnreg();
+            CBCread();
+            Transmit(); 
 
-            // simOff();
-      // }
+            simOff();
+      }
     
   
-    // Serial.println("Sleep");
-    
-    
-    // simCom.flush(); // must run before going to sleep	
-    // Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
-    // simOff();
-    // Sleeps.sleeps(60);
+    Serial.println("Sleep");
+	Serial.println();
  
 }
 
@@ -303,6 +296,33 @@ void tempread(){
   itoa(int(100*tempvar), temp, 10);
 }
 
+
+
+////SLEEPS FOR SET TIME////
+void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
+    
+    simCom.flush(); // must run before going to sleep
+ 	
+    Serial.flush(); // ensures that all messages have sent through serial before arduino sleeps
+    simOff();
+
+    LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF); //8 seconds dosen't work on the 8mhz
+    //advance millis timer as it is paused in sleep
+    noInterrupts();
+    timer0_millis += 4000;
+    interrupts(); 
+    
+    
+    while(tsleep >= 8){
+        LowPower.powerDown(SLEEP_4S, ADC_OFF, BOD_OFF); //8 seconds dosen't work on the 8mhz
+        //advance millis timer as it is paused in sleep
+        noInterrupts();
+        timer0_millis += 4000;
+        interrupts();
+        
+        tsleep -= 4;
+    }
+}
 
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
 void Transmit(){
@@ -397,11 +417,11 @@ void netReg(){
     
     if(sendATcmd(F("AT+CFUN=1"), "+CPIN: READY", 1000) == 0){
         sendATcmd(F("AT+CFUN=6"), "OK", 10000);
-        Sleeps.extDelay(10000);
+        delay(10000);
         
         sendATcmd(F("AT+CFUN=1"), "OK", 1000);
     }
-    Sleeps.extDelay(2000);
+    delay(2000);
     sendATcmd(F("AT+CREG?"), "+CREG: 0,1", 2000);
 }
 
@@ -490,10 +510,10 @@ void simOn() {
 
 	digitalWrite(PWRKEY, LOW);
 	// See spec sheets for your particular module
-	delay(1000); // For SIM7000
+	delay(100); // For SIM7000
 
 	digitalWrite(PWRKEY, HIGH);
-    Sleeps.extDelay(5000);
+    delay(5000);
 }
 
 ////powers off SIM7000////
@@ -506,10 +526,10 @@ void simOff() {
 	digitalWrite(PWRKEY, LOW);
 
 	// See spec sheets for your particular module
-	Sleeps.extDelay(1250); // For SIM7000
+	delay(3000); // For SIM7000
 
 	digitalWrite(PWRKEY, HIGH);
-    Sleeps.extDelay(7000);
+    delay(10);
 }
 
 void CBCread(){
@@ -520,6 +540,61 @@ void CBCread(){
         
     }
 }
+
+//like delay but lower power and more dodgy//
+void xDelay(uint32_t tmz){
+	uint32_t tmzslc = tmz/64;
+	//64 chosen as ballance between power savings and time spent in full clock mode
+	clock_prescale_set(clock_div_64);
+		delay(tmzslc);
+	clock_prescale_set(clock_div_1);
+	
+	cli();
+	timer0_millis += 63*tmzslc;	
+	sei();
+	
+	delay(tmz-64*tmzslc);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
