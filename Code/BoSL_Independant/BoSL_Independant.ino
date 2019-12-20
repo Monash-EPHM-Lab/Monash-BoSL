@@ -1,7 +1,7 @@
 #include <avr/power.h>
 #include <SoftwareSerial.h>
 #include <LowPower.h>
-#include <SparkFun_MS5803_I2C.h>
+#include "src/MS5803.h"
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
