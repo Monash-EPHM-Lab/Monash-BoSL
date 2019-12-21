@@ -1,3 +1,4 @@
 (sym_lib_table
   (lib (name Project)(type Legacy)(uri ${KIPRJMOD}/Component/Project.lib)(options "")(descr ""))
+  (lib (name BoSL-Probe-rescue)(type Legacy)(uri "${KIPRJMOD}/BoSL Probe-rescue.lib")(options "")(descr ""))
 )
