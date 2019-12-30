@@ -5,4 +5,5 @@ This repostory contains all the hardware and software resources for the BoSL boa
 
 Find our website at: www.bosl.com.au
 
+![BoSL Board](/README.png)
 
