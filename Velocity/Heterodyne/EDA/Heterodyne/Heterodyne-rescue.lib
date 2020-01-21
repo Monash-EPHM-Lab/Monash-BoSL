@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Heterodyne-rescue_C-Device
+# C-Device
 #
-DEF Heterodyne-rescue_C-Device C 0 10 N Y 1 F N
+DEF C-Device C 0 10 N Y 1 F N
 F0 "C" 25 100 50 H V L CNN
-F1 "Heterodyne-rescue_C-Device" 25 -100 50 H V L CNN
+F1 "C-Device" 25 -100 50 H V L CNN
 F2 "" 38 -150 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -19,11 +19,11 @@ X ~ 2 0 -150 110 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_Conn_01x01-Connector_Generic
+# Conn_01x01-Connector_Generic
 #
-DEF Heterodyne-rescue_Conn_01x01-Connector_Generic J 0 40 Y N 1 F N
+DEF Conn_01x01-Connector_Generic J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "Heterodyne-rescue_Conn_01x01-Connector_Generic" 0 -100 50 H V C CNN
+F1 "Conn_01x01-Connector_Generic" 0 -100 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -36,11 +36,11 @@ X Pin_1 1 -200 0 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_Conn_01x02-Connector_Generic
+# Conn_01x02-Connector_Generic
 #
-DEF Heterodyne-rescue_Conn_01x02-Connector_Generic J 0 40 Y N 1 F N
+DEF Conn_01x02-Connector_Generic J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "Heterodyne-rescue_Conn_01x02-Connector_Generic" 0 -200 50 H V C CNN
+F1 "Conn_01x02-Connector_Generic" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -55,11 +55,11 @@ X Pin_2 2 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_GND-power
+# GND-power
 #
-DEF Heterodyne-rescue_GND-power #PWR 0 0 Y Y 1 F P
+DEF GND-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "Heterodyne-rescue_GND-power" 0 -150 50 H V C CNN
+F1 "GND-power" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -68,11 +68,11 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_Jumper_NC_Dual-Device
+# Jumper_NC_Dual-Device
 #
-DEF Heterodyne-rescue_Jumper_NC_Dual-Device JP 0 30 Y N 1 F N
+DEF Jumper_NC_Dual-Device JP 0 30 Y N 1 F N
 F0 "JP" 50 -100 50 H V L CNN
-F1 "Heterodyne-rescue_Jumper_NC_Dual-Device" 0 100 50 H V C BNN
+F1 "Jumper_NC_Dual-Device" 0 100 50 H V C BNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -90,11 +90,11 @@ X 3 3 250 0 95 L 50 50 0 1 P
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_MAX7375AXR105-Oscillator
+# MAX7375AXR105-Oscillator
 #
-DEF Heterodyne-rescue_MAX7375AXR105-Oscillator U 0 10 Y Y 1 F N
+DEF MAX7375AXR105-Oscillator U 0 10 Y Y 1 F N
 F0 "U" -100 250 50 H V R CNN
-F1 "Heterodyne-rescue_MAX7375AXR105-Oscillator" 50 -250 50 H V L CNN
+F1 "MAX7375AXR105-Oscillator" 50 -250 50 H V L CNN
 F2 "Package_TO_SOT_SMD:SOT-323_SC-70" 1100 -350 50 H I C CNN
 F3 "" -100 0 50 H I C CNN
 $FPLIST
@@ -109,11 +109,11 @@ X GND 3 0 -300 100 U 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_NE5532-Amplifier_Operational
+# NE5532-Amplifier_Operational
 #
-DEF Heterodyne-rescue_NE5532-Amplifier_Operational U 0 5 Y Y 3 L N
+DEF NE5532-Amplifier_Operational U 0 5 Y Y 3 L N
 F0 "U" 0 200 50 H V L CNN
-F1 "Heterodyne-rescue_NE5532-Amplifier_Operational" 0 -200 50 H V L CNN
+F1 "NE5532-Amplifier_Operational" 0 -200 50 H V L CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -143,11 +143,11 @@ X V+ 8 -100 300 150 D 50 50 3 1 W
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_R-Device
+# R-Device
 #
-DEF Heterodyne-rescue_R-Device R 0 0 N Y 1 F N
+DEF R-Device R 0 0 N Y 1 F N
 F0 "R" 80 0 50 V V C CNN
-F1 "Heterodyne-rescue_R-Device" 0 0 50 V V C CNN
+F1 "R-Device" 0 0 50 V V C CNN
 F2 "" -70 0 50 V I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -160,11 +160,11 @@ X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_Speaker_Ultrasound-Device
+# Speaker_Ultrasound-Device
 #
-DEF Heterodyne-rescue_Speaker_Ultrasound-Device LS 0 0 Y N 1 F N
+DEF Speaker_Ultrasound-Device LS 0 0 Y N 1 F N
 F0 "LS" 25 225 50 H V R CNN
-F1 "Heterodyne-rescue_Speaker_Ultrasound-Device" 25 150 50 H V R CNN
+F1 "Speaker_Ultrasound-Device" 25 150 50 H V R CNN
 F2 "" -35 -50 50 H I C CNN
 F3 "" -35 -50 50 H I C CNN
 DRAW
@@ -180,11 +180,11 @@ X 2 2 -200 -100 100 R 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# Heterodyne-rescue_VPP-power
+# VPP-power
 #
-DEF Heterodyne-rescue_VPP-power #PWR 0 0 Y Y 1 F P
+DEF VPP-power #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -150 50 H I C CNN
-F1 "Heterodyne-rescue_VPP-power" 0 150 50 H V C CNN
+F1 "VPP-power" 0 150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -192,26 +192,6 @@ P 2 0 1 0 -30 50 0 100 N
 P 2 0 1 0 0 0 0 100 N
 P 2 0 1 0 0 100 30 50 N
 X VPP 1 0 0 0 U 50 50 1 1 W N
-ENDDRAW
-ENDDEF
-#
-# Project_SA612AD
-#
-DEF Project_SA612AD U 0 40 Y Y 1 F N
-F0 "U" 0 250 50 H V C CNN
-F1 "Project_SA612AD" 0 -50 50 V V C CNN
-F2 "" 0 0 50 H I C CNN
-F3 "" 0 0 50 H I C CNN
-DRAW
-S -350 350 350 -300 0 1 0 N
-X IN_A 1 -550 250 200 R 50 50 1 1 I
-X IN_B 2 -550 100 200 R 50 50 1 1 I
-X GND 3 -550 -50 200 R 50 50 1 1 W
-X OUT_A 4 -550 -200 200 R 50 50 1 1 O
-X OUT_B 5 550 -200 200 L 50 50 1 1 O
-X OSC_B 6 550 -50 200 L 50 50 1 1 B
-X OSC_E 7 550 100 200 L 50 50 1 1 B
-X VCC 8 550 250 200 L 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #

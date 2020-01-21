@@ -26,8 +26,8 @@ void setup(){
   pinMode(11, OUTPUT);
   TCCR2A = _BV(COM2A0) | _BV(COM2B1) | _BV(WGM21) | _BV(WGM20);
   TCCR2B = _BV(WGM22) | _BV(CS20);
-  OCR2A = 65;
-  OCR2B = 32;
+  OCR2A = 15;
+  OCR2B = 7;
     
   
    Serial.begin(230400);
