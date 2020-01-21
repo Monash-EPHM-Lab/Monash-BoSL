@@ -1,3 +1,5 @@
+//todo add check for if i2c device is present to change error code
+
 #include <avr/power.h>
 #include <SoftwareSerial.h>
 #include <LowPower.h>
@@ -9,7 +11,7 @@
 #define BAUDRATE 9600 // MUST be below 19200 (for stability) but 9600 is more stable
 
 #define CHARBUFF 196 //SIM7000 serial response buffer //longer than 255 will cause issues
-#define MAXTRASMITINTERVAL 180000//milli seconds
+#define MAXTRASMITINTERVAL 18000//milli seconds
 
 // For SIM7000 BoSL board
 #define PWRKEY 4
@@ -18,7 +20,7 @@
 #define BOSL_TX 2 // Microcontroller TX
 
 //Site specific config
-#define SITEID "PUT SITE IDENTIFIER HERE"
+#define SITEID "BoSL_INDEP"
 #define APN "telstra.internet"
 
 //default variable array (complilation purposes only)
@@ -271,6 +273,16 @@ void pressread(){
   pressint = (int)10*pressvar;
 
   ltoa(pressint, press, 10);
+  
+  //error code value B1004
+  if (pressvar == 0){
+	  press[0] = 'B';
+	  press[1] = '1';
+	  press[2] = '0';
+	  press[3] = '0';
+	  press[4] = '4';
+  }
+  
 }
 
 void airread(){
@@ -283,8 +295,17 @@ void airread(){
   airvar = MyAirMS5803.getPressure(ADC_4096);
 
   airint = (int)10*airvar;
-
+  
   ltoa(airint, air, 10);
+  
+  //error code value B1710 
+  if (airvar == 0){
+	  air[0] = 'B';
+	  air[1] = '1';
+	  air[2] = '7';
+	  air[3] = '1';
+	  air[4] = '0';
+  }
 }
 
 

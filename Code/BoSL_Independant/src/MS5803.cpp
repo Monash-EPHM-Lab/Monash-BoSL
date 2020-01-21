@@ -30,6 +30,7 @@ Distributed as-is; no warranty is given.
 #include "I2C.h" // Wire library is used for I2C
 #include "MS5803.h"
 
+
 MS5803::MS5803(ms5803_addr address)
 // Base library type I2C
 {
@@ -46,6 +47,9 @@ void MS5803::reset(void)
 uint8_t MS5803::begin(void)
 // Initialize library for subsequent pressure measurements
 {  
+	//add timeout to i2c bus
+	I2c.timeOut(100);
+
 	uint8_t i;
 	for(i = 0; i <= 7; i++)
   {
@@ -164,6 +168,8 @@ uint32_t MS5803::getADCconversion(measurement _measurement, precision _precision
 // Retrieve ADC measurement from the device.  
 // Select measurement type and precision
 {	
+	//add timeout to i2c bus
+	I2c.timeOut(100);
 	uint32_t result;
 	uint8_t highByte = 0, midByte = 0, lowByte = 0;
 	
@@ -197,7 +203,8 @@ uint32_t MS5803::getADCconversion(measurement _measurement, precision _precision
 
 void MS5803::sendCommand(uint8_t command)
 {	
-
+	//add timeout to i2c bus
+	I2c.timeOut(100);
 	I2c.write(_address,command);
 
 	
