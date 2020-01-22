@@ -799,4 +799,6 @@ Text GLabel 6700 2550 1    50   Input ~ 0
 Driver_Wave
 Text GLabel 2050 3050 1    50   Input ~ 0
 Driver_Wave
+Text Notes 1000 800  0    50   ~ 0
+Consider Changing op amp to TL074
 $EndSCHEMATC

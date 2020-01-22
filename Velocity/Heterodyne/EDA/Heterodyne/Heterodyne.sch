@@ -699,10 +699,10 @@ Wire Wire Line
 Wire Wire Line
 	8050 3900 8350 3900
 $Comp
-L Heterodyne-rescue:VPP-power #PWR?
+L Heterodyne-rescue:VPP-power #PWR0111
 U 1 1 5E281BA1
 P 8350 3300
-F 0 "#PWR?" H 8350 3150 50  0001 C CNN
+F 0 "#PWR0111" H 8350 3150 50  0001 C CNN
 F 1 "VPP" H 8365 3471 50  0000 C CNN
 F 2 "" H 8350 3300 50  0001 C CNN
 F 3 "" H 8350 3300 50  0001 C CNN
@@ -711,10 +711,10 @@ F 3 "" H 8350 3300 50  0001 C CNN
 $EndComp
 Connection ~ 8350 3300
 $Comp
-L Heterodyne-rescue:GND-power #PWR?
+L Heterodyne-rescue:GND-power #PWR0112
 U 1 1 5E282178
 P 8350 3900
-F 0 "#PWR?" H 8350 3650 50  0001 C CNN
+F 0 "#PWR0112" H 8350 3650 50  0001 C CNN
 F 1 "GND" H 8355 3729 50  0000 C CNN
 F 2 "" H 8350 3900 50  0001 C CNN
 F 3 "" H 8350 3900 50  0001 C CNN
@@ -725,10 +725,10 @@ Connection ~ 8350 3900
 Wire Wire Line
 	2050 3050 2050 3550
 $Comp
-L Heterodyne-rescue:R-Device R?
+L Heterodyne-rescue:R-Device R4
 U 1 1 5E282544
 P 2650 3850
-F 0 "R?" V 2854 3850 50  0000 C CNN
+F 0 "R4" V 2854 3850 50  0000 C CNN
 F 1 "39 kΩ" V 2765 3850 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2580 3850 50  0001 C CNN
 F 3 "~" H 2650 3850 50  0001 C CNN
@@ -745,10 +745,10 @@ Wire Wire Line
 Wire Wire Line
 	2350 3550 2650 3550
 $Comp
-L Heterodyne-rescue:R-Device R?
+L Heterodyne-rescue:R-Device R1
 U 1 1 5E285F20
 P 2350 2800
-F 0 "R?" V 2554 2800 50  0000 C CNN
+F 0 "R1" V 2554 2800 50  0000 C CNN
 F 1 "1 kΩ" V 2465 2800 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2280 2800 50  0001 C CNN
 F 3 "~" H 2350 2800 50  0001 C CNN
@@ -756,10 +756,10 @@ F 3 "~" H 2350 2800 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Heterodyne-rescue:R-Device R?
+L Heterodyne-rescue:R-Device R3
 U 1 1 5E286294
 P 2600 3050
-F 0 "R?" V 2804 3050 50  0000 C CNN
+F 0 "R3" V 2804 3050 50  0000 C CNN
 F 1 "1 kΩ" V 2715 3050 50  0000 C CNN
 F 2 "Resistors_SMD:R_0805_HandSoldering" V 2530 3050 50  0001 C CNN
 F 3 "~" H 2600 3050 50  0001 C CNN
@@ -774,10 +774,10 @@ Connection ~ 2350 3050
 Wire Wire Line
 	2350 3050 2350 3550
 $Comp
-L Heterodyne-rescue:VPP-power #PWR?
+L Heterodyne-rescue:VPP-power #PWR0117
 U 1 1 5E289D11
 P 2350 2650
-F 0 "#PWR?" H 2350 2500 50  0001 C CNN
+F 0 "#PWR0117" H 2350 2500 50  0001 C CNN
 F 1 "VPP" H 2365 2821 50  0000 C CNN
 F 2 "" H 2350 2650 50  0001 C CNN
 F 3 "" H 2350 2650 50  0001 C CNN
@@ -785,10 +785,10 @@ F 3 "" H 2350 2650 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Heterodyne-rescue:GND-power #PWR?
+L Heterodyne-rescue:GND-power #PWR0118
 U 1 1 5E28A11D
 P 2750 3050
-F 0 "#PWR?" H 2750 2800 50  0001 C CNN
+F 0 "#PWR0118" H 2750 2800 50  0001 C CNN
 F 1 "GND" H 2755 2879 50  0000 C CNN
 F 2 "" H 2750 3050 50  0001 C CNN
 F 3 "" H 2750 3050 50  0001 C CNN
