@@ -224,34 +224,12 @@ $EndComp
 $Comp
 L Heterodyne-rescue:NE5532-Amplifier_Operational U2
 U 3 1 5DE9ED64
-P 8250 3600
-F 0 "U2" H 8063 3555 50  0000 R CNN
-F 1 "NE5532" H 8063 3644 50  0000 R CNN
-F 2 "Housings_DIP:DIP-8_W7.62mm_LongPads" H 8250 3600 50  0001 C CNN
-F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 8250 3600 50  0001 C CNN
-	3    8250 3600
-	-1   0    0    1   
-$EndComp
-$Comp
-L Heterodyne-rescue:VPP-power #PWR0111
-U 1 1 5DEA1CC4
-P 8350 3300
-F 0 "#PWR0111" H 8350 3150 50  0001 C CNN
-F 1 "VPP" V 8365 3426 50  0000 L CNN
-F 2 "" H 8350 3300 50  0001 C CNN
-F 3 "" H 8350 3300 50  0001 C CNN
-	1    8350 3300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:GND-power #PWR0112
-U 1 1 5DEA21FC
-P 8350 3900
-F 0 "#PWR0112" H 8350 3650 50  0001 C CNN
-F 1 "GND" V 8355 3773 50  0000 R CNN
-F 2 "" H 8350 3900 50  0001 C CNN
-F 3 "" H 8350 3900 50  0001 C CNN
-	1    8350 3900
+P 8450 3600
+F 0 "U2" H 8263 3555 50  0000 R CNN
+F 1 "NE5532" H 8263 3644 50  0000 R CNN
+F 2 "Housings_DIP:DIP-8_W7.62mm_LongPads" H 8450 3600 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 8450 3600 50  0001 C CNN
+	3    8450 3600
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -288,50 +266,6 @@ F 2 "Housings_DIP:DIP-8_W7.62mm_LongPads" H 2150 3850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 2150 3850 50  0001 C CNN
 	1    2150 3850
 	0    -1   1    0   
-$EndComp
-$Comp
-L Heterodyne-rescue:GND-power #PWR0117
-U 1 1 5DEC862E
-P 2450 2400
-F 0 "#PWR0117" H 2450 2150 50  0001 C CNN
-F 1 "GND" V 2455 2273 50  0000 R CNN
-F 2 "" H 2450 2400 50  0001 C CNN
-F 3 "" H 2450 2400 50  0001 C CNN
-	1    2450 2400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:GND-power #PWR0118
-U 1 1 5DEC895C
-P 1950 2400
-F 0 "#PWR0118" H 1950 2150 50  0001 C CNN
-F 1 "GND" V 1955 2273 50  0000 R CNN
-F 2 "" H 1950 2400 50  0001 C CNN
-F 3 "" H 1950 2400 50  0001 C CNN
-	1    1950 2400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:Conn_01x02-Connector_Generic J1
-U 1 1 5DECC74B
-P 2350 2200
-F 0 "J1" H 2430 2192 50  0000 L CNN
-F 1 "OP_IN" H 2430 2103 50  0000 L CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 2350 2200 50  0001 C CNN
-F 3 "~" H 2350 2200 50  0001 C CNN
-	1    2350 2200
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Heterodyne-rescue:Conn_01x02-Connector_Generic J2
-U 1 1 5DECCC45
-P 1950 2200
-F 0 "J2" H 2030 2192 50  0000 L CNN
-F 1 "OP_OUT" H 2030 2103 50  0000 L CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02_Pitch2.54mm" H 1950 2200 50  0001 C CNN
-F 3 "~" H 1950 2200 50  0001 C CNN
-	1    1950 2200
-	0    -1   -1   0   
 $EndComp
 Connection ~ 6150 4050
 Wire Wire Line
@@ -703,83 +637,6 @@ Connection ~ 5250 5100
 Wire Wire Line
 	5250 5100 5650 5100
 $Comp
-L Heterodyne-rescue:R-Device R4
-U 1 1 5DFAD002
-P 2350 2900
-F 0 "R4" V 2554 2900 50  0000 C CNN
-F 1 "10 kΩ" V 2465 2900 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 2280 2900 50  0001 C CNN
-F 3 "~" H 2350 2900 50  0001 C CNN
-	1    2350 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:R-Device R3
-U 1 1 5DFAD398
-P 2050 2900
-F 0 "R3" V 2254 2900 50  0000 C CNN
-F 1 "10 kΩ" V 2165 2900 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 1980 2900 50  0001 C CNN
-F 3 "~" H 2050 2900 50  0001 C CNN
-	1    2050 2900
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:C-Device C4
-U 1 1 5DFADDA3
-P 2200 3250
-F 0 "C4" H 2085 3205 50  0000 R CNN
-F 1 "100 nF" H 2085 3294 50  0000 R CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2238 3100 50  0001 C CNN
-F 3 "~" H 2200 3250 50  0001 C CNN
-	1    2200 3250
-	0    -1   -1   0   
-$EndComp
-$Comp
-L Heterodyne-rescue:R-Device R5
-U 1 1 5DFAEA80
-P 2600 3850
-F 0 "R5" V 2804 3850 50  0000 C CNN
-F 1 "10 kΩ" V 2715 3850 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 2530 3850 50  0001 C CNN
-F 3 "~" H 2600 3850 50  0001 C CNN
-	1    2600 3850
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:R-Device R1
-U 1 1 5DFAEDEA
-P 1450 3850
-F 0 "R1" V 1654 3850 50  0000 C CNN
-F 1 "10 kΩ" V 1565 3850 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 1380 3850 50  0001 C CNN
-F 3 "~" H 1450 3850 50  0001 C CNN
-	1    1450 3850
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:C-Device C5
-U 1 1 5DFAF0E1
-P 2950 3850
-F 0 "C5" V 3199 3850 50  0000 C CNN
-F 1 "100 nF" V 3110 3850 50  0000 C CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 2988 3700 50  0001 C CNN
-F 3 "~" H 2950 3850 50  0001 C CNN
-	1    2950 3850
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:C-Device C3
-U 1 1 5DFB2EFF
-P 1100 3850
-F 0 "C3" V 1349 3850 50  0000 C CNN
-F 1 "100 nF" V 1260 3850 50  0000 C CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 1138 3700 50  0001 C CNN
-F 3 "~" H 1100 3850 50  0001 C CNN
-	1    1100 3850
-	1    0    0    -1  
-$EndComp
-$Comp
 L Heterodyne-rescue:GND-power #PWR0120
 U 1 1 5DFB3A2A
 P 2250 4350
@@ -802,57 +659,8 @@ F 3 "~" H 2250 4550 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	2150 4150 2600 4150
-Wire Wire Line
-	2600 4150 2600 4000
-Wire Wire Line
-	2350 3050 2350 3250
-Wire Wire Line
-	2350 3250 2350 3550
-Wire Wire Line
 	2250 3550 2350 3550
-Connection ~ 2350 3250
 Connection ~ 2350 3550
-Wire Wire Line
-	2350 3550 2600 3550
-Wire Wire Line
-	2050 3550 2050 3250
-Wire Wire Line
-	2050 3250 2050 3050
-Connection ~ 2050 3250
-Wire Wire Line
-	2350 2400 2350 2750
-Wire Wire Line
-	2050 2400 2050 2750
-Wire Wire Line
-	2950 4000 2950 4150
-Wire Wire Line
-	2950 4150 2600 4150
-Connection ~ 2600 4150
-Wire Wire Line
-	2950 3700 2950 3550
-Wire Wire Line
-	2950 3550 2600 3550
-Connection ~ 2600 3550
-Wire Wire Line
-	2050 3250 1450 3250
-Wire Wire Line
-	1450 3250 1450 3700
-Wire Wire Line
-	1450 3250 1100 3250
-Wire Wire Line
-	1100 3250 1100 3700
-Wire Wire Line
-	2600 3550 2600 3700
-Connection ~ 1450 3250
-Wire Wire Line
-	1100 4000 1450 4000
-Wire Wire Line
-	2150 4150 1450 4150
-Wire Wire Line
-	1450 4150 1450 4000
-Connection ~ 2150 4150
-Connection ~ 1450 4000
 Wire Wire Line
 	2150 4150 2150 4350
 Wire Wire Line
@@ -881,15 +689,114 @@ F 3 "~" H 8050 3600 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8350 3300 8050 3300
-Wire Wire Line
 	8050 3300 8050 3450
-Connection ~ 8350 3300
 Wire Wire Line
 	8050 3750 8050 3900
-Wire Wire Line
-	8050 3900 8350 3900
-Connection ~ 8350 3900
 Connection ~ 6900 1850
 Connection ~ 6900 1550
+Wire Wire Line
+	8050 3300 8350 3300
+Wire Wire Line
+	8050 3900 8350 3900
+$Comp
+L Heterodyne-rescue:VPP-power #PWR?
+U 1 1 5E281BA1
+P 8350 3300
+F 0 "#PWR?" H 8350 3150 50  0001 C CNN
+F 1 "VPP" H 8365 3471 50  0000 C CNN
+F 2 "" H 8350 3300 50  0001 C CNN
+F 3 "" H 8350 3300 50  0001 C CNN
+	1    8350 3300
+	1    0    0    -1  
+$EndComp
+Connection ~ 8350 3300
+$Comp
+L Heterodyne-rescue:GND-power #PWR?
+U 1 1 5E282178
+P 8350 3900
+F 0 "#PWR?" H 8350 3650 50  0001 C CNN
+F 1 "GND" H 8355 3729 50  0000 C CNN
+F 2 "" H 8350 3900 50  0001 C CNN
+F 3 "" H 8350 3900 50  0001 C CNN
+	1    8350 3900
+	1    0    0    -1  
+$EndComp
+Connection ~ 8350 3900
+Wire Wire Line
+	2050 3050 2050 3550
+$Comp
+L Heterodyne-rescue:R-Device R?
+U 1 1 5E282544
+P 2650 3850
+F 0 "R?" V 2854 3850 50  0000 C CNN
+F 1 "39 kΩ" V 2765 3850 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 2580 3850 50  0001 C CNN
+F 3 "~" H 2650 3850 50  0001 C CNN
+	1    2650 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 4150 2650 4150
+Wire Wire Line
+	2650 4150 2650 4000
+Connection ~ 2150 4150
+Wire Wire Line
+	2650 3700 2650 3550
+Wire Wire Line
+	2350 3550 2650 3550
+$Comp
+L Heterodyne-rescue:R-Device R?
+U 1 1 5E285F20
+P 2350 2800
+F 0 "R?" V 2554 2800 50  0000 C CNN
+F 1 "1 kΩ" V 2465 2800 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 2280 2800 50  0001 C CNN
+F 3 "~" H 2350 2800 50  0001 C CNN
+	1    2350 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Heterodyne-rescue:R-Device R?
+U 1 1 5E286294
+P 2600 3050
+F 0 "R?" V 2804 3050 50  0000 C CNN
+F 1 "1 kΩ" V 2715 3050 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 2530 3050 50  0001 C CNN
+F 3 "~" H 2600 3050 50  0001 C CNN
+	1    2600 3050
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	2350 2950 2350 3050
+Wire Wire Line
+	2450 3050 2350 3050
+Connection ~ 2350 3050
+Wire Wire Line
+	2350 3050 2350 3550
+$Comp
+L Heterodyne-rescue:VPP-power #PWR?
+U 1 1 5E289D11
+P 2350 2650
+F 0 "#PWR?" H 2350 2500 50  0001 C CNN
+F 1 "VPP" H 2365 2821 50  0000 C CNN
+F 2 "" H 2350 2650 50  0001 C CNN
+F 3 "" H 2350 2650 50  0001 C CNN
+	1    2350 2650
+	1    0    0    -1  
+$EndComp
+$Comp
+L Heterodyne-rescue:GND-power #PWR?
+U 1 1 5E28A11D
+P 2750 3050
+F 0 "#PWR?" H 2750 2800 50  0001 C CNN
+F 1 "GND" H 2755 2879 50  0000 C CNN
+F 2 "" H 2750 3050 50  0001 C CNN
+F 3 "" H 2750 3050 50  0001 C CNN
+	1    2750 3050
+	0    -1   -1   0   
+$EndComp
+Text GLabel 6700 2550 1    50   Input ~ 0
+Driver_Wave
+Text GLabel 2050 3050 1    50   Input ~ 0
+Driver_Wave
 $EndSCHEMATC
