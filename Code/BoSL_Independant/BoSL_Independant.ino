@@ -20,7 +20,7 @@
 #define BOSL_TX 2 // Microcontroller TX
 
 //Site specific config
-#define SITEID "BoSL_INDEP"
+#define SITEID "BoSL_19817"
 #define APN "telstra.internet"
 
 //default variable array (complilation purposes only)
@@ -318,6 +318,15 @@ void tempread(){
   tempvar = MyDS18B20.getTempCByIndex(0);
   
   itoa(int(100*tempvar), temp, 10);
+
+  if(tempvar == -127){
+	temp[0] = 'B';
+	temp[1] = '1';
+	temp[2] = '5';
+	temp[3] = '1';
+	temp[4] = '2';
+	temp[5] = '\0';
+  }
 }
 
 
