@@ -20,8 +20,10 @@
 #define BOSL_TX 2 // Microcontroller TX
 
 //Site specific config
-#define SITEID "BoSL_19817"
-#define APN "telstra.internet"
+#define SITEID "ALDI_TEST"
+//does not do anything atm // change values in transmit function
+//#define APN "telstra.internet" //FOR TELSTRA
+//#define APN "mdata.net.au" //FOR ALDI MOBILE
 
 //default variable array (complilation purposes only)
 bool defaultVars[6] = {1,1,1,1,1,1};
@@ -380,11 +382,11 @@ void Transmit(){
     ///***check logic
    //set CSTT - if it is already set, then no need to do again...
         sendATcmd(F("AT+CSTT?"), "OK",1000);   
-        if (strstr(response, "telstra.internet") != NULL){
+        if (strstr(response, "mdata.net.au") != NULL){
             //this means the cstt has been set, so no need to set again!
             Serial.println("CSTT already set to APN ...no need to set again");
        } else {
-            sendATcmd(F("AT+CSTT=\"telstra.internet\""), "OK",1000);
+            sendATcmd(F("AT+CSTT=\"mdata.net.au\""), "OK",1000);
         }
     
     
@@ -572,7 +574,6 @@ void xDelay(uint32_t tmz){
 	
 	delay(tmz-64*tmzslc);
 }
-
 
 
 

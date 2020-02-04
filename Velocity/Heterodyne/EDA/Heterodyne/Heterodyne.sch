@@ -518,28 +518,6 @@ F 3 "~" H 6150 3700 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Heterodyne-rescue:R-Device R8
-U 1 1 5DF78A40
-P 5050 4250
-F 0 "R8" V 5254 4250 50  0000 C CNN
-F 1 "10 kΩ" V 5165 4250 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 4980 4250 50  0001 C CNN
-F 3 "~" H 5050 4250 50  0001 C CNN
-	1    5050 4250
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:R-Device R9
-U 1 1 5DF72BBA
-P 5250 4800
-F 0 "R9" V 5454 4800 50  0000 C CNN
-F 1 "39 kΩ" V 5365 4800 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 5180 4800 50  0001 C CNN
-F 3 "~" H 5250 4800 50  0001 C CNN
-	1    5250 4800
-	1    0    0    -1  
-$EndComp
-$Comp
 L Heterodyne-rescue:NE5532-Amplifier_Operational U2
 U 2 1 5DE9A181
 P 4950 4800
@@ -551,91 +529,7 @@ F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 4950 4800 50  0001 C CNN
 	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	4950 5100 5250 5100
-Wire Wire Line
-	5250 5100 5250 4950
-Wire Wire Line
-	5250 4650 5250 4500
-Wire Wire Line
-	5250 4500 5050 4500
-Wire Wire Line
-	5050 4500 5050 4400
-Connection ~ 5050 4500
-$Comp
-L Heterodyne-rescue:C-Device C7
-U 1 1 5DF80B53
-P 4900 3950
-F 0 "C7" H 4785 3905 50  0000 R CNN
-F 1 "100 nF" H 4785 3994 50  0000 R CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4938 3800 50  0001 C CNN
-F 3 "~" H 4900 3950 50  0001 C CNN
-	1    4900 3950
-	0    -1   -1   0   
-$EndComp
-Wire Wire Line
-	4850 4500 4750 4500
-Wire Wire Line
-	4750 4500 4750 3950
-Wire Wire Line
-	5050 3950 5050 4100
-$Comp
-L Heterodyne-rescue:R-Device R7
-U 1 1 5DF84FFF
-P 4750 3800
-F 0 "R7" V 4954 3800 50  0000 C CNN
-F 1 "10 kΩ" V 4865 3800 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 4680 3800 50  0001 C CNN
-F 3 "~" H 4750 3800 50  0001 C CNN
-	1    4750 3800
-	1    0    0    -1  
-$EndComp
-Connection ~ 4750 3950
-$Comp
-L Heterodyne-rescue:R-Device R6
-U 1 1 5DF8534D
-P 4750 3400
-F 0 "R6" V 4954 3400 50  0000 C CNN
-F 1 "10 kΩ" V 4865 3400 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 4680 3400 50  0001 C CNN
-F 3 "~" H 4750 3400 50  0001 C CNN
-	1    4750 3400
-	1    0    0    -1  
-$EndComp
-$Comp
-L Heterodyne-rescue:C-Device C6
-U 1 1 5DF85649
-P 4400 4450
-F 0 "C6" V 4649 4450 50  0000 C CNN
-F 1 "100 nF" V 4560 4450 50  0000 C CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4438 4300 50  0001 C CNN
-F 3 "~" H 4400 4450 50  0001 C CNN
-	1    4400 4450
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	4400 4600 4400 5100
-Wire Wire Line
-	4400 5100 4950 5100
-Connection ~ 4950 5100
-Wire Wire Line
-	4400 4300 4400 3600
-Wire Wire Line
-	4400 3600 4750 3600
-Wire Wire Line
-	4750 3600 4750 3650
-Wire Wire Line
-	4750 3550 4750 3600
-Connection ~ 4750 3600
-Wire Wire Line
-	5050 3950 5050 3250
-Connection ~ 5050 3950
-Wire Wire Line
-	5650 3250 5050 3250
-Wire Wire Line
 	5650 5100 5650 4050
-Connection ~ 5250 5100
-Wire Wire Line
-	5250 5100 5650 5100
 $Comp
 L Heterodyne-rescue:GND-power #PWR0120
 U 1 1 5DFB3A2A
@@ -665,10 +559,6 @@ Wire Wire Line
 	2150 4150 2150 4350
 Wire Wire Line
 	5900 2700 5900 2900
-Wire Wire Line
-	5900 2900 4750 2900
-Wire Wire Line
-	4750 2900 4750 3250
 Wire Wire Line
 	4750 2850 5750 2850
 Wire Wire Line
@@ -801,4 +691,133 @@ Text GLabel 2050 3050 1    50   Input ~ 0
 Driver_Wave
 Text Notes 1000 800  0    50   ~ 0
 Consider Changing op amp to TL074
+Wire Wire Line
+	4950 5100 5300 5100
+$Comp
+L Device:R R?
+U 1 1 5E37EFD3
+P 5300 4750
+F 0 "R?" H 5370 4796 50  0000 L CNN
+F 1 "18 kΩ" H 5370 4705 50  0000 L CNN
+F 2 "" V 5230 4750 50  0001 C CNN
+F 3 "~" H 5300 4750 50  0001 C CNN
+	1    5300 4750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5300 4900 5300 5100
+Connection ~ 5300 5100
+Wire Wire Line
+	5300 5100 5650 5100
+Wire Wire Line
+	5300 4600 5300 4400
+Wire Wire Line
+	5300 4400 5050 4400
+Wire Wire Line
+	5050 4400 5050 4500
+$Comp
+L Device:R R?
+U 1 1 5E3820B6
+P 4700 4250
+F 0 "R?" V 4493 4250 50  0000 C CNN
+F 1 "18 kΩ" V 4584 4250 50  0000 C CNN
+F 2 "" V 4630 4250 50  0001 C CNN
+F 3 "~" H 4700 4250 50  0001 C CNN
+	1    4700 4250
+	0    1    1    0   
+$EndComp
+$Comp
+L Heterodyne-rescue:VPP-power #PWR?
+U 1 1 5E3824B9
+P 4550 4250
+F 0 "#PWR?" H 4550 4100 50  0001 C CNN
+F 1 "VPP" V 4565 4377 50  0000 L CNN
+F 2 "" H 4550 4250 50  0001 C CNN
+F 3 "" H 4550 4250 50  0001 C CNN
+	1    4550 4250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E382D5B
+P 4850 3800
+F 0 "R?" H 5100 3750 50  0000 R CNN
+F 1 "1 kΩ" H 5100 3850 50  0000 R CNN
+F 2 "" V 4780 3800 50  0001 C CNN
+F 3 "~" H 4850 3800 50  0001 C CNN
+	1    4850 3800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E383109
+P 5050 3800
+F 0 "R?" H 4980 3754 50  0000 R CNN
+F 1 "1 kΩ" H 4980 3845 50  0000 R CNN
+F 2 "" V 4980 3800 50  0001 C CNN
+F 3 "~" H 5050 3800 50  0001 C CNN
+	1    5050 3800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	5050 3950 5050 4400
+Connection ~ 5050 4400
+Wire Wire Line
+	4850 4500 4850 4250
+Wire Wire Line
+	4850 3950 4850 4250
+Connection ~ 4850 4250
+$Comp
+L Device:C C?
+U 1 1 5E387E65
+P 4950 3500
+F 0 "C?" V 4698 3500 50  0000 C CNN
+F 1 "C" V 4789 3500 50  0000 C CNN
+F 2 "" H 4988 3350 50  0001 C CNN
+F 3 "~" H 4950 3500 50  0001 C CNN
+	1    4950 3500
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5050 3650 5100 3650
+Wire Wire Line
+	5100 3650 5100 3500
+Wire Wire Line
+	4850 3650 4800 3650
+Wire Wire Line
+	4800 3650 4800 3500
+$Comp
+L Device:R R?
+U 1 1 5E38B726
+P 5250 3250
+F 0 "R?" V 5457 3250 50  0000 C CNN
+F 1 "330 Ω" V 5366 3250 50  0000 C CNN
+F 2 "" V 5180 3250 50  0001 C CNN
+F 3 "~" H 5250 3250 50  0001 C CNN
+	1    5250 3250
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5E38C4E7
+P 4800 3100
+F 0 "R?" H 5050 3050 50  0000 R CNN
+F 1 "330 Ω" H 5050 3150 50  0000 R CNN
+F 2 "" V 4730 3100 50  0001 C CNN
+F 3 "~" H 4800 3100 50  0001 C CNN
+	1    4800 3100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	4800 2900 4800 2950
+Wire Wire Line
+	4800 2900 5900 2900
+Wire Wire Line
+	4800 3250 4800 3500
+Connection ~ 4800 3500
+Wire Wire Line
+	5100 3500 5100 3250
+Connection ~ 5100 3500
+Wire Wire Line
+	5400 3250 5650 3250
 $EndSCHEMATC
