@@ -215,6 +215,7 @@ void setup() {
      simInit();
         
      netReg();
+	 ///
      netUnreg();
 
 	 simOff();
@@ -280,7 +281,7 @@ void pressread(){
   if (pressvar == 0){
 	  press[0] = 'B';
 	  press[1] = '1';
-	  press[2] = '0';
+	  press[2] = '4';
 	  press[3] = '0';
 	  press[4] = '4';
   }

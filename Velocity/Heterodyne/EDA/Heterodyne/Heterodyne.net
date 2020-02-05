@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source \\ad.monash.edu\home\User070\scat0009\Documents\Monash-BoSL\Velocity\Heterodyne\EDA\Heterodyne\Heterodyne.sch)
-    (date "2020/02/05 11:16:56")
+    (date "2020/02/05 13:48:06")
     (tool "Eeschema (5.1.5)-3")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -73,7 +73,7 @@
       (tstamp 5DE98025))
     (comp (ref U2)
       (value NE5532)
-      (footprint Package_DIP:DIP-8_W7.62mm)
+      (footprint Package_SO:SOIC-8_3.9x4.9mm_P1.27mm)
       (datasheet http://www.ti.com/lit/ds/symlink/ne5532.pdf)
       (libsource (lib Heterodyne-rescue) (part NE5532-Amplifier_Operational) (description ""))
       (sheetpath (names /) (tstamps /))

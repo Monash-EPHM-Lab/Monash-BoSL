@@ -207,7 +207,7 @@ U 3 1 5DE9ED64
 P 9050 3500
 F 0 "U2" H 8863 3455 50  0000 R CNN
 F 1 "NE5532" H 8863 3544 50  0000 R CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 9050 3500 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 9050 3500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 9050 3500 50  0001 C CNN
 	3    9050 3500
 	1    0    0    -1  
@@ -242,7 +242,7 @@ U 2 1 5DEBD03F
 P 2150 3850
 F 0 "U2" H 2150 4150 50  0000 C CNN
 F 1 "NE5532" H 2150 4250 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 2150 3850 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2150 3850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 2150 3850 50  0001 C CNN
 	2    2150 3850
 	0    -1   1    0   
@@ -479,7 +479,7 @@ U 1 1 5DE9A181
 P 4950 4800
 F 0 "U2" H 4950 5100 50  0000 C CNN
 F 1 "NE5532" H 4950 5200 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 4950 4800 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4950 4800 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 4950 4800 50  0001 C CNN
 	1    4950 4800
 	0    -1   1    0   
@@ -921,4 +921,8 @@ Wire Wire Line
 Connection ~ 5100 3750
 Wire Wire Line
 	5100 3750 5100 3800
+Text Notes 1000 1250 0    50   ~ 0
+remove staightthrough out
+Text Notes 1000 1350 0    50   ~ 0
+remove adc or opamp out\n
 $EndSCHEMATC

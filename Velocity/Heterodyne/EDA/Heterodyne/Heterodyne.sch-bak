@@ -207,7 +207,7 @@ U 3 1 5DE9ED64
 P 9050 3500
 F 0 "U2" H 8863 3455 50  0000 R CNN
 F 1 "NE5532" H 8863 3544 50  0000 R CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 9050 3500 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 9050 3500 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 9050 3500 50  0001 C CNN
 	3    9050 3500
 	1    0    0    -1  
@@ -242,7 +242,7 @@ U 2 1 5DEBD03F
 P 2150 3850
 F 0 "U2" H 2150 4150 50  0000 C CNN
 F 1 "NE5532" H 2150 4250 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 2150 3850 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 2150 3850 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 2150 3850 50  0001 C CNN
 	2    2150 3850
 	0    -1   1    0   
@@ -479,7 +479,7 @@ U 1 1 5DE9A181
 P 4950 4800
 F 0 "U2" H 4950 5100 50  0000 C CNN
 F 1 "NE5532" H 4950 5200 50  0000 C CNN
-F 2 "Package_DIP:DIP-8_W7.62mm" H 4950 4800 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 4950 4800 50  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/ne5532.pdf" H 4950 4800 50  0001 C CNN
 	1    4950 4800
 	0    -1   1    0   
@@ -866,31 +866,6 @@ F 3 "" H 4150 5100 50  0001 C CNN
 	1    4150 5100
 	1    0    0    -1  
 $EndComp
-$Comp
-L Heterodyne-rescue:Conn_01x02-Connector_Generic J2
-U 1 1 5E3D8E89
-P 5050 5500
-F 0 "J2" H 5130 5492 50  0000 L CNN
-F 1 "Amplitude_OUT" H 5130 5403 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 5050 5500 50  0001 C CNN
-F 3 "~" H 5050 5500 50  0001 C CNN
-	1    5050 5500
-	0    1    1    0   
-$EndComp
-$Comp
-L Heterodyne-rescue:GND-power #PWR0126
-U 1 1 5E3D9218
-P 5050 5300
-F 0 "#PWR0126" H 5050 5050 50  0001 C CNN
-F 1 "GND" V 5055 5173 50  0000 R CNN
-F 2 "" H 5050 5300 50  0001 C CNN
-F 3 "" H 5050 5300 50  0001 C CNN
-	1    5050 5300
-	-1   0    0    1   
-$EndComp
-Wire Wire Line
-	4950 5100 4950 5300
-Connection ~ 4950 5100
 Wire Wire Line
 	4850 3800 4800 3800
 Wire Wire Line

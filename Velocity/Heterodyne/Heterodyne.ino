@@ -7,46 +7,49 @@
 //FFT sample buffers
 double read[128];
 double imag[128];
+
+double max;
+double avspeed;
+double indx;
  
 //Define FFT object
 arduinoFFT FFT = arduinoFFT(); 
 
 void setup(){
     
-  //set sampling rate to 17.6 kHz
+  //set sampling rate to 66 kHz
   sbi(ADCSRA, ADPS2);
-  sbi(ADCSRA, ADPS1);
-  cbi(ADCSRA, ADPS0);
+  cbi(ADCSRA, ADPS1);
+  sbi(ADCSRA, ADPS0);
   
    Serial.begin(230400);
 }
 
 void loop(){
   double result;
-  result = getVel(1,8);
-  plotFFT();
-  // Serial.print(result);
-  // Serial.print(" ");
-  result = getVel(2,8);
-  plotFFT();
-  // Serial.print(result);
-  // Serial.print(" ");
-  result = getVel(4,8);
-  plotFFT();
-  // Serial.print(result);
-  // Serial.print(" ");
-  result = getVel(8,8);
-  plotFFT();
-  // Serial.println(result);
+    result = getVel(0,8);
+    plotFFT();
+//	Serial.print(result);
+//	Serial.print(" ");
+	result = getVel(1,8);
+	plotFFT();
+//	Serial.print(result);
+//	Serial.print(" ");
+	result = getVel(2,8);
+	plotFFT();
+//	Serial.print(result);
+//	Serial.print(" ");
+	result = getVel(3,8);
+//	Serial.println(result);
+	plotFFT();
+	clearPlot();
     
 }
 // Plot FFT
 
 double getVel(int velMulti, int averages){
-	double max;
-	double avspeed;
-	double indx;
-	
+	double calArray[4] = {3.70,7.35,14.28,26.55};
+	int delayArray[4] = {2000,1000,500,250};
 	
 	avspeed = 0;
 	
@@ -58,7 +61,7 @@ double getVel(int velMulti, int averages){
 	   //sample 128 times at 2 kHz
 	   for(int i = 0; i < 128; i++){
 		   read[i] = analogRead(A1);
-		   delayMicroseconds(2000/velMulti);
+		   delayMicroseconds(delayArray[velMulti]);
 	   }
 
 		//set imaginary componet of FFT to zero
@@ -71,7 +74,11 @@ double getVel(int velMulti, int averages){
 	   FFT.Compute(read, imag, 128, FFT_FORWARD);
 	   FFT.ComplexToMagnitude(read, imag, 128);
 			
-		for(int i=10; i<(128/2); i++)
+			
+		nullRemove();	
+			
+			
+		for(int i=4; i<(128/2); i++)
 		{
 			if (read[i] > max){
 				max = read[i];
@@ -80,25 +87,15 @@ double getVel(int velMulti, int averages){
 			
 		}
 		
-		for(int i=10; i<(128/2); i++)
-		{
-			read[i] -= (max - 5);
-			if (read[i] < 0){
-				read[i]= 0;
-			}
-		}
-		max = 0
-		indx = 0
-		for(int i=10; i<(128/2); i++)
-		{
-			indx += read[i]*i;
-			max +=read[i];	
-			
-		}
-		indx = indx/max
+		
+		/////////////////
+		//betterMAX();
+		
+		//////////////////////
 		
 		//converts frequency to mm/s
-		max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
+		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
+		max = (indx)*(calArray[velMulti]);
 		avspeed += max;
 	}
 	avspeed = avspeed/averages;
@@ -106,18 +103,51 @@ double getVel(int velMulti, int averages){
 	return avspeed;
 }
 
+void betterMAX(){
+	for(int i=4; i<(128/2); i++)
+		{
+			read[i] -= (max - 5);
+			if (read[i] < 0){
+				read[i]= 0;
+			}
+		}
+		max = 0;
+		indx = 0;
+		for(int i=3; i<(128/2); i++)
+		{
+			indx += read[i]*i;
+			max +=read[i];	
+			
+		}
+		indx = indx/max;
+}
+
 void plotFFT(){
-	for(int i=10; i<(128/2); i++)
+	for(int i=4; i<(128/2); i++)
     {
         Serial.println(read[i], 1);   
     }
-
-    for(int i=0; i<(436); i++)
+//436
+    for(int i=0; i<(65); i++)
    {
         Serial.println(0);   
    }
-   delay(300);
 }
 //TODO ADD GOOD AVERAGEING/DATA STUFF
 
 //subtract null signal from fft data
+
+void nullRemove(){
+	for (int i =4; i<(128/2); i++){
+		
+		read[i] -= 385/(i*i);
+	}	
+}
+
+void clearPlot(){
+	delay(1500);
+	for(int i=0; i<500; i++)
+   {
+        Serial.println(0);   
+   }
+}
