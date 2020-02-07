@@ -395,7 +395,7 @@ L Heterodyne-rescue:C-Device C11
 U 1 1 5DEF08D7
 P 8550 1350
 F 0 "C11" H 8250 1400 50  0000 L CNN
-F 1 "330 μF" H 8150 1300 50  0000 L CNN
+F 1 "3.3 μF" H 8150 1300 50  0000 L CNN
 F 2 "Capacitor_SMD:CP_Elec_8x10" H 8588 1200 50  0001 C CNN
 F 3 "~" H 8550 1350 50  0001 C CNN
 	1    8550 1350
@@ -875,8 +875,6 @@ Wire Wire Line
 Wire Wire Line
 	5100 3500 5100 3650
 Connection ~ 5100 3650
-Wire Wire Line
-	5100 3650 5100 3750
 $Comp
 L Jumper:SolderJumper_2_Open JP4
 U 1 1 5E3E931C
@@ -918,11 +916,12 @@ Wire Wire Line
 	3850 4200 3850 3650
 Wire Wire Line
 	3850 3650 4150 3650
-Connection ~ 5100 3750
-Wire Wire Line
-	5100 3750 5100 3800
 Text Notes 1000 1250 0    50   ~ 0
 remove staightthrough out
 Text Notes 1000 1350 0    50   ~ 0
 remove adc or opamp out\n
+Wire Wire Line
+	5100 3650 5100 3800
+Text Notes 8600 1150 0    50   ~ 0
+CHANGE TO TANTALUM 1206
 $EndSCHEMATC
