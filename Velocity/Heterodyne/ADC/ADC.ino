@@ -7,8 +7,8 @@ uint8_t a[1024];
 	
 void setup(){
 	I2c.begin();
-	I2c.write(54, 0b10001100);
-	I2c.write(54, 0b00000000);
+	I2c.write(54, 0b11011100);
+	I2c.write(54, 0b00000010);
 	Serial.begin(230400);
 }
 
