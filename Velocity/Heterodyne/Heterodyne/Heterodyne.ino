@@ -1,8 +1,7 @@
-#define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
-#define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
 
 //FFT library
 #include <arduinoFFT.h>
+#include "src\I2C.h"
 
 //FFT sample buffers
 double read[128];
@@ -17,19 +16,16 @@ arduinoFFT FFT = arduinoFFT();
 
 void setup(){
     
-  //set sampling rate to 66 kHz
-  sbi(ADCSRA, ADPS2);
-  cbi(ADCSRA, ADPS1);
-  sbi(ADCSRA, ADPS0);
 
-  
+
+   I2c.begin();
    Serial.begin(230400);
 }
 
 void loop(){
   double result;
     result = getVel(0,4);
-//   plotFFT();
+//    plotFFT();
 	Serial.print(result);
 	Serial.print(" ");
 	result = getVel(1,4);
@@ -49,8 +45,7 @@ void loop(){
 // Plot FFT
 
 double getVel(int velMulti, int averages){
-	double calArray[4] = {3.70,7.35,14.28,26.55};
-	int delayArray[4] = {2000,1000,500,250};
+	double calArray[4] = {4.09,6.99,10.9,41.3};
 	
 	avspeed = 0;
 	
@@ -58,12 +53,20 @@ double getVel(int velMulti, int averages){
 		max = 0;
 		indx = 0;
 			
-		
-	   //sample 128 times at 2 kHz
-	   for(int i = 0; i < 128; i++){
-		   read[i] = analogRead(A1);
-		   delayMicroseconds(delayArray[velMulti]);
+	   if (velMulti == 3){
+	   sampleFast();
 	   }
+	   if (velMulti == 2){
+		sampleSlow(400);
+	   }
+	   if (velMulti == 1){
+		sampleSlow(800);
+	   }
+	   if (velMulti == 0){
+		sampleSlow(1600);
+	   }
+
+
 
 		//set imaginary componet of FFT to zero
 		for(int i = 0; i < 128; i++){
@@ -78,7 +81,7 @@ double getVel(int velMulti, int averages){
 			
 		nullRemove();	
 			
-			
+		//add null condition for if amplitude is small	
 		for(int i=4; i<(128/2); i++)
 		{
 			if (read[i] > max){
@@ -102,6 +105,58 @@ double getVel(int velMulti, int averages){
 	avspeed = avspeed/averages;
     //Serial.println(avspeed/1000);
 	return avspeed;
+}
+
+
+void sampleFast(){
+	uint8_t adcData[256];
+	
+	I2c.write(54, 0b11011100);
+	I2c.write(54, 0b00000010);
+	
+	I2c.read(54,255,adcData);
+	
+	for(int i = 0; i <254; i += 2){
+	int rsult = (adcData[i]-240)*256 + adcData[i+1];
+	if (rsult > 2048){
+		rsult = rsult - 4096;
+	}
+	read[i/2] = rsult;
+	}
+	
+	int rsult = (adcData[254]-240)*256 + adcData[253];
+	if (rsult > 2048){
+		rsult = rsult - 4096;
+	}
+	read[127] = rsult;
+	
+}
+
+void sampleSlow(int delay){
+	I2c.write(54, 0b11010100);
+	I2c.write(54, 0b00000010);
+	
+	uint8_t MSB;
+	uint8_t LSB;
+	
+	
+	for(int i =0; i<256; i += 2){
+		I2c.read(54, 2);
+		
+		MSB = I2c.receive();
+		LSB = I2c.receive();
+		
+		int rsult = (MSB-240)*256 + LSB;
+		if (rsult > 2048){
+			rsult = rsult - 4096;
+		}
+		read[i/2] = rsult;
+
+		delayMicroseconds(delay);
+	}
+	
+	
+	
 }
 
 void betterMAX(){
@@ -147,7 +202,7 @@ void plotFFT(){
 void nullRemove(){
 	for (int i =4; i<(128/2); i++){
 		
-		read[i] -= 385/(i*i);
+		read[i] -= 1000/(i*i);
 	}	
 }
 

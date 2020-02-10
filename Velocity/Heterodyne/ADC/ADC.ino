@@ -14,7 +14,7 @@ void setup(){
 
 void loop(){
 	
-	I2c.read(54,254,a);
+	I2c.read(54,256,a);
 	
 	for(int i=0; i<(254); i += 2)
     {
