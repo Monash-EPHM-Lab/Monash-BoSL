@@ -28,6 +28,7 @@ void loop(){
 			Serial.println(0);   
 	   }
 //	plotFFT();
+
 	clearPlot();
     
 }

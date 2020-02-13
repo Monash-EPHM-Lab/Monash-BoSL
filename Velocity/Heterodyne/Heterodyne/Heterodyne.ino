@@ -3,7 +3,8 @@
 #include <arduinoFFT.h>
 #include "src\I2C.h"
 
-#define PLOTFFT 1
+#define PLOTFFT 0
+#define LOWPRINT 1
 
 //FFT sample buffers
 double read[128];
@@ -13,7 +14,7 @@ double max;
 double avspeed;
 double indx;
 
-bool low = 0;
+double low = 0;
  
 //Define FFT object
 arduinoFFT FFT = arduinoFFT(); 
@@ -21,62 +22,74 @@ arduinoFFT FFT = arduinoFFT();
 void setup(){
 
    I2c.begin();
-   Serial.begin(230400);
+   I2c.setSpeed(1); //Note 200 kHz Bus Speed
+   Serial.begin(115200);
+}
+
+void printlow(){
+	if (LOWPRINT){
+	if (PLOTFFT){
+		if (low){
+			low = 0;
+			Serial.println(-1);
+		}
+	}else{
+		Serial.print("| ");
+		Serial.print(low);
+		Serial.print(", ");
+	}		
+	}
 }
 
 void loop(){
-	low = 0;
 	double result;
-    result = getVel(0,4);
-	if (PLOTFFT){
-	plotFFT();
-	}else{
-	if (low){
-		low = 0;
-		Serial.print("*");
-	}
-	Serial.print(result);
-	Serial.print(" ");
-	}
-	result = getVel(1,4);
-	if (PLOTFFT){
-	plotFFT();
-	}else{
-	if (low){
-		low = 0;
-		Serial.print("*");
-	}
-	Serial.print(result);
-	Serial.print(" ");
-	}
-	result = getVel(2,4);
-	if (PLOTFFT){
-	plotFFT();
-	}else{
-	if (low){
-		low = 0;
-		Serial.print("*");
-	}
-	Serial.print(result);
-	Serial.print(" ");
-	}
-	result = getVel(3,4);
-	if (PLOTFFT){
+    result = getVel(0,1);
+		printlow();
+		if (PLOTFFT){
 		plotFFT();
-		clearPlot();
-	}else{
-	if (low){
-		low = 0;
-		Serial.print("*");
-	}
-	Serial.println(result);
-	}
+		}else{
+		Serial.print(result);
+		Serial.print(" ");
+		}
+		
+	result = getVel(1,1);
+		printlow();
+		if (PLOTFFT){
+		plotFFT();
+		}else{
+		Serial.print(result);
+		Serial.print(" ");
+		}
+	result = getVel(2,1);
+		printlow();
+		if (PLOTFFT){
+		plotFFT();
+		}else{
+		Serial.print(result);
+		Serial.print(" ");
+		}
+	result = getVel(3,1);
+		printlow();
+		if (PLOTFFT){
+		plotFFT();
+		}else{
+		Serial.print(result);
+		Serial.print(" ");
+		}
+	result = getVel(4,1);
+		printlow();
+		if (PLOTFFT){
+			plotFFT();
+			clearPlot();
+		}else{
+		Serial.println(result);
+		}
     
 }
 // Plot FFT
 
 double getVel(int velMulti, int averages){
-	double calArray[4] = {4.09,6.99,10.9,41.3};
+	double calArray[5] = {5.08,10.2,21.0,40.7,80.6};
 	
 	avspeed = 0;
 	
@@ -84,17 +97,20 @@ double getVel(int velMulti, int averages){
 		max = 0;
 		indx = 0;
 			
-	   if (velMulti == 3){
+	   if (velMulti == 4){
 	   sampleFast();
 	   }
+	   if (velMulti == 3){
+		sampleSlow(20);
+	   }
 	   if (velMulti == 2){
-		sampleSlow(400);
+		sampleSlow(200);
 	   }
 	   if (velMulti == 1){
-		sampleSlow(800);
+		sampleSlow(600);
 	   }
 	   if (velMulti == 0){
-		sampleSlow(1600);
+		sampleSlow(1400);
 	   }
 
 		//delete DC component of signal
@@ -112,6 +128,7 @@ double getVel(int velMulti, int averages){
 			
 			
 		//nullRemove();	
+		
 				
 		for(int i=2; i<(128/2); i++)
 		{
@@ -122,16 +139,59 @@ double getVel(int velMulti, int averages){
 			
 		}
 		
-		if (max < 30){
-			low = 1;		
-		}
+		
+		// if (max < 15){
+			// low = 1;		
+		// }
 		/////////////////
 		//betterMAX();
 		
 		//////////////////////
+		delDCcompFFT();
+		
+
+		for(int i = 2; i < (128/2); i++){
+			read[i] -=3;			
+		}
+		
+		for(int i = 2; i < (128/2); i++){
+		if (read[i] < 0){
+			read[i] = 0;
+		}
+			
+		}
+		
+		bool Npeak = 0;
+		for(int i = indx; i < (128/2); i++){
+			if (read[i] == 0){
+				Npeak = 1;
+			}
+			if (Npeak){
+				read[i] = 0;
+			}
+		}
+		Npeak = 0;
+		for(int i = indx; i > 0; i--){
+			if (read[i] == 0){
+				Npeak = 1;
+			}
+			if (Npeak){
+				read[i] = 0;
+			}
+		}
+		indx = 0;
+		max = 0;
+		for(int i = 2; i < (128/2); i++){
+			indx += read[i]*i;
+			max += read[i];
+		}
+		indx = indx/max;
+		
+		low = max;
 		
 		//converts frequency to mm/s
 		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
+		
 		max = (indx)*(calArray[velMulti])*0.75;
 		avspeed += max;
 	}
@@ -157,11 +217,7 @@ void sampleFast(){
 	read[i/2] = rsult;
 	}
 	
-	int rsult = (adcData[254]-240)*256 + adcData[253];
-	if (rsult > 2048){
-		rsult = rsult - 4096;
-	}
-	read[127] = rsult;
+	read[127] = read[126];
 	
 }
 
@@ -224,11 +280,11 @@ void plotFFT(){
         Serial.println(read[i], 1);   
     }
 
-    for(int i=0; i<(65); i++)
+    for(int i=0; i<(1); i++)
    {
-        Serial.println(0);   
+        Serial.println(-10);   
    }
-   // plotRAW();
+    //plotRAW();
    // Serial.println("------------------------");
 }
 //TODO ADD GOOD AVERAGEING/DATA STUFF
@@ -242,7 +298,7 @@ void nullRemove(){
 }
 
 void clearPlot(){
-	delay(1500);
+	delay(3000);
 	for(int i=0; i<500; i++)
    {
         Serial.println(0);   
@@ -258,6 +314,19 @@ void delDCcomp(){
 	average = average/128;
 	
 	for( int i = 0; i < 128; i++){
+		read[i] -= average;
+	}
+}
+
+void delDCcompFFT(){
+	int32_t average = 0;
+	
+	for( int i = 2; i < (128/2); i++){
+		average += read[i];
+	}
+	average = average/62;
+	
+	for( int i = 2; i < (128/2); i++){
 		read[i] -= average;
 	}
 }

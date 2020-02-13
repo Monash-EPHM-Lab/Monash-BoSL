@@ -117,7 +117,7 @@ void I2C::setSpeed(uint8_t _fast)
   }
   else
   {
-    TWBR = ((F_CPU / 400000) - 16) / 2;
+    TWBR = ((F_CPU / 200000) - 16) / 2;
   }
 }
   
