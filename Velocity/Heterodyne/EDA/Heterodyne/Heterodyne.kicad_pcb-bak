@@ -2,7 +2,7 @@
 
   (general
     (thickness 1.6)
-    (drawings 13)
+    (drawings 14)
     (tracks 198)
     (zones 0)
     (modules 33)
@@ -472,7 +472,7 @@
     (tags "resistor handsolder")
     (path /5E436A94)
     (attr smd)
-    (fp_text reference R6 (at 0 -1.43 90) (layer F.SilkS)
+    (fp_text reference R6 (at 0.9 1.8 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value "1 kΩ" (at 0 1.43 90) (layer F.Fab)
@@ -1541,6 +1541,9 @@
     )
   )
 
+  (gr_text "BoSL \nVelocity\nrev 0.1" (at 107 65.1 90) (layer F.SilkS)
+    (effects (font (size 1 1) (thickness 0.2)) (justify left))
+  )
   (gr_text TX (at 133.5 47.6) (layer F.SilkS) (tstamp 5E4754FE)
     (effects (font (size 0.8 0.8) (thickness 0.1)))
   )
@@ -1764,7 +1767,7 @@
   (segment (start 127.9 53.851458) (end 127.5 54.251458) (width 0.4) (layer B.Cu) (net 43))
   (segment (start 127.9 51.8) (end 127.9 53.851458) (width 0.4) (layer B.Cu) (net 43))
 
-  (zone (net 1) (net_name GND) (layer In1.Cu) (tstamp 0) (hatch edge 0.508)
+  (zone (net 1) (net_name GND) (layer In1.Cu) (tstamp 5E475596) (hatch edge 0.508)
     (connect_pads (clearance 0.508))
     (min_thickness 0.254)
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508))
@@ -1883,7 +1886,7 @@
       )
     )
   )
-  (zone (net 2) (net_name VPP) (layer In2.Cu) (tstamp 0) (hatch edge 0.508)
+  (zone (net 2) (net_name VPP) (layer In2.Cu) (tstamp 5E475593) (hatch edge 0.508)
     (connect_pads (clearance 0.508))
     (min_thickness 0.254)
     (fill yes (arc_segments 32) (thermal_gap 0.508) (thermal_bridge_width 0.508))
