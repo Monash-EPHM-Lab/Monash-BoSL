@@ -810,7 +810,7 @@ Text GLabel 2800 4450 2    50   Input ~ 0
 VCLOCK
 Text GLabel 8950 3200 1    50   Input ~ 0
 VOPAMP
-Text GLabel 2800 2950 2    50   Input ~ 0
+Text GLabel 2800 2550 2    50   Input ~ 0
 VOPAMP
 Text GLabel 3050 3950 1    50   Input ~ 0
 TTL_RST
@@ -846,4 +846,23 @@ F 3 "~" H 8350 5150 50  0001 C CNN
 $EndComp
 Text Notes 2350 1450 0    50   ~ 0
 OPTIMISATION IDEA: USE ARDUINO TO GENERATE 1MHz WAVE
+$Comp
+L Heterodyne-rescue:VPP-power #PWR?
+U 1 1 5E51A727
+P 2300 2150
+F 0 "#PWR?" H 2300 2000 50  0001 C CNN
+F 1 "VPP" V 2315 2276 50  0000 L CNN
+F 2 "" H 2300 2150 50  0001 C CNN
+F 3 "" H 2300 2150 50  0001 C CNN
+	1    2300 2150
+	1    0    0    -1  
+$EndComp
+Text GLabel 2800 2650 2    50   Input ~ 0
+SS
+Text GLabel 2800 2750 2    50   Input ~ 0
+MOSI
+Text GLabel 2800 2850 2    50   Input ~ 0
+MISO
+Text GLabel 2800 2950 2    50   Input ~ 0
+SCLK
 $EndSCHEMATC

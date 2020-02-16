@@ -810,7 +810,7 @@ Text GLabel 2800 4450 2    50   Input ~ 0
 VCLOCK
 Text GLabel 8950 3200 1    50   Input ~ 0
 VOPAMP
-Text GLabel 2800 2950 2    50   Input ~ 0
+Text GLabel 2800 2550 2    50   Input ~ 0
 VOPAMP
 Text GLabel 3050 3950 1    50   Input ~ 0
 TTL_RST
@@ -856,5 +856,65 @@ F 2 "" H 2300 2150 50  0001 C CNN
 F 3 "" H 2300 2150 50  0001 C CNN
 	1    2300 2150
 	1    0    0    -1  
+$EndComp
+Text GLabel 2800 2650 2    50   Input ~ 0
+SS
+Text GLabel 2800 2750 2    50   Input ~ 0
+MOSI
+Text GLabel 2800 2850 2    50   Input ~ 0
+MISO
+Text GLabel 2800 2950 2    50   Input ~ 0
+SCLK
+Text GLabel 1050 2800 0    50   Input ~ 0
+SS
+Text GLabel 1050 2900 0    50   Input ~ 0
+MOSI
+Text GLabel 1050 3000 0    50   Input ~ 0
+MISO
+Text GLabel 1050 3100 0    50   Input ~ 0
+SCLK
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E4A0171
+P 1050 2800
+F 0 "TP?" V 1004 2988 50  0000 L CNN
+F 1 "TestPoint" V 1095 2988 50  0000 L CNN
+F 2 "" H 1250 2800 50  0001 C CNN
+F 3 "~" H 1250 2800 50  0001 C CNN
+	1    1050 2800
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E4A069C
+P 1050 2900
+F 0 "TP?" V 1004 3088 50  0000 L CNN
+F 1 "TestPoint" V 1095 3088 50  0000 L CNN
+F 2 "" H 1250 2900 50  0001 C CNN
+F 3 "~" H 1250 2900 50  0001 C CNN
+	1    1050 2900
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E4A0810
+P 1050 3000
+F 0 "TP?" V 1004 3188 50  0000 L CNN
+F 1 "TestPoint" V 1095 3188 50  0000 L CNN
+F 2 "" H 1250 3000 50  0001 C CNN
+F 3 "~" H 1250 3000 50  0001 C CNN
+	1    1050 3000
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector:TestPoint TP?
+U 1 1 5E4A08E9
+P 1050 3100
+F 0 "TP?" V 1004 3288 50  0000 L CNN
+F 1 "TestPoint" V 1095 3288 50  0000 L CNN
+F 2 "" H 1250 3100 50  0001 C CNN
+F 3 "~" H 1250 3100 50  0001 C CNN
+	1    1050 3100
+	0    1    1    0   
 $EndComp
 $EndSCHEMATC
