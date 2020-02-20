@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name Project)(type Legacy)(uri ${KIPRJMOD}/Project.lib)(options "")(descr ""))
+  (lib (name Heterodyne-rescue)(type Legacy)(uri ${KIPRJMOD}/Heterodyne-rescue.lib)(options "")(descr ""))
+)
