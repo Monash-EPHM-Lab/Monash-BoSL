@@ -1,0 +1,8 @@
+Ref,Val,Package,PosX,PosY,Rot,Side
+"C5","18 pF","C_0603_1608Metric_Pad1.05x0.95mm_HandSolder",135.925000,-54.900000,180.000000,bottom
+"C6","18 pF","C_0603_1608Metric_Pad1.05x0.95mm_HandSolder",137.900000,-60.175000,90.000000,bottom
+"C11","3.3 μF","C_0805_2012Metric",123.862500,-52.600000,0.000000,bottom
+"R8","10 kΩ","R_0603_1608Metric_Pad1.05x0.95mm_HandSolder",127.281282,-52.418718,45.000000,bottom
+"R11","10 kΩ","R_0603_1608Metric_Pad1.05x0.95mm_HandSolder",120.500000,-62.125000,270.000000,bottom
+"U5","ATmega328PB-AU","TQFP-32_7x7mm_P0.8mm",127.100000,-60.200000,180.000000,bottom
+"Y1","8 MHz","Crystal_SMD_5032-2Pin_5.0x3.2mm",135.100000,-59.350000,270.000000,bottom
