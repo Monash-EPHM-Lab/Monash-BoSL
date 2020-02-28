@@ -330,3 +330,13 @@ void delDCcompFFT(){
 		read[i] -= average;
 	}
 }
+
+
+
+////////////////SPI INTERFACE///////////////
+
+//SET Config
+//SET Power
+//Measure
+//Return value
+//sleep
