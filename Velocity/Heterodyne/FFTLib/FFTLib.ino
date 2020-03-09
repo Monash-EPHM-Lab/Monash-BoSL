@@ -1,7 +1,6 @@
 
 //FFT library
-//#include "src\arduinoFFTfix.h"
-#include <arduinoFFT.h>
+#include "src\arduinoFFTfix.h"
 
 
 double source[128] = {0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0,0,0,1,1,1,1};
@@ -12,7 +11,7 @@ double imag[128];
 
  
 //Define FFT object
-arduinoFFT FFT = arduinoFFT(); 
+arduinoFFTfix FFT = arduinoFFTfix(); 
 
 void setup(){
 

@@ -19,14 +19,14 @@
 
 */
 
-#include "arduinoFFT.h"
+#include "arduinoFFTfix.h"
 
-arduinoFFT::arduinoFFT(void)
+arduinoFFTfix::arduinoFFTfix(void)
 { // Constructor
 	#warning("This method is deprecated and will be removed on future revisions.")
 }
 
-arduinoFFT::arduinoFFT(double *vReal, double *vImag, uint16_t samples, double samplingFrequency)
+arduinoFFTfix::arduinoFFTfix(double *vReal, double *vImag, uint16_t samples, double samplingFrequency)
 {// Constructor
 	this->_vReal = vReal;
 	this->_vImag = vImag;
@@ -35,23 +35,23 @@ arduinoFFT::arduinoFFT(double *vReal, double *vImag, uint16_t samples, double sa
 	this->_power = Exponent(samples);
 }
 
-arduinoFFT::~arduinoFFT(void)
+arduinoFFTfix::~arduinoFFTfix(void)
 {
 // Destructor
 }
 
-uint8_t arduinoFFT::Revision(void)
+uint8_t arduinoFFTfix::Revision(void)
 {
 	return(FFT_LIB_REV);
 }
 
-void arduinoFFT::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t dir)
+void arduinoFFTfix::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t dir)
 {
 	#warning("This method is deprecated and will be removed on future revisions.")
 	Compute(vReal, vImag, samples, Exponent(samples), dir);
 }
 
-void arduinoFFT::Compute(uint8_t dir)
+void arduinoFFTfix::Compute(uint8_t dir)
 {// Computes in-place complex-to-complex FFT /
 	// Reverse bits /
 	uint16_t j = 0;
@@ -106,7 +106,7 @@ void arduinoFFT::Compute(uint8_t dir)
 	}
 }
 
-void arduinoFFT::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t power, uint8_t dir)
+void arduinoFFTfix::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t power, uint8_t dir)
 {	// Computes in-place complex-to-complex FFT
 	// Reverse bits
 	#warning("This method is deprecated and will be removed on future revisions.")
@@ -162,14 +162,14 @@ void arduinoFFT::Compute(double *vReal, double *vImag, uint16_t samples, uint8_t
 	}
 }
 
-void arduinoFFT::ComplexToMagnitude()
+void arduinoFFTfix::ComplexToMagnitude()
 { // vM is half the size of vReal and vImag
 	for (uint16_t i = 0; i < this->_samples; i++) {
 		this->_vReal[i] = sqrt(sq(this->_vReal[i]) + sq(this->_vImag[i]));
 	}
 }
 
-void arduinoFFT::ComplexToMagnitude(double *vReal, double *vImag, uint16_t samples)
+void arduinoFFTfix::ComplexToMagnitude(double *vReal, double *vImag, uint16_t samples)
 {	// vM is half the size of vReal and vImag
 	#warning("This method is deprecated and will be removed on future revisions.")
 	for (uint16_t i = 0; i < samples; i++) {
@@ -177,7 +177,7 @@ void arduinoFFT::ComplexToMagnitude(double *vReal, double *vImag, uint16_t sampl
 	}
 }
 
-void arduinoFFT::DCRemoval()
+void arduinoFFTfix::DCRemoval()
 {
 	// calculate the mean of vData
 	double mean = 0;
@@ -193,7 +193,7 @@ void arduinoFFT::DCRemoval()
 	}
 }
 
-void arduinoFFT::DCRemoval(double *vData, uint16_t samples)
+void arduinoFFTfix::DCRemoval(double *vData, uint16_t samples)
 {
 	// calculate the mean of vData
 	#warning("This method is deprecated and will be removed on future revisions.")
@@ -210,7 +210,7 @@ void arduinoFFT::DCRemoval(double *vData, uint16_t samples)
 	}
 }
 
-void arduinoFFT::Windowing(uint8_t windowType, uint8_t dir)
+void arduinoFFTfix::Windowing(uint8_t windowType, uint8_t dir)
 {// Weighing factors are computed once before multiple use of FFT
 // The weighing function is symetric; half the weighs are recorded
 	double samplesMinusOne = (double(this->_samples) - 1.0);
@@ -263,7 +263,7 @@ void arduinoFFT::Windowing(uint8_t windowType, uint8_t dir)
 }
 
 
-void arduinoFFT::Windowing(double *vData, uint16_t samples, uint8_t windowType, uint8_t dir)
+void arduinoFFTfix::Windowing(double *vData, uint16_t samples, uint8_t windowType, uint8_t dir)
 {// Weighing factors are computed once before multiple use of FFT
 // The weighing function is symetric; half the weighs are recorded
 	#warning("This method is deprecated and will be removed on future revisions.")
@@ -316,7 +316,7 @@ void arduinoFFT::Windowing(double *vData, uint16_t samples, uint8_t windowType, 
 	}
 }
 
-double arduinoFFT::MajorPeak()
+double arduinoFFTfix::MajorPeak()
 {
 	double maxY = 0;
 	uint16_t IndexOfMaxY = 0;
@@ -338,7 +338,7 @@ double arduinoFFT::MajorPeak()
 	return(interpolatedX);
 }
 
-void arduinoFFT::MajorPeak(double *f, double *v)
+void arduinoFFTfix::MajorPeak(double *f, double *v)
 {
 	double maxY = 0;
 	uint16_t IndexOfMaxY = 0;
@@ -361,7 +361,7 @@ void arduinoFFT::MajorPeak(double *f, double *v)
 	*v = abs(this->_vReal[IndexOfMaxY - 1] - (2.0 * this->_vReal[IndexOfMaxY]) + this->_vReal[IndexOfMaxY + 1]);
 }
 
-double arduinoFFT::MajorPeak(double *vD, uint16_t samples, double samplingFrequency)
+double arduinoFFTfix::MajorPeak(double *vD, uint16_t samples, double samplingFrequency)
 {
 	#warning("This method is deprecated and will be removed on future revisions.")
 	double maxY = 0;
@@ -384,7 +384,7 @@ double arduinoFFT::MajorPeak(double *vD, uint16_t samples, double samplingFreque
 	return(interpolatedX);
 }
 
-void arduinoFFT::MajorPeak(double *vD, uint16_t samples, double samplingFrequency, double *f, double *v)
+void arduinoFFTfix::MajorPeak(double *vD, uint16_t samples, double samplingFrequency, double *f, double *v)
 {
 	#warning("This method is deprecated and will be removed on future revisions.")
 	double maxY = 0;
@@ -409,7 +409,7 @@ void arduinoFFT::MajorPeak(double *vD, uint16_t samples, double samplingFrequenc
 	*v = abs(vD[IndexOfMaxY - 1] - (2.0 * vD[IndexOfMaxY]) + vD[IndexOfMaxY + 1]);
 }
 
-uint8_t arduinoFFT::Exponent(uint16_t value)
+uint8_t arduinoFFTfix::Exponent(uint16_t value)
 {
 	#warning("This method will not be accessible on future revisions.")
 	// Calculates the base 2 logarithm of a value
@@ -420,7 +420,7 @@ uint8_t arduinoFFT::Exponent(uint16_t value)
 
 // Private functions
 
-void arduinoFFT::Swap(double *x, double *y)
+void arduinoFFTfix::Swap(double *x, double *y)
 {
 	double temp = *x;
 	*x = *y;

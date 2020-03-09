@@ -19,8 +19,8 @@
 
 */
 
-#ifndef arduinoFFT_h /* Prevent loading library twice */
-#define arduinoFFT_h
+#ifndef arduinoFFTfix_h /* Prevent loading library twice */
+#define arduinoFFTfix_h
 #ifdef ARDUINO
 	#if ARDUINO >= 100
 		#include "Arduino.h"
@@ -34,8 +34,8 @@
 		#include <avr/io.h>
 	#endif
 	#include <math.h>
-	#include "defs.h"
-	#include "types.h"
+	#include "defsfix.h"
+	#include "typesfix.h"
 #endif
 
 #define FFT_LIB_REV 0x14
@@ -59,13 +59,13 @@
 #define fourPi 12.56637061
 #define sixPi 18.84955593
 
-class arduinoFFT {
+class arduinoFFTfix {
 public:
 	/* Constructor */
-	arduinoFFT(void);
-	arduinoFFT(double *vReal, double *vImag, uint16_t samples, double samplingFrequency);
+	arduinoFFTfix(void);
+	arduinoFFTfix(double *vReal, double *vImag, uint16_t samples, double samplingFrequency);
 	/* Destructor */
-	~arduinoFFT(void);
+	~arduinoFFTfix(void);
 	/* Functions */
 	uint8_t Revision(void);
 	uint8_t Exponent(uint16_t value);
