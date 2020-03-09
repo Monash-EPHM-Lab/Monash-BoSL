@@ -1,23 +1,24 @@
 
 //FFT library
-#include <arduinoFFT.h>
+#include "src\arduinoFFTfix.h"
 #include "src\I2C.h"
 
 #define PLOTFFT 0
 #define LOWPRINT 1
 
 //FFT sample buffers
-double read[128];
-double imag[128];
+int16_t read[128];
+int16_t imag[128];
 
 double max;
 double avspeed;
 double indx;
+double rangeScaler;
 
 double low = 0;
  
 //Define FFT object
-arduinoFFT FFT = arduinoFFT(); 
+arduinoFFTfix FFTfix = arduinoFFTfix(); 
 
 void setup(){
 
@@ -92,6 +93,7 @@ double getVel(int velMulti, int averages){
 	double calArray[5] = {5.08,10.2,21.0,40.7,80.6};
 	
 	avspeed = 0;
+	rangeScaler = 0;
 	
 	for (int iter = 0; iter<averages; iter++){
 		max = 0;
@@ -122,9 +124,10 @@ double getVel(int velMulti, int averages){
 	   }
 	   
 		//Compute FFT
-		FFT.Windowing(read, 128, FFT_WIN_TYP_HAMMING, FFT_FORWARD);
-		FFT.Compute(read, imag, 128, FFT_FORWARD);
-		FFT.ComplexToMagnitude(read, imag, 128);
+		rangeScaler = FFTfix.RangeScaling(read, 128);
+		FFTfix.Windowing(read, 128, FFT_FORWARD);
+		FFTfix.Compute(read, imag, 128, FFT_FORWARD);
+		FFTfix.ComplexToMagnitude(read, imag, 128);
 			
 			
 		//nullRemove();	
@@ -187,7 +190,7 @@ double getVel(int velMulti, int averages){
 		}
 		indx = indx/max;
 		
-		low = max;
+		low = max*rangeScaler;
 		
 		//converts frequency to mm/s
 		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
@@ -207,9 +210,9 @@ void sampleFast(){
 	I2c.write(54, 0b11011100);
 	I2c.write(54, 0b00000010);
 	
-	I2c.read(54,255,adcData);
+	I2c.read(54,256,adcData);
 	
-	for(int i = 0; i <254; i += 2){
+	for(int i = 0; i <255; i += 2){
 	int rsult = (adcData[i]-240)*256 + adcData[i+1];
 	if (rsult > 2048){
 		rsult = rsult - 4096;
@@ -217,7 +220,7 @@ void sampleFast(){
 	read[i/2] = rsult;
 	}
 	
-	read[127] = read[126];
+	//read[127] = read[126];
 	
 }
 
