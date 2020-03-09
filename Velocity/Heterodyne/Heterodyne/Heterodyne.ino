@@ -5,10 +5,11 @@
 
 #define PLOTFFT 0
 #define LOWPRINT 1
+#define SAMPLES 256
 
 //FFT sample buffers
-int16_t read[128];
-int16_t imag[128];
+int16_t read[SAMPLES];
+int16_t imag[SAMPLES];
 
 double max;
 double avspeed;
@@ -119,21 +120,21 @@ double getVel(int velMulti, int averages){
 		delDCcomp();
 
 		//set imaginary componet of FFT to zero
-		for(int i = 0; i < 128; i++){
+		for(int i = 0; i < SAMPLES; i++){
 		   imag[i] = 0;
 	   }
 	   
 		//Compute FFT
-		rangeScaler = FFTfix.RangeScaling(read, 128);
-		FFTfix.Windowing(read, 128, FFT_FORWARD);
-		FFTfix.Compute(read, imag, 128, FFT_FORWARD);
-		FFTfix.ComplexToMagnitude(read, imag, 128);
+		rangeScaler = FFTfix.RangeScaling(read, SAMPLES);
+		FFTfix.Windowing(read, SAMPLES, FFT_FORWARD);
+		FFTfix.Compute(read, imag, SAMPLES, FFT_FORWARD);
+		FFTfix.ComplexToMagnitude(read, imag, SAMPLES);
 			
 			
 		//nullRemove();	
 		
 				
-		for(int i=2; i<(128/2); i++)
+		for(int i=2; i<(SAMPLES/2); i++)
 		{
 			if (read[i] > max){
 				max = read[i];
@@ -153,11 +154,11 @@ double getVel(int velMulti, int averages){
 		delDCcompFFT();
 		
 
-		for(int i = 2; i < (128/2); i++){
+		for(int i = 2; i < (SAMPLES/2); i++){
 			read[i] -=3;			
 		}
 		
-		for(int i = 2; i < (128/2); i++){
+		for(int i = 2; i < (SAMPLES/2); i++){
 		if (read[i] < 0){
 			read[i] = 0;
 		}
@@ -165,7 +166,7 @@ double getVel(int velMulti, int averages){
 		}
 		
 		bool Npeak = 0;
-		for(int i = indx; i < (128/2); i++){
+		for(int i = indx; i < (SAMPLES/2); i++){
 			if (read[i] == 0){
 				Npeak = 1;
 			}
@@ -184,18 +185,18 @@ double getVel(int velMulti, int averages){
 		}
 		indx = 0;
 		max = 0;
-		for(int i = 2; i < (128/2); i++){
+		for(int i = 2; i < (SAMPLES/2); i++){
 			indx += read[i]*i;
 			max += read[i];
 		}
 		indx = indx/max;
 		
-		low = max*rangeScaler;
+		low = max*rangeScaler/(SAMPLES/128);
 		
 		//converts frequency to mm/s
 		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
 		
-		max = (indx)*(calArray[velMulti])*0.75;
+		max = (indx)*(calArray[velMulti])*0.75/(SAMPLES/128);
 		avspeed += max;
 	}
 	avspeed = avspeed/averages;
@@ -205,22 +206,20 @@ double getVel(int velMulti, int averages){
 
 
 void sampleFast(){
-	uint8_t adcData[256];
+	uint8_t adcData[SAMPLES*2];
 	
 	I2c.write(54, 0b11011100);
 	I2c.write(54, 0b00000010);
 	
-	I2c.read(54,256,adcData);
+	I2c.read(54,SAMPLES*2,adcData);
 	
-	for(int i = 0; i <255; i += 2){
+	for(int i = 0; i <SAMPLES*2; i += 2){
 	int rsult = (adcData[i]-240)*256 + adcData[i+1];
 	if (rsult > 2048){
 		rsult = rsult - 4096;
 	}
 	read[i/2] = rsult;
 	}
-	
-	//read[127] = read[126];
 	
 }
 
@@ -232,7 +231,7 @@ void sampleSlow(int delay){
 	uint8_t LSB;
 	
 	
-	for(int i =0; i<256; i += 2){
+	for(int i =0; i<SAMPLES*2; i += 2){
 		I2c.read(54, 2);
 		
 		MSB = I2c.receive();
@@ -252,7 +251,7 @@ void sampleSlow(int delay){
 }
 
 void betterMAX(){
-	for(int i=2; i<(128/2); i++)
+	for(int i=2; i<(SAMPLES/2); i++)
 		{
 			read[i] -= (max - 5);
 			if (read[i] < 0){
@@ -261,7 +260,7 @@ void betterMAX(){
 		}
 		max = 0;
 		indx = 0;
-		for(int i=1; i<(128/2); i++)
+		for(int i=1; i<(SAMPLES/2); i++)
 		{
 			indx += read[i]*i;
 			max +=read[i];	
@@ -271,14 +270,14 @@ void betterMAX(){
 }
 
 void plotRAW(){
-	for(int i=0; i<(128); i++)
+	for(int i=0; i<(SAMPLES); i++)
     {
         Serial.println(read[i]);   
     }
 }
 
 void plotFFT(){
-	for(int i=2; i<(128/2); i++)
+	for(int i=2; i<(SAMPLES/2); i++)
     {
         Serial.println(read[i], 1);   
     }
@@ -294,7 +293,7 @@ void plotFFT(){
 
 //subtract null signal from fft data
 void nullRemove(){
-	for (int i =2; i<(128/2); i++){
+	for (int i =2; i<(SAMPLES/2); i++){
 		
 		read[i] -= 1000/(i*i);
 	}	
@@ -311,12 +310,12 @@ void clearPlot(){
 void delDCcomp(){
 	int32_t average = 0;
 	
-	for( int i = 0; i < 128; i++){
+	for( int i = 0; i < SAMPLES; i++){
 		average += read[i];
 	}
-	average = average/128;
+	average = average/SAMPLES;
 	
-	for( int i = 0; i < 128; i++){
+	for( int i = 0; i < SAMPLES; i++){
 		read[i] -= average;
 	}
 }
@@ -324,12 +323,12 @@ void delDCcomp(){
 void delDCcompFFT(){
 	int32_t average = 0;
 	
-	for( int i = 2; i < (128/2); i++){
+	for( int i = 2; i < (SAMPLES/2); i++){
 		average += read[i];
 	}
-	average = average/62;
+	average = average/((SAMPLES/2)-2);
 	
-	for( int i = 2; i < (128/2); i++){
+	for( int i = 2; i < (SAMPLES/2); i++){
 		read[i] -= average;
 	}
 }
