@@ -1,5 +1,0 @@
-(fp_lib_table
-  (lib (name "AM Demodulator")(type KiCad)(uri "D:/data/My Documents/Monash/Monash-BoSL/Velocity/EDA/AM Demodulator/AM Demodulator.pretty")(options "")(descr ""))
-  (lib (name Turbitidy)(type KiCad)(uri "D:/data/My Documents/Monash/Code/Turbidity/Turbitidy/Turbitidy.pretty")(options "")(descr ""))
-  (lib (name Heterodyne)(type KiCad)(uri ${KIPRJMOD}/Heterodyne.pretty)(options "")(descr ""))
-)
