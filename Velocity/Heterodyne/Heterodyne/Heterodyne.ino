@@ -3,7 +3,7 @@
 #include "src\arduinoFFTfix.h"
 #include "src\I2C.h"
 
-#define PLOTFFT 0
+#define PLOTFFT 1
 #define LOWPRINT 1
 #define SAMPLES 256
 
@@ -21,8 +21,14 @@ double low = 0;
 //Define FFT object
 arduinoFFTfix FFTfix = arduinoFFTfix(); 
 
-void setup(){
 
+
+void setup(){
+	pinMode(3,OUTPUT);
+	pinMode(9,OUTPUT);
+	digitalWrite(9,HIGH);
+	digitalWrite(3,HIGH);
+	
    I2c.begin();
    I2c.setSpeed(1); //Note 200 kHz Bus Speed
    Serial.begin(115200);
@@ -151,44 +157,44 @@ double getVel(int velMulti, int averages){
 		//betterMAX();
 		
 		//////////////////////
-		delDCcompFFT();
+		// delDCcompFFT();
 		
 
-		for(int i = 2; i < (SAMPLES/2); i++){
-			read[i] -=3;			
-		}
+		// for(int i = 2; i < (SAMPLES/2); i++){
+			// read[i] -=3;			
+		// }
 		
-		for(int i = 2; i < (SAMPLES/2); i++){
-		if (read[i] < 0){
-			read[i] = 0;
-		}
+		// for(int i = 2; i < (SAMPLES/2); i++){
+		// if (read[i] < 0){
+			// read[i] = 0;
+		// }
 			
-		}
+		// }
 		
-		bool Npeak = 0;
-		for(int i = indx; i < (SAMPLES/2); i++){
-			if (read[i] == 0){
-				Npeak = 1;
-			}
-			if (Npeak){
-				read[i] = 0;
-			}
-		}
-		Npeak = 0;
-		for(int i = indx; i > 0; i--){
-			if (read[i] == 0){
-				Npeak = 1;
-			}
-			if (Npeak){
-				read[i] = 0;
-			}
-		}
-		indx = 0;
-		max = 0;
-		for(int i = 2; i < (SAMPLES/2); i++){
-			indx += read[i]*i;
-			max += read[i];
-		}
+		// bool Npeak = 0;
+		// for(int i = indx; i < (SAMPLES/2); i++){
+			// if (read[i] == 0){
+				// Npeak = 1;
+			// }
+			// if (Npeak){
+				// read[i] = 0;
+			// }
+		// }
+		// Npeak = 0;
+		// for(int i = indx; i > 0; i--){
+			// if (read[i] == 0){
+				// Npeak = 1;
+			// }
+			// if (Npeak){
+				// read[i] = 0;
+			// }
+		// }
+		// indx = 0;
+		// max = 0;
+		// for(int i = 2; i < (SAMPLES/2); i++){
+			// indx += read[i]*i;
+			// max += read[i];
+		// }
 		indx = indx/max;
 		
 		low = max*rangeScaler/(SAMPLES/128);
