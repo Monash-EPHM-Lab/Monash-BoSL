@@ -6,6 +6,7 @@
 #define PLOTFFT 1
 #define LOWPRINT 1
 #define SAMPLES 256
+#define ADCADR 0x34
 
 //FFT sample buffers
 int16_t read[SAMPLES];
@@ -214,10 +215,10 @@ double getVel(int velMulti, int averages){
 void sampleFast(){
 	uint8_t adcData[SAMPLES*2];
 	
-	I2c.write(54, 0b11011100);
-	I2c.write(54, 0b00000010);
+	I2c.write(ADCADR, 0b11011100);
+	I2c.write(ADCADR, 0b00000010);
 	
-	I2c.read(54,SAMPLES*2,adcData);
+	I2c.read(ADCADR,SAMPLES*2,adcData);
 	
 	for(int i = 0; i <SAMPLES*2; i += 2){
 	int rsult = (adcData[i]-240)*256 + adcData[i+1];
@@ -230,15 +231,15 @@ void sampleFast(){
 }
 
 void sampleSlow(int delay){
-	I2c.write(54, 0b11010100);
-	I2c.write(54, 0b00000010);
+	I2c.write(ADCADR, 0b11010100);
+	I2c.write(ADCADR, 0b00000010);
 	
 	uint8_t MSB;
 	uint8_t LSB;
 	
 	
 	for(int i =0; i<SAMPLES*2; i += 2){
-		I2c.read(54, 2);
+		I2c.read(ADCADR, 2);
 		
 		MSB = I2c.receive();
 		LSB = I2c.receive();
