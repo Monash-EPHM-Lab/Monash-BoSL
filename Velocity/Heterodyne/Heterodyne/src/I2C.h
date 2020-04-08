@@ -109,7 +109,7 @@ class I2C
     uint8_t read(int, int);
     uint8_t read(uint8_t, uint8_t, uint8_t);
     uint8_t read(int, int, int);
-    uint8_t read(uint8_t, uint16_t, uint8_t*);
+    uint8_t readex(uint8_t, uint16_t, uint8_t*);
     uint8_t read(uint8_t, uint8_t, uint8_t, uint8_t*);
 
 
@@ -121,11 +121,11 @@ class I2C
     uint8_t stop();
     void lockUp();
     uint8_t returnStatus;
-    uint8_t nack;
+    uint16_t nack;
     uint8_t data[MAX_BUFFER_SIZE];
-    static uint8_t bytesAvailable;
+    static uint16_t bytesAvailable;
     static uint8_t bufferIndex;
-    static uint8_t totalBytes;
+    static uint16_t totalBytes;
     static uint16_t timeOutDelay;
 
 };

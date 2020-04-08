@@ -3,7 +3,7 @@
 #include "src\arduinoFFTfix.h"
 #include "src\I2C.h"
 
-#define PLOTFFT 1
+#define PLOTFFT 0
 #define LOWPRINT 1
 #define SAMPLES 256
 #define ADCADR 0x34
@@ -104,6 +104,8 @@ double getVel(int velMulti, int averages){
 	rangeScaler = 0;
 	
 	for (int iter = 0; iter<averages; iter++){
+		
+		
 		max = 0;
 		indx = 0;
 			
@@ -218,7 +220,7 @@ void sampleFast(){
 	I2c.write(ADCADR, 0b11011100);
 	I2c.write(ADCADR, 0b00000010);
 	
-	I2c.read(ADCADR,SAMPLES*2,adcData);
+	I2c.readex(ADCADR,SAMPLES*2,adcData);
 	
 	for(int i = 0; i <SAMPLES*2; i += 2){
 	int rsult = (adcData[i]-240)*256 + adcData[i+1];

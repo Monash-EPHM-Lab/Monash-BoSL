@@ -64,9 +64,9 @@
 
 
 
-uint8_t I2C::bytesAvailable = 0;
+uint16_t I2C::bytesAvailable = 0;
 uint8_t I2C::bufferIndex = 0;
-uint8_t I2C::totalBytes = 0;
+uint16_t I2C::totalBytes = 0;
 uint16_t I2C::timeOutDelay = 0;
 
 I2C::I2C()
@@ -455,7 +455,7 @@ uint8_t I2C::read(uint8_t address, uint8_t registerAddress, uint8_t numberBytes)
   return(returnStatus);
 }
 
-uint8_t I2C::read(uint8_t address, uint16_t numberBytes, uint8_t *dataBuffer)
+uint8_t I2C::readex(uint8_t address, uint16_t numberBytes, uint8_t *dataBuffer)
 {
   bytesAvailable = 0;
   bufferIndex = 0;
@@ -470,7 +470,7 @@ uint8_t I2C::read(uint8_t address, uint16_t numberBytes, uint8_t *dataBuffer)
     if(returnStatus == 1){return(5);}
     return(returnStatus);
   }
-  for(uint8_t i = 0; i < numberBytes; i++)
+  for(uint16_t i = 0; i < numberBytes; i++)
   {
     if( i == nack )
     {
