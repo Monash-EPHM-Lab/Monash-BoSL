@@ -572,17 +572,6 @@ $EndComp
 Wire Wire Line
 	5000 4150 5000 4050
 $Comp
-L Heterodyne-rescue:VPP-power #PWR0103
-U 1 1 5E43C439
-P 4700 3800
-F 0 "#PWR0103" H 4700 3650 50  0001 C CNN
-F 1 "VPP" V 4715 3927 50  0000 L CNN
-F 2 "" H 4700 3800 50  0001 C CNN
-F 3 "" H 4700 3800 50  0001 C CNN
-	1    4700 3800
-	0    -1   -1   0   
-$EndComp
-$Comp
 L Heterodyne-rescue:GND-power #PWR0104
 U 1 1 5E43C850
 P 4700 4050
@@ -918,4 +907,8 @@ F 3 "~" H 1250 3150 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 NoConn ~ 1600 2450
+Text GLabel 2800 2450 2    50   Input ~ 0
+VREF
+Text GLabel 4700 3800 0    50   Input ~ 0
+VREF
 $EndSCHEMATC

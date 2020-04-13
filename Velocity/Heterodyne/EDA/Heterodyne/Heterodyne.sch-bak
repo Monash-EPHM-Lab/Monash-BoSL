@@ -874,10 +874,10 @@ MISO
 Text GLabel 1050 3150 0    50   Input ~ 0
 SCLK
 $Comp
-L Connector:TestPoint TP?
+L Connector:TestPoint TP1
 U 1 1 5E4B4DF0
 P 1050 2700
-F 0 "TP?" V 1004 2888 50  0000 L CNN
+F 0 "TP1" V 1004 2888 50  0000 L CNN
 F 1 "TestPoint" V 1095 2888 50  0000 L CNN
 F 2 "Heterodyne:Testpoint SPI" H 1250 2700 50  0001 C CNN
 F 3 "~" H 1250 2700 50  0001 C CNN
@@ -885,10 +885,10 @@ F 3 "~" H 1250 2700 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L Connector:TestPoint TP2
 U 1 1 5E4B56C0
 P 1050 2850
-F 0 "TP?" V 1004 3038 50  0000 L CNN
+F 0 "TP2" V 1004 3038 50  0000 L CNN
 F 1 "TestPoint" V 1095 3038 50  0000 L CNN
 F 2 "Heterodyne:Testpoint SPI" H 1250 2850 50  0001 C CNN
 F 3 "~" H 1250 2850 50  0001 C CNN
@@ -896,10 +896,10 @@ F 3 "~" H 1250 2850 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L Connector:TestPoint TP3
 U 1 1 5E4B5809
 P 1050 3000
-F 0 "TP?" V 1004 3188 50  0000 L CNN
+F 0 "TP3" V 1004 3188 50  0000 L CNN
 F 1 "TestPoint" V 1095 3188 50  0000 L CNN
 F 2 "Heterodyne:Testpoint SPI" H 1250 3000 50  0001 C CNN
 F 3 "~" H 1250 3000 50  0001 C CNN
@@ -907,14 +907,15 @@ F 3 "~" H 1250 3000 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Connector:TestPoint TP?
+L Connector:TestPoint TP4
 U 1 1 5E4B5960
 P 1050 3150
-F 0 "TP?" V 1004 3338 50  0000 L CNN
+F 0 "TP4" V 1004 3338 50  0000 L CNN
 F 1 "TestPoint" V 1095 3338 50  0000 L CNN
 F 2 "Heterodyne:Testpoint SPI" H 1250 3150 50  0001 C CNN
 F 3 "~" H 1250 3150 50  0001 C CNN
 	1    1050 3150
 	0    1    1    0   
 $EndComp
+NoConn ~ 1600 2450
 $EndSCHEMATC
