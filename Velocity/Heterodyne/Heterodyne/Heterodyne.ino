@@ -3,8 +3,8 @@
 #include "src\arduinoFFTfix.h"
 #include "src\I2C.h"
 
-#define PLOTFFT 0
-#define LOWPRINT 1
+#define PLOTFFT 1
+#define LOWPRINT 0
 #define SAMPLES 256
 #define ADCADR 0x34
 
@@ -25,10 +25,10 @@ arduinoFFTfix FFTfix = arduinoFFTfix();
 
 
 void setup(){
-	pinMode(3,OUTPUT);
-	pinMode(9,OUTPUT);
-	digitalWrite(9,HIGH);
-	digitalWrite(3,HIGH);
+	 pinMode(3,OUTPUT);
+	 pinMode(9,OUTPUT);
+	 digitalWrite(9,HIGH);
+	 digitalWrite(3,HIGH);
 	
    I2c.begin();
    I2c.setSpeed(1); //Note 200 kHz Bus Speed
@@ -89,7 +89,7 @@ void loop(){
 		printlow();
 		if (PLOTFFT){
 			plotFFT();
-			clearPlot();
+			//clearPlot();
 		}else{
 		Serial.println(result);
 		}
@@ -133,7 +133,7 @@ double getVel(int velMulti, int averages){
 		   imag[i] = 0;
 	   }
 	   
-		//Compute FFT
+		// //Compute FFT
 		rangeScaler = FFTfix.RangeScaling(read, SAMPLES);
 		FFTfix.Windowing(read, SAMPLES, FFT_FORWARD);
 		FFTfix.Compute(read, imag, SAMPLES, FFT_FORWARD);
@@ -143,14 +143,14 @@ double getVel(int velMulti, int averages){
 		//nullRemove();	
 		
 				
-		for(int i=2; i<(SAMPLES/2); i++)
-		{
-			if (read[i] > max){
-				max = read[i];
-				indx = i;
-			}
+		// for(int i=2; i<(SAMPLES/2); i++)
+		// {
+			// if (read[i] > max){
+				// max = read[i];
+				// indx = i;
+			// }
 			
-		}
+		// }
 		
 		
 		// if (max < 15){
@@ -217,7 +217,7 @@ double getVel(int velMulti, int averages){
 void sampleFast(){
 	uint8_t adcData[SAMPLES*2];
 	
-	I2c.write(ADCADR, 0b11011100);
+	I2c.write(ADCADR, 0b10101100);
 	I2c.write(ADCADR, 0b00000010);
 	
 	I2c.readex(ADCADR,SAMPLES*2,adcData);
@@ -233,7 +233,7 @@ void sampleFast(){
 }
 
 void sampleSlow(int delay){
-	I2c.write(ADCADR, 0b11010100);
+	I2c.write(ADCADR, 0b10100100);
 	I2c.write(ADCADR, 0b00000010);
 	
 	uint8_t MSB;
@@ -245,13 +245,12 @@ void sampleSlow(int delay){
 		
 		MSB = I2c.receive();
 		LSB = I2c.receive();
-		
-		int rsult = (MSB-240)*256 + LSB;
+
+		int16_t rsult = (MSB-240)*256 + LSB;
 		if (rsult > 2048){
 			rsult = rsult - 4096;
 		}
 		read[i/2] = rsult;
-
 		delayMicroseconds(delay);
 	}
 	
@@ -288,7 +287,7 @@ void plotRAW(){
 void plotFFT(){
 	for(int i=2; i<(SAMPLES/2); i++)
     {
-        Serial.println(read[i], 1);   
+        Serial.println(read[i]);   
     }
 
     for(int i=0; i<(1); i++)
@@ -319,12 +318,12 @@ void clearPlot(){
 void delDCcomp(){
 	int32_t average = 0;
 	
-	for( int i = 0; i < SAMPLES; i++){
+	for( int16_t i = 0; i < SAMPLES; i++){
 		average += read[i];
 	}
-	average = average/SAMPLES;
+	average = (average/SAMPLES);
 	
-	for( int i = 0; i < SAMPLES; i++){
+	for( int16_t i = 0; i < SAMPLES; i++){
 		read[i] -= average;
 	}
 }
