@@ -3,8 +3,8 @@
 #include "src\arduinoFFTfix.h"
 #include "src\I2C.h"
 
-#define PLOTFFT 1
-#define LOWPRINT 0
+#define PLOTFFT 0
+#define LOWPRINT 1
 #define SAMPLES 256
 #define ADCADR 0x34
 
@@ -44,7 +44,7 @@ void printlow(){
 		}
 	}else{
 		Serial.print("| ");
-		Serial.print(low);
+		Serial.print(low/100000);
 		Serial.print(", ");
 	}		
 	}
@@ -140,64 +140,64 @@ double getVel(int velMulti, int averages){
 		FFTfix.ComplexToMagnitude(read, imag, SAMPLES);
 			
 			
-		//nullRemove();	
+		//////////nullRemove();	
 		
 				
-		// for(int i=2; i<(SAMPLES/2); i++)
-		// {
-			// if (read[i] > max){
-				// max = read[i];
-				// indx = i;
-			// }
+		for(int i=2; i<(SAMPLES/2); i++)
+		{
+			if (read[i] > max){
+				max = read[i];
+				indx = i;
+			}
 			
-		// }
+		}
 		
 		
 		// if (max < 15){
 			// low = 1;		
 		// }
-		/////////////////
+		///////////////
 		//betterMAX();
 		
-		//////////////////////
-		// delDCcompFFT();
+		////////////////////
+		delDCcompFFT();
 		
 
-		// for(int i = 2; i < (SAMPLES/2); i++){
-			// read[i] -=3;			
-		// }
+		for(int i = 2; i < (SAMPLES/2); i++){
+			read[i] -=3; //MAJIK number			
+		}
 		
-		// for(int i = 2; i < (SAMPLES/2); i++){
-		// if (read[i] < 0){
-			// read[i] = 0;
-		// }
+		for(int i = 2; i < (SAMPLES/2); i++){
+		if (read[i] < 0){
+			read[i] = 0;
+		}
 			
-		// }
+		}
 		
-		// bool Npeak = 0;
-		// for(int i = indx; i < (SAMPLES/2); i++){
-			// if (read[i] == 0){
-				// Npeak = 1;
-			// }
-			// if (Npeak){
-				// read[i] = 0;
-			// }
-		// }
-		// Npeak = 0;
-		// for(int i = indx; i > 0; i--){
-			// if (read[i] == 0){
-				// Npeak = 1;
-			// }
-			// if (Npeak){
-				// read[i] = 0;
-			// }
-		// }
-		// indx = 0;
-		// max = 0;
-		// for(int i = 2; i < (SAMPLES/2); i++){
-			// indx += read[i]*i;
-			// max += read[i];
-		// }
+		bool Npeak = 0;
+		for(int i = indx; i < (SAMPLES/2); i++){
+			if (read[i] == 0){
+				Npeak = 1;
+			}
+			if (Npeak){
+				read[i] = 0;
+			}
+		}
+		Npeak = 0;
+		for(int i = indx; i > 0; i--){
+			if (read[i] == 0){
+				Npeak = 1;
+			}
+			if (Npeak){
+				read[i] = 0;
+			}
+		}
+		indx = 0;
+		max = 0;
+		for(int i = 2; i < (SAMPLES/2); i++){
+			indx += read[i]*(float)i;
+			max += read[i];
+		}
 		indx = indx/max;
 		
 		low = max*rangeScaler/(SAMPLES/128);
@@ -206,6 +206,7 @@ double getVel(int velMulti, int averages){
 		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
 		
 		max = (indx)*(calArray[velMulti])*0.75/(SAMPLES/128);
+		
 		avspeed += max;
 	}
 	avspeed = avspeed/averages;
