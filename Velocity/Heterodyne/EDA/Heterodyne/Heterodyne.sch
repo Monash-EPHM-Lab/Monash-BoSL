@@ -496,23 +496,23 @@ Wire Wire Line
 $Comp
 L Heterodyne-rescue:GND-power #PWR0123
 U 1 1 5E3B45F2
-P 8450 4950
-F 0 "#PWR0123" H 8450 4700 50  0001 C CNN
-F 1 "GND" V 8455 4823 50  0000 R CNN
-F 2 "" H 8450 4950 50  0001 C CNN
-F 3 "" H 8450 4950 50  0001 C CNN
-	1    8450 4950
+P 8600 4950
+F 0 "#PWR0123" H 8600 4700 50  0001 C CNN
+F 1 "GND" V 8605 4823 50  0000 R CNN
+F 2 "" H 8600 4950 50  0001 C CNN
+F 3 "" H 8600 4950 50  0001 C CNN
+	1    8600 4950
 	-1   0    0    1   
 $EndComp
 $Comp
 L Heterodyne-rescue:VPP-power #PWR0124
 U 1 1 5E3B49BA
-P 8550 4950
-F 0 "#PWR0124" H 8550 4800 50  0001 C CNN
-F 1 "VPP" V 8565 5076 50  0000 L CNN
-F 2 "" H 8550 4950 50  0001 C CNN
-F 3 "" H 8550 4950 50  0001 C CNN
-	1    8550 4950
+P 8700 4950
+F 0 "#PWR0124" H 8700 4800 50  0001 C CNN
+F 1 "VPP" V 8715 5076 50  0000 L CNN
+F 2 "" H 8700 4950 50  0001 C CNN
+F 3 "" H 8700 4950 50  0001 C CNN
+	1    8700 4950
 	1    0    0    -1  
 $EndComp
 NoConn ~ 5100 4150
@@ -551,7 +551,7 @@ $Comp
 L Device:R R6
 U 1 1 5E436A94
 P 4850 4050
-F 0 "R6" V 4750 4050 50  0000 R CNN
+F 0 "R6" V 4950 4050 50  0000 R CNN
 F 1 "1 kΩ" V 4850 4150 50  0000 R CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4780 4050 50  0001 C CNN
 F 3 "~" H 4850 4050 50  0001 C CNN
@@ -561,12 +561,12 @@ $EndComp
 $Comp
 L Device:R R5
 U 1 1 5E436F78
-P 4850 3800
-F 0 "R5" V 4950 3850 50  0000 C CNN
-F 1 "2 kΩ" V 4850 3800 50  0000 C CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4780 3800 50  0001 C CNN
-F 3 "~" H 4850 3800 50  0001 C CNN
-	1    4850 3800
+P 4750 3550
+F 0 "R5" V 4850 3600 50  0000 C CNN
+F 1 "2 kΩ" V 4750 3550 50  0000 C CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 4680 3550 50  0001 C CNN
+F 3 "~" H 4750 3550 50  0001 C CNN
+	1    4750 3550
 	0    -1   -1   0   
 $EndComp
 Wire Wire Line
@@ -602,9 +602,6 @@ Wire Wire Line
 	5650 3400 5650 3700
 Wire Wire Line
 	5650 3700 5500 3700
-Wire Wire Line
-	5000 3800 5000 4050
-Connection ~ 5000 4050
 Wire Wire Line
 	5200 4150 5200 3700
 Connection ~ 5200 3700
@@ -650,17 +647,6 @@ F 2 "" H 4600 5200 50  0001 C CNN
 F 3 "" H 4600 5200 50  0001 C CNN
 	1    4600 5200
 	0    -1   -1   0   
-$EndComp
-$Comp
-L MCU_Microchip_ATmega:ATmega328PB-AU U5
-U 1 1 5E452B6B
-P 2200 3650
-F 0 "U5" H 1750 5150 50  0000 C CNN
-F 1 "ATmega328PB-AU" H 2750 5100 50  0000 C CNN
-F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 2200 3650 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40001906C.pdf" H 2200 3650 50  0001 C CNN
-	1    2200 3650
-	1    0    0    -1  
 $EndComp
 $Comp
 L Heterodyne-rescue:VPP-power #PWR0110
@@ -803,11 +789,11 @@ Text GLabel 2800 2550 2    50   Input ~ 0
 VOPAMP
 Text GLabel 3050 3950 1    50   Input ~ 0
 TTL_RST
-Text GLabel 8350 4950 1    50   Input ~ 0
+Text GLabel 8500 4950 1    50   Input ~ 0
 TTL_RST
-Text GLabel 8250 4950 1    50   Input ~ 0
+Text GLabel 8400 4950 1    50   Input ~ 0
 TTL_RX
-Text GLabel 8150 4950 1    50   Input ~ 0
+Text GLabel 8300 4950 1    50   Input ~ 0
 TTL_TX
 $Comp
 L Heterodyne-rescue:R-Device R1
@@ -822,17 +808,6 @@ F 3 "~" H 7000 3550 50  0001 C CNN
 $EndComp
 Text GLabel 7000 3400 1    50   Input ~ 0
 VOPAMP
-$Comp
-L Connector_Generic:Conn_01x05 J1
-U 1 1 5E4B4FBE
-P 8350 5150
-F 0 "J1" V 8222 5430 50  0000 L CNN
-F 1 "Conn_01x05" V 8313 5430 50  0000 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 8350 5150 50  0001 C CNN
-F 3 "~" H 8350 5150 50  0001 C CNN
-	1    8350 5150
-	0    1    1    0   
-$EndComp
 Text Notes 2350 1450 0    50   ~ 0
 OPTIMISATION IDEA: USE ARDUINO TO GENERATE 1MHz WAVE
 $Comp
@@ -907,8 +882,66 @@ F 3 "~" H 1250 3150 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 NoConn ~ 1600 2450
-Text GLabel 2800 2450 2    50   Input ~ 0
+Text GLabel 2800 3350 2    50   Input ~ 0
 VREF
-Text GLabel 4700 3800 0    50   Input ~ 0
+Text GLabel 4600 3550 0    50   Input ~ 0
 VREF
+$Comp
+L Connector_Generic:Conn_01x06 J1
+U 1 1 5E9822C7
+P 8500 5150
+F 0 "J1" V 8372 5430 50  0000 L CNN
+F 1 "Conn_01x06" V 8463 5430 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 8500 5150 50  0001 C CNN
+F 3 "~" H 8500 5150 50  0001 C CNN
+	1    8500 5150
+	0    1    1    0   
+$EndComp
+Text GLabel 2800 4350 2    50   Input ~ 0
+TLL_WAKE
+$Comp
+L MCU_Microchip_ATmega:ATmega328PB-AU U5
+U 1 1 5E452B6B
+P 2200 3650
+F 0 "U5" H 1750 5150 50  0000 C CNN
+F 1 "ATmega328PB-AU" H 2750 5100 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 2200 3650 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/40001906C.pdf" H 2200 3650 50  0001 C CNN
+	1    2200 3650
+	1    0    0    -1  
+$EndComp
+Text GLabel 8200 4950 1    50   Input ~ 0
+TLL_WAKE
+$Comp
+L Heterodyne-rescue:C-Device C7
+U 1 1 5E989C6F
+P 4850 3900
+F 0 "C7" V 4600 3850 50  0000 C CNN
+F 1 "100 nF" V 4700 3800 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 4888 3750 50  0001 C CNN
+F 3 "~" H 4850 3900 50  0001 C CNN
+	1    4850 3900
+	0    1    1    0   
+$EndComp
+$Comp
+L Heterodyne-rescue:GND-power #PWR01
+U 1 1 5E9905FE
+P 4700 3900
+F 0 "#PWR01" H 4700 3650 50  0001 C CNN
+F 1 "GND" V 4705 3773 50  0000 R CNN
+F 2 "" H 4700 3900 50  0001 C CNN
+F 3 "" H 4700 3900 50  0001 C CNN
+	1    4700 3900
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5000 4050 5000 3900
+Connection ~ 5000 4050
+Wire Wire Line
+	4900 3750 5000 3750
+Wire Wire Line
+	5000 3750 5000 3900
+Connection ~ 5000 3900
+Wire Wire Line
+	4900 3550 4900 3750
 $EndSCHEMATC
