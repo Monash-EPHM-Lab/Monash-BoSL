@@ -1,13 +1,13 @@
 EESchema Schematic File Version 4
-LIBS:BoSL-cache
+LIBS:BoSL_GSP-cache
 EELAYER 29 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
-Title "Monash BoSL Board"
-Date "2019-08-25"
-Rev "0.3"
+Title "Monash BoSL G Board"
+Date "2019-11-01"
+Rev "0.3 G"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -142,7 +142,6 @@ NoConn ~ 9150 3350
 NoConn ~ 9150 3450
 NoConn ~ 9150 3550
 NoConn ~ 9150 3650
-NoConn ~ 8550 1500
 NoConn ~ 9150 2150
 NoConn ~ 9150 2250
 NoConn ~ 9150 2350
@@ -465,17 +464,6 @@ F 1 "GND" H 3050 1150 50  0000 C CNN
 F 2 "" H 3050 1300 50  0000 C CNN
 F 3 "" H 3050 1300 50  0000 C CNN
 	1    3050 1300
-	1    0    0    -1  
-$EndComp
-$Comp
-L SIM7000-rescue:SIM7000-simcom IC2
-U 1 1 5CE4EC39
-P 7850 2850
-F 0 "IC2" H 7800 2700 50  0000 L CNN
-F 1 "SIM7000" H 7700 2850 50  0000 L CNN
-F 2 "SIMFootprints:SIM7000" H 8338 2950 50  0001 C CNN
-F 3 "" H 8300 3100 50  0000 C CNN
-	1    7850 2850
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -1000,7 +988,7 @@ Text GLabel 15100 3500 3    60   Input ~ 0
 USB_DM
 Text GLabel 15200 3500 3    60   Input ~ 0
 USB_DP
-Text GLabel 8650 1500 1    60   Input ~ 0
+Text GLabel 8750 1500 2    60   Input ~ 0
 NETLIGHT
 Text GLabel 11550 1100 0    60   Input ~ 0
 NETLIGHT
@@ -1354,8 +1342,6 @@ Wire Notes Line
 	1200 3750 1200 5300
 Wire Notes Line
 	1200 5300 500  5300
-Wire Wire Line
-	8250 950  9050 950 
 Wire Wire Line
 	9050 850  9050 950 
 Connection ~ 9050 950 
@@ -1857,14 +1843,66 @@ Mounting Holes\n
 Text GLabel 4150 5400 2    60   Input ~ 0
 V_3.3
 $Comp
-L SIM7000-rescue:74HC126 U?
+L SIM7000-rescue:74HC126 U4
 U 1 1 5D69FD44
 P 12050 1300
-F 0 "U?" H 12050 1843 60  0000 C CNN
+F 0 "U4" H 12050 1843 60  0000 C CNN
 F 1 "74HC126" H 12050 1739 60  0000 C CNN
 F 2 "Housings_SOIC:SOIC-14_3.9x8.7mm_Pitch1.27mm" H 12050 1300 60  0001 C CNN
 F 3 "http://www.farnell.com/datasheets/2030230.pdf?_ga=2.69642903.606851804.1567147512-325851870.1553337182&_gac=1.41560982.1567151116.EAIaIQobChMI1uyK5Yyq5AIVSSUrCh05hgU3EAkYASABEgJC2_D_BwE" H 12050 1300 60  0001 C CNN
 	1    12050 1300
 	1    0    0    -1  
+$EndComp
+$Comp
+L SIM7000-rescue:SIM7000-simcom IC2
+U 1 1 5CE4EC39
+P 7850 2850
+F 0 "IC2" H 7800 2700 50  0000 L CNN
+F 1 "SIM7000" H 7700 2850 50  0000 L CNN
+F 2 "SIMFootprints:SIM7000" H 8338 2950 50  0001 C CNN
+F 3 "" H 8300 3100 50  0000 C CNN
+	1    7850 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L SIM7000-rescue:AT-ant AT?
+U 1 1 5DBBFC5D
+P 8850 650
+F 0 "AT?" H 8700 550 50  0000 L CNN
+F 1 "AT-GNSS" H 8500 750 50  0000 L CNN
+F 2 "Connectors_Molex:Molex_Microcoaxial_RF" H 8888 500 50  0001 C CNN
+F 3 "" H 8850 650 50  0000 C CNN
+	1    8850 650 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8650 1500 8750 1500
+Wire Wire Line
+	8250 950  9050 950 
+$Comp
+L Device:C C?
+U 1 1 5DBC63AD
+P 8700 1200
+F 0 "C?" V 8850 1200 50  0000 C CNN
+F 1 "33 pF" V 8540 1200 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8738 1050 50  0001 C CNN
+F 3 "~" H 8700 1200 50  0001 C CNN
+	1    8700 1200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8550 1500 8550 1200
+Wire Wire Line
+	8850 1200 8850 900 
+$Comp
+L power:GND #PWR?
+U 1 1 5DBD0D35
+P 8650 650
+F 0 "#PWR?" H 8650 400 50  0001 C CNN
+F 1 "GND" V 8655 523 50  0000 R CNN
+F 2 "" H 8650 650 50  0001 C CNN
+F 3 "" H 8650 650 50  0001 C CNN
+	1    8650 650 
+	0    1    1    0   
 $EndComp
 $EndSCHEMATC

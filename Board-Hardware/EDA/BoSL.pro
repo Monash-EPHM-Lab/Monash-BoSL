@@ -1,4 +1,4 @@
-update=2019/08/25 11:42:26
+update=2019/11/1   15:32:39
 version=1
 last_client=kicad
 [cvpcb]
@@ -9,10 +9,20 @@ version=1
 [eeschema]
 version=1
 LibDir=
+[schematic_editor]
+version=1
+PageLayoutDescrFile=
+PlotDirectoryName=../Production Files/
+SubpartIdSeparator=0
+SubpartFirstId=65
+NetFmtName=Pcbnew
+SpiceAjustPassiveValues=0
+LabSize=60
+ERC_TestSimilarLabels=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
-LastNetListRead=BoSL.net
+LastNetListRead=BoSL_GSP.net
 CopperLayerCount=2
 BoardThickness=1.6
 AllowMicroVias=0
@@ -262,13 +272,3 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=../Production Files/
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceAjustPassiveValues=0
-LabSize=60
-ERC_TestSimilarLabels=1

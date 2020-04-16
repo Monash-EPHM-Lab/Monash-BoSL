@@ -1,13 +1,12 @@
 EESchema Schematic File Version 4
-LIBS:BoSL-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
 Sheet 1 1
 Title "Monash BoSL Board"
-Date "2019-08-25"
-Rev "0.3"
+Date "2020-04-16"
+Rev "0.4"
 Comp ""
 Comment1 ""
 Comment2 ""
@@ -142,106 +141,94 @@ NoConn ~ 9150 3350
 NoConn ~ 9150 3450
 NoConn ~ 9150 3550
 NoConn ~ 9150 3650
-NoConn ~ 8550 1500
 NoConn ~ 9150 2150
 NoConn ~ 9150 2250
 NoConn ~ 9150 2350
 NoConn ~ 7150 1500
 NoConn ~ 7050 1500
 $Comp
-L SIM7000-rescue:ATMEGA328-P-SIM7000-rescue IC1
-U 1 1 5CE615FC
-P 2400 5050
-F 0 "IC1" H 1500 4900 50  0000 L BNN
-F 1 "ATMEGA328-P" H 2800 3650 50  0000 L BNN
-F 2 "Housings_DIP:DIP-28_W7.62mm_Socket_LongPads" H 2400 5050 50  0001 C CIN
-F 3 "" H 2400 5050 50  0000 C CNN
-	1    2400 5050
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:GND #PWR03
 U 1 1 5CE61B33
-P 1500 6150
-F 0 "#PWR03" H 1500 5900 50  0001 C CNN
-F 1 "GND" H 1500 6000 50  0000 C CNN
-F 2 "" H 1500 6150 50  0000 C CNN
-F 3 "" H 1500 6150 50  0000 C CNN
-	1    1500 6150
-	0    1    1    0   
+P 2900 6400
+F 0 "#PWR03" H 2900 6150 50  0001 C CNN
+F 1 "GND" H 2900 6250 50  0000 C CNN
+F 2 "" H 2900 6400 50  0000 C CNN
+F 3 "" H 2900 6400 50  0000 C CNN
+	1    2900 6400
+	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R1
 U 1 1 5CE61DD3
-P 3900 5400
-F 0 "R1" V 3980 5400 50  0000 C CNN
-F 1 "10 kΩ" V 3800 5400 50  0000 C CNN
-F 2 "Resistors_SMD:R_0805_HandSoldering" V 3830 5400 50  0001 C CNN
-F 3 "" H 3900 5400 50  0000 C CNN
-	1    3900 5400
+P 4000 5200
+F 0 "R1" V 4080 5200 50  0000 C CNN
+F 1 "10 kΩ" V 3900 5200 50  0000 C CNN
+F 2 "Resistors_SMD:R_0805_HandSoldering" V 3930 5200 50  0001 C CNN
+F 3 "" H 4000 5200 50  0000 C CNN
+	1    4000 5200
 	0    1    1    0   
 $EndComp
-Text GLabel 3400 5950 2    60   Input ~ 0
+Text GLabel 3500 5800 2    60   Input ~ 0
 ONOFF_PIN
-Text GLabel 3700 5400 1    60   Input ~ 0
+Text GLabel 3800 5200 1    60   Input ~ 0
 TLL_RST
-Text GLabel 3400 5550 2    60   Input ~ 0
+Text GLabel 3500 5400 2    60   Input ~ 0
 TLL_RX
-Text GLabel 3400 5650 2    60   Input ~ 0
+Text GLabel 3500 5500 2    60   Input ~ 0
 TLL_TX
 $Comp
 L Device:Crystal Y1
 U 1 1 5CE649D0
-P 4450 4550
-F 0 "Y1" H 4450 4700 50  0000 C CNN
-F 1 "8 MHz" H 4450 4400 50  0000 C CNN
-F 2 "Crystals:Crystal_HC49-U_Vertical" H 4450 4550 50  0001 C CNN
-F 3 "" H 4450 4550 50  0000 C CNN
-	1    4450 4550
+P 4550 4300
+F 0 "Y1" H 4550 4450 50  0000 C CNN
+F 1 "8 MHz" H 4550 4150 50  0000 C CNN
+F 2 "Crystals:Crystal_HC49-U_Vertical" H 4550 4300 50  0001 C CNN
+F 3 "" H 4550 4300 50  0000 C CNN
+	1    4550 4300
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:C C2
 U 1 1 5CE64EC9
-P 4050 4400
-F 0 "C2" H 4075 4500 50  0000 L CNN
-F 1 "22 pF" H 4075 4300 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4088 4250 50  0001 C CNN
-F 3 "" H 4050 4400 50  0000 C CNN
-	1    4050 4400
+P 4150 4150
+F 0 "C2" H 4175 4250 50  0000 L CNN
+F 1 "22 pF" H 4175 4050 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4188 4000 50  0001 C CNN
+F 3 "" H 4150 4150 50  0000 C CNN
+	1    4150 4150
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR021
 U 1 1 5CE65118
-P 4050 4250
-F 0 "#PWR021" H 4050 4000 50  0001 C CNN
-F 1 "GND" H 4050 4100 50  0000 C CNN
-F 2 "" H 4050 4250 50  0000 C CNN
-F 3 "" H 4050 4250 50  0000 C CNN
-	1    4050 4250
+P 4150 4000
+F 0 "#PWR021" H 4150 3750 50  0001 C CNN
+F 1 "GND" H 4150 3850 50  0000 C CNN
+F 2 "" H 4150 4000 50  0000 C CNN
+F 3 "" H 4150 4000 50  0000 C CNN
+	1    4150 4000
 	-1   0    0    1   
 $EndComp
 $Comp
 L Device:C C3
 U 1 1 5CE65174
-P 4750 4650
-F 0 "C3" H 4775 4750 50  0000 L CNN
-F 1 "22 pF" H 4775 4550 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4788 4500 50  0001 C CNN
-F 3 "" H 4750 4650 50  0000 C CNN
-	1    4750 4650
+P 4850 4400
+F 0 "C3" H 4875 4500 50  0000 L CNN
+F 1 "22 pF" H 4875 4300 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 4888 4250 50  0001 C CNN
+F 3 "" H 4850 4400 50  0000 C CNN
+	1    4850 4400
 	0    1    1    0   
 $EndComp
 $Comp
 L power:GND #PWR023
 U 1 1 5CE651BE
-P 4900 4650
-F 0 "#PWR023" H 4900 4400 50  0001 C CNN
-F 1 "GND" H 4900 4500 50  0000 C CNN
-F 2 "" H 4900 4650 50  0000 C CNN
-F 3 "" H 4900 4650 50  0000 C CNN
-	1    4900 4650
+P 5000 4400
+F 0 "#PWR023" H 5000 4150 50  0001 C CNN
+F 1 "GND" H 5000 4250 50  0000 C CNN
+F 2 "" H 5000 4400 50  0000 C CNN
+F 3 "" H 5000 4400 50  0000 C CNN
+	1    5000 4400
 	0    -1   -1   0   
 $EndComp
 $Comp
@@ -309,23 +296,23 @@ Text GLabel 1750 7150 0    60   Input ~ 0
 TLL_RX
 Text GLabel 1750 7050 0    60   Input ~ 0
 TLL_RST
-Text GLabel 3400 4800 2    60   Input ~ 0
+Text GLabel 3500 4600 2    60   Input ~ 0
 A0
 Text GLabel 1700 8800 0    60   Input ~ 0
 V_3.3
-Text GLabel 3400 5200 2    60   Input ~ 0
+Text GLabel 3500 5000 2    60   Input ~ 0
 SDA
-Text GLabel 3400 5300 2    60   Input ~ 0
+Text GLabel 3500 5100 2    60   Input ~ 0
 SCL
 Text GLabel 1700 8500 0    60   Input ~ 0
 SCL
 Text GLabel 1700 8600 0    60   Input ~ 0
 SDA
-Text GLabel 3400 4900 2    60   Input ~ 0
+Text GLabel 3500 4700 2    60   Input ~ 0
 A1
-Text GLabel 3400 5000 2    60   Input ~ 0
+Text GLabel 3500 4800 2    60   Input ~ 0
 A2
-Text GLabel 3400 5100 2    60   Input ~ 0
+Text GLabel 3500 4900 2    60   Input ~ 0
 A3
 $Comp
 L SIM7000-rescue:BARREL_JACK-SIM7000-rescue CON2
@@ -371,7 +358,7 @@ F 3 "" H 5000 1300 50  0000 C CNN
 	1    5000 1300
 	0    -1   -1   0   
 $EndComp
-Text GLabel 3400 4050 2    60   Input ~ 0
+Text GLabel 3500 3800 2    60   Input ~ 0
 D9
 $Comp
 L power:VPP #PWR04
@@ -468,17 +455,6 @@ F 3 "" H 3050 1300 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L SIM7000-rescue:SIM7000-simcom IC2
-U 1 1 5CE4EC39
-P 7850 2850
-F 0 "IC2" H 7800 2700 50  0000 L CNN
-F 1 "SIM7000" H 7700 2850 50  0000 L CNN
-F 2 "SIMFootprints:SIM7000" H 8338 2950 50  0001 C CNN
-F 3 "" H 8300 3100 50  0000 C CNN
-	1    7850 2850
-	1    0    0    -1  
-$EndComp
-$Comp
 L power:VPP #PWR033
 U 1 1 5CF05CD8
 P 7750 4200
@@ -493,7 +469,7 @@ Text Label 7750 1000 0    60   ~ 0
 50_Ω
 Text GLabel 6550 2250 0    60   Input ~ 0
 DTR
-Text GLabel 3400 6050 2    60   Input ~ 0
+Text GLabel 3500 5900 2    60   Input ~ 0
 DTR
 $Comp
 L SIM7000-rescue:TEST-SIM7000-rescue TP3
@@ -608,21 +584,21 @@ Text GLabel 2600 2200 2    60   Input ~ 0
 SD_MISO
 Text GLabel 2600 2400 2    60   Input ~ 0
 SD_SCLK
-Text GLabel 3400 4150 2    60   Input ~ 0
+Text GLabel 3500 3900 2    60   Input ~ 0
 SD_CS
-Text GLabel 3400 4450 2    60   Input ~ 0
+Text GLabel 3500 4200 2    60   Input ~ 0
 SD_SCLK
-Text GLabel 3400 5750 2    60   Input ~ 0
+Text GLabel 3500 5600 2    60   Input ~ 0
 RX
-Text GLabel 3400 5850 2    60   Input ~ 0
+Text GLabel 3500 5700 2    60   Input ~ 0
 TX
-Text GLabel 3400 4250 2    60   Input ~ 0
+Text GLabel 3500 4000 2    60   Input ~ 0
 SD_MOSI
-Text GLabel 3400 4350 2    60   Input ~ 0
+Text GLabel 3500 4100 2    60   Input ~ 0
 SD_MISO
 Text Label 1400 1750 0    60   ~ 0
 SD_Card
-Text Label 3800 3950 0    60   ~ 0
+Text Label 3900 3700 0    60   ~ 0
 ATMEGA328P
 $Comp
 L SIM7000-rescue:CONN_01X04-SIM7000-rescue P4
@@ -657,11 +633,11 @@ F 3 "" H 8600 5750 60  0001 C CNN
 	1    8550 5750
 	1    0    0    -1  
 $EndComp
-Text GLabel 3400 6250 2    60   Input ~ 0
+Text GLabel 3500 6100 2    60   Input ~ 0
 D7
-Text GLabel 3400 3950 2    60   Input ~ 0
+Text GLabel 3500 3700 2    60   Input ~ 0
 D8
-Text GLabel 1500 4550 0    60   Input ~ 0
+Text GLabel 2300 3700 0    60   Input ~ 0
 AREF
 $Comp
 L SIM7000-rescue:Screw_Terminal_1x06-SIM7000-rescue J1
@@ -1000,7 +976,7 @@ Text GLabel 15100 3500 3    60   Input ~ 0
 USB_DM
 Text GLabel 15200 3500 3    60   Input ~ 0
 USB_DP
-Text GLabel 8650 1500 1    60   Input ~ 0
+Text GLabel 8750 1500 2    60   Input ~ 0
 NETLIGHT
 Text GLabel 11550 1100 0    60   Input ~ 0
 NETLIGHT
@@ -1249,18 +1225,14 @@ Wire Wire Line
 Wire Wire Line
 	7850 900  7850 1500
 Wire Wire Line
-	1500 6150 1500 6250
+	4250 5200 4150 5200
 Wire Wire Line
-	1500 4250 1500 3950
+	3500 4300 4150 4300
+Connection ~ 4150 4300
 Wire Wire Line
-	4150 5400 4050 5400
+	4700 4400 4700 4300
 Wire Wire Line
-	3400 4550 4050 4550
-Connection ~ 4050 4550
-Wire Wire Line
-	4600 4650 4600 4550
-Wire Wire Line
-	3400 4650 4600 4650
+	3500 4400 4700 4400
 Wire Wire Line
 	8550 4200 8550 5000
 Wire Wire Line
@@ -1332,9 +1304,7 @@ Wire Notes Line
 Wire Notes Line
 	600  1550 5450 1550
 Wire Notes Line
-	500  3750 5450 3750
-Wire Notes Line
-	4800 1550 4800 3750
+	4750 1550 4750 3750
 Wire Notes Line
 	1150 5300 1150 6650
 Wire Notes Line
@@ -1351,11 +1321,7 @@ Connection ~ 6200 2050
 Wire Notes Line
 	600  1550 600  3750
 Wire Notes Line
-	1200 3750 1200 5300
-Wire Notes Line
 	1200 5300 500  5300
-Wire Wire Line
-	8250 950  9050 950 
 Wire Wire Line
 	9050 850  9050 950 
 Connection ~ 9050 950 
@@ -1435,10 +1401,10 @@ F 3 "" H 11550 1600 50  0000 C CNN
 	1    11550 1600
 	0    1    1    0   
 $EndComp
-Text GLabel 1500 3950 0    60   Input ~ 0
+Text GLabel 2900 3400 1    60   Input ~ 0
 V_3.3
 NoConn ~ 6550 3550
-Text GLabel 3400 6150 2    60   Input ~ 0
+Text GLabel 3500 6000 2    60   Input ~ 0
 D6
 $Comp
 L SIM7000-rescue:Screw_Terminal_1x08-SIM7000-rescue J4
@@ -1634,7 +1600,7 @@ Wire Wire Line
 Wire Wire Line
 	8250 1350 8250 1500
 Wire Wire Line
-	4050 4550 4300 4550
+	4150 4300 4400 4300
 Wire Wire Line
 	8250 4900 9050 4900
 Wire Wire Line
@@ -1672,7 +1638,7 @@ Wire Wire Line
 Wire Wire Line
 	11800 3250 11850 3250
 Wire Wire Line
-	3400 5400 3750 5400
+	3500 5200 3850 5200
 Wire Wire Line
 	8550 5000 9050 5000
 Wire Wire Line
@@ -1854,7 +1820,7 @@ Wire Notes Line
 	9700 4350 11550 4350
 Text Notes 9750 3800 0    60   ~ 0
 Mounting Holes\n
-Text GLabel 4150 5400 2    60   Input ~ 0
+Text GLabel 4250 5200 2    60   Input ~ 0
 V_3.3
 $Comp
 L SIM7000-rescue:74HC126 U4
@@ -1867,4 +1833,192 @@ F 3 "http://www.farnell.com/datasheets/2030230.pdf?_ga=2.69642903.606851804.1567
 	1    12050 1300
 	1    0    0    -1  
 $EndComp
+$Comp
+L SIM7000-rescue:SIM7000-simcom IC2
+U 1 1 5CE4EC39
+P 7850 2850
+F 0 "IC2" H 7800 2700 50  0000 L CNN
+F 1 "SIM7000" H 7700 2850 50  0000 L CNN
+F 2 "SIMFootprints:SIM7000" H 8338 2950 50  0001 C CNN
+F 3 "" H 8300 3100 50  0000 C CNN
+	1    7850 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L SIM7000-rescue:AT-ant AT2
+U 1 1 5DBBFC5D
+P 8850 650
+F 0 "AT2" H 8700 550 50  0000 L CNN
+F 1 "AT-GNSS" H 8500 750 50  0000 L CNN
+F 2 "Connectors_Molex:Molex_Microcoaxial_RF" H 8888 500 50  0001 C CNN
+F 3 "" H 8850 650 50  0000 C CNN
+	1    8850 650 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8650 1500 8750 1500
+Wire Wire Line
+	8250 950  9050 950 
+$Comp
+L Device:C C10
+U 1 1 5DBC63AD
+P 8700 1200
+F 0 "C10" V 8850 1200 50  0000 C CNN
+F 1 "33 pF" V 8540 1200 50  0000 C CNN
+F 2 "Capacitors_SMD:C_0805_HandSoldering" H 8738 1050 50  0001 C CNN
+F 3 "~" H 8700 1200 50  0001 C CNN
+	1    8700 1200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8550 1500 8550 1200
+Wire Wire Line
+	8850 1200 8850 900 
+$Comp
+L power:GND #PWR0101
+U 1 1 5DBD0D35
+P 8650 650
+F 0 "#PWR0101" H 8650 400 50  0001 C CNN
+F 1 "GND" V 8655 523 50  0000 R CNN
+F 2 "" H 8650 650 50  0001 C CNN
+F 3 "" H 8650 650 50  0001 C CNN
+	1    8650 650 
+	0    1    1    0   
+$EndComp
+$Comp
+L Timer:MCP7940N-xSN U?
+U 1 1 5E98247E
+P 11400 5200
+F 0 "U?" H 11200 4800 50  0000 C CNN
+F 1 "MCP7940N-xSN" H 11800 4800 50  0000 C CNN
+F 2 "" H 11400 5200 50  0001 C CNN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20005010F.pdf" H 11400 5200 50  0001 C CNN
+	1    11400 5200
+	1    0    0    -1  
+$EndComp
+Text GLabel 11400 4800 1    60   Input ~ 0
+V_3.3
+Text GLabel 11500 4800 1    60   Input ~ 0
+V_3.3
+$Comp
+L power:GND #PWR?
+U 1 1 5E98293F
+P 11400 5600
+F 0 "#PWR?" H 11400 5350 50  0001 C CNN
+F 1 "GND" H 11400 5450 50  0000 C CNN
+F 2 "" H 11400 5600 50  0000 C CNN
+F 3 "" H 11400 5600 50  0000 C CNN
+	1    11400 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Crystal Y?
+U 1 1 5E983AB6
+P 12150 5200
+F 0 "Y?" V 12104 5331 50  0000 L CNN
+F 1 " 32.768 kHz" V 12400 5000 50  0000 L CNN
+F 2 "Crystal:Crystal_SMD_EuroQuartz_EQ161-2Pin_3.2x1.5mm" H 12150 5200 50  0001 C CNN
+F 3 "FC-135 32.7680KA-AG" H 12150 5200 50  0001 C CNN
+	1    12150 5200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5E983D64
+P 12650 5050
+F 0 "C?" V 12398 5050 50  0000 C CNN
+F 1 "12 pF" V 12489 5050 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 12688 4900 50  0001 C CNN
+F 3 "~" H 12650 5050 50  0001 C CNN
+	1    12650 5050
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5E984B65
+P 12650 5350
+F 0 "C?" V 12550 5450 50  0000 C CNN
+F 1 "12 pF" V 12800 5400 50  0000 C CNN
+F 2 "Capacitor_SMD:C_0805_2012Metric" H 12688 5200 50  0001 C CNN
+F 3 "~" H 12650 5350 50  0001 C CNN
+	1    12650 5350
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	11800 5100 11950 5100
+Wire Wire Line
+	11950 5100 11950 5050
+Wire Wire Line
+	11950 5050 12150 5050
+Connection ~ 12150 5050
+Wire Wire Line
+	12150 5050 12500 5050
+Wire Wire Line
+	12500 5350 12150 5350
+Wire Wire Line
+	11950 5350 11950 5300
+Wire Wire Line
+	11950 5300 11800 5300
+Connection ~ 12150 5350
+Wire Wire Line
+	12150 5350 11950 5350
+$Comp
+L power:GND #PWR?
+U 1 1 5E990792
+P 12800 5050
+F 0 "#PWR?" H 12800 4800 50  0001 C CNN
+F 1 "GND" H 12800 4900 50  0000 C CNN
+F 2 "" H 12800 5050 50  0000 C CNN
+F 3 "" H 12800 5050 50  0000 C CNN
+	1    12800 5050
+	0    -1   -1   0   
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5E990C8E
+P 12800 5350
+F 0 "#PWR?" H 12800 5100 50  0001 C CNN
+F 1 "GND" H 12800 5200 50  0000 C CNN
+F 2 "" H 12800 5350 50  0000 C CNN
+F 3 "" H 12800 5350 50  0000 C CNN
+	1    12800 5350
+	0    -1   -1   0   
+$EndComp
+NoConn ~ 11000 5300
+Text GLabel 11000 5100 0    60   Input ~ 0
+SDA
+Text GLabel 11000 5000 0    60   Input ~ 0
+SCL
+Text Notes 10900 4500 0    60   ~ 0
+RTC\n
+$Comp
+L MCU_Microchip_ATmega:ATmega328P-AU U?
+U 1 1 5E998630
+P 2900 4900
+F 0 "U?" H 3150 3450 50  0000 C CNN
+F 1 "ATmega328P-AU" H 2400 3450 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 2900 4900 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2900 4900 50  0001 C CNN
+	1    2900 4900
+	1    0    0    -1  
+$EndComp
+Text GLabel 3000 3400 1    60   Input ~ 0
+V_3.3
+Wire Notes Line
+	5450 3750 4750 3750
+Wire Notes Line
+	500  3750 1200 3750
+Wire Notes Line
+	1200 3150 2550 3150
+Wire Notes Line
+	2550 3150 2550 2950
+Wire Notes Line
+	2550 2950 4750 2950
+Wire Notes Line
+	1200 3150 1200 5300
+Connection ~ 4700 4400
+Wire Notes Line
+	10550 6000 13250 6000
+Wire Notes Line
+	13250 6000 13250 4300
 $EndSCHEMATC

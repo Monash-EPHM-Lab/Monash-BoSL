@@ -1,4 +1,4 @@
-(module Screw_Terminals_1x8 (layer F.Cu) (tedit 5DCC96CB)
+(module Screw_Terminals_1x8 (layer F.Cu) (tedit 5DCC97BB)
   (fp_text reference REF** (at -1 -6) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)))
   )
