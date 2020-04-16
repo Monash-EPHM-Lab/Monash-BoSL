@@ -358,8 +358,8 @@ F 3 "" H 5000 1300 50  0000 C CNN
 	1    5000 1300
 	0    -1   -1   0   
 $EndComp
-Text GLabel 3500 3800 2    60   Input ~ 0
-D9
+Text GLabel 3500 5700 2    60   Input ~ 0
+D3
 $Comp
 L power:VPP #PWR04
 U 1 1 5CE759E6
@@ -588,9 +588,9 @@ Text GLabel 3500 3900 2    60   Input ~ 0
 SD_CS
 Text GLabel 3500 4200 2    60   Input ~ 0
 SD_SCLK
-Text GLabel 3500 5600 2    60   Input ~ 0
+Text GLabel 3500 3700 2    60   Input ~ 0
 RX
-Text GLabel 3500 5700 2    60   Input ~ 0
+Text GLabel 3500 3800 2    60   Input ~ 0
 TX
 Text GLabel 3500 4000 2    60   Input ~ 0
 SD_MOSI
@@ -635,8 +635,8 @@ F 3 "" H 8600 5750 60  0001 C CNN
 $EndComp
 Text GLabel 3500 6100 2    60   Input ~ 0
 D7
-Text GLabel 3500 3700 2    60   Input ~ 0
-D8
+Text GLabel 3500 5600 2    60   Input ~ 0
+D2
 Text GLabel 2300 3700 0    60   Input ~ 0
 AREF
 $Comp
@@ -702,11 +702,11 @@ Text GLabel 2800 9200 0    60   Input ~ 0
 SD_MOSI
 Text GLabel 2800 9400 0    60   Input ~ 0
 SD_CS
-Text GLabel 2800 9600 0    60   Input ~ 0
-D9
-Text GLabel 2800 9800 0    60   Input ~ 0
-D8
 Text GLabel 2800 10000 0    60   Input ~ 0
+D3
+Text GLabel 2800 10200 0    60   Input ~ 0
+D2
+Text GLabel 2800 9600 0    60   Input ~ 0
 D7
 $Comp
 L power:VPP #PWR012
@@ -1417,7 +1417,7 @@ F 3 "" H 2975 10100 50  0001 C CNN
 	1    3000 9500
 	-1   0    0    1   
 $EndComp
-Text GLabel 2800 10200 0    60   Input ~ 0
+Text GLabel 2800 9800 0    60   Input ~ 0
 D6
 $Comp
 L SIM7000-rescue:RJ45-SIM7000-rescue J6
@@ -1555,22 +1555,22 @@ F 3 "" H 2900 7800 50  0000 C CNN
 	1    2900 7800
 	1    0    0    -1  
 $EndComp
-Text GLabel 2700 7050 0    60   Input ~ 0
-D6
-Text GLabel 2700 7150 0    60   Input ~ 0
-D6
-Text GLabel 2700 7250 0    60   Input ~ 0
-D7
-Text GLabel 2700 7350 0    60   Input ~ 0
-D7
 Text GLabel 2700 7450 0    60   Input ~ 0
-D8
+D6
 Text GLabel 2700 7550 0    60   Input ~ 0
-D8
+D6
 Text GLabel 2700 7650 0    60   Input ~ 0
-D9
+D7
 Text GLabel 2700 7750 0    60   Input ~ 0
-D9
+D7
+Text GLabel 2700 7050 0    60   Input ~ 0
+D2
+Text GLabel 2700 7150 0    60   Input ~ 0
+D2
+Text GLabel 2700 7250 0    60   Input ~ 0
+D3
+Text GLabel 2700 7350 0    60   Input ~ 0
+D3
 Text GLabel 2700 7850 0    60   Input ~ 0
 SD_CS
 Text GLabel 2700 8050 0    60   Input ~ 0
@@ -1886,12 +1886,12 @@ F 3 "" H 8650 650 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Timer:MCP7940N-xSN U?
+L Timer:MCP7940N-xSN U7
 U 1 1 5E98247E
 P 11400 5200
-F 0 "U?" H 11200 4800 50  0000 C CNN
+F 0 "U7" H 11200 4800 50  0000 C CNN
 F 1 "MCP7940N-xSN" H 11800 4800 50  0000 C CNN
-F 2 "" H 11400 5200 50  0001 C CNN
+F 2 "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm" H 11400 5200 50  0001 C CNN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20005010F.pdf" H 11400 5200 50  0001 C CNN
 	1    11400 5200
 	1    0    0    -1  
@@ -1901,10 +1901,10 @@ V_3.3
 Text GLabel 11500 4800 1    60   Input ~ 0
 V_3.3
 $Comp
-L power:GND #PWR?
+L power:GND #PWR022
 U 1 1 5E98293F
 P 11400 5600
-F 0 "#PWR?" H 11400 5350 50  0001 C CNN
+F 0 "#PWR022" H 11400 5350 50  0001 C CNN
 F 1 "GND" H 11400 5450 50  0000 C CNN
 F 2 "" H 11400 5600 50  0000 C CNN
 F 3 "" H 11400 5600 50  0000 C CNN
@@ -1912,10 +1912,10 @@ F 3 "" H 11400 5600 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:Crystal Y?
+L Device:Crystal Y2
 U 1 1 5E983AB6
 P 12150 5200
-F 0 "Y?" V 12104 5331 50  0000 L CNN
+F 0 "Y2" V 12104 5331 50  0000 L CNN
 F 1 " 32.768 kHz" V 12400 5000 50  0000 L CNN
 F 2 "Crystal:Crystal_SMD_EuroQuartz_EQ161-2Pin_3.2x1.5mm" H 12150 5200 50  0001 C CNN
 F 3 "FC-135 32.7680KA-AG" H 12150 5200 50  0001 C CNN
@@ -1923,10 +1923,10 @@ F 3 "FC-135 32.7680KA-AG" H 12150 5200 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:C C?
+L Device:C C11
 U 1 1 5E983D64
 P 12650 5050
-F 0 "C?" V 12398 5050 50  0000 C CNN
+F 0 "C11" V 12398 5050 50  0000 C CNN
 F 1 "12 pF" V 12489 5050 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" H 12688 4900 50  0001 C CNN
 F 3 "~" H 12650 5050 50  0001 C CNN
@@ -1934,10 +1934,10 @@ F 3 "~" H 12650 5050 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:C C?
+L Device:C C12
 U 1 1 5E984B65
 P 12650 5350
-F 0 "C?" V 12550 5450 50  0000 C CNN
+F 0 "C12" V 12550 5500 50  0000 C CNN
 F 1 "12 pF" V 12800 5400 50  0000 C CNN
 F 2 "Capacitor_SMD:C_0805_2012Metric" H 12688 5200 50  0001 C CNN
 F 3 "~" H 12650 5350 50  0001 C CNN
@@ -1963,10 +1963,10 @@ Connection ~ 12150 5350
 Wire Wire Line
 	12150 5350 11950 5350
 $Comp
-L power:GND #PWR?
+L power:GND #PWR053
 U 1 1 5E990792
 P 12800 5050
-F 0 "#PWR?" H 12800 4800 50  0001 C CNN
+F 0 "#PWR053" H 12800 4800 50  0001 C CNN
 F 1 "GND" H 12800 4900 50  0000 C CNN
 F 2 "" H 12800 5050 50  0000 C CNN
 F 3 "" H 12800 5050 50  0000 C CNN
@@ -1974,10 +1974,10 @@ F 3 "" H 12800 5050 50  0000 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L power:GND #PWR?
+L power:GND #PWR054
 U 1 1 5E990C8E
 P 12800 5350
-F 0 "#PWR?" H 12800 5100 50  0001 C CNN
+F 0 "#PWR054" H 12800 5100 50  0001 C CNN
 F 1 "GND" H 12800 5200 50  0000 C CNN
 F 2 "" H 12800 5350 50  0000 C CNN
 F 3 "" H 12800 5350 50  0000 C CNN
@@ -1992,10 +1992,10 @@ SCL
 Text Notes 10900 4500 0    60   ~ 0
 RTC\n
 $Comp
-L MCU_Microchip_ATmega:ATmega328P-AU U?
+L MCU_Microchip_ATmega:ATmega328P-AU U6
 U 1 1 5E998630
 P 2900 4900
-F 0 "U?" H 3150 3450 50  0000 C CNN
+F 0 "U6" H 3150 3450 50  0000 C CNN
 F 1 "ATmega328P-AU" H 2400 3450 50  0000 C CNN
 F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 2900 4900 50  0001 C CIN
 F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2900 4900 50  0001 C CNN
