@@ -53,7 +53,7 @@ void loop(){
 		cmd = Serial.read();
 		
 		if(cmd == 'V'){
-			printVel()
+			printVel();
 		}
 		if(cmd == 'S'){
 			sleepF();

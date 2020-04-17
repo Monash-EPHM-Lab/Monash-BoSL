@@ -16,9 +16,9 @@
 #define DTR 5 // Connect with solder jumper
 #define BOSL_RX 3 // Microcontroller RX
 #define BOSL_TX 2 // Microcontroller TX
-#define VEL_RX 29
-#define VEL_TX 30
-#define VEL_RST 31
+#define VEL_RX 8
+#define VEL_TX 9
+#define VEL_RST 7
 
 //Site specific config
 #define SITEID "VELOCITY"
@@ -218,14 +218,18 @@ void loop() {
       
       Serial.println("VEL");
       velread();
+	  Serial.print(vel[0]);
+	  Serial.print(vel[1]);
+	  Serial.println(vel[2]);
 
       
       if(shouldTrasmit()){
             simOn();
-            
+
             netUnreg();
+
             CBCread();
-			
+
             Transmit(); 
 
             simOff();
@@ -241,6 +245,7 @@ void loop() {
 void velread(){
 	uint32_t tout = 0;
 	uint8_t bytin = 0;
+	uint8_t i = 0;
 	
 	
 	pinMode(VEL_RST, OUTPUT);
@@ -254,23 +259,23 @@ void velread(){
 	
 	tout = millis(); 
 	
-	while(millis()- tout < 10000){
+	while(millis() - tout < 10000){
         if(velPort.available() != 0){ 
 			bytin = velPort.read();
 			if(bytin == 'R'){
 				break;
 			}
 		}
-	}
+	}	
 	velPort.print('V');
-	while(millis()- tout < 10000){
+	while(millis()- tout < 25000){
 		if(velPort.available() != 0){
             vel[i] = velPort.read();
             i++;
             // check if the desired answer is in the response of the module
             if (vel[i] == 'T')    
             {
-                vel[i] == '\0'
+                vel[i] == '\0';
 				break;
             }
         } 
@@ -278,7 +283,7 @@ void velread(){
 	}
 	velPort.print('S');
 	velPort.flush();
-	velPort.close();
+	velPort.end();
 	simCom.listen();
 }
 
@@ -362,7 +367,8 @@ void Transmit(){
 }
 
 ////RETURNS TRUE IF SIM7000 SHOULD TRANSMIT////
-bool shouldTrasmit(){   
+bool shouldTrasmit(){  
+	return 1;
     //checks to see if it has been longer than max transmit interval
     if (MAXTRASMITINTERVAL < millis() - lstTransmit){
         return 1;
