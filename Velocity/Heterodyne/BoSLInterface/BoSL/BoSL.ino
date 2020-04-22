@@ -38,14 +38,14 @@ uint32_t lstTransmit = 0; //timestamp of last transmit (milli seconds)
 String dataStr; //Transmit URL
 
 //GPS reponse stings
-char vel[40];
+char vel[80];
 char press[2];
 char EC[2];
 char air[2];
 char Nview[2];
 char CBC[5];
 //previous GPS reponse strings
-char Lstvel[40];
+char Lstvel[80];
 char Lstpress[2];
 char LstEC[2];
 char Lstair[2];
@@ -59,7 +59,7 @@ SoftwareSerial velPort = SoftwareSerial(VEL_RX, VEL_TX);
 ////clears char arrays////
 void charBuffclr(bool clrVars[6] = defaultVars){
     if(clrVars[0]){
-    memset(vel, '\0', 40);
+    memset(vel, '\0', 80);
     }
     if(clrVars[1]){
     memset(press, '\0', 2);
@@ -81,7 +81,7 @@ void charBuffclr(bool clrVars[6] = defaultVars){
 ////clears char arrays////
 void LstcharBuffclr(bool clrVars[6] = defaultVars){
     if(clrVars[0]){
-    memset(Lstvel, '\0', 40);
+    memset(Lstvel, '\0', 80);
     }
     if(clrVars[1]){
     memset(Lstpress, '\0', 2);
@@ -102,7 +102,7 @@ void charBuffAdvance(bool advVars[6] = defaultVars){
     uint8_t i;
     
     if(advVars[0]){
-        for(i = 0; i < 40; i++){
+        for(i = 0; i < 80; i++){
             Lstvel[i] = vel[i];
         }
     }
@@ -202,27 +202,31 @@ void setup() {
 
   Serial.println("Initialising SIM 7000");
   //initialise sim (on arduino startup only)
-	 simOn();
-     simInit();
+	simOn();
+    simInit();
         
-     netReg();
-	 ///
-     netUnreg();
+    netReg();
+	 
+    netUnreg();
 
-	 simOff();
+	simOff();
 }
     
 void loop() {
       
+	  // pinMode(7,INPUT);
+	  // pinMode(8,INPUT);
+	  // pinMode(9,INPUT);
+	  
       charBuffclr();
       
       Serial.println("VEL");
       velread();
-	  Serial.print(vel[0]);
-	  Serial.print(vel[1]);
-	  Serial.println(vel[2]);
-
-      
+	  // for(int j = 0; j < 79; j++){
+		  // Serial.print(vel[j]);
+	  // }
+	  // Serial.println(vel[79]);
+	  
       if(shouldTrasmit()){
             simOn();
 
@@ -258,29 +262,36 @@ void velread(){
 	velPort.listen();
 	
 	tout = millis(); 
-	
 	while(millis() - tout < 10000){
         if(velPort.available() != 0){ 
 			bytin = velPort.read();
 			if(bytin == 'R'){
+
 				break;
 			}
 		}
 	}	
+	
+	
 	velPort.print('V');
-	while(millis()- tout < 25000){
+	
+	tout = millis();
+	while((millis()- tout < 10000) and (i<80)){
 		if(velPort.available() != 0){
-            vel[i] = velPort.read();
-            i++;
+           
+		   vel[i] = velPort.read();
+            
             // check if the desired answer is in the response of the module
             if (vel[i] == 'T')    
             {
-                vel[i] == '\0';
+                vel[i] = '\0';
 				break;
             }
+			i++;
         } 
 		
-	}
+	 }
+
 	velPort.print('S');
 	velPort.flush();
 	velPort.end();
