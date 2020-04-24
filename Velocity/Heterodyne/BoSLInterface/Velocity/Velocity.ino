@@ -61,7 +61,7 @@ void loop(){
 		
 		
 	}
-	
+
 }
 
 void sleepF(){
@@ -132,12 +132,14 @@ void printVel(){
 		Serial.print(result,0);
 		}
 		printlow();
-		
+	
+	
 	digitalWrite(9,LOW);
 	digitalWrite(3,LOW);	
 	I2c.end();	
 	
-	Serial.print('T');
+	Serial.println('T');
+	
 		
 }
 
