@@ -329,7 +329,7 @@ void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
 void Transmit(){
     
-    dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
+    dataStr = "AT+HTTPPARA=\"URL\",\"www.bosl.com.au/IoT/testing/scripts/WriteMe.php?SiteName=";
     
     dataStr += SITEID;
     dataStr += ".csv&T=";
