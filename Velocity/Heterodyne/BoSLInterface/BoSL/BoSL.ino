@@ -21,7 +21,7 @@
 #define VEL_RST 7
 
 //Site specific config
-#define SITEID "VELOCITY"
+#define SITEID "VELOCITY_TEST"
 //does not do anything atm // change values in transmit function
 //#define APN "telstra.internet" //FOR TELSTRA
 //#define APN "mdata.net.au" //FOR ALDI MOBILE
