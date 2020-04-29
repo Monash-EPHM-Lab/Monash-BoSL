@@ -1898,8 +1898,6 @@ F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/20005010F.pdf" H 11400 5200
 $EndComp
 Text GLabel 11400 4800 1    60   Input ~ 0
 V_3.3
-Text GLabel 11500 4800 1    60   Input ~ 0
-V_3.3
 $Comp
 L power:GND #PWR022
 U 1 1 5E98293F
@@ -2021,4 +2019,30 @@ Wire Notes Line
 	10550 6000 13250 6000
 Wire Notes Line
 	13250 6000 13250 4300
+$Comp
+L Device:Battery_Cell BT1
+U 1 1 5EA93550
+P 12150 4450
+F 0 "BT1" V 12405 4500 50  0000 C CNN
+F 1 "Battery_Cell" V 12314 4500 50  0000 C CNN
+F 2 "SIMFootprints:2996TR" V 12150 4510 50  0001 C CNN
+F 3 "LR44 KEYSTONE2996TR" V 12150 4510 50  0001 C CNN
+	1    12150 4450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	11950 4450 11500 4450
+Wire Wire Line
+	11500 4450 11500 4800
+$Comp
+L power:GND #PWR0102
+U 1 1 5EA9A82A
+P 12250 4450
+F 0 "#PWR0102" H 12250 4200 50  0001 C CNN
+F 1 "GND" H 12250 4300 50  0000 C CNN
+F 2 "" H 12250 4450 50  0000 C CNN
+F 3 "" H 12250 4450 50  0000 C CNN
+	1    12250 4450
+	0    -1   -1   0   
+$EndComp
 $EndSCHEMATC

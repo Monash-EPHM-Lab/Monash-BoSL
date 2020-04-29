@@ -1,4 +1,4 @@
-16958493247570689
+16960081369214414
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin Battery Holder, BX0036, Battery Type C (https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -68662,6 +68662,13 @@ rotary encoder
 0
 5
 4
+SIMFootprints
+2996TR
+
+
+0
+3
+2
 SIMFootprints
 Dummy_Empty
 Only empty Dummy to give satsfaction to DRC
