@@ -40,7 +40,7 @@
   )
 
   (setup
-    (last_trace_width 0.4)
+    (last_trace_width 0.25)
     (user_trace_width 0.4)
     (user_trace_width 0.6)
     (user_trace_width 0.8)
@@ -481,6 +481,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/TerminalBlock_Altech.3dshapes/Altech_AK300_1x08_P5.00mm_45-Degree.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal (layer F.Cu) (tedit 5B294EE5) (tstamp 5D611FCA)
@@ -539,6 +544,11 @@
     (pad 1 thru_hole rect (at 0 0) (size 2.6 2.6) (drill 1.3) (layers *.Cu *.Mask)
       (net 22 TLL_RX))
     (model ${KISYS3DMOD}/TerminalBlock_Phoenix.3dshapes/TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ${KISYS3DMOD}/TerminalBlock_Altech.3dshapes/Altech_AK300_1x02_P5.00mm_45-Degree.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -645,9 +655,14 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/TerminalBlock_Altech.3dshapes/Altech_AK300_1x06_P5.00mm_45-Degree.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module SIMFootprints:2996TR (layer B.Cu) (tedit 5EA8E083) (tstamp 5EA95389)
+  (module SIMFootprints:2996TR (layer B.Cu) (tedit 5EA8E083) (tstamp 5EAA6C52)
     (at 181.3 92.6 90)
     (path /5EA93550)
     (fp_text reference BT1 (at 0 -0.5 90) (layer B.SilkS)
@@ -662,6 +677,11 @@
       (net 115 "Net-(BT1-Pad1)"))
     (pad 2 smd rect (at 0 0 90) (size 4 4) (layers B.Cu B.Paste B.Mask)
       (net 1 GND))
+    (model ${KISYS3DMOD}/Battery.3dshapes/BatteryHolder_Keystone_3000_1x12mm.step
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Crystal:Crystal_HC49-4H_Vertical (layer F.Cu) (tedit 5A1AD3B7) (tstamp 5D429D20)
@@ -1055,6 +1075,11 @@
     (pad 1 smd rect (at -3.975 -2.25) (size 1.55 1.3) (layers F.Cu F.Paste F.Mask)
       (net 1 GND))
     (model ${KISYS3DMOD}/Button_Switch_SMD.3dshapes/SW_SPST_B3S-1000.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ${KISYS3DMOD}/Button_Switch_SMD.3dshapes/SW_SPST_PTS645.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -1494,6 +1519,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/TerminalBlock_Altech.3dshapes/Altech_AK300_1x04_P5.00mm_45-Degree.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-4_1x04_P5.00mm_Horizontal (layer F.Cu) (tedit 5B294EE5) (tstamp 5D6717C1)
@@ -1572,6 +1602,11 @@
     (pad 4 thru_hole circle (at 15 0 180) (size 2.6 2.6) (drill 1.3) (layers *.Cu *.Mask)
       (net 36 SCL))
     (model ${KISYS3DMOD}/TerminalBlock_Phoenix.3dshapes/TerminalBlock_Phoenix_MKDS-1,5-4_1x04_P5.00mm_Horizontal.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ${KISYS3DMOD}/TerminalBlock_Altech.3dshapes/Altech_AK300_1x04_P5.00mm_45-Degree.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -1773,6 +1808,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/Connector_Coaxial.3dshapes/U.FL_Hirose_U.FL-R-SMT-1_Vertical.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Connector_Coaxial:SMA_Amphenol_901-144_Vertical (layer B.Cu) (tedit 5B2F4C32) (tstamp 5D4298A0)
@@ -1813,6 +1853,11 @@
     (pad 1 thru_hole circle (at 0 0 90) (size 2.05 2.05) (drill 1.5) (layers *.Cu *.Mask)
       (net 2 "Net-(AT1-Pad1)"))
     (model ${KISYS3DMOD}/Connector_Coaxial.3dshapes/SMA_Amphenol_901-144_Vertical.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ${KISYS3DMOD}/Connector_Coaxial.3dshapes/SMA_Amphenol_132291_Vertical.wrl
       (at (xyz 0 0 0))
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
@@ -1882,6 +1927,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/Connector_USB.3dshapes/USB_Micro-B_Molex_47346-0001.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Connector_BarrelJack:BarrelJack_Horizontal (layer B.Cu) (tedit 5A1DBF6A) (tstamp 5D42997A)
@@ -1936,6 +1986,11 @@
       (scale (xyz 1 1 1))
       (rotate (xyz 0 0 0))
     )
+    (model ${KISYS3DMOD}/Connector_BarrelJack.3dshapes/BarrelJack_CUI_PJ-063BH_Horizontal.wrl
+      (at (xyz 0 0 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 90))
+    )
   )
 
   (module SIMFootprints:RJ_45 (layer B.Cu) (tedit 5D60C8A6) (tstamp 5D610686)
@@ -1974,6 +2029,11 @@
       (net 31 A2))
     (pad "" thru_hole circle (at 0 0 270) (size 3.6 3.6) (drill 3.25) (layers *.Cu *.Mask))
     (pad "" thru_hole circle (at 12.7 0 270) (size 3.6 3.6) (drill 3.25) (layers *.Cu *.Mask))
+    (model ${KISYS3DMOD}/Connector_RJ.3dshapes/RJ45_Amphenol_RJHSE538X.wrl
+      (offset (xyz 10 2.5 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 -180))
+    )
   )
 
   (module Resistor_SMD:R_0805_2012Metric (layer F.Cu) (tedit 5B36C52B) (tstamp 5D61006F)
@@ -3123,9 +3183,14 @@
       (net 23 SD_CS))
     (pad 1 smd rect (at 3.125 -0.3 270) (size 0.85 1.1) (layers F.Cu F.Paste F.Mask)
       (net 60 "Net-(CON1-Pad1)"))
+    (model ${KISYS3DMOD}/Connector_Card.3dshapes/microSD_HC_Hirose_DM3D-SF.wrl
+      (offset (xyz 0 6 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
-  (module SIMFootprints:SIM7000 (layer F.Cu) (tedit 5D0AEEDA) (tstamp 5D429A95)
+  (module SIMFootprints:SIM7000 (layer F.Cu) (tedit 5D0AEEDA) (tstamp 5EAA6D05)
     (at 176.69 89.92)
     (path /5CE4EC39)
     (fp_text reference IC2 (at -10.29 -9.12 180) (layer F.SilkS)
