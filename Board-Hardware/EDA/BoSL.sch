@@ -1869,8 +1869,6 @@ F 3 "" H 12250 4450 50  0000 C CNN
 	1    12250 4450
 	0    -1   -1   0   
 $EndComp
-Text Notes 5650 6950 0    60   ~ 0
-TODO:\nextra mixroaxial antenna\npressure sensor on back\nscrew terminals small
 $Comp
 L SIM7000-rescue:AT-ant AT3
 U 1 1 5EAFF5BF
