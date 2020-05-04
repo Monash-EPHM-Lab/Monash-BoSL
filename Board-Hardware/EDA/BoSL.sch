@@ -645,7 +645,7 @@ U 1 1 5D3A70FC
 P 1100 9800
 F 0 "J1" H 1100 10450 50  0000 C TNN
 F 1 "Screw_Terminal_1x06" V 950 9800 50  0000 C TNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-6_1x06_P5.00mm_Horizontal" H 1100 9175 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-6-3.5-H_1x06_P3.50mm_Horizontal" H 1100 9175 50  0001 C CNN
 F 3 "" H 1075 10200 50  0001 C CNN
 	1    1100 9800
 	-1   0    0    1   
@@ -672,7 +672,7 @@ U 1 1 5D3AF380
 P 1900 9300
 F 0 "J2" H 1900 9750 50  0000 C TNN
 F 1 "Screw_Terminal_1x04" V 1750 9300 50  0000 C TNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-4_1x04_P5.00mm_Horizontal" H 1900 8875 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-4-3.5-H_1x04_P3.50mm_Horizontal" H 1900 8875 50  0001 C CNN
 F 3 "" H 1875 9500 50  0001 C CNN
 	1    1900 9300
 	-1   0    0    1   
@@ -708,122 +708,8 @@ Text GLabel 2800 10200 0    60   Input ~ 0
 D2
 Text GLabel 2800 9600 0    60   Input ~ 0
 D7
-$Comp
-L power:VPP #PWR012
-U 1 1 5D3B4E69
-P 3500 7000
-F 0 "#PWR012" H 3500 6850 50  0001 C CNN
-F 1 "VPP" H 3500 7150 50  0000 C CNN
-F 2 "" H 3500 7000 50  0000 C CNN
-F 3 "" H 3500 7000 50  0000 C CNN
-	1    3500 7000
-	0    -1   -1   0   
-$EndComp
-Text GLabel 3500 6900 0    60   Input ~ 0
-AREF
-Text GLabel 3500 7200 0    60   Input ~ 0
-V_3.3
-$Comp
-L power:GND #PWR016
-U 1 1 5D3B6D83
-P 3500 7600
-F 0 "#PWR016" H 3500 7350 50  0001 C CNN
-F 1 "GND" H 3500 7450 50  0000 C CNN
-F 2 "" H 3500 7600 50  0000 C CNN
-F 3 "" H 3500 7600 50  0000 C CNN
-	1    3500 7600
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR015
-U 1 1 5D3B7090
-P 3500 7500
-F 0 "#PWR015" H 3500 7250 50  0001 C CNN
-F 1 "GND" H 3500 7350 50  0000 C CNN
-F 2 "" H 3500 7500 50  0000 C CNN
-F 3 "" H 3500 7500 50  0000 C CNN
-	1    3500 7500
-	0    1    1    0   
-$EndComp
-$Comp
-L power:VPP #PWR013
-U 1 1 5D3B7127
-P 3500 7100
-F 0 "#PWR013" H 3500 6950 50  0001 C CNN
-F 1 "VPP" H 3500 7250 50  0000 C CNN
-F 2 "" H 3500 7100 50  0000 C CNN
-F 3 "" H 3500 7100 50  0000 C CNN
-	1    3500 7100
-	0    -1   -1   0   
-$EndComp
 Text GLabel 3500 7300 0    60   Input ~ 0
-V_3.3
-$Comp
-L power:GND #PWR014
-U 1 1 5D3B712E
-P 3500 7400
-F 0 "#PWR014" H 3500 7150 50  0001 C CNN
-F 1 "GND" H 3500 7250 50  0000 C CNN
-F 2 "" H 3500 7400 50  0000 C CNN
-F 3 "" H 3500 7400 50  0000 C CNN
-	1    3500 7400
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR017
-U 1 1 5D3B7134
-P 3500 7700
-F 0 "#PWR017" H 3500 7450 50  0001 C CNN
-F 1 "GND" H 3500 7550 50  0000 C CNN
-F 2 "" H 3500 7700 50  0000 C CNN
-F 3 "" H 3500 7700 50  0000 C CNN
-	1    3500 7700
-	0    1    1    0   
-$EndComp
-$Comp
-L SIM7000-rescue:CONN_01X09-SIM7000-rescue P6
-U 1 1 5D3B7691
-P 3700 7300
-F 0 "P6" H 3700 7800 50  0000 C CNN
-F 1 "CONN_01X09" V 3800 7300 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x09_P2.54mm_Vertical" H 3700 7300 50  0001 C CNN
-F 3 "" H 3700 7300 50  0000 C CNN
-	1    3700 7300
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:VPP #PWR018
-U 1 1 5D3B78CA
-P 3650 8500
-F 0 "#PWR018" H 3650 8350 50  0001 C CNN
-F 1 "VPP" H 3650 8650 50  0000 C CNN
-F 2 "" H 3650 8500 50  0000 C CNN
-F 3 "" H 3650 8500 50  0000 C CNN
-	1    3650 8500
-	0    -1   -1   0   
-$EndComp
-$Comp
-L power:GND #PWR019
-U 1 1 5D3B78D2
-P 3650 7900
-F 0 "#PWR019" H 3650 7650 50  0001 C CNN
-F 1 "GND" H 3650 7750 50  0000 C CNN
-F 2 "" H 3650 7900 50  0000 C CNN
-F 3 "" H 3650 7900 50  0000 C CNN
-	1    3650 7900
-	0    1    1    0   
-$EndComp
-$Comp
-L power:GND #PWR020
-U 1 1 5D3B78E5
-P 3650 8100
-F 0 "#PWR020" H 3650 7850 50  0001 C CNN
-F 1 "GND" H 3650 7950 50  0000 C CNN
-F 2 "" H 3650 8100 50  0000 C CNN
-F 3 "" H 3650 8100 50  0000 C CNN
-	1    3650 8100
-	0    1    1    0   
-$EndComp
+AREF
 $Comp
 L SIM7000-rescue:TEST-SIM7000-rescue TP1
 U 1 1 5D3BD257
@@ -1223,7 +1109,7 @@ Connection ~ 8250 1350
 Wire Wire Line
 	6050 2050 6200 2050
 Wire Wire Line
-	7850 900  7850 1500
+	7850 900  7850 1050
 Wire Wire Line
 	4250 5200 4150 5200
 Wire Wire Line
@@ -1412,7 +1298,7 @@ U 1 1 5D432391
 P 3000 9500
 F 0 "J4" H 3000 10350 50  0000 C TNN
 F 1 "Screw_Terminal_1x08" V 2850 9500 50  0000 C TNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-8_1x08_P5.00mm_Horizontal" H 3000 8675 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-8-3.5-H_1x08_P3.50mm_Horizontal" H 3000 8675 50  0001 C CNN
 F 3 "" H 2975 10100 50  0001 C CNN
 	1    3000 9500
 	-1   0    0    1   
@@ -1461,7 +1347,7 @@ U 1 1 5D43FC6D
 P 1950 7550
 F 0 "J3" H 1950 7800 50  0000 C TNN
 F 1 "Screw_Terminal_1x02" V 1800 7550 50  0000 C TNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal" H 1950 7325 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-2-3.5-H_1x02_P3.50mm_Horizontal" H 1950 7325 50  0001 C CNN
 F 3 "" H 1925 7550 50  0001 C CNN
 	1    1950 7550
 	-1   0    0    1   
@@ -1496,97 +1382,35 @@ F 3 "" H 1900 8150 50  0000 C CNN
 $EndComp
 NoConn ~ 2600 2800
 NoConn ~ 2600 2100
-Text GLabel 3650 8300 0    60   Input ~ 0
-V_3.3
 $Comp
 L SIM7000-rescue:Screw_Terminal_1x04-SIM7000-rescue J5
 U 1 1 5D456DDA
 P 3850 8200
 F 0 "J5" H 3850 8650 50  0000 C TNN
 F 1 "Screw_Terminal_1x04" V 3700 8200 50  0000 C TNN
-F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-4_1x04_P5.00mm_Horizontal" H 3850 7775 50  0001 C CNN
+F 2 "TerminalBlock_Phoenix:TerminalBlock_Phoenix_PT-1,5-4-3.5-H_1x04_P3.50mm_Horizontal" H 3850 7775 50  0001 C CNN
 F 3 "" H 3825 8400 50  0001 C CNN
 	1    3850 8200
 	-1   0    0    1   
 $EndComp
-$Comp
-L SIM7000-rescue:CONN_01X12-SIM7000-rescue P9
-U 1 1 5D458C3A
-P 1100 8250
-F 0 "P9" H 1100 8900 50  0000 C CNN
-F 1 "CONN_01X12" V 1200 8250 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x12_P2.54mm_Vertical" H 1100 8250 50  0001 C CNN
-F 3 "" H 1100 8250 50  0000 C CNN
-	1    1100 8250
-	1    0    0    -1  
-$EndComp
 Text GLabel 900  7700 0    60   Input ~ 0
 SCL
 Text GLabel 900  7800 0    60   Input ~ 0
-SCL
+SDA
 Text GLabel 900  7900 0    60   Input ~ 0
-SDA
+A3
 Text GLabel 900  8000 0    60   Input ~ 0
-SDA
+A2
 Text GLabel 900  8100 0    60   Input ~ 0
-A3
+A1
 Text GLabel 900  8200 0    60   Input ~ 0
-A3
-Text GLabel 900  8300 0    60   Input ~ 0
-A2
-Text GLabel 900  8400 0    60   Input ~ 0
-A2
-Text GLabel 900  8500 0    60   Input ~ 0
-A1
-Text GLabel 900  8600 0    60   Input ~ 0
-A1
-Text GLabel 900  8700 0    60   Input ~ 0
 A0
-Text GLabel 900  8800 0    60   Input ~ 0
-A0
-$Comp
-L SIM7000-rescue:CONN_01X16-SIM7000-rescue P1
-U 1 1 5D45AC74
-P 2900 7800
-F 0 "P1" H 2900 8650 50  0000 C CNN
-F 1 "CONN_01X16" V 3000 7800 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x16_P2.54mm_Vertical" H 2900 7800 50  0001 C CNN
-F 3 "" H 2900 7800 50  0000 C CNN
-	1    2900 7800
-	1    0    0    -1  
-$EndComp
-Text GLabel 2700 7450 0    60   Input ~ 0
+Text GLabel 2700 7250 0    60   Input ~ 0
 D6
-Text GLabel 2700 7550 0    60   Input ~ 0
-D6
-Text GLabel 2700 7650 0    60   Input ~ 0
-D7
-Text GLabel 2700 7750 0    60   Input ~ 0
-D7
 Text GLabel 2700 7050 0    60   Input ~ 0
 D2
 Text GLabel 2700 7150 0    60   Input ~ 0
-D2
-Text GLabel 2700 7250 0    60   Input ~ 0
 D3
-Text GLabel 2700 7350 0    60   Input ~ 0
-D3
-Text GLabel 2700 7850 0    60   Input ~ 0
-SD_CS
-Text GLabel 2700 8050 0    60   Input ~ 0
-SD_MOSI
-Text GLabel 2700 8250 0    60   Input ~ 0
-SD_MISO
-Text GLabel 2700 8450 0    60   Input ~ 0
-SD_SCLK
-Text GLabel 2700 8550 0    60   Input ~ 0
-SD_SCLK
-Text GLabel 2700 8350 0    60   Input ~ 0
-SD_MISO
-Text GLabel 2700 8150 0    60   Input ~ 0
-SD_MOSI
-Text GLabel 2700 7950 0    60   Input ~ 0
-SD_CS
 Wire Wire Line
 	7450 1350 7550 1350
 Wire Wire Line
@@ -2044,5 +1868,149 @@ F 2 "" H 12250 4450 50  0000 C CNN
 F 3 "" H 12250 4450 50  0000 C CNN
 	1    12250 4450
 	0    -1   -1   0   
+$EndComp
+Text Notes 5650 6950 0    60   ~ 0
+TODO:\nextra mixroaxial antenna\npressure sensor on back\nscrew terminals small
+$Comp
+L SIM7000-rescue:AT-ant AT3
+U 1 1 5EAFF5BF
+P 7450 650
+F 0 "AT3" H 7300 550 50  0000 L CNN
+F 1 "AT-GNSS" H 7100 750 50  0000 L CNN
+F 2 "Connector_Coaxial:U.FL_Molex_MCRF_73412-0110_Vertical" H 7488 500 50  0001 C CNN
+F 3 "" H 7450 650 50  0000 C CNN
+	1    7450 650 
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 900  7450 1050
+Wire Wire Line
+	7450 1050 7850 1050
+Connection ~ 7850 1050
+Wire Wire Line
+	7850 1050 7850 1500
+$Comp
+L power:GND #PWR0103
+U 1 1 5EB05F30
+P 7250 650
+F 0 "#PWR0103" H 7250 400 50  0001 C CNN
+F 1 "GND" H 7250 500 50  0000 C CNN
+F 2 "" H 7250 650 50  0000 C CNN
+F 3 "" H 7250 650 50  0000 C CNN
+	1    7250 650 
+	0    1    1    0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x05 J8
+U 1 1 5EB07E4A
+P 3700 7100
+F 0 "J8" H 3780 7142 50  0000 L CNN
+F 1 "Conn_01x05" H 3780 7051 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical" H 3700 7100 50  0001 C CNN
+F 3 "~" H 3700 7100 50  0001 C CNN
+	1    3700 7100
+	1    0    0    -1  
+$EndComp
+Text GLabel 2700 7750 0    60   Input ~ 0
+SD_SCLK
+Text GLabel 2700 7650 0    60   Input ~ 0
+SD_MISO
+Text GLabel 2700 7550 0    60   Input ~ 0
+SD_MOSI
+Text GLabel 2700 7450 0    60   Input ~ 0
+SD_CS
+Text GLabel 2700 7350 0    60   Input ~ 0
+D7
+$Comp
+L Connector_Generic:Conn_01x06 J9
+U 1 1 5EB658F4
+P 1100 7900
+F 0 "J9" H 1180 7892 50  0000 L CNN
+F 1 "Conn_01x06" H 1180 7801 50  0000 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x06_P2.54mm_Vertical" H 1100 7900 50  0001 C CNN
+F 3 "~" H 1100 7900 50  0001 C CNN
+	1    1100 7900
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR015
+U 1 1 5D3B7090
+P 3500 6900
+F 0 "#PWR015" H 3500 6650 50  0001 C CNN
+F 1 "GND" H 3500 6750 50  0000 C CNN
+F 2 "" H 3500 6900 50  0000 C CNN
+F 3 "" H 3500 6900 50  0000 C CNN
+	1    3500 6900
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR014
+U 1 1 5D3B712E
+P 3500 7100
+F 0 "#PWR014" H 3500 6850 50  0001 C CNN
+F 1 "GND" H 3500 6950 50  0000 C CNN
+F 2 "" H 3500 7100 50  0000 C CNN
+F 3 "" H 3500 7100 50  0000 C CNN
+	1    3500 7100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VPP #PWR012
+U 1 1 5D3B4E69
+P 3500 7000
+F 0 "#PWR012" H 3500 6850 50  0001 C CNN
+F 1 "VPP" H 3500 7150 50  0000 C CNN
+F 2 "" H 3500 7000 50  0000 C CNN
+F 3 "" H 3500 7000 50  0000 C CNN
+	1    3500 7000
+	0    -1   -1   0   
+$EndComp
+Text GLabel 3500 7200 0    60   Input ~ 0
+V_3.3
+Text GLabel 3650 7900 0    60   Input ~ 0
+V_3.3
+$Comp
+L power:GND #PWR020
+U 1 1 5D3B78E5
+P 3650 8500
+F 0 "#PWR020" H 3650 8250 50  0001 C CNN
+F 1 "GND" H 3650 8350 50  0000 C CNN
+F 2 "" H 3650 8500 50  0000 C CNN
+F 3 "" H 3650 8500 50  0000 C CNN
+	1    3650 8500
+	0    1    1    0   
+$EndComp
+$Comp
+L power:GND #PWR019
+U 1 1 5D3B78D2
+P 3650 8100
+F 0 "#PWR019" H 3650 7850 50  0001 C CNN
+F 1 "GND" H 3650 7950 50  0000 C CNN
+F 2 "" H 3650 8100 50  0000 C CNN
+F 3 "" H 3650 8100 50  0000 C CNN
+	1    3650 8100
+	0    1    1    0   
+$EndComp
+$Comp
+L power:VPP #PWR018
+U 1 1 5D3B78CA
+P 3650 8300
+F 0 "#PWR018" H 3650 8150 50  0001 C CNN
+F 1 "VPP" H 3650 8450 50  0000 C CNN
+F 2 "" H 3650 8300 50  0000 C CNN
+F 3 "" H 3650 8300 50  0000 C CNN
+	1    3650 8300
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Connector_Generic:Conn_01x08 J10
+U 1 1 5EB3CBC0
+P 2900 7350
+F 0 "J10" H 2980 7342 50  0000 L CNN
+F 1 "Conn_01x08" H 2980 7251 50  0000 L CNN
+F 2 "" H 2900 7350 50  0001 C CNN
+F 3 "~" H 2900 7350 50  0001 C CNN
+	1    2900 7350
+	1    0    0    -1  
 $EndComp
 $EndSCHEMATC
