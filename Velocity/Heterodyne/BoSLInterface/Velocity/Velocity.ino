@@ -83,7 +83,7 @@ void printVel(){
 	
 	
 	double result;
-    result = getVel(0,3);
+    result = getVel(0,1);
 		
 		if (PLOTFFT){
 		plotFFT();
@@ -92,28 +92,18 @@ void printVel(){
 		}
 		printlow();
 		
-	result = getVel(1,3);
-		
-		if (PLOTFFT){
-		plotFFT();
-		}else{
-		Serial.print(", ");
-		Serial.print(result,0);
-		
-		}
-		printlow();
-		
-	result = getVel(2,3);
+	result = getVel(1,1);
 		
 		if (PLOTFFT){
 		plotFFT();
 		}else{
 		Serial.print(", ");
 		Serial.print(result,0);
+		
 		}
 		printlow();
 		
-	result = getVel(3,3);
+	result = getVel(2,1);
 		
 		if (PLOTFFT){
 		plotFFT();
@@ -123,7 +113,17 @@ void printVel(){
 		}
 		printlow();
 		
-	result = getVel(4,3);
+	result = getVel(3,1);
+		
+		if (PLOTFFT){
+		plotFFT();
+		}else{
+		Serial.print(", ");
+		Serial.print(result,0);
+		}
+		printlow();
+		
+	result = getVel(4,1);
 		if (PLOTFFT){
 			plotFFT();
 			//clearPlot();
