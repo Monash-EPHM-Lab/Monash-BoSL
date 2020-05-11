@@ -1,4 +1,3 @@
-
 //FFT library
 #include "src\arduinoFFTfix.h"
 #include "src\I2C.h"
@@ -144,13 +143,13 @@ void printVel(){
 }
 
 
-double getVel(int velMulti, int averages){
+double getVel(int velMulti, int attempts){
 	double calArray[5] = {5.08,10.2,21.0,40.7,80.6};
 	
 	avspeed = 0;
 	rangeScaler = 0;
 	
-	for (int iter = 0; iter<averages; iter++){
+	for (int iter = 0; iter<attempts; iter++){
 		
 		
 		max = 0;
@@ -241,17 +240,16 @@ double getVel(int velMulti, int averages){
 		indx = indx/max;
 		
 		low = max*rangeScaler/(SAMPLES/128);
-		
+		if (low > 1E6){
+			break;
+		}
 		//converts frequency to mm/s
 		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
 		
 		max = (indx)*(calArray[velMulti])*0.75/(SAMPLES/128);
-		
-		avspeed += max;
 	}
-	avspeed = avspeed/averages;
-    //Serial.println(avspeed/1000);
-	return avspeed;
+
+	return max;
 }
 
 

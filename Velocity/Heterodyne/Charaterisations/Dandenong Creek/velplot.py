@@ -85,5 +85,4 @@ plt.scatter(pltimes,PVels4Adj)
 
 plt.xlabel("Amplitude")
 plt.ylabel("Velocity (mm/s)")
-
 plt.show()
