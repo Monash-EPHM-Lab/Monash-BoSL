@@ -3,8 +3,8 @@
 #include "src\I2C.h"
 #include <LowPower.h>
 
-#define PLOTFFT 0
-#define LOWPRINT 1
+#define PLOTFFT 1
+#define LOWPRINT 0
 #define SAMPLES 256
 #define ADCADR 0x34
 #define INTPIN 2
@@ -29,7 +29,7 @@ void setup(){
 	
    Serial.begin(9600);
    Serial.print('R');
-     
+        
 }
 
 void printlow(){
@@ -41,13 +41,16 @@ void printlow(){
 		}
 	}else{
 		Serial.print(", ");
-		Serial.print(low/1000,0);
+		Serial.print(low/1000000,0);
 	}		
 	}
 }
 
 void loop(){
+
+	
 	uint8_t cmd;
+	printVel();
 	if (Serial.available() > 0){
 		cmd = Serial.read();
 		
@@ -77,12 +80,12 @@ void printVel(){
     I2c.begin();
     I2c.setSpeed(1); //Note 200 kHz Bus Speed
 	
-	
+	int reps = 1;
 	
 	
 	
 	double result;
-    result = getVel(0,1);
+    result = getVel(0,reps);
 		
 		if (PLOTFFT){
 		plotFFT();
@@ -91,28 +94,18 @@ void printVel(){
 		}
 		printlow();
 		
-	result = getVel(1,1);
-		
-		if (PLOTFFT){
-		plotFFT();
-		}else{
-		Serial.print(", ");
-		Serial.print(result,0);
-		
-		}
-		printlow();
-		
-	result = getVel(2,1);
+	result = getVel(1,reps);
 		
 		if (PLOTFFT){
 		plotFFT();
 		}else{
 		Serial.print(", ");
 		Serial.print(result,0);
+		
 		}
 		printlow();
 		
-	result = getVel(3,1);
+	result = getVel(2,reps);
 		
 		if (PLOTFFT){
 		plotFFT();
@@ -122,7 +115,17 @@ void printVel(){
 		}
 		printlow();
 		
-	result = getVel(4,1);
+	result = getVel(3,reps);
+		
+		if (PLOTFFT){
+		plotFFT();
+		}else{
+		Serial.print(", ");
+		Serial.print(result,0);
+		}
+		printlow();
+		
+	result = getVel(4,reps);
 		if (PLOTFFT){
 			plotFFT();
 			//clearPlot();
@@ -179,7 +182,7 @@ double getVel(int velMulti, int attempts){
 		   imag[i] = 0;
 	   }
 	   
-		// //Compute FFT
+		//Compute FFT
 		rangeScaler = FFTfix.RangeScaling(read, SAMPLES);
 		FFTfix.Windowing(read, SAMPLES, FFT_FORWARD);
 		FFTfix.Compute(read, imag, SAMPLES, FFT_FORWARD);
@@ -203,7 +206,7 @@ double getVel(int velMulti, int attempts){
 		
 
 		for(int i = 2; i < (SAMPLES/2); i++){
-			read[i] -=3; //MAJIK number			
+			read[i] -= 1600; //MAJIK number			
 		}
 		
 		for(int i = 2; i < (SAMPLES/2); i++){
@@ -233,20 +236,31 @@ double getVel(int velMulti, int attempts){
 		}
 		indx = 0;
 		max = 0;
-		for(int i = 2; i < (SAMPLES/2); i++){
-			indx += read[i]*(float)i;
-			max += read[i];
-		}
+		
+		for(int i = 2; i < (SAMPLES/2) ; i++){
+			indx += (double)read[i]*(double)i;
+			max += (double)read[i];
+		}		
+		
 		indx = indx/max;
+
+		max = 0;
+		for(int i = 2; i < (SAMPLES/2); i++){
+			max += ((double)read[i])*((double)read[i]);
+		}
 		
 		low = max*rangeScaler/(SAMPLES/128);
-		if (low > 1E6){
-			break;
-		}
+		
+		
+
 		//converts frequency to mm/s
 		//max = (indx*3.5)*velMulti;//MAX READING = 337 mm/s
 		
 		max = (indx)*(calArray[velMulti])*0.75/(SAMPLES/128);
+		
+		if (low > 1E6){
+			break;
+		}
 	}
 
 	return max;
