@@ -1,1 +1,0 @@
-expand soldermask on screw terminals

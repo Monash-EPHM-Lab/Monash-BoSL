@@ -1,3 +1,0 @@
-(sym_lib_table
-  (lib (name SIM7000-rescue)(type Legacy)(uri ${KIPRJMOD}/SIM7000-rescue.lib)(options "")(descr ""))
-)

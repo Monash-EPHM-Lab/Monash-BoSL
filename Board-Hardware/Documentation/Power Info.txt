@@ -1,3 +1,0 @@
-BoSL sleep:    		100 µA
-SD CARD sleep: 		200 µA
-Transmit:		300 µAh
