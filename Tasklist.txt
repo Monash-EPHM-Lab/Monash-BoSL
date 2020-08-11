@@ -1,0 +1,5 @@
+Branch Specific Tasklist
+
+measure power consumption on everything and create file for it in documentation.
+
+write code documentation
