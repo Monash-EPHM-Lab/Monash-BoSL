@@ -16,8 +16,8 @@
 // For SIM7000 BoSL board
 #define PWRKEY 4
 #define DTR 5 // Connect with solder jumper
-#define BOSL_RX 3 // Microcontroller RX
-#define BOSL_TX 2 // Microcontroller TX
+#define BOSL_RX 9 // Microcontroller RX
+#define BOSL_TX 8 // Microcontroller TX
 
 //Site specific config
 #define SITEID "ALDI_TEST"
@@ -362,7 +362,7 @@ void Sleepy(uint16_t tsleep){ //Sleep Time in seconds
 ////TRANSMITS LAST GPS CORDINATES TO WEB////
 void Transmit(){
     
-    dataStr = "AT+HTTPPARA=\"URL\",\"www.cartridgerefills.com.au/EoDC/databases/WriteMe.php?SiteName=";
+    dataStr = "AT+HTTPPARA=\"URL\",\"http://www.bosl.com.au/IoT/testing/scripts/WriteMe.php?SiteName=";
     
     dataStr += SITEID;
     dataStr += ".csv&T=";
@@ -575,47 +575,3 @@ void xDelay(uint32_t tmz){
 	
 	delay(tmz-64*tmzslc);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
